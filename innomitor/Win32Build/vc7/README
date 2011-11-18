@@ -1,0 +1,27 @@
+Note:  Both Debug and Release configurations should properly compile 
+and execute.  Release might require some ASM compiler.  The following
+instructions should work for version 7 or higher of MSVC (just convert the
+projects to the new format when prompted)
+
+Instructions to get MSVC compiling to work:
+
+- Download zlib-1.2.3:
+http://www.zlib.net/zlib-1.2.3.tar.gz
+	
+ - Download libevent-1.3e:
+http://www.monkey.org/~provos/libevent-1.3e.tar.gz
+
+ - Extract both packages to the contrib directory
+ 
+ - Download OpenSSL-0.9.8g:
+http://www.slproweb.com/download/Win32OpenSSL-0_9_8g.exe
+
+ - Install OpenSSL-0.9.8g  (let it keep the default path, C:\OpenSSL)
+
+ - I did this using Cygwin.  Feel free to try using patch for windows as well:
+cd contrib/zlib-1.2.3
+patch -p 1 -i ../../Win32Build/vc7/zlib-1.2.3.patch
+cd ../libevent-1.3e
+patch -p 1 -i ../../Win32Build/vc7/libevent-1.3e.patch
+
+ - Open Win32Build/vc7/Tor/Tor.sln and compile all projects

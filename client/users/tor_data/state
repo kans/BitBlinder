@@ -1,0 +1,19 @@
+# Tor state file last generated on 2010-01-07 10:51:47 local time
+# Other times below are in GMT
+# You *do not* need to edit this file.
+
+# When does the last-recorded read-interval end?
+BWHistoryReadEnds 2010-01-07 16:05:37
+# Number of bytes read in each interval.
+BWHistoryReadValues 77223
+# When does the last-recorded write-interval end?
+BWHistoryWriteEnds 2010-01-07 16:05:37
+# Number of bytes written in each interval.
+BWHistoryWriteValues 46151
+# Which version of Tor generated this state file?
+TorVersion Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 (r4159)
+# The last time at which we changed the medium-term private key used for
+# building circuits.
+LastRotatedOnionKey 2010-01-07 15:50:45
+# When was this state file last regenerated?
+LastWritten 2010-01-07 15:51:47

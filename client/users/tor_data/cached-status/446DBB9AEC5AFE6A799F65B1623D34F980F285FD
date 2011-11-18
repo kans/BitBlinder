@@ -1,0 +1,126 @@
+network-status-version 2
+dir-source 174.129.199.15 174.129.199.15 33355
+fingerprint 446DBB9AEC5AFE6A799F65B1623D34F980F285FD
+contact admin@innomi.net
+published 2010-01-07 15:44:10
+dir-options
+dir-signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBANbOyQIl5QBojriVuIe3tXCWBJIaiD4wr22BDy7S1tSPEA/yAm52kizo
+U7VcS03PKYxqLi/fQQ7iSJ50kw+rK2iQlPrti4ZxQNtrOFQMEJPliZKfQQhyQMiz
+71ce/GX5/kvZ5MaaT+WpsdQsHuefvWjtKNtHlc+Ne0K6KspDGqsZAgMBAAE=
+-----END RSA PUBLIC KEY-----
+r 4C90E31C0D8DEFE4 A0mumFsWkCSGmIMX3ebyB2iGy8Q BqkrzHN68DqkxrNLXmuxYCflvyI 2010-01-07 07:16:03 79.13.23.41 10001 10030
+s Exit V2Dir Valid
+opt v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+r 1DA9F03ECA0916AF JoqfOE/FmNdVt8+G8EGpOY5WMy4 qFXw2d711cnzja4cy63bhHlAmhc 2010-01-07 15:41:30 89.12.185.34 10001 10010
+s Fast Running V2Dir Valid
+opt v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+r 835CB8085406B8CC LaOmq5QNwLcGg3VXb6oLn4B9cVk I5/AjRCI6fRcz73uGp7j1+7cFro 2010-01-06 21:36:02 62.31.65.93 10001 10030
+s Exit V2Dir Valid
+opt v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+r B0BB24845E3C731A L0jbZvKrTFwd2UsooAXbcdx3WNw 7IIqnfYCd7yYcDV75X7NMr3qnsY 2010-01-07 00:05:30 201.208.246.68 10001 0
+s Exit Valid
+opt v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+r InnomiNetAuth3 RG27muxa/mp5n2WxYj00+YDyhf0 6ZxO5PEcFFqgkt2fYn1f32MCvEo 2010-01-07 10:13:18 174.129.199.15 33354 33355
+s Authority Fast HSDir Running V2Dir Valid
+opt v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 (r4026)
+r 7E0977FEA3874B6D S5EpNfNxrMdbSqIpaZtOSxRjYAU zfk1tJ7Sjw+eMkI2Lg92Bi8b894 2010-01-07 12:44:12 97.83.146.132 10001 10030
+s V2Dir Valid
+opt v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+r D749C49FB5DC3B04 TNUR5nMlGXsh6z0GNDYua7OS9OI fKrE7ZWNsRVF1t92wqzXG32dnfU 2010-01-07 14:41:16 208.69.32.132 10000 10030
+s V2Dir Valid
+opt v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+r 2D1098BAAC5DF80C UB/6zxYRI0yDTNnniCuZQvMU/RM UE+T6U7mivAYATNw/ERV2iHoAgY 2010-01-07 13:32:05 24.243.2.112 1614 1615
+s V2Dir Valid
+opt v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+r 0A1ED726D25B7572 UY6WdZNksByYAMNu3TzA6rnwtOU NqDvShWJqFKdsxd6k820xydTF/U 2010-01-07 02:54:06 96.22.210.194 10001 10030
+s Fast Running V2Dir Valid
+opt v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+r C215C051D550C7C5 UmN5+8ydfANHWymc0IKwQuwYQTY QS8Hpg8ATN8bNr4G6FOKCduQ1OE 2010-01-07 09:17:03 75.84.14.78 10001 0
+s Exit Valid
+opt v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+r BC96D2BF10B218B3 VurdjmYpv03smcV9sso8wjHeZjs 5IX61sMMRtwj73oUJX8Gjxhp/fM 2010-01-07 12:31:24 220.233.13.190 10001 0
+s Exit Fast Running Valid
+opt v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+r 3D4CEF6C18994C85 V4N/hKN/le58PA5dgw+6/i+fWf8 D0clizAn+t+um5FJn0TBNp91xy0 2010-01-07 01:21:16 63.134.128.228 10001 0
+s Valid
+opt v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+r InnomiNetAuth1 X6FR2IA6dvhYEqL/FYbf5xmZVAU B5y7kMcNuIrxEQ50tGXfCpoMcHs 2010-01-06 22:14:15 174.129.199.15 33350 33351
+s Authority Fast HSDir Running Stable V2Dir Valid
+opt v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 (r4026)
+r DE3D2A7E37AD9666 a5d/AXDoO8cc3KsbIjZDoGgloLc RFeB8UVSHsX4yJafjz5E3DJYLnw 2010-01-07 07:24:38 75.72.116.66 10001 10030
+s Fast Guard HSDir Running V2Dir Valid
+opt v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+r 2BF8A138C775F177 bSnRTDv5mbWGhFXLSBfhvJoceOI SP7ogPLC5r+S8Y7rIvHJBY93pes 2010-01-07 10:09:25 220.104.73.55 10001 10030
+s Exit V2Dir Valid
+opt v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+r C9561DB0C012E185 hK4kUSRhOFTZxPd3hVdqjFeED6w SEcjIpv3SHMjLpKVWLkPgYKQ14c 2010-01-06 21:30:38 67.186.6.165 10001 10030
+s V2Dir Valid
+opt v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+r EAAA9A8E6A8F209F hUpok23oiXjnXWa0xp67Lj0p5Cc G1PmynKKrfFxl6lEUlKsM3CX19w 2010-01-07 08:11:41 82.228.55.143 10001 10030
+s Exit Fast Guard HSDir Running Stable V2Dir Valid
+opt v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+r 941C712DA0F7DFD6 hgG2iIoy1YAG9z0w9GHw4adgvOg YkgcICt7uHMQfr5MOnXi3DuOOg4 2010-01-07 15:12:12 220.233.25.181 10002 10031
+s Fast Running Stable V2Dir Valid
+opt v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+r 70565C3E7F293AA9 monWP9We66Lq5/n5z2JaW3jOGTI bsK5yNK1Br6gt/ez0YzUVDkTpp4 2010-01-07 06:50:17 64.122.230.233 10001 10030
+s Fast Guard HSDir Running Stable V2Dir Valid
+opt v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+r 43A2285AF1D02CC3 m6UTjcRluD/+Nd+tRV6FIUdhRwk 02WSCjm5LyKfCqw9vOxzH0nCGtk 2010-01-06 22:55:04 86.196.254.189 10001 10030
+s Exit V2Dir Valid
+opt v Tor 0.2.2.0-alpha-dev
+r 394687A5EAA75437 oYTpqyvLJ41p+c9ReDyVvGPAkHA LONeuuyquhSt8oskrbnSCMjdPgw 2010-01-07 01:19:05 92.135.193.35 10001 10030
+s Exit Fast Running Stable V2Dir Valid
+opt v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+r 836F14858D64B897 pMuPPanEEVVhJIhzjYJNGGv/muo rLEX7MbOHcSQQQyj09yOMvIN+Q4 2010-01-07 01:12:33 71.59.234.13 10001 10030
+s V2Dir Valid
+opt v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+r 9C72215273C50E3F p14a7Jti0+Mi+pUz/cHWBXW0rDs a2PlBCsMCXbqWlLo1SnBgoywcQQ 2010-01-07 08:38:00 87.227.83.186 9998 10007
+s Fast Running Stable V2Dir Valid
+opt v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+r 6B0F4BA87B5E4CE8 q9oTqg4SCJSbsQYUQ5PqCY6V2fc PT5zTFzUjo61yXCVcR9mWYAUtg4 2010-01-07 15:38:55 213.161.252.207 9001 0
+s Exit Running Valid
+opt v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+r 873E99C1034DE334 sviJwhU/Dj/9eS9qBYUPEmdHEPQ JDS5MW9c/Rc16xA2QKUksfeJJjU 2010-01-07 02:52:59 98.236.71.7 8001 8030
+s Exit Fast Guard HSDir Running Stable V2Dir Valid
+opt v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+r 92BD6BFE91C7A79E uvdOQMB04d+J7DPx4f+l/hB6S/Y cIwE+MqLqmPWtffDVTf4d07UgCA 2010-01-07 14:21:45 121.243.187.71 10001 10030
+s Exit Fast Running V2Dir Valid
+opt v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+r 9B452E3761D5AAF4 yKE87mNM1BzbO2EAokYaBZuGaEY or9KCFrL9qKPX1SW5Y7E3Zk50Es 2010-01-07 02:28:07 75.110.43.65 10001 10030
+s Exit Fast Guard HSDir Running Stable V2Dir Valid
+opt v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+r EA46046384E88E71 ybZLcV+CP460LZGmi4ZrvNbfIfg UyBawgFU0Gk1gKqxkf5Sm//ueZY 2010-01-07 15:38:55 151.47.77.41 10001 10030
+s V2Dir Valid
+opt v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+r InnomiNetAuth2 2+Wg4+EixnrPIroCRK7M6X4+e5k vVQ4H0saYQibMTyzhAjTgi0wxLc 2010-01-07 06:08:08 174.143.240.110 33352 33353
+s Authority Fast HSDir Running Stable V2Dir Valid
+opt v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 (r4026)
+r AEAD3EB478579E60 4ln2adv7QDh0czibF2TiYCXGVKU zMZMCQADbdMLnqbRbAdP6ezLR44 2010-01-07 01:47:27 89.240.115.72 10001 0
+s Exit Valid
+opt v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+r 0BECCEB8E600A27B 5pIxoxk6S7Ky+HzcYmZg9ktBikM IIu6Fd0H+52gZFOBHTcpptnZL/I 2010-01-07 13:37:44 93.11.181.56 10001 10030
+s Exit Fast Running V2Dir Valid
+opt v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+r 601CFFC429EAD941 56Hw3IquBN2yoYWFQNQFKmBePw8 ui4peCpi/08vj+TUQJ9tXrTlS+k 2010-01-06 20:40:27 98.236.71.7 10001 10030
+s V2Dir Valid
+opt v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+r F679FBD693865D56 6dgv/fapw9gpUcBAA11TnM50tYA laacah9gIfI08oK56an0Lej3XjI 2010-01-07 10:31:43 94.23.9.43 10002 10030
+s V2Dir Valid
+opt v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+r 791B008EEE3BD27C 8/2rJg0HDwWo0QIa7dSF32nHFGI kdQEa+/3wnnYXGJNz/t6Epu+fFA 2010-01-07 03:57:37 98.194.177.74 46835 10030
+s Exit Fast Running Stable V2Dir Valid
+opt v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+r 222CC9544001EE98 /RCC6nmfqGF2XdceDgrnWdbyfuU p2XtEJ9aHM2Mx4/vJzE95SI3BFA 2010-01-07 14:11:29 77.201.156.117 10001 10030
+s V2Dir Valid
+opt v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+r 0F38615332E5A3F5 /f3Sv9Xx8GinTV5i8Y/8n4hYVio TEm0lg+Aaxj5lnBlLp11OpPaYkc 2010-01-07 13:55:06 98.236.71.7 10005 13424
+s Exit V2Dir Valid
+opt v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+directory-signature InnomiNetAuth3
+-----BEGIN SIGNATURE-----
+laJb43XtrghH58x7SFzmg3c70iosHknFsV8mu44ksO2FULtZL6GoZYeRjBu0HqUF
+DIkiDUkPKGjpEdGGJQDp/jV61qHr+KHmLZ4mMb2TtDn91uIV7duhuLlAaxzbVHPA
+EjIyAV/pV6jiBUhSfCsRG1pDOay1tQIflqUxSQfcE+8=
+-----END SIGNATURE-----

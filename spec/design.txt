@@ -1,0 +1,36 @@
+Overview:
+
+  BitBlinder is designed to address a need for faster speeds and higher throughput over a weaker need for anonymity in the Tor network.
+  
+Goals:
+  
+  BitBlinder's main goal is usable, practical anonymity and filter avoidance.  More specific goals include:
+
+  1.  Usability.  BitBlinder aims to make simple anonymity and filter avoidance as easy as possible.
+  
+  2.  Speed.  BitBlinder aims to be faster than Tor by allowing shorter paths when desired, and incentivizing participation in the network.
+  
+  3.  Practical Anonymity.  We believe that most users and potential users do not want or need perfect anonymity online.  Many will be happy with a simple approach that helps them avoid naieve firewalls and network traffic filtering techniques, or hides their IP address from the local network or network endpoint.  Protecting against global adversaries, governments, Tier 1 ISPs, etc, is not one of our goals.
+  
+  4.  BitTorrent Support.  BitBlinder is designed with support for BitTorrent and other high bandwidth applications in mind, and we do not believe that slow speeds are a solution to the problem!  We want to achieve reasonable download speeds while maintaining at least some of the anonymity afforded by Tor.
+  
+  5.  Choice.  We believe that  users are ideally the best candidates to determine the various tradeoffs between anonymity, security, speed, and cost.
+  
+  6.  Synced with Tor.  It makes little sense to design and implement our own onion router when so much effort has been put into Tor.  We should stride to stay up to date with Tor as much as possible.
+
+
+Design:
+
+  BitBlinder attempts to stay as close to Tor as possible in terms of implementation, modifying only what is necessary to achieve our goals.
+  
+  The major differences between BitBlinder and Tor are as follows:
+  
+  1.  Participation as a relay in the network is required.  Users are given a small amount of tokens at time of their account creation and thereafter earn tokens by forwarding traffic on behalf of other users.  Tokens are required for service.  Currently the only way of acquiring tokens is by running a relay, so effectively, all users must be relays.  Currently, they do not have to be exit relays, but they must relay at least some traffic.
+  
+  2.  Configuration:  On Windows, BitBlinder is bundled with a pre-configured FireFoxPortable installation that contains TorButton, and it cannot be turned off via the usual GUI.  BitBlinder also has a custom BitTorrent client (based on the most recent release of BitTornado), again, modified to ensure that all communications are done through the network of relays.
+  
+Problems:
+  Potential New Vulnerabilities:
+    1.  We do not currently use entry guards.  This is not permanent, but it's also not clear how the idea of entry guards would correspond to a network using many one-hop circuits.  Perhaps some notion of friends or other nodes that you trust could be useful here?
+  
+Questions

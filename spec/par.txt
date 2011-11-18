@@ -1,0 +1,40 @@
+Overview:
+
+  A key component of BitBlinder is the incentive system that is used to ensure that members of the network function as some sort of relay; in fact, this is the key differentiator between BitBlinder and Tor.
+  
+Conventions:
+  
+  client:  An instance of BitBlinder.
+
+  bank:  The global bank run by InnomiNet.  This party is assumed to be an adversary of the peers in the network.
+  
+  micropayment:  a payment which is only redeemable a fraction of the time
+  
+Goals:
+  
+  The ideal payment system would meet the following criteria sufficiently to the extent that physical money could reasonably be attached to the system:
+
+  1.  Low Overhead.  Overhead comes in many forms, including: cpu on the client and bank, connections between clients or between the clients and bank, bandwidth to transmit the payments, database transactions, and total storage requirements at the client or bank.  Our gold standard is to support 1 terabyte of traffic through the network at the cost of no more than .01 C to ourselves and at a similarly marginal cost to the clients.  It is imperative that the overhead of the payment system must not forfeit any gains we make in speed via the incentive system. 
+  
+  2.  Off Line.  Ideally, the payment system would not require a connection to the bank to verify the validity of a payment, or to prevent cheating.  This goal relates to overhead, but also effects potential user interactions and the less likely case of the bank actually going offline for any reason.  At the least, the payment system should be able to cope with small amounts of (unexpected) downtime at the bank.
+  
+  3.  Good Cash Flow.  Tokens should not be "locked in" or bound to another specific client in large amounts or for long periods of time nor should they be bound in other ways as to cause cash flow issues where money exists to do useful work but can not be appropriated.  Additionally, the payment system should be plastic enough that the bank can take measured and public actions to maintain a healthy economy and allocation of capital.  Finally, clients should be able to transfer money between themselves which can help solve problems like hoarding.
+  
+  4.  Prevent Cheating.  Cheating should be readily apparent and avoidable by any party in the system to within some bounds, not specified here, or else the payment system will fail.  Many avenues exist to cheat:  
+	a: a client attempting to not pay for traffic, 
+	b. a client attempting to pay for traffic with another client's money, 
+	c. a client attempting to double spend legitimate tokens
+	d. a client attempting to mint it's own currency 
+	e. a client attempting to frame another client for any of these actions
+	f.  the bank refusing valid money
+    
+    Note: the punishment for cheating is not discussed here, though it is fundamental that the expected gain of cheating is smaller than the expected profit such that cheating is naturally bounded.
+    
+  5.  Preserve Anonymity.  Finally, the payment system must maintain a reasonable level of anonymity and security in the network.  There are numerous different ways in which payments can lead to loss of anonymity, and the bank and all other clients should always be treated as an adversary.  Ideally, the anonymity loss associated with the bank acting in collusion with some limited subset of clients would be limited.
+  
+
+Design:
+
+
+  
+Questions

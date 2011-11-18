@@ -1,0 +1,562 @@
+diff -Nubr zlib-1.2.3/projects/visualc6/zlib.sln zlib-1.2.3_new/projects/visualc6/zlib.sln
+--- zlib-1.2.3/projects/visualc6/zlib.sln	1969-12-31 19:00:00.000000000 -0500
++++ zlib-1.2.3_new/projects/visualc6/zlib.sln	2008-08-18 12:59:31.796875000 -0400
+@@ -0,0 +1,83 @@
++Microsoft Visual Studio Solution File, Format Version 8.00
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "example", "example.vcproj", "{424458BC-8066-4D33-B54F-5F29B925CE93}"
++	ProjectSection(ProjectDependencies) = postProject
++		{E9C16397-184B-4DA9-BB0A-90C8B59EA588} = {E9C16397-184B-4DA9-BB0A-90C8B59EA588}
++	EndProjectSection
++EndProject
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "minigzip", "minigzip.vcproj", "{CE374BA8-FB7C-4728-ADFD-B4E96B0E0325}"
++	ProjectSection(ProjectDependencies) = postProject
++		{E9C16397-184B-4DA9-BB0A-90C8B59EA588} = {E9C16397-184B-4DA9-BB0A-90C8B59EA588}
++	EndProjectSection
++EndProject
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zlib", "zlib.vcproj", "{E9C16397-184B-4DA9-BB0A-90C8B59EA588}"
++	ProjectSection(ProjectDependencies) = postProject
++	EndProjectSection
++EndProject
++Global
++	GlobalSection(SolutionConfiguration) = preSolution
++		DLL ASM Debug = DLL ASM Debug
++		DLL ASM Release = DLL ASM Release
++		DLL Debug = DLL Debug
++		DLL Release = DLL Release
++		LIB ASM Debug = LIB ASM Debug
++		LIB ASM Release = LIB ASM Release
++		LIB Debug = LIB Debug
++		LIB Release = LIB Release
++	EndGlobalSection
++	GlobalSection(ProjectDependencies) = postSolution
++	EndGlobalSection
++	GlobalSection(ProjectConfiguration) = postSolution
++		{424458BC-8066-4D33-B54F-5F29B925CE93}.DLL ASM Debug.ActiveCfg = DLL ASM Debug|Win32
++		{424458BC-8066-4D33-B54F-5F29B925CE93}.DLL ASM Debug.Build.0 = DLL ASM Debug|Win32
++		{424458BC-8066-4D33-B54F-5F29B925CE93}.DLL ASM Release.ActiveCfg = DLL ASM Release|Win32
++		{424458BC-8066-4D33-B54F-5F29B925CE93}.DLL ASM Release.Build.0 = DLL ASM Release|Win32
++		{424458BC-8066-4D33-B54F-5F29B925CE93}.DLL Debug.ActiveCfg = DLL Debug|Win32
++		{424458BC-8066-4D33-B54F-5F29B925CE93}.DLL Debug.Build.0 = DLL Debug|Win32
++		{424458BC-8066-4D33-B54F-5F29B925CE93}.DLL Release.ActiveCfg = DLL Release|Win32
++		{424458BC-8066-4D33-B54F-5F29B925CE93}.DLL Release.Build.0 = DLL Release|Win32
++		{424458BC-8066-4D33-B54F-5F29B925CE93}.LIB ASM Debug.ActiveCfg = LIB ASM Debug|Win32
++		{424458BC-8066-4D33-B54F-5F29B925CE93}.LIB ASM Debug.Build.0 = LIB ASM Debug|Win32
++		{424458BC-8066-4D33-B54F-5F29B925CE93}.LIB ASM Release.ActiveCfg = LIB ASM Release|Win32
++		{424458BC-8066-4D33-B54F-5F29B925CE93}.LIB ASM Release.Build.0 = LIB ASM Release|Win32
++		{424458BC-8066-4D33-B54F-5F29B925CE93}.LIB Debug.ActiveCfg = LIB Debug|Win32
++		{424458BC-8066-4D33-B54F-5F29B925CE93}.LIB Debug.Build.0 = LIB Debug|Win32
++		{424458BC-8066-4D33-B54F-5F29B925CE93}.LIB Release.ActiveCfg = LIB Release|Win32
++		{424458BC-8066-4D33-B54F-5F29B925CE93}.LIB Release.Build.0 = LIB Release|Win32
++		{CE374BA8-FB7C-4728-ADFD-B4E96B0E0325}.DLL ASM Debug.ActiveCfg = DLL ASM Debug|Win32
++		{CE374BA8-FB7C-4728-ADFD-B4E96B0E0325}.DLL ASM Debug.Build.0 = DLL ASM Debug|Win32
++		{CE374BA8-FB7C-4728-ADFD-B4E96B0E0325}.DLL ASM Release.ActiveCfg = DLL ASM Release|Win32
++		{CE374BA8-FB7C-4728-ADFD-B4E96B0E0325}.DLL ASM Release.Build.0 = DLL ASM Release|Win32
++		{CE374BA8-FB7C-4728-ADFD-B4E96B0E0325}.DLL Debug.ActiveCfg = DLL Debug|Win32
++		{CE374BA8-FB7C-4728-ADFD-B4E96B0E0325}.DLL Debug.Build.0 = DLL Debug|Win32
++		{CE374BA8-FB7C-4728-ADFD-B4E96B0E0325}.DLL Release.ActiveCfg = DLL Release|Win32
++		{CE374BA8-FB7C-4728-ADFD-B4E96B0E0325}.DLL Release.Build.0 = DLL Release|Win32
++		{CE374BA8-FB7C-4728-ADFD-B4E96B0E0325}.LIB ASM Debug.ActiveCfg = LIB ASM Debug|Win32
++		{CE374BA8-FB7C-4728-ADFD-B4E96B0E0325}.LIB ASM Debug.Build.0 = LIB ASM Debug|Win32
++		{CE374BA8-FB7C-4728-ADFD-B4E96B0E0325}.LIB ASM Release.ActiveCfg = LIB ASM Release|Win32
++		{CE374BA8-FB7C-4728-ADFD-B4E96B0E0325}.LIB ASM Release.Build.0 = LIB ASM Release|Win32
++		{CE374BA8-FB7C-4728-ADFD-B4E96B0E0325}.LIB Debug.ActiveCfg = LIB Debug|Win32
++		{CE374BA8-FB7C-4728-ADFD-B4E96B0E0325}.LIB Debug.Build.0 = LIB Debug|Win32
++		{CE374BA8-FB7C-4728-ADFD-B4E96B0E0325}.LIB Release.ActiveCfg = LIB Release|Win32
++		{CE374BA8-FB7C-4728-ADFD-B4E96B0E0325}.LIB Release.Build.0 = LIB Release|Win32
++		{E9C16397-184B-4DA9-BB0A-90C8B59EA588}.DLL ASM Debug.ActiveCfg = DLL ASM Debug|Win32
++		{E9C16397-184B-4DA9-BB0A-90C8B59EA588}.DLL ASM Debug.Build.0 = DLL ASM Debug|Win32
++		{E9C16397-184B-4DA9-BB0A-90C8B59EA588}.DLL ASM Release.ActiveCfg = DLL ASM Release|Win32
++		{E9C16397-184B-4DA9-BB0A-90C8B59EA588}.DLL ASM Release.Build.0 = DLL ASM Release|Win32
++		{E9C16397-184B-4DA9-BB0A-90C8B59EA588}.DLL Debug.ActiveCfg = DLL Debug|Win32
++		{E9C16397-184B-4DA9-BB0A-90C8B59EA588}.DLL Debug.Build.0 = DLL Debug|Win32
++		{E9C16397-184B-4DA9-BB0A-90C8B59EA588}.DLL Release.ActiveCfg = DLL Release|Win32
++		{E9C16397-184B-4DA9-BB0A-90C8B59EA588}.DLL Release.Build.0 = DLL Release|Win32
++		{E9C16397-184B-4DA9-BB0A-90C8B59EA588}.LIB ASM Debug.ActiveCfg = LIB ASM Debug|Win32
++		{E9C16397-184B-4DA9-BB0A-90C8B59EA588}.LIB ASM Debug.Build.0 = LIB ASM Debug|Win32
++		{E9C16397-184B-4DA9-BB0A-90C8B59EA588}.LIB ASM Release.ActiveCfg = LIB ASM Release|Win32
++		{E9C16397-184B-4DA9-BB0A-90C8B59EA588}.LIB ASM Release.Build.0 = LIB ASM Release|Win32
++		{E9C16397-184B-4DA9-BB0A-90C8B59EA588}.LIB Debug.ActiveCfg = LIB Debug|Win32
++		{E9C16397-184B-4DA9-BB0A-90C8B59EA588}.LIB Debug.Build.0 = LIB Debug|Win32
++		{E9C16397-184B-4DA9-BB0A-90C8B59EA588}.LIB Release.ActiveCfg = LIB Release|Win32
++		{E9C16397-184B-4DA9-BB0A-90C8B59EA588}.LIB Release.Build.0 = LIB Release|Win32
++	EndGlobalSection
++	GlobalSection(ExtensibilityGlobals) = postSolution
++	EndGlobalSection
++	GlobalSection(ExtensibilityAddIns) = postSolution
++	EndGlobalSection
++EndGlobal
+diff -Nubr zlib-1.2.3/projects/visualc6/zlib.vcproj zlib-1.2.3_new/projects/visualc6/zlib.vcproj
+--- zlib-1.2.3/projects/visualc6/zlib.vcproj	1969-12-31 19:00:00.000000000 -0500
++++ zlib-1.2.3_new/projects/visualc6/zlib.vcproj	2008-08-18 15:56:30.171875000 -0400
+@@ -0,0 +1,471 @@
++<?xml version="1.0" encoding="Windows-1252"?>
++<VisualStudioProject
++	ProjectType="Visual C++"
++	Version="7.10"
++	Name="zlib"
++	SccProjectName=""
++	SccLocalPath="">
++	<Platforms>
++		<Platform
++			Name="Win32"/>
++	</Platforms>
++	<Configurations>
++		<Configuration
++			Name="LIB Debug|Win32"
++			OutputDirectory=".\Win32_LIB_Debug"
++			IntermediateDirectory=".\Win32_LIB_Debug"
++			ConfigurationType="4"
++			UseOfMFC="0"
++			ATLMinimizesCRunTimeLibraryUsage="FALSE">
++			<Tool
++				Name="VCCLCompilerTool"
++				Optimization="0"
++				PreprocessorDefinitions="WIN32;_DEBUG"
++				BasicRuntimeChecks="3"
++				RuntimeLibrary="1"
++				PrecompiledHeaderFile=".\Win32_LIB_Debug/zlib.pch"
++				AssemblerListingLocation=".\Win32_LIB_Debug/"
++				ObjectFile=".\Win32_LIB_Debug/"
++				ProgramDataBaseFileName=".\Win32_LIB_Debug/"
++				WarningLevel="3"
++				SuppressStartupBanner="TRUE"
++				DebugInformationFormat="4"/>
++			<Tool
++				Name="VCCustomBuildTool"/>
++			<Tool
++				Name="VCLibrarianTool"
++				OutputFile="Win32_LIB_Debug\zlibd.lib"
++				SuppressStartupBanner="TRUE"/>
++			<Tool
++				Name="VCMIDLTool"/>
++			<Tool
++				Name="VCPostBuildEventTool"/>
++			<Tool
++				Name="VCPreBuildEventTool"/>
++			<Tool
++				Name="VCPreLinkEventTool"/>
++			<Tool
++				Name="VCResourceCompilerTool"
++				PreprocessorDefinitions="_DEBUG"
++				Culture="1033"/>
++			<Tool
++				Name="VCWebServiceProxyGeneratorTool"/>
++			<Tool
++				Name="VCXMLDataGeneratorTool"/>
++			<Tool
++				Name="VCManagedWrapperGeneratorTool"/>
++			<Tool
++				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
++		</Configuration>
++		<Configuration
++			Name="LIB ASM Release|Win32"
++			OutputDirectory=".\Win32_LIB_ASM_Release"
++			IntermediateDirectory=".\Win32_LIB_ASM_Release"
++			ConfigurationType="4"
++			UseOfMFC="0"
++			ATLMinimizesCRunTimeLibraryUsage="FALSE">
++			<Tool
++				Name="VCCLCompilerTool"
++				Optimization="2"
++				InlineFunctionExpansion="1"
++				PreprocessorDefinitions="WIN32;NDEBUG;ASMV;ASMINF"
++				StringPooling="TRUE"
++				RuntimeLibrary="0"
++				EnableFunctionLevelLinking="TRUE"
++				PrecompiledHeaderFile=".\Win32_LIB_ASM_Release/zlib.pch"
++				AssemblerListingLocation=".\Win32_LIB_ASM_Release/"
++				ObjectFile=".\Win32_LIB_ASM_Release/"
++				ProgramDataBaseFileName=".\Win32_LIB_ASM_Release/"
++				WarningLevel="3"
++				SuppressStartupBanner="TRUE"/>
++			<Tool
++				Name="VCCustomBuildTool"/>
++			<Tool
++				Name="VCLibrarianTool"
++				OutputFile=".\Win32_LIB_ASM_Release\zlib.lib"
++				SuppressStartupBanner="TRUE"/>
++			<Tool
++				Name="VCMIDLTool"/>
++			<Tool
++				Name="VCPostBuildEventTool"/>
++			<Tool
++				Name="VCPreBuildEventTool"/>
++			<Tool
++				Name="VCPreLinkEventTool"/>
++			<Tool
++				Name="VCResourceCompilerTool"
++				PreprocessorDefinitions="NDEBUG"
++				Culture="1033"/>
++			<Tool
++				Name="VCWebServiceProxyGeneratorTool"/>
++			<Tool
++				Name="VCXMLDataGeneratorTool"/>
++			<Tool
++				Name="VCManagedWrapperGeneratorTool"/>
++			<Tool
++				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
++		</Configuration>
++	</Configurations>
++	<References>
++	</References>
++	<Files>
++		<Filter
++			Name="Source Files"
++			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat">
++			<File
++				RelativePath="..\..\adler32.c">
++				<FileConfiguration
++					Name="LIB Debug|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="0"
++						PreprocessorDefinitions=""
++						BasicRuntimeChecks="3"/>
++				</FileConfiguration>
++				<FileConfiguration
++					Name="LIB ASM Release|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="2"
++						PreprocessorDefinitions=""/>
++				</FileConfiguration>
++			</File>
++			<File
++				RelativePath="..\..\compress.c">
++				<FileConfiguration
++					Name="LIB Debug|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="0"
++						PreprocessorDefinitions=""
++						BasicRuntimeChecks="3"/>
++				</FileConfiguration>
++				<FileConfiguration
++					Name="LIB ASM Release|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="2"
++						PreprocessorDefinitions=""/>
++				</FileConfiguration>
++			</File>
++			<File
++				RelativePath="..\..\crc32.c">
++				<FileConfiguration
++					Name="LIB Debug|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="0"
++						PreprocessorDefinitions=""
++						BasicRuntimeChecks="3"/>
++				</FileConfiguration>
++				<FileConfiguration
++					Name="LIB ASM Release|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="2"
++						PreprocessorDefinitions=""/>
++				</FileConfiguration>
++			</File>
++			<File
++				RelativePath="..\..\deflate.c">
++				<FileConfiguration
++					Name="LIB Debug|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="0"
++						PreprocessorDefinitions=""
++						BasicRuntimeChecks="3"/>
++				</FileConfiguration>
++				<FileConfiguration
++					Name="LIB ASM Release|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="2"
++						PreprocessorDefinitions=""/>
++				</FileConfiguration>
++			</File>
++			<File
++				RelativePath="..\..\gzio.c">
++				<FileConfiguration
++					Name="LIB Debug|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="0"
++						PreprocessorDefinitions=""
++						BasicRuntimeChecks="3"/>
++				</FileConfiguration>
++				<FileConfiguration
++					Name="LIB ASM Release|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="2"
++						PreprocessorDefinitions=""/>
++				</FileConfiguration>
++			</File>
++			<File
++				RelativePath="..\..\infback.c">
++				<FileConfiguration
++					Name="LIB Debug|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="0"
++						PreprocessorDefinitions=""
++						BasicRuntimeChecks="3"/>
++				</FileConfiguration>
++				<FileConfiguration
++					Name="LIB ASM Release|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="2"
++						PreprocessorDefinitions=""/>
++				</FileConfiguration>
++			</File>
++			<File
++				RelativePath="..\..\inffast.c">
++				<FileConfiguration
++					Name="LIB Debug|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="0"
++						PreprocessorDefinitions=""
++						BasicRuntimeChecks="3"/>
++				</FileConfiguration>
++				<FileConfiguration
++					Name="LIB ASM Release|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="2"
++						PreprocessorDefinitions=""/>
++				</FileConfiguration>
++			</File>
++			<File
++				RelativePath="..\..\inflate.c">
++				<FileConfiguration
++					Name="LIB Debug|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="0"
++						PreprocessorDefinitions=""
++						BasicRuntimeChecks="3"/>
++				</FileConfiguration>
++				<FileConfiguration
++					Name="LIB ASM Release|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="2"
++						PreprocessorDefinitions=""/>
++				</FileConfiguration>
++			</File>
++			<File
++				RelativePath="..\..\inftrees.c">
++				<FileConfiguration
++					Name="LIB Debug|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="0"
++						PreprocessorDefinitions=""
++						BasicRuntimeChecks="3"/>
++				</FileConfiguration>
++				<FileConfiguration
++					Name="LIB ASM Release|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="2"
++						PreprocessorDefinitions=""/>
++				</FileConfiguration>
++			</File>
++			<File
++				RelativePath="..\..\trees.c">
++				<FileConfiguration
++					Name="LIB Debug|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="0"
++						PreprocessorDefinitions=""
++						BasicRuntimeChecks="3"/>
++				</FileConfiguration>
++				<FileConfiguration
++					Name="LIB ASM Release|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="2"
++						PreprocessorDefinitions=""/>
++				</FileConfiguration>
++			</File>
++			<File
++				RelativePath="..\..\uncompr.c">
++				<FileConfiguration
++					Name="LIB Debug|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="0"
++						PreprocessorDefinitions=""
++						BasicRuntimeChecks="3"/>
++				</FileConfiguration>
++				<FileConfiguration
++					Name="LIB ASM Release|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="2"
++						PreprocessorDefinitions=""/>
++				</FileConfiguration>
++			</File>
++			<File
++				RelativePath="..\..\win32\zlib.def">
++				<FileConfiguration
++					Name="LIB Debug|Win32"
++					ExcludedFromBuild="TRUE">
++					<Tool
++						Name="VCCustomBuildTool"/>
++				</FileConfiguration>
++				<FileConfiguration
++					Name="LIB ASM Release|Win32"
++					ExcludedFromBuild="TRUE">
++					<Tool
++						Name="VCCustomBuildTool"/>
++				</FileConfiguration>
++			</File>
++			<File
++				RelativePath="..\..\zutil.c">
++				<FileConfiguration
++					Name="LIB Debug|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="0"
++						PreprocessorDefinitions=""
++						BasicRuntimeChecks="3"/>
++				</FileConfiguration>
++				<FileConfiguration
++					Name="LIB ASM Release|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="2"
++						PreprocessorDefinitions=""/>
++				</FileConfiguration>
++			</File>
++		</Filter>
++		<Filter
++			Name="Header Files"
++			Filter="h;hpp;hxx;hm;inl">
++			<File
++				RelativePath="..\..\crc32.h">
++			</File>
++			<File
++				RelativePath="..\..\deflate.h">
++			</File>
++			<File
++				RelativePath="..\..\inffast.h">
++			</File>
++			<File
++				RelativePath="..\..\inffixed.h">
++			</File>
++			<File
++				RelativePath="..\..\inflate.h">
++			</File>
++			<File
++				RelativePath="..\..\inftrees.h">
++			</File>
++			<File
++				RelativePath="..\..\trees.h">
++			</File>
++			<File
++				RelativePath="..\..\zconf.h">
++			</File>
++			<File
++				RelativePath="..\..\zlib.h">
++			</File>
++			<File
++				RelativePath="..\..\zutil.h">
++			</File>
++		</Filter>
++		<Filter
++			Name="Resource Files"
++			Filter="ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe">
++			<File
++				RelativePath="..\..\win32\zlib1.rc">
++				<FileConfiguration
++					Name="LIB Debug|Win32">
++					<Tool
++						Name="VCResourceCompilerTool"
++						PreprocessorDefinitions=""
++						AdditionalIncludeDirectories="\Projects\web\tor\contrib\zlib-1.2.3\win32"/>
++				</FileConfiguration>
++				<FileConfiguration
++					Name="LIB ASM Release|Win32">
++					<Tool
++						Name="VCResourceCompilerTool"
++						PreprocessorDefinitions=""
++						AdditionalIncludeDirectories="\Projects\web\tor\contrib\zlib-1.2.3\win32"/>
++				</FileConfiguration>
++			</File>
++		</Filter>
++		<Filter
++			Name="Assembler Files (Unsupported)"
++			Filter="asm;obj;c;cpp;cxx;h;hpp;hxx">
++			<File
++				RelativePath="..\..\contrib\masmx86\gvmat32.asm">
++				<FileConfiguration
++					Name="LIB Debug|Win32"
++					ExcludedFromBuild="TRUE">
++					<Tool
++						Name="VCCustomBuildTool"/>
++				</FileConfiguration>
++				<FileConfiguration
++					Name="LIB ASM Release|Win32">
++					<Tool
++						Name="VCCustomBuildTool"
++						Description="Assembling..."
++						CommandLine="ml.exe /nologo /c /coff /Cx /Fo&quot;$(IntDir)\$(InputName).obj&quot; &quot;$(InputPath)&quot;
++"
++						Outputs="$(IntDir)\$(InputName).obj"/>
++				</FileConfiguration>
++			</File>
++			<File
++				RelativePath="..\..\contrib\masmx86\gvmat32c.c">
++				<FileConfiguration
++					Name="LIB Debug|Win32"
++					ExcludedFromBuild="TRUE">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="0"
++						AdditionalIncludeDirectories="..\.."
++						PreprocessorDefinitions=""
++						BasicRuntimeChecks="3"
++						CompileAs="0"/>
++				</FileConfiguration>
++				<FileConfiguration
++					Name="LIB ASM Release|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="2"
++						AdditionalIncludeDirectories="..\.."
++						PreprocessorDefinitions=""
++						CompileAs="0"/>
++				</FileConfiguration>
++			</File>
++			<File
++				RelativePath="..\..\contrib\masmx86\inffas32.asm">
++				<FileConfiguration
++					Name="LIB Debug|Win32"
++					ExcludedFromBuild="TRUE">
++					<Tool
++						Name="VCCustomBuildTool"/>
++				</FileConfiguration>
++				<FileConfiguration
++					Name="LIB ASM Release|Win32">
++					<Tool
++						Name="VCCustomBuildTool"
++						Description="Assembling..."
++						CommandLine="ml.exe /nologo /c /coff /Cx /Fo&quot;$(IntDir)\$(InputName).obj&quot; &quot;$(InputPath)&quot;
++"
++						Outputs="$(IntDir)\$(InputName).obj"/>
++				</FileConfiguration>
++			</File>
++		</Filter>
++		<File
++			RelativePath="README.txt">
++		</File>
++	</Files>
++	<Globals>
++	</Globals>
++</VisualStudioProject>

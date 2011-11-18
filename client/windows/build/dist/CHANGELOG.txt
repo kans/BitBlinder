@@ -1,0 +1,3 @@
+0.3.0
+(Initial limited public release)
+Thanks to all of our testers!

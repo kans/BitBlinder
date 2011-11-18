@@ -1,0 +1,127 @@
+network-status-version 3
+vote-status consensus
+consensus-method 5
+valid-after 2010-01-07 15:45:00
+fresh-until 2010-01-07 16:00:00
+valid-until 2010-01-07 16:30:00
+voting-delay 20 20
+client-versions 
+server-versions 
+known-flags Authority Exit Fast Guard HSDir Running Stable V2Dir Valid
+dir-source InnomiNetAuth3 0361B04347FE6DCFA54D98A50AE5BCCC3D1F7597 174.129.199.15 174.129.199.15 33355 33354
+contact admin@innomi.net
+vote-digest D14812518BF59FE19238866D20288AEE4CF7EEAA
+dir-source InnomiNetAuth2 03624A0DB12AC7CA77C829CB9FD3DDB35A40FBB7 174.143.240.110 174.143.240.110 33353 33352
+contact admin@innomi.net
+vote-digest 9E66C526C29E219E16DBE1250F63F8E78466FBD2
+dir-source InnomiNetAuth1 98F3E99CB993D6AC5BB80B8560AD80ABF389A7AC 174.129.199.15 174.129.199.15 33351 33350
+contact admin@innomi.net
+vote-digest 41C941C129E451AF56BCB988D4DF5F4E0C8B33D9
+r 1DA9F03ECA0916AF JoqfOE/FmNdVt8+G8EGpOY5WMy4 qFXw2d711cnzja4cy63bhHlAmhc 2010-01-07 15:41:30 89.12.185.34 10001 10010
+s Fast Running V2Dir Valid
+v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+w Bandwidth=37
+p reject 1-65535
+r InnomiNetAuth3 RG27muxa/mp5n2WxYj00+YDyhf0 6ZxO5PEcFFqgkt2fYn1f32MCvEo 2010-01-07 10:13:18 174.129.199.15 33354 33355
+s Authority Fast Guard HSDir Running Stable V2Dir Valid
+v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 (r4026)
+w Bandwidth=52
+p reject 1-65535
+r 0A1ED726D25B7572 UY6WdZNksByYAMNu3TzA6rnwtOU NqDvShWJqFKdsxd6k820xydTF/U 2010-01-07 02:54:06 96.22.210.194 10001 10030
+s Fast Running V2Dir Valid
+v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+w Bandwidth=97
+p reject 1-65535
+r BC96D2BF10B218B3 VurdjmYpv03smcV9sso8wjHeZjs 5IX61sMMRtwj73oUJX8Gjxhp/fM 2010-01-07 12:31:24 220.233.13.190 10001 0
+s Exit Fast Running Valid
+v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+w Bandwidth=21
+p reject 25,80,119,135-139,443,445
+r InnomiNetAuth1 X6FR2IA6dvhYEqL/FYbf5xmZVAU B5y7kMcNuIrxEQ50tGXfCpoMcHs 2010-01-06 22:14:15 174.129.199.15 33350 33351
+s Authority Fast HSDir Running Stable V2Dir Valid
+v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 (r4026)
+w Bandwidth=52
+p reject 1-65535
+r DE3D2A7E37AD9666 a5d/AXDoO8cc3KsbIjZDoGgloLc RFeB8UVSHsX4yJafjz5E3DJYLnw 2010-01-07 07:24:38 75.72.116.66 10001 10030
+s Fast Guard HSDir Running V2Dir Valid
+v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+w Bandwidth=96
+p reject 1-65535
+r EAAA9A8E6A8F209F hUpok23oiXjnXWa0xp67Lj0p5Cc G1PmynKKrfFxl6lEUlKsM3CX19w 2010-01-07 08:11:41 82.228.55.143 10001 10030
+s Exit Fast Guard HSDir Running Stable V2Dir Valid
+v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+w Bandwidth=90
+p reject 25,80,119,135-139,443,445
+r 941C712DA0F7DFD6 hgG2iIoy1YAG9z0w9GHw4adgvOg YkgcICt7uHMQfr5MOnXi3DuOOg4 2010-01-07 15:12:12 220.233.25.181 10002 10031
+s Fast Running Stable V2Dir Valid
+v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+w Bandwidth=43
+p reject 1-65535
+r 70565C3E7F293AA9 monWP9We66Lq5/n5z2JaW3jOGTI bsK5yNK1Br6gt/ez0YzUVDkTpp4 2010-01-07 06:50:17 64.122.230.233 10001 10030
+s Fast Guard HSDir Running Stable V2Dir Valid
+v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+w Bandwidth=62
+p reject 1-65535
+r 394687A5EAA75437 oYTpqyvLJ41p+c9ReDyVvGPAkHA LONeuuyquhSt8oskrbnSCMjdPgw 2010-01-07 01:19:05 92.135.193.35 10001 10030
+s Exit Fast Running Stable V2Dir Valid
+v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+w Bandwidth=47
+p reject 25,119,135-139,445
+r 9C72215273C50E3F p14a7Jti0+Mi+pUz/cHWBXW0rDs a2PlBCsMCXbqWlLo1SnBgoywcQQ 2010-01-07 08:38:00 87.227.83.186 9998 10007
+s Fast Running Stable V2Dir Valid
+v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+w Bandwidth=21
+p reject 1-65535
+r 6B0F4BA87B5E4CE8 q9oTqg4SCJSbsQYUQ5PqCY6V2fc PT5zTFzUjo61yXCVcR9mWYAUtg4 2010-01-07 15:38:55 213.161.252.207 9001 0
+s Exit Running Valid
+v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+w Bandwidth=0
+p reject 25,80,119,135-139,443,445
+r 873E99C1034DE334 sviJwhU/Dj/9eS9qBYUPEmdHEPQ JDS5MW9c/Rc16xA2QKUksfeJJjU 2010-01-07 02:52:59 98.236.71.7 8001 8030
+s Exit Fast Guard HSDir Running Stable V2Dir Valid
+v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+w Bandwidth=170
+p reject 25,119,135-139,445
+r 92BD6BFE91C7A79E uvdOQMB04d+J7DPx4f+l/hB6S/Y cIwE+MqLqmPWtffDVTf4d07UgCA 2010-01-07 14:21:45 121.243.187.71 10001 10030
+s Exit Fast Running V2Dir Valid
+v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+w Bandwidth=60
+p reject 25,119,135-139,445
+r 9B452E3761D5AAF4 yKE87mNM1BzbO2EAokYaBZuGaEY or9KCFrL9qKPX1SW5Y7E3Zk50Es 2010-01-07 02:28:07 75.110.43.65 10001 10030
+s Exit Fast Guard HSDir Running Stable V2Dir Valid
+v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+w Bandwidth=82
+p reject 25,119,135-139,445
+r InnomiNetAuth2 2+Wg4+EixnrPIroCRK7M6X4+e5k vVQ4H0saYQibMTyzhAjTgi0wxLc 2010-01-07 06:08:08 174.143.240.110 33352 33353
+s Authority Fast HSDir Running Stable V2Dir Valid
+v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 (r4026)
+w Bandwidth=45
+p reject 1-65535
+r 0BECCEB8E600A27B 5pIxoxk6S7Ky+HzcYmZg9ktBikM IIu6Fd0H+52gZFOBHTcpptnZL/I 2010-01-07 13:37:44 93.11.181.56 10001 10030
+s Exit Fast Running V2Dir Valid
+v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+w Bandwidth=61
+p reject 25,119,135-139,445
+r 791B008EEE3BD27C 8/2rJg0HDwWo0QIa7dSF32nHFGI kdQEa+/3wnnYXGJNz/t6Epu+fFA 2010-01-07 03:57:37 98.194.177.74 46835 10030
+s Exit Fast Running Stable V2Dir Valid
+v Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0
+w Bandwidth=61
+p reject 25,119,135-139,445
+directory-signature 0361B04347FE6DCFA54D98A50AE5BCCC3D1F7597 FAC133B39B018C77E968BE45880E97AF639C38F7
+-----BEGIN SIGNATURE-----
+ODnuxJUeGib/NXUomcS3+JhUZ0jGTwv5MzFyz+FlQ2YT2E+oIGKn+sufmUKTjROq
+G1O7eqs6CCQFvT7wby1xNTtjB1ibx3QQqZsHC5+e4rHINyFly+zgvN4/bKvExnH0
+fE8IgVM2WPRyHjVaIrohIH1c6IushMc1O3Sb4MxTHpo=
+-----END SIGNATURE-----
+directory-signature 03624A0DB12AC7CA77C829CB9FD3DDB35A40FBB7 67FECCED532E9BBDAAD021185B019652DB057F1D
+-----BEGIN SIGNATURE-----
+DFGXqeIon3VxnJMN33v9c+zCLWbCY011sgQqoJkPn5xHxoKbiTuRx81fgpEpqRSP
+X/WlNiuSNy4BncVK7u9f6H9XUH8de6gVE/egYv817ebXMwNT/XhB6GgEeRHS6mgD
++f9j1rDYn5EZzUo71aB8GBrSTi+YnhB0xmyQh6qUjwI=
+-----END SIGNATURE-----
+directory-signature 98F3E99CB993D6AC5BB80B8560AD80ABF389A7AC 40CE6EE251C25028B3B27ACC11DFB3E526DE37BB
+-----BEGIN SIGNATURE-----
+KW8fEw3BT4dmUkbaJwALOy4WmJTc88/72n1tjtVXGRnHXoKlASzM70/phQ39b1/M
+O8Ps9Qo/SsyK+lu4vY1rJLikjAKrWC9qpvVpES1z2rBx0hB7PJaGi+BRvOq4xZkv
+L1ffOI1kepTz8zj+HL0nT+33jbhARqcH8sshMpo3E8E=
+-----END SIGNATURE-----

@@ -1,0 +1,197 @@
+bitblinder (0.5.8) unstable; urgency=low
+
+  * Added upnp support for linux.
+
+ -- Matt Kaniaris <kans@bitblinder.com>  Thu, 07 Jan 2010 09:10:01 +0000
+
+bitblinder (0.5.5) unstable; urgency=low
+
+  * Complete GUI redesign
+  * Anonymous DHT for finding more peers
+  * Improved relay setup process, should walk you through all the steps
+  * Can edit trackers manually
+  * Peer view now shows what client other peers are using
+  * Fixed windows 7 bugs (proper shortcuts and no more weird error message)
+  * Fixed bug that was sending too many payments when new circuits are opened
+  * Fixed another bug that opened too many circuits (too much payment) for bittorrent
+  * Fixed a bug that prevent users from logging in (Twisted currently has a DNS bug)
+  * Fixed a race connection that caused extra payments to be sent sometimes
+  * Fixed a bug that would invalidate some credits unecessarily
+  * Cleaned and restructured a lot of code, should make somewhat more sense now
+  * Removed pyopenssl dependency
+  * Removed all mention of BitTwister, now has only one status icon for BitBlinder
+  * Changed settings files, no longer stores separately for each login name
+  * Fixed bitblinder.exe icon on windows
+  * Other smaller bugfixes
+
+ -- Matt Kaniaris <kans@bitblinder.com>  Mon, 07 Dec 2009 10:21:10 +0000
+
+bitblinder (0.4.9) unstable; urgency=low
+
+  * hopefully fixed startup for non-ASCII file paths
+  * warn users who are firewalled, because that prevents bitblinder from working
+  * now merge trackers when you add a torrent that you're already downloading
+  * fixed crash from too many open connections
+  * fixed bug that sometimes prevented tracker connections
+  * fixed bug that caused overpayment on circuits sometimes
+  * fixed links for forgetting password, new account
+  * better handling of errors from trackers
+  * better anonymization for error logs
+  * better error logging to help fix some outstanding tricky errors
+  * added open torrent folder link in menu
+  * can only open one circuit list now
+  * misc small bugfixes
+
+ -- Matt Kaniaris <kans@bitblinder.com>  Tue, 20 Oct 2009 16:21:10 +0000
+
+bitblinder (0.4.8) unstable; urgency=low
+
+  * bitblinder warns about bad clocks on the first run
+  * relay visual feedback and warning messages are much more accurate now
+
+ -- Matt Kaniaris <kans@bitblinder.com>  Wed, 07 Oct 2009 01:14:57 +0000
+
+bitblinder (0.4.7) unstable; urgency=low
+
+  * logins fixed for usernames with spaces, dashes, and underbars
+  * fixed major startup bugs
+  * new tracker connection code and better errors
+
+ -- Matt Kaniaris <kans@bitblinder.com>  Wed, 30 Sep 2009 16:13:21 -0400
+
+bitblinder (0.4.5) unstable; urgency=low
+  
+  * The GUI has been refactored to be significantly more responsive while also reducing its overhead (ticket# 13)
+  * Added some optimizations for increasing BitTorrent speeds (ticket# 14)
+  * Support generic SOCKS connections from any program including FF on linux (ticket# 43, 39)
+  * The BitBlinder interface is separated into two windows  (ticket# 73)
+  * The BitTorrent client is now called BitTwister, and the anonymizing (SOCKS) platform is now called BitBlinder to reduce ambiguity
+  * Now support non-ASCII path names for everything which should work for any language...
+  * New options files, easier to edit and understand
+  * Clean BitTorrent shutdown with better support for private trackers (ticket# 53)
+  * New Peer Display for BitTorrent
+  * New toggle switch for being a relay (ticket# 34)
+  * New curses based gui added- use --curses flag when starting and press q to quit (ticket# 81)
+  
+ -- Matt Kaniaris <kans@bitblinder.com>  Tue, 08 Sep 2009 16:13:21 -0400
+  
+bitblinder (0.4.2) unstable; urgency=low
+
+  * always write options to disk (now cmdline users can edit the config)
+  * fixed tracker connection error that caused it to timeout forever
+  * fixed error in cmdline version when downloading files
+  * fixed code that checks if ports are in use in linux
+  * fixed exception from rare tor startup event sequence
+  * prevent buildup of messages when bank is down and wallet is empty
+  * added system type info for better error reports
+  * disabled exceptions when money runs out
+  * bank communications now properly fail and timeout when the bank is down
+  * fixed ftp error on shutdown
+  * made scanning the torrentFolder faster
+
+ -- Matt Kaniaris <kans@bitblinder.com>  Sun, 09 Aug 2009 15:37:33 +0000
+
+bitblinder (0.4.0-rc7) unstable; urgency=low
+
+  * now properly inform users when ports are bound, and give them options to deal with it
+  * added nice checks for necessary packages on linux startup
+  * really fixed bwrate setting
+  * fixed problem with listing process ids in linux
+  * fixed exception from early shutdown
+  * code cleanup and commenting
+  
+ -- Matt Kaniaris <kans@bitblinder.com>  Friday, 31 July 2009 00:16:00 -0400
+ 
+
+bitblinder (0.4.0-rc5) unstable; urgency=low
+
+  * clean linux shutdown
+  * fixed bug when balance is low or negative
+  * better error logging
+  * fixed exception on early shutdown
+  * fixed exception when people clicked on help link
+  * fixed two exceptions during login
+  
+ -- Matt Kaniaris <kans@bitblinder.com>  Wed, 29 July 2009 00:16:00 -0400
+ 
+bitblinder (0.4.0) unstable; urgency=low
+
+  * much better relay setup interface
+  * Completely new coin system--no more losing money; earn money more quickly, balances remain in sync with multiple running clients, with better anonymity.
+  * Many security fixes, now both faster and safer
+  * Changed default ports to not conflict with Tor
+  * GUI reorganization to be more intuitive
+  * Better theme support for *nix
+  * No longer delete the wrong torrents
+  * Better path selection--now always more likely to choose middle relays from the pool of non-exits
+
+ -- Matt Kaniaris <kans@bitblinder.com>  Tue, 21 June 2009 00:47:00 -0400
+
+bitblinder (0.3.8) unstable; urgency=low
+
+  * much better relay setup interface
+  * port tests are now free--should no longer lose money for that reason
+  * can now select number of relays to use separately for firefox and bittorrent
+  * improved circuit building policies--should spread traffic more evenly on the network, making everything faster
+  * "go faster" button for firefox (gets a new circuit)
+  * improved firefox launch process (should be less crashy)
+  * properly hiding some useless options
+  * settings validation and feedback in gui
+  * gui-less logins no longer show password
+  * now allow unlimited bandwidth option values for server
+  * fixed bug that was making bwscheduler useless before
+  * changed to OSError instead of WindowsError for relevant errors
+  * changed FastFirstHopPPK to zero, better anonymity this way
+  * circuit list only updates when open
+  * various windows changes for auto-updater and UAC programs
+
+ -- Matt Kaniaris <kans@bitblinder.com>  Sun, 14 June 2009 23:00:00 -0400
+
+bitblinder (0.3.7) unstable; urgency=low
+
+  * fixed major bug that causes you to lose money over time
+  * fixed bw scheduler hopefully
+  * fixed compatibility for certain windows systems (Server 2008, some others)
+  * fixed crash on tor startup
+  * fixed crash on certain windows machine configurations
+  * fixed horrible speed bug
+  * stops trying to load a torrent file if it is unaccessible
+  * deleted a lot of old/unused code
+  * appropriately error when someone tries to start an application too early
+  * fixed error when changing setting to a folder that does not exist
+  * show users an error when a web address fails to open for some reason.
+  * can cancel the delete torrent dialog
+  * fixed XML interactions with abnormal strings (hopefully)
+  * prevented access to TorControl port when Tor is not running (numerous exceptions)
+  * code cleanup and commenting
+  * a few smaller bugfixes
+
+ -- Matt Kaniaris <kans@bitblinder.com>  Sun, 14 June 2009 23:00:00 -0400
+
+bitblinder (0.3.4) unstable; urgency=low
+
+  * Scan folder works now
+  * Tracker errors (like those that happen when you try to use a private
+    tracker that requires certain IP addresses) are now reported
+  * Suppressed a number of pointless exceptions
+
+ -- Matt Kaniaris <kans@bitblinder.com>  Wed, 10 June 2009 05:40:00 -0400
+
+bitblinder (0.3.3) unstable; urgency=low
+
+  * I hate writing changelogs, see SVN if you really care
+
+ -- Matt Kaniaris <kans@bitblinder.com>  Wed, 10 June 2009 05:40:00 -0400
+
+bitblinder (0.3.2) unstable; urgency=low
+
+  * Fixed a lot of bugs
+
+ -- Matt Kaniaris <kans@bitblinder.com>  Wed, 10 June 2009 02:40:00 -0400
+
+bitblinder (0.3.0) unstable; urgency=low
+
+  * Initial release!
+
+ -- Matt Kaniaris <kans@bitblinder.com>  Sat, 23 May 2009 05:23:31 -0400
+ 

@@ -1,0 +1,19 @@
+[FirefoxPortable]
+FirefoxDirectory=App\firefox
+ProfileDirectory=Data\profile
+SettingsDirectory=Data\settings
+PluginsDirectory=Data\plugins
+FirefoxExecutable=firefox.exe
+AdditionalParameters=
+LocalHomepage=
+DisableSplashScreen=true
+#AllowMultipleInstances=false
+AllowMultipleInstances=true
+DisableIntelligentStart=false
+SkipChromeFix=false
+SkipCompregFix=false
+RunLocally=false
+WaitForFirefox=true
+
+# The above options are explained in the included readme.txt
+# This INI file is an example only and is not used unless it is placed as described in the included readme.txt

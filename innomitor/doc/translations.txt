@@ -1,0 +1,179 @@
+##      Instructions for helping translate text for Vidalia, TorButton
+##      and TorCheck
+##  ( More translation information for Tor related apps will accumulate here )
+
+Our translations are handled in one of two places. The Tor Translation Portal
+handles all of the translations for Vidalia, Torbutton and TorCheck. The Tor
+website itself is currently handled by hand translations using subversion.
+
+-------------------------------------------------------------------------
+
+For the Tor website, you'll need a Tor SVN account.
+If you do not have one and you need one, please run this command with your
+desired username in place of 'USERNAME':
+    htdigest -c passwd.tmp "Tor subversion repository" USERNAME
+and send us the contents of passwd.tmp.
+
+-------------------------------------------------------------------------
+
+For the Portal-based projects, all three check in their respective .po
+files into the following subversion urls:
+
+    https://tor-svn.freehaven.net/svn/translation/trunk/projects/torbutton
+    https://tor-svn.freehaven.net/svn/translation/trunk/projects/torcheck
+    https://svn.vidalia-project.net/svn/vidalia/trunk/src/vidalia/i18n/
+
+The current pootle configuration is checked into subversion as well:
+
+    https://tor-svn.freehaven.net/svn/translation/trunk/pootle
+
+---------------------------- TorCheck -------------------------------
+
+TorCheck uses our translation portal to accept translations. Users use
+the portal to check in their changes.  To make use of the translations
+that users have commited to the translations/ subversion module, you'll
+need to ensure that you have a current checked out copy of TorCheck:
+
+    cd check/trunk/i18n/
+    check/trunk/i18n$ svn up
+
+You should see something like the following:
+
+    Fetching external item into 'pootle'
+    External at revision 15300.
+
+    At revision 15300.
+
+Now if you had changes, you'd simply want to move the newly updated .po files
+into the current stable directory.  Moving the .po files from
+'check/trunk/i18n/pootle/' into 'check/trunk/i18n' properly naming the files
+for their respective locale.
+
+Here's an example of how to move all of the current pootle translations into
+the svn trunk area of TorCheck:
+
+    cd check/trunk/i18n/
+    for locale in `ls -1 pootle/|grep -v template`;
+    do
+    mv -v pootle/$locale/TorCheck_$locale.po TorCheck_$locale.po;
+    done
+
+Now check the differences (ensure the output looks reasonable):
+
+    svn diff
+
+Ensure that msgfmt has no errors:
+
+    msgfmt -C *.po
+
+And finally check in the changes:
+
+    svn commit
+
+---------------------------- Torbutton -------------------------------
+
+Torbutton uses our translation portal to accept translations. Users use
+the portal to check in their changes.
+
+To make use of the translations that users have commited to the translations/
+subversion module, you'll need to ensure that you have a current checked out
+copy of Torbutton:
+
+    cd torbutton/trans_tools
+    torbutton/trans_tools$ svn up
+
+You should see something like the following:
+
+    Fetching external item into 'pootle'
+    External at revision 15300.
+
+    At revision 15300.
+
+Now if you had changes, you need to convert from .po and move
+the newly updated mozilla files into the current stable locale
+directory. First convert them with the 'mkmoz.sh' script and then
+move the proper mozilla files from 'torbutton/trans_tools/moz/' into
+'torbutton/src/chrome/locale/' directory while properly naming the files
+for their respective locale.
+
+Here's an example of how to move all of the current pootle translations into
+the svn trunk area of Torbutton:
+
+    cd torbutton/trans_tools
+    ./mkmoz.sh
+    for locale in `ls -1 moz/`;
+    do
+       mv -v moz/$locale/*.{dtd,properties} ../src/chrome/locale/$locale/;
+    done
+
+Now check the differences (ensure the output looks reasonable):
+
+    svn diff
+
+And finally check in the changes:
+
+    svn commit
+
+
+If you make changes to strings in Torbutton, you need to rebuild the 
+templates in torbutton/trans_tools/pootle/templates. This is done via:
+
+    moz2po -P -i torbutton/src/chrome/locale/en/ -o torbutton/trans_tools/templates/
+
+You now have two options:
+
+Option 1 (The Pootle Web UI Way):
+
+View then commit the changes to the template with:
+
+    svn diff torbutton/trans_tools/templates/ 
+    svn commit torbutton/trans_tools/templates/
+
+Then poke Jake to 'svn up' on the Pootle side. If you do this enough
+times, he may give you a button to click to update templates in Pootle,
+or maybe even an account on the Pootle server. Persistence is a virtue.
+
+You then need to go to the Pootle website and click the checkbox next to
+every language on:
+https://translation.torproject.org/projects/torbutton/admin.html
+and then click "Update Languages" at the bottom.
+
+You then need to go to each language and go to "Editing Options" and click 
+"Commit" for each one. 
+
+You then need to 'svn up' locally, and follow the procedure above for
+rebuilding your .dtd and .properties files.
+
+Yes, this sucks. :/
+
+Option 2 (Use your own msgmerge: YMMV, may change .po flags and formatting):
+
+Run msgmerge yourself for each language:
+
+    cd torbutton/trans_tools
+    for i in `ls -1 pootle`
+    do
+       msgmerge -U ./pootle/$i/torbutton.dtd.po ./pootle/templates/torbutton.dtd.pot
+       msgmerge -U ./pootle/$i/torbutton.properties.po ./pootle/templates/torbutton.properties.pot
+    done
+    svn diff pootle
+    svn commit pootle
+
+Then poke Jake to 'svn up' on the Pootle side. If you do this enough times, 
+he may give you a button on Pootle, or maybe even an account on the Pootle 
+server. Persistence is a virtue.
+
+You may notice that some .po file flags and string formatting have changed 
+with this method, depending on your gettext version. It is unclear if this 
+is a problem. Please update this doc if you hit a landmine and everything 
+breaks :)
+
+After this process is done, you then need to regenerate the mozilla
+.dtd and .properties files as specified above.
+
+---------------------------- Vidalia -------------------------------
+
+Vidalia uses our translation portal to accept translations. Users use the
+portal to check in their changes. No conversion or moving is required other
+than normal pootle usage.
+

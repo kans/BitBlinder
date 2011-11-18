@@ -1,0 +1,18 @@
+#change me, and don't forget the changelog too!
+VERSION=0.4.5
+
+#the assumption is that you have a copy of innomitor by that name and are in the debian folder
+
+cd ../..
+#cean the dir
+rm -rf ./innomitor-$VERSION
+svn export --force innomitor innomitor-$VERSION
+cd innomitor-$VERSION
+chmod +x autogen.sh
+rm -rf ./windows ./experiments
+cd ..
+tar cfz innomitor-$VERSION.tar.gz innomitor-$VERSION
+cp innomitor-$VERSION.tar.gz innomitor_$VERSION.orig.tar.gz
+cd innomitor-$VERSION
+debuild
+ 

@@ -1,0 +1,2774 @@
+/* Copyright (c) 2004-2006, Roger Dingledine, Nick Mathewson.
+ * Copyright (c) 2007-2009, The Tor Project, Inc. */
+/* See LICENSE for licensing information */
+
+/**
+ * \file rephist.c
+ * \brief Basic history and "reputation" functionality to remember
+ *    which servers have worked in the past, how much bandwidth we've
+ *    been using, which ports we tend to want, and so on.
+ **/
+
+#include "or.h"
+#include "ht.h"
+
+static void bw_arrays_init(void);
+static void predicted_ports_init(void);
+static void hs_usage_init(void);
+
+/** Total number of bytes currently allocated in fields used by rephist.c. */
+uint64_t rephist_total_alloc=0;
+/** Number of or_history_t objects currently allocated. */
+uint32_t rephist_total_num=0;
+
+/** If the total weighted run count of all runs for a router ever falls
+ * below this amount, the router can be treated as having 0 MTBF. */
+#define STABILITY_EPSILON   0.0001
+/** Value by which to discount all old intervals for MTBF purposes.  This
+ * is compounded every STABILITY_INTERVAL. */
+#define STABILITY_ALPHA     0.95
+/** Interval at which to discount all old intervals for MTBF purposes. */
+#define STABILITY_INTERVAL  (12*60*60)
+/* (This combination of ALPHA, INTERVAL, and EPSILON makes it so that an
+ * interval that just ended counts twice as much as one that ended a week ago,
+ * 20X as much as one that ended a month ago, and routers that have had no
+ * uptime data for about half a year will get forgotten.) */
+
+/** History of an OR-\>OR link. */
+typedef struct link_history_t {
+  /** When did we start tracking this list? */
+  time_t since;
+  /** When did we most recently note a change to this link */
+  time_t changed;
+  /** How many times did extending from OR1 to OR2 succeed? */
+  unsigned long n_extend_ok;
+  /** How many times did extending from OR1 to OR2 fail? */
+  unsigned long n_extend_fail;
+} link_history_t;
+
+/** History of an OR. */
+typedef struct or_history_t {
+  /** When did we start tracking this OR? */
+  time_t since;
+  /** When did we most recently note a change to this OR? */
+  time_t changed;
+  /** How many times did we successfully connect? */
+  unsigned long n_conn_ok;
+  /** How many times did we try to connect and fail?*/
+  unsigned long n_conn_fail;
+  /** How many seconds have we been connected to this OR before
+   * 'up_since'? */
+  unsigned long uptime;
+  /** How many seconds have we been unable to connect to this OR before
+   * 'down_since'? */
+  unsigned long downtime;
+  /** If nonzero, we have been connected since this time. */
+  time_t up_since;
+  /** If nonzero, we have been unable to connect since this time. */
+  time_t down_since;
+
+  /* === For MTBF tracking: */
+  /** Weighted sum total of all times that this router has been online.
+   */
+  unsigned long weighted_run_length;
+  /** If the router is now online (according to stability-checking rules),
+   * when did it come online? */
+  time_t start_of_run;
+  /** Sum of weights for runs in weighted_run_length. */
+  double total_run_weights;
+  /* === For fractional uptime tracking: */
+  time_t start_of_downtime;
+  unsigned long weighted_uptime;
+  unsigned long total_weighted_time;
+
+  /** Map from hex OR2 identity digest to a link_history_t for the link
+   * from this OR to OR2. */
+  digestmap_t *link_history_map;
+} or_history_t;
+
+/** When did we last multiply all routers' weighted_run_length and
+ * total_run_weights by STABILITY_ALPHA? */
+static time_t stability_last_downrated = 0;
+
+/**  */
+static time_t started_tracking_stability = 0;
+
+/** Map from hex OR identity digest to or_history_t. */
+static digestmap_t *history_map = NULL;
+
+/** Return the or_history_t for the OR with identity digest <b>id</b>,
+ * creating it if necessary. */
+static or_history_t *
+get_or_history(const char* id)
+{
+  or_history_t *hist;
+
+  if (tor_mem_is_zero(id, DIGEST_LEN))
+    return NULL;
+
+  hist = digestmap_get(history_map, id);
+  if (!hist) {
+    hist = tor_malloc_zero(sizeof(or_history_t));
+    rephist_total_alloc += sizeof(or_history_t);
+    rephist_total_num++;
+    hist->link_history_map = digestmap_new();
+    hist->since = hist->changed = time(NULL);
+    digestmap_set(history_map, id, hist);
+  }
+  return hist;
+}
+
+/** Return the link_history_t for the link from the first named OR to
+ * the second, creating it if necessary. (ORs are identified by
+ * identity digest.)
+ */
+static link_history_t *
+get_link_history(const char *from_id, const char *to_id)
+{
+  or_history_t *orhist;
+  link_history_t *lhist;
+  orhist = get_or_history(from_id);
+  if (!orhist)
+    return NULL;
+  if (tor_mem_is_zero(to_id, DIGEST_LEN))
+    return NULL;
+  lhist = (link_history_t*) digestmap_get(orhist->link_history_map, to_id);
+  if (!lhist) {
+    lhist = tor_malloc_zero(sizeof(link_history_t));
+    rephist_total_alloc += sizeof(link_history_t);
+    lhist->since = lhist->changed = time(NULL);
+    digestmap_set(orhist->link_history_map, to_id, lhist);
+  }
+  return lhist;
+}
+
+/** Helper: free storage held by a single link history entry. */
+static void
+_free_link_history(void *val)
+{
+  rephist_total_alloc -= sizeof(link_history_t);
+  tor_free(val);
+}
+
+/** Helper: free storage held by a single OR history entry. */
+static void
+free_or_history(void *_hist)
+{
+  or_history_t *hist = _hist;
+  digestmap_free(hist->link_history_map, _free_link_history);
+  rephist_total_alloc -= sizeof(or_history_t);
+  rephist_total_num--;
+  tor_free(hist);
+}
+
+/** Update an or_history_t object <b>hist</b> so that its uptime/downtime
+ * count is up-to-date as of <b>when</b>.
+ */
+static void
+update_or_history(or_history_t *hist, time_t when)
+{
+  tor_assert(hist);
+  if (hist->up_since) {
+    tor_assert(!hist->down_since);
+    hist->uptime += (when - hist->up_since);
+    hist->up_since = when;
+  } else if (hist->down_since) {
+    hist->downtime += (when - hist->down_since);
+    hist->down_since = when;
+  }
+}
+
+/** Initialize the static data structures for tracking history. */
+void
+rep_hist_init(void)
+{
+  history_map = digestmap_new();
+  bw_arrays_init();
+  predicted_ports_init();
+  hs_usage_init();
+}
+
+/** Helper: note that we are no longer connected to the router with history
+ * <b>hist</b>.  If <b>failed</b>, the connection failed; otherwise, it was
+ * closed correctly. */
+static void
+mark_or_down(or_history_t *hist, time_t when, int failed)
+{
+  if (hist->up_since) {
+    hist->uptime += (when - hist->up_since);
+    hist->up_since = 0;
+  }
+  if (failed && !hist->down_since) {
+    hist->down_since = when;
+  }
+}
+
+/** Helper: note that we are connected to the router with history
+ * <b>hist</b>. */
+static void
+mark_or_up(or_history_t *hist, time_t when)
+{
+  if (hist->down_since) {
+    hist->downtime += (when - hist->down_since);
+    hist->down_since = 0;
+  }
+  if (!hist->up_since) {
+    hist->up_since = when;
+  }
+}
+
+/** Remember that an attempt to connect to the OR with identity digest
+ * <b>id</b> failed at <b>when</b>.
+ */
+void
+rep_hist_note_connect_failed(const char* id, time_t when)
+{
+  or_history_t *hist;
+  hist = get_or_history(id);
+  if (!hist)
+    return;
+  ++hist->n_conn_fail;
+  mark_or_down(hist, when, 1);
+  hist->changed = when;
+}
+
+/** Remember that an attempt to connect to the OR with identity digest
+ * <b>id</b> succeeded at <b>when</b>.
+ */
+void
+rep_hist_note_connect_succeeded(const char* id, time_t when)
+{
+  or_history_t *hist;
+  hist = get_or_history(id);
+  if (!hist)
+    return;
+  ++hist->n_conn_ok;
+  mark_or_up(hist, when);
+  hist->changed = when;
+}
+
+/** Remember that we intentionally closed our connection to the OR
+ * with identity digest <b>id</b> at <b>when</b>.
+ */
+void
+rep_hist_note_disconnect(const char* id, time_t when)
+{
+  or_history_t *hist;
+  hist = get_or_history(id);
+  if (!hist)
+    return;
+  mark_or_down(hist, when, 0);
+  hist->changed = when;
+}
+
+/** Remember that our connection to the OR with identity digest
+ * <b>id</b> had an error and stopped working at <b>when</b>.
+ */
+void
+rep_hist_note_connection_died(const char* id, time_t when)
+{
+  or_history_t *hist;
+  if (!id) {
+    /* If conn has no identity, it didn't complete its handshake, or something
+     * went wrong.  Ignore it.
+     */
+    return;
+  }
+  hist = get_or_history(id);
+  if (!hist)
+    return;
+  mark_or_down(hist, when, 1);
+  hist->changed = when;
+}
+
+/** We have just decided that this router with identity digest <b>id</b> is
+ * reachable, meaning we will give it a "Running" flag for the next while. */
+void
+rep_hist_note_router_reachable(const char *id, time_t when)
+{
+  or_history_t *hist = get_or_history(id);
+  int was_in_run = 1;
+  char tbuf[ISO_TIME_LEN+1];
+
+  tor_assert(hist);
+
+  if (!started_tracking_stability)
+    started_tracking_stability = time(NULL);
+  if (!hist->start_of_run) {
+    hist->start_of_run = when;
+    was_in_run = 0;
+  }
+  if (hist->start_of_downtime) {
+    long down_length;
+
+    format_local_iso_time(tbuf, hist->start_of_downtime);
+    log_info(LD_HIST, "Router %s is now Running; it had been down since %s.",
+             hex_str(id, DIGEST_LEN), tbuf);
+    if (was_in_run)
+      log_info(LD_HIST, "  (Paradoxically, it was already Running too.)");
+
+    down_length = when - hist->start_of_downtime;
+    hist->total_weighted_time += down_length;
+    hist->start_of_downtime = 0;
+  } else {
+    format_local_iso_time(tbuf, hist->start_of_run);
+    if (was_in_run)
+      log_debug(LD_HIST, "Router %s is still Running; it has been Running "
+                "since %s", hex_str(id, DIGEST_LEN), tbuf);
+    else
+      log_info(LD_HIST,"Router %s is now Running; it was previously untracked",
+               hex_str(id, DIGEST_LEN));
+  }
+}
+
+/** We have just decided that this router is unreachable, meaning
+ * we are taking away its "Running" flag. */
+void
+rep_hist_note_router_unreachable(const char *id, time_t when)
+{
+  or_history_t *hist = get_or_history(id);
+  char tbuf[ISO_TIME_LEN+1];
+  int was_running = 0;
+  if (!started_tracking_stability)
+    started_tracking_stability = time(NULL);
+
+  tor_assert(hist);
+  if (hist->start_of_run) {
+    /*XXXX We could treat failed connections differently from failed
+     * connect attempts. */
+    long run_length = when - hist->start_of_run;
+    format_local_iso_time(tbuf, hist->start_of_run);
+
+    hist->weighted_run_length += run_length;
+    hist->total_run_weights += 1.0;
+    hist->start_of_run = 0;
+    hist->weighted_uptime += run_length;
+    hist->total_weighted_time += run_length;
+
+    was_running = 1;
+    log_info(LD_HIST, "Router %s is now non-Running: it had previously been "
+             "Running since %s.  Its total weighted uptime is %lu/%lu.",
+             hex_str(id, DIGEST_LEN), tbuf, hist->weighted_uptime,
+             hist->total_weighted_time);
+  }
+  if (!hist->start_of_downtime) {
+    hist->start_of_downtime = when;
+
+    if (!was_running)
+      log_info(LD_HIST, "Router %s is now non-Running; it was previously "
+               "untracked.", hex_str(id, DIGEST_LEN));
+  } else {
+    if (!was_running) {
+      format_local_iso_time(tbuf, hist->start_of_downtime);
+
+      log_info(LD_HIST, "Router %s is still non-Running; it has been "
+               "non-Running since %s.", hex_str(id, DIGEST_LEN), tbuf);
+    }
+  }
+}
+
+/** Helper: Discount all old MTBF data, if it is time to do so.  Return
+ * the time at which we should next discount MTBF data. */
+time_t
+rep_hist_downrate_old_runs(time_t now)
+{
+  digestmap_iter_t *orhist_it;
+  const char *digest1;
+  or_history_t *hist;
+  void *hist_p;
+  double alpha = 1.0;
+
+  if (!history_map)
+    history_map = digestmap_new();
+  if (!stability_last_downrated)
+    stability_last_downrated = now;
+  if (stability_last_downrated + STABILITY_INTERVAL > now)
+    return stability_last_downrated + STABILITY_INTERVAL;
+
+  /* Okay, we should downrate the data.  By how much? */
+  while (stability_last_downrated + STABILITY_INTERVAL < now) {
+    stability_last_downrated += STABILITY_INTERVAL;
+    alpha *= STABILITY_ALPHA;
+  }
+
+  log_info(LD_HIST, "Discounting all old stability info by a factor of %lf",
+           alpha);
+
+  /* Multiply every w_r_l, t_r_w pair by alpha. */
+  for (orhist_it = digestmap_iter_init(history_map);
+       !digestmap_iter_done(orhist_it);
+       orhist_it = digestmap_iter_next(history_map,orhist_it)) {
+    digestmap_iter_get(orhist_it, &digest1, &hist_p);
+    hist = hist_p;
+
+    hist->weighted_run_length =
+      (unsigned long)(hist->weighted_run_length * alpha);
+    hist->total_run_weights *= alpha;
+
+    hist->weighted_uptime = (unsigned long)(hist->weighted_uptime * alpha);
+    hist->total_weighted_time = (unsigned long)
+      (hist->total_weighted_time * alpha);
+  }
+
+  return stability_last_downrated + STABILITY_INTERVAL;
+}
+
+/** Helper: Return the weighted MTBF of the router with history <b>hist</b>. */
+static double
+get_stability(or_history_t *hist, time_t when)
+{
+  unsigned long total = hist->weighted_run_length;
+  double total_weights = hist->total_run_weights;
+
+  if (hist->start_of_run) {
+    /* We're currently in a run.  Let total and total_weights hold the values
+     * they would hold if the current run were to end now. */
+    total += (when-hist->start_of_run);
+    total_weights += 1.0;
+  }
+  if (total_weights < STABILITY_EPSILON) {
+    /* Round down to zero, and avoid divide-by-zero. */
+    return 0.0;
+  }
+
+  return total / total_weights;
+}
+
+/** Return the total amount of time we've been observing, with each run of
+ * time downrated by the appropriate factor. */
+static long
+get_total_weighted_time(or_history_t *hist, time_t when)
+{
+  long total = hist->total_weighted_time;
+  if (hist->start_of_run) {
+    total += (when - hist->start_of_run);
+  } else if (hist->start_of_downtime) {
+    total += (when - hist->start_of_downtime);
+  }
+  return total;
+}
+
+/** Helper: Return the weighted percent-of-time-online of the router with
+ * history <b>hist</b>. */
+static double
+get_weighted_fractional_uptime(or_history_t *hist, time_t when)
+{
+  unsigned long total = hist->total_weighted_time;
+  unsigned long up = hist->weighted_uptime;
+
+  if (hist->start_of_run) {
+    long run_length = (when - hist->start_of_run);
+    up += run_length;
+    total += run_length;
+  } else if (hist->start_of_downtime) {
+    total += (when - hist->start_of_downtime);
+  }
+
+  if (!total) {
+    /* Avoid calling anybody's uptime infinity (which should be impossible if
+     * the code is working), or NaN (which can happen for any router we haven't
+     * observed up or down yet). */
+    return 0.0;
+  }
+
+  return ((double) up) / total;
+}
+
+/** Return an estimated MTBF for the router whose identity digest is
+ * <b>id</b>. Return 0 if the router is unknown. */
+double
+rep_hist_get_stability(const char *id, time_t when)
+{
+  or_history_t *hist = get_or_history(id);
+  if (!hist)
+    return 0.0;
+
+  return get_stability(hist, when);
+}
+
+/** Return an estimated percent-of-time-online for the router whose identity
+ * digest is <b>id</b>. Return 0 if the router is unknown. */
+double
+rep_hist_get_weighted_fractional_uptime(const char *id, time_t when)
+{
+  or_history_t *hist = get_or_history(id);
+  if (!hist)
+    return 0.0;
+
+  return get_weighted_fractional_uptime(hist, when);
+}
+
+/** Return a number representing how long we've known about the router whose
+ * digest is <b>id</b>. Return 0 if the router is unknown.
+ *
+ * Be careful: this measure increases monotonically as we know the router for
+ * longer and longer, but it doesn't increase linearly.
+ */
+long
+rep_hist_get_weighted_time_known(const char *id, time_t when)
+{
+  or_history_t *hist = get_or_history(id);
+  if (!hist)
+    return 0;
+
+  return get_total_weighted_time(hist, when);
+}
+
+/** Return true if we've been measuring MTBFs for long enough to
+ * pronounce on Stability. */
+int
+rep_hist_have_measured_enough_stability(void)
+{
+  /* XXXX021 This doesn't do so well when we change our opinion
+   * as to whether we're tracking router stability. */
+  return started_tracking_stability < time(NULL) - 4*60*60;
+}
+
+/** Remember that we successfully extended from the OR with identity
+ * digest <b>from_id</b> to the OR with identity digest
+ * <b>to_name</b>.
+ */
+void
+rep_hist_note_extend_succeeded(const char *from_id, const char *to_id)
+{
+  link_history_t *hist;
+  /* log_fn(LOG_WARN, "EXTEND SUCCEEDED: %s->%s",from_name,to_name); */
+  hist = get_link_history(from_id, to_id);
+  if (!hist)
+    return;
+  ++hist->n_extend_ok;
+  hist->changed = time(NULL);
+}
+
+/** Remember that we tried to extend from the OR with identity digest
+ * <b>from_id</b> to the OR with identity digest <b>to_name</b>, but
+ * failed.
+ */
+void
+rep_hist_note_extend_failed(const char *from_id, const char *to_id)
+{
+  link_history_t *hist;
+  /* log_fn(LOG_WARN, "EXTEND FAILED: %s->%s",from_name,to_name); */
+  hist = get_link_history(from_id, to_id);
+  if (!hist)
+    return;
+  ++hist->n_extend_fail;
+  hist->changed = time(NULL);
+}
+
+/** Log all the reliability data we have remembered, with the chosen
+ * severity.
+ */
+void
+rep_hist_dump_stats(time_t now, int severity)
+{
+  digestmap_iter_t *lhist_it;
+  digestmap_iter_t *orhist_it;
+  const char *name1, *name2, *digest1, *digest2;
+  char hexdigest1[HEX_DIGEST_LEN+1];
+  or_history_t *or_history;
+  link_history_t *link_history;
+  void *or_history_p, *link_history_p;
+  double uptime;
+  char buffer[2048];
+  size_t len;
+  int ret;
+  unsigned long upt, downt;
+  routerinfo_t *r;
+
+  rep_history_clean(now - get_options()->RephistTrackTime);
+
+  log(severity, LD_HIST, "--------------- Dumping history information:");
+
+  for (orhist_it = digestmap_iter_init(history_map);
+       !digestmap_iter_done(orhist_it);
+       orhist_it = digestmap_iter_next(history_map,orhist_it)) {
+    double s;
+    long stability;
+    digestmap_iter_get(orhist_it, &digest1, &or_history_p);
+    or_history = (or_history_t*) or_history_p;
+
+    if ((r = router_get_by_digest(digest1)))
+      name1 = r->nickname;
+    else
+      name1 = "(unknown)";
+    base16_encode(hexdigest1, sizeof(hexdigest1), digest1, DIGEST_LEN);
+    update_or_history(or_history, now);
+    upt = or_history->uptime;
+    downt = or_history->downtime;
+    s = get_stability(or_history, now);
+    stability = (long)s;
+    if (upt+downt) {
+      uptime = ((double)upt) / (upt+downt);
+    } else {
+      uptime=1.0;
+    }
+    log(severity, LD_HIST,
+        "OR %s [%s]: %ld/%ld good connections; uptime %ld/%ld sec (%.2f%%); "
+        "wmtbf %lu:%02lu:%02lu",
+        name1, hexdigest1,
+        or_history->n_conn_ok, or_history->n_conn_fail+or_history->n_conn_ok,
+        upt, upt+downt, uptime*100.0,
+        stability/3600, (stability/60)%60, stability%60);
+
+    if (!digestmap_isempty(or_history->link_history_map)) {
+      strlcpy(buffer, "    Extend attempts: ", sizeof(buffer));
+      len = strlen(buffer);
+      for (lhist_it = digestmap_iter_init(or_history->link_history_map);
+           !digestmap_iter_done(lhist_it);
+           lhist_it = digestmap_iter_next(or_history->link_history_map,
+                                          lhist_it)) {
+        digestmap_iter_get(lhist_it, &digest2, &link_history_p);
+        if ((r = router_get_by_digest(digest2)))
+          name2 = r->nickname;
+        else
+          name2 = "(unknown)";
+
+        link_history = (link_history_t*) link_history_p;
+
+        ret = tor_snprintf(buffer+len, 2048-len, "%s(%ld/%ld); ", name2,
+                        link_history->n_extend_ok,
+                        link_history->n_extend_ok+link_history->n_extend_fail);
+        if (ret<0)
+          break;
+        else
+          len += ret;
+      }
+      log(severity, LD_HIST, "%s", buffer);
+    }
+  }
+}
+
+/** Remove history info for routers/links that haven't changed since
+ * <b>before</b>.
+ */
+void
+rep_history_clean(time_t before)
+{
+  int authority = authdir_mode(get_options());
+  or_history_t *or_history;
+  link_history_t *link_history;
+  void *or_history_p, *link_history_p;
+  digestmap_iter_t *orhist_it, *lhist_it;
+  const char *d1, *d2;
+
+  orhist_it = digestmap_iter_init(history_map);
+  while (!digestmap_iter_done(orhist_it)) {
+    int remove;
+    digestmap_iter_get(orhist_it, &d1, &or_history_p);
+    or_history = or_history_p;
+
+    remove = authority ? (or_history->total_run_weights < STABILITY_EPSILON &&
+                          !or_history->start_of_run)
+                       : (or_history->changed < before);
+    if (remove) {
+      orhist_it = digestmap_iter_next_rmv(history_map, orhist_it);
+      free_or_history(or_history);
+      continue;
+    }
+    for (lhist_it = digestmap_iter_init(or_history->link_history_map);
+         !digestmap_iter_done(lhist_it); ) {
+      digestmap_iter_get(lhist_it, &d2, &link_history_p);
+      link_history = link_history_p;
+      if (link_history->changed < before) {
+        lhist_it = digestmap_iter_next_rmv(or_history->link_history_map,
+                                           lhist_it);
+        rephist_total_alloc -= sizeof(link_history_t);
+        tor_free(link_history);
+        continue;
+      }
+      lhist_it = digestmap_iter_next(or_history->link_history_map,lhist_it);
+    }
+    orhist_it = digestmap_iter_next(history_map, orhist_it);
+  }
+}
+
+/** Write MTBF data to disk. Return 0 on success, negative on failure.
+ *
+ * If <b>missing_means_down</b>, then if we're about to write an entry
+ * that is still considered up but isn't in our routerlist, consider it
+ * to be down. */
+int
+rep_hist_record_mtbf_data(time_t now, int missing_means_down)
+{
+  char time_buf[ISO_TIME_LEN+1];
+
+  digestmap_iter_t *orhist_it;
+  const char *digest;
+  void *or_history_p;
+  or_history_t *hist;
+  open_file_t *open_file = NULL;
+  FILE *f;
+
+  {
+    char *filename = get_datadir_fname("router-stability");
+    f = start_writing_to_stdio_file(filename, OPEN_FLAGS_REPLACE|O_TEXT, 0600,
+                                    &open_file);
+    tor_free(filename);
+    if (!f)
+      return -1;
+  }
+
+  /* File format is:
+   *   FormatLine *KeywordLine Data
+   *
+   *   FormatLine = "format 1" NL
+   *   KeywordLine = Keyword SP Arguments NL
+   *   Data = "data" NL *RouterMTBFLine "." NL
+   *   RouterMTBFLine = Fingerprint SP WeightedRunLen SP
+   *           TotalRunWeights [SP S=StartRunTime] NL
+   */
+#define PUT(s) STMT_BEGIN if (fputs((s),f)<0) goto err; STMT_END
+#define PRINTF(args) STMT_BEGIN if (fprintf args <0) goto err; STMT_END
+
+  PUT("format 2\n");
+
+  format_iso_time(time_buf, time(NULL));
+  PRINTF((f, "stored-at %s\n", time_buf));
+
+  if (started_tracking_stability) {
+    format_iso_time(time_buf, started_tracking_stability);
+    PRINTF((f, "tracked-since %s\n", time_buf));
+  }
+  if (stability_last_downrated) {
+    format_iso_time(time_buf, stability_last_downrated);
+    PRINTF((f, "last-downrated %s\n", time_buf));
+  }
+
+  PUT("data\n");
+
+  /* XXX Nick: now bridge auths record this for all routers too.
+   * Should we make them record it only for bridge routers? -RD
+   * Not for 0.2.0. -NM */
+  for (orhist_it = digestmap_iter_init(history_map);
+       !digestmap_iter_done(orhist_it);
+       orhist_it = digestmap_iter_next(history_map,orhist_it)) {
+    char dbuf[HEX_DIGEST_LEN+1];
+    const char *t = NULL;
+    digestmap_iter_get(orhist_it, &digest, &or_history_p);
+    hist = (or_history_t*) or_history_p;
+
+    base16_encode(dbuf, sizeof(dbuf), digest, DIGEST_LEN);
+
+    if (missing_means_down && hist->start_of_run &&
+        !router_get_by_digest(digest)) {
+      /* We think this relay is running, but it's not listed in our
+       * routerlist. Somehow it fell out without telling us it went
+       * down. Complain and also correct it. */
+      log_info(LD_HIST,
+               "Relay '%s' is listed as up in rephist, but it's not in "
+               "our routerlist. Correcting.", dbuf);
+      rep_hist_note_router_unreachable(digest, now);
+    }
+
+    PRINTF((f, "R %s\n", dbuf));
+    if (hist->start_of_run > 0) {
+      format_iso_time(time_buf, hist->start_of_run);
+      t = time_buf;
+    }
+    PRINTF((f, "+MTBF %lu %.5lf%s%s\n",
+            hist->weighted_run_length, hist->total_run_weights,
+            t ? " S=" : "", t ? t : ""));
+    t = NULL;
+    if (hist->start_of_downtime > 0) {
+      format_iso_time(time_buf, hist->start_of_downtime);
+      t = time_buf;
+    }
+    PRINTF((f, "+WFU %lu %lu%s%s\n",
+            hist->weighted_uptime, hist->total_weighted_time,
+            t ? " S=" : "", t ? t : ""));
+  }
+
+  PUT(".\n");
+
+#undef PUT
+#undef PRINTF
+
+  return finish_writing_to_file(open_file);
+ err:
+  abort_writing_to_file(open_file);
+  return -1;
+}
+
+/** Format the current tracked status of the router in <b>hist</b> at time
+ * <b>now</b> for analysis; return it in a newly allocated string. */
+static char *
+rep_hist_format_router_status(or_history_t *hist, time_t now)
+{
+  char buf[1024];
+  char sor_buf[ISO_TIME_LEN+1];
+  char sod_buf[ISO_TIME_LEN+1];
+  double wfu;
+  double mtbf;
+  int up = 0, down = 0;
+
+  if (hist->start_of_run) {
+    format_iso_time(sor_buf, hist->start_of_run);
+    up = 1;
+  }
+  if (hist->start_of_downtime) {
+    format_iso_time(sod_buf, hist->start_of_downtime);
+    down = 1;
+  }
+
+  wfu = get_weighted_fractional_uptime(hist, now);
+  mtbf = get_stability(hist, now);
+  tor_snprintf(buf, sizeof(buf),
+               "%s%s%s"
+               "%s%s%s"
+               "wfu %0.3lf\n"
+               " weighted-time %lu\n"
+               " weighted-uptime %lu\n"
+               "mtbf %0.1lf\n"
+               " weighted-run-length %lu\n"
+               " total-run-weights %lf\n",
+               up?"uptime-started ":"", up?sor_buf:"", up?" UTC\n":"",
+               down?"downtime-started ":"", down?sod_buf:"", down?" UTC\n":"",
+               wfu,
+               hist->total_weighted_time,
+               hist->weighted_uptime,
+               mtbf,
+               hist->weighted_run_length,
+               hist->total_run_weights
+               );
+
+  return tor_strdup(buf);
+}
+
+/** The last stability analysis document that we created, or NULL if we never
+ * have created one. */
+static char *last_stability_doc = NULL;
+/** The last time we created a stability analysis document, or 0 if we never
+ * have created one. */
+static time_t built_last_stability_doc_at = 0;
+/** Shortest allowable time between building two stability documents. */
+#define MAX_STABILITY_DOC_BUILD_RATE (3*60)
+
+/** Return a pointer to a NUL-terminated document describing our view of the
+ * stability of the routers we've been tracking.  Return NULL on failure. */
+const char *
+rep_hist_get_router_stability_doc(time_t now)
+{
+  char *result;
+  smartlist_t *chunks;
+  if (built_last_stability_doc_at + MAX_STABILITY_DOC_BUILD_RATE > now)
+    return last_stability_doc;
+
+  if (!history_map)
+    return NULL;
+
+  tor_free(last_stability_doc);
+  chunks = smartlist_create();
+
+  if (rep_hist_have_measured_enough_stability()) {
+    smartlist_add(chunks, tor_strdup("we-have-enough-measurements\n"));
+  } else {
+    smartlist_add(chunks, tor_strdup("we-do-not-have-enough-measurements\n"));
+  }
+
+  DIGESTMAP_FOREACH(history_map, id, or_history_t *, hist) {
+    routerinfo_t *ri;
+    char dbuf[BASE64_DIGEST_LEN+1];
+    char header_buf[512];
+    char *info;
+    digest_to_base64(dbuf, id);
+    ri = router_get_by_digest(id);
+    if (ri) {
+      char *ip = tor_dup_ip(ri->addr);
+      char tbuf[ISO_TIME_LEN+1];
+      format_iso_time(tbuf, ri->cache_info.published_on);
+      tor_snprintf(header_buf, sizeof(header_buf),
+                   "router %s %s %s\n"
+                   "published %s\n"
+                   "relevant-flags %s%s%s\n"
+                   "declared-uptime %ld\n",
+                   dbuf, ri->nickname, ip,
+                   tbuf,
+                   ri->is_running ? "Running " : "",
+                   ri->is_valid ? "Valid " : "",
+                   ri->is_hibernating ? "Hibernating " : "",
+                   ri->uptime);
+      tor_free(ip);
+    } else {
+      tor_snprintf(header_buf, sizeof(header_buf),
+                   "router %s {no descriptor}\n", dbuf);
+    }
+    smartlist_add(chunks, tor_strdup(header_buf));
+    info = rep_hist_format_router_status(hist, now);
+    if (info)
+      smartlist_add(chunks, info);
+
+  } DIGESTMAP_FOREACH_END;
+
+  result = smartlist_join_strings(chunks, "", 0, NULL);
+  SMARTLIST_FOREACH(chunks, char *, cp, tor_free(cp));
+  smartlist_free(chunks);
+
+  last_stability_doc = result;
+  built_last_stability_doc_at = time(NULL);
+  return result;
+}
+
+/** Helper: return the first j >= i such that !strcmpstart(sl[j], prefix) and
+ * such that no line sl[k] with i <= k < j starts with "R ".  Return -1 if no
+ * such line exists. */
+static int
+find_next_with(smartlist_t *sl, int i, const char *prefix)
+{
+  for ( ; i < smartlist_len(sl); ++i) {
+    const char *line = smartlist_get(sl, i);
+    if (!strcmpstart(line, prefix))
+      return i;
+    if (!strcmpstart(line, "R "))
+      return -1;
+  }
+  return -1;
+}
+
+/** How many bad times has parse_possibly_bad_iso_time parsed? */
+static int n_bogus_times = 0;
+/** Parse the ISO-formatted time in <b>s</b> into *<b>time_out</b>, but
+ * rounds any pre-1970 date to Jan 1, 1970. */
+static int
+parse_possibly_bad_iso_time(const char *s, time_t *time_out)
+{
+  int year;
+  char b[5];
+  strlcpy(b, s, sizeof(b));
+  b[4] = '\0';
+  year = (int)tor_parse_long(b, 10, 0, INT_MAX, NULL, NULL);
+  if (year < 1970) {
+    *time_out = 0;
+    ++n_bogus_times;
+    return 0;
+  } else
+    return parse_iso_time(s, time_out);
+}
+
+/** We've read a time <b>t</b> from a file stored at <b>stored_at</b>, which
+ * says we started measuring at <b>started_measuring</b>.  Return a new number
+ * that's about as much before <b>now</b> as <b>t</b> was before
+ * <b>stored_at</b>.
+ */
+static INLINE time_t
+correct_time(time_t t, time_t now, time_t stored_at, time_t started_measuring)
+{
+  if (t < started_measuring - 24*60*60*365)
+    return 0;
+  else if (t < started_measuring)
+    return started_measuring;
+  else if (t > stored_at)
+    return 0;
+  else {
+    long run_length = stored_at - t;
+    t = now - run_length;
+    if (t < started_measuring)
+      t = started_measuring;
+    return t;
+  }
+}
+
+/** Load MTBF data from disk.  Returns 0 on success or recoverable error, -1
+ * on failure. */
+int
+rep_hist_load_mtbf_data(time_t now)
+{
+  /* XXXX won't handle being called while history is already populated. */
+  smartlist_t *lines;
+  const char *line = NULL;
+  int r=0, i;
+  time_t last_downrated = 0, stored_at = 0, tracked_since = 0;
+  time_t latest_possible_start = now;
+  long format = -1;
+
+  {
+    char *filename = get_datadir_fname("router-stability");
+    char *d = read_file_to_str(filename, RFTS_IGNORE_MISSING, NULL);
+    tor_free(filename);
+    if (!d)
+      return -1;
+    lines = smartlist_create();
+    smartlist_split_string(lines, d, "\n", SPLIT_SKIP_SPACE, 0);
+    tor_free(d);
+  }
+
+  {
+    const char *firstline;
+    if (smartlist_len(lines)>4) {
+      firstline = smartlist_get(lines, 0);
+      if (!strcmpstart(firstline, "format "))
+        format = tor_parse_long(firstline+strlen("format "),
+                                10, -1, LONG_MAX, NULL, NULL);
+    }
+  }
+  if (format != 1 && format != 2) {
+    log_warn(LD_HIST,
+             "Unrecognized format in mtbf history file. Skipping.");
+    goto err;
+  }
+  for (i = 1; i < smartlist_len(lines); ++i) {
+    line = smartlist_get(lines, i);
+    if (!strcmp(line, "data"))
+      break;
+    if (!strcmpstart(line, "last-downrated ")) {
+      if (parse_iso_time(line+strlen("last-downrated "), &last_downrated)<0)
+        log_warn(LD_HIST,"Couldn't parse downrate time in mtbf "
+                 "history file.");
+    }
+    if (!strcmpstart(line, "stored-at ")) {
+      if (parse_iso_time(line+strlen("stored-at "), &stored_at)<0)
+        log_warn(LD_HIST,"Couldn't parse stored time in mtbf "
+                 "history file.");
+    }
+    if (!strcmpstart(line, "tracked-since ")) {
+      if (parse_iso_time(line+strlen("tracked-since "), &tracked_since)<0)
+        log_warn(LD_HIST,"Couldn't parse started-tracking time in mtbf "
+                 "history file.");
+    }
+  }
+  if (last_downrated > now)
+    last_downrated = now;
+  if (tracked_since > now)
+    tracked_since = now;
+
+  if (!stored_at) {
+    log_warn(LD_HIST, "No stored time recorded.");
+    goto err;
+  }
+
+  if (line && !strcmp(line, "data"))
+    ++i;
+
+  n_bogus_times = 0;
+
+  for (; i < smartlist_len(lines); ++i) {
+    char digest[DIGEST_LEN];
+    char hexbuf[HEX_DIGEST_LEN+1];
+    char mtbf_timebuf[ISO_TIME_LEN+1];
+    char wfu_timebuf[ISO_TIME_LEN+1];
+    time_t start_of_run = 0;
+    time_t start_of_downtime = 0;
+    int have_mtbf = 0, have_wfu = 0;
+    long wrl = 0;
+    double trw = 0;
+    long wt_uptime = 0, total_wt_time = 0;
+    int n;
+    or_history_t *hist;
+    line = smartlist_get(lines, i);
+    if (!strcmp(line, "."))
+      break;
+
+    mtbf_timebuf[0] = '\0';
+    wfu_timebuf[0] = '\0';
+
+    if (format == 1) {
+      n = sscanf(line, "%40s %ld %lf S=%10s %8s",
+                 hexbuf, &wrl, &trw, mtbf_timebuf, mtbf_timebuf+11);
+      if (n != 3 && n != 5) {
+        log_warn(LD_HIST, "Couldn't scan line %s", escaped(line));
+        continue;
+      }
+      have_mtbf = 1;
+    } else {
+      // format == 2.
+      int mtbf_idx, wfu_idx;
+      if (strcmpstart(line, "R ") || strlen(line) < 2+HEX_DIGEST_LEN)
+        continue;
+      strlcpy(hexbuf, line+2, sizeof(hexbuf));
+      mtbf_idx = find_next_with(lines, i+1, "+MTBF ");
+      wfu_idx = find_next_with(lines, i+1, "+WFU ");
+      if (mtbf_idx >= 0) {
+        const char *mtbfline = smartlist_get(lines, mtbf_idx);
+        n = sscanf(mtbfline, "+MTBF %lu %lf S=%10s %8s",
+                   &wrl, &trw, mtbf_timebuf, mtbf_timebuf+11);
+        if (n == 2 || n == 4) {
+          have_mtbf = 1;
+        } else {
+          log_warn(LD_HIST, "Couldn't scan +MTBF line %s",
+                   escaped(mtbfline));
+        }
+      }
+      if (wfu_idx >= 0) {
+        const char *wfuline = smartlist_get(lines, wfu_idx);
+        n = sscanf(wfuline, "+WFU %lu %lu S=%10s %8s",
+                   &wt_uptime, &total_wt_time,
+                   wfu_timebuf, wfu_timebuf+11);
+        if (n == 2 || n == 4) {
+          have_wfu = 1;
+        } else {
+          log_warn(LD_HIST, "Couldn't scan +WFU line %s", escaped(wfuline));
+        }
+      }
+      if (wfu_idx > i)
+        i = wfu_idx;
+      if (mtbf_idx > i)
+        i = mtbf_idx;
+    }
+    if (base16_decode(digest, DIGEST_LEN, hexbuf, HEX_DIGEST_LEN) < 0) {
+      log_warn(LD_HIST, "Couldn't hex string %s", escaped(hexbuf));
+      continue;
+    }
+    hist = get_or_history(digest);
+    if (!hist)
+      continue;
+
+    if (have_mtbf) {
+      if (mtbf_timebuf[0]) {
+        mtbf_timebuf[10] = ' ';
+        if (parse_possibly_bad_iso_time(mtbf_timebuf, &start_of_run)<0)
+          log_warn(LD_HIST, "Couldn't parse time %s",
+                   escaped(mtbf_timebuf));
+      }
+      hist->start_of_run = correct_time(start_of_run, now, stored_at,
+                                        tracked_since);
+      if (hist->start_of_run < latest_possible_start + wrl)
+        latest_possible_start = hist->start_of_run - wrl;
+
+      hist->weighted_run_length = wrl;
+      hist->total_run_weights = trw;
+    }
+    if (have_wfu) {
+      if (wfu_timebuf[0]) {
+        wfu_timebuf[10] = ' ';
+        if (parse_possibly_bad_iso_time(wfu_timebuf, &start_of_downtime)<0)
+          log_warn(LD_HIST, "Couldn't parse time %s", escaped(wfu_timebuf));
+      }
+    }
+    hist->start_of_downtime = correct_time(start_of_downtime, now, stored_at,
+                                           tracked_since);
+    hist->weighted_uptime = wt_uptime;
+    hist->total_weighted_time = total_wt_time;
+  }
+  if (strcmp(line, "."))
+    log_warn(LD_HIST, "Truncated MTBF file.");
+
+  if (tracked_since < 86400*365) /* Recover from insanely early value. */
+    tracked_since = latest_possible_start;
+
+  stability_last_downrated = last_downrated;
+  started_tracking_stability = tracked_since;
+
+  goto done;
+ err:
+  r = -1;
+ done:
+  SMARTLIST_FOREACH(lines, char *, cp, tor_free(cp));
+  smartlist_free(lines);
+  return r;
+}
+
+/** For how many seconds do we keep track of individual per-second bandwidth
+ * totals? */
+#define NUM_SECS_ROLLING_MEASURE 10
+/** How large are the intervals for which we track and report bandwidth use? */
+#define NUM_SECS_BW_SUM_INTERVAL (15*60)
+/** How far in the past do we remember and publish bandwidth use? */
+#define NUM_SECS_BW_SUM_IS_VALID (24*60*60)
+/** How many bandwidth usage intervals do we remember? (derived) */
+#define NUM_TOTALS (NUM_SECS_BW_SUM_IS_VALID/NUM_SECS_BW_SUM_INTERVAL)
+
+/** Structure to track bandwidth use, and remember the maxima for a given
+ * time period.
+ */
+typedef struct bw_array_t {
+  /** Observation array: Total number of bytes transferred in each of the last
+   * NUM_SECS_ROLLING_MEASURE seconds. This is used as a circular array. */
+  uint64_t obs[NUM_SECS_ROLLING_MEASURE];
+  int cur_obs_idx; /**< Current position in obs. */
+  time_t cur_obs_time; /**< Time represented in obs[cur_obs_idx] */
+  uint64_t total_obs; /**< Total for all members of obs except
+                       * obs[cur_obs_idx] */
+  uint64_t max_total; /**< Largest value that total_obs has taken on in the
+                       * current period. */
+  uint64_t total_in_period; /**< Total bytes transferred in the current
+                             * period. */
+
+  /** When does the next period begin? */
+  time_t next_period;
+  /** Where in 'maxima' should the maximum bandwidth usage for the current
+   * period be stored? */
+  int next_max_idx;
+  /** How many values in maxima/totals have been set ever? */
+  int num_maxes_set;
+  /** Circular array of the maximum
+   * bandwidth-per-NUM_SECS_ROLLING_MEASURE usage for the last
+   * NUM_TOTALS periods */
+  uint64_t maxima[NUM_TOTALS];
+  /** Circular array of the total bandwidth usage for the last NUM_TOTALS
+   * periods */
+  uint64_t totals[NUM_TOTALS];
+} bw_array_t;
+
+/** Shift the current period of b forward by one. */
+static void
+commit_max(bw_array_t *b)
+{
+  /* Store total from current period. */
+  b->totals[b->next_max_idx] = b->total_in_period;
+  /* Store maximum from current period. */
+  b->maxima[b->next_max_idx++] = b->max_total;
+  /* Advance next_period and next_max_idx */
+  b->next_period += NUM_SECS_BW_SUM_INTERVAL;
+  if (b->next_max_idx == NUM_TOTALS)
+    b->next_max_idx = 0;
+  if (b->num_maxes_set < NUM_TOTALS)
+    ++b->num_maxes_set;
+  /* Reset max_total. */
+  b->max_total = 0;
+  /* Reset total_in_period. */
+  b->total_in_period = 0;
+}
+
+/** Shift the current observation time of 'b' forward by one second. */
+static INLINE void
+advance_obs(bw_array_t *b)
+{
+  int nextidx;
+  uint64_t total;
+
+  /* Calculate the total bandwidth for the last NUM_SECS_ROLLING_MEASURE
+   * seconds; adjust max_total as needed.*/
+  total = b->total_obs + b->obs[b->cur_obs_idx];
+  if (total > b->max_total)
+    b->max_total = total;
+
+  nextidx = b->cur_obs_idx+1;
+  if (nextidx == NUM_SECS_ROLLING_MEASURE)
+    nextidx = 0;
+
+  b->total_obs = total - b->obs[nextidx];
+  b->obs[nextidx]=0;
+  b->cur_obs_idx = nextidx;
+
+  if (++b->cur_obs_time >= b->next_period)
+    commit_max(b);
+}
+
+/** Add <b>n</b> bytes to the number of bytes in <b>b</b> for second
+ * <b>when</b>. */
+static INLINE void
+add_obs(bw_array_t *b, time_t when, uint64_t n)
+{
+  /* Don't record data in the past. */
+  if (when<b->cur_obs_time)
+    return;
+  /* If we're currently adding observations for an earlier second than
+   * 'when', advance b->cur_obs_time and b->cur_obs_idx by an
+   * appropriate number of seconds, and do all the other housekeeping */
+  while (when>b->cur_obs_time)
+    advance_obs(b);
+
+  b->obs[b->cur_obs_idx] += n;
+  b->total_in_period += n;
+}
+
+/** Allocate, initialize, and return a new bw_array. */
+static bw_array_t *
+bw_array_new(void)
+{
+  bw_array_t *b;
+  time_t start;
+  b = tor_malloc_zero(sizeof(bw_array_t));
+  rephist_total_alloc += sizeof(bw_array_t);
+  start = time(NULL);
+  b->cur_obs_time = start;
+  b->next_period = start + NUM_SECS_BW_SUM_INTERVAL;
+  return b;
+}
+
+/** Recent history of bandwidth observations for read operations. */
+static bw_array_t *read_array = NULL;
+/** Recent history of bandwidth observations for write operations. */
+static bw_array_t *write_array = NULL;
+
+/** Set up read_array and write_array. */
+static void
+bw_arrays_init(void)
+{
+  read_array = bw_array_new();
+  write_array = bw_array_new();
+}
+
+/** We read <b>num_bytes</b> more bytes in second <b>when</b>.
+ *
+ * Add num_bytes to the current running total for <b>when</b>.
+ *
+ * <b>when</b> can go back to time, but it's safe to ignore calls
+ * earlier than the latest <b>when</b> you've heard of.
+ */
+void
+rep_hist_note_bytes_written(size_t num_bytes, time_t when)
+{
+/* Maybe a circular array for recent seconds, and step to a new point
+ * every time a new second shows up. Or simpler is to just to have
+ * a normal array and push down each item every second; it's short.
+ */
+/* When a new second has rolled over, compute the sum of the bytes we've
+ * seen over when-1 to when-1-NUM_SECS_ROLLING_MEASURE, and stick it
+ * somewhere. See rep_hist_bandwidth_assess() below.
+ */
+  add_obs(write_array, when, num_bytes);
+}
+
+/** We wrote <b>num_bytes</b> more bytes in second <b>when</b>.
+ * (like rep_hist_note_bytes_written() above)
+ */
+void
+rep_hist_note_bytes_read(size_t num_bytes, time_t when)
+{
+/* if we're smart, we can make this func and the one above share code */
+  add_obs(read_array, when, num_bytes);
+}
+
+#ifdef ENABLE_EXIT_STATS
+/* Some constants */
+/** How long are the intervals for measuring exit stats? */
+#define EXIT_STATS_INTERVAL_SEC (24 * 60 * 60)
+/** To what multiple should byte numbers be rounded up? */
+#define EXIT_STATS_ROUND_UP_BYTES 1024
+/** To what multiple should stream counts be rounded up? */
+#define EXIT_STATS_ROUND_UP_STREAMS 4
+/** Number of TCP ports */
+#define EXIT_STATS_NUM_PORTS 65536
+/** Reciprocal of threshold (= 0.01%) of total bytes that a port needs to
+ * see in order to be included in exit stats. */
+#define EXIT_STATS_THRESHOLD_RECIPROCAL 10000
+
+/* The following data structures are arrays and no fancy smartlists or maps,
+ * so that all write operations can be done in constant time. This comes at
+ * the price of some memory (1.25 MB) and linear complexity when writing
+ * stats. */
+/** Number of bytes read in current period by exit port */
+static uint64_t exit_bytes_read[EXIT_STATS_NUM_PORTS];
+/** Number of bytes written in current period by exit port */
+static uint64_t exit_bytes_written[EXIT_STATS_NUM_PORTS];
+/** Number of streams opened in current period by exit port */
+static uint32_t exit_streams[EXIT_STATS_NUM_PORTS];
+
+/** When does the current exit stats period end? */
+static time_t end_of_current_exit_stats_period = 0;
+
+/** Write exit stats for the current period to disk and reset counters. */
+static void
+write_exit_stats(time_t when)
+{
+  char t[ISO_TIME_LEN+1];
+  int r, i, comma;
+  uint64_t *b, total_bytes, threshold_bytes, other_bytes;
+  uint32_t other_streams;
+
+  char *filename = get_datadir_fname("exit-stats");
+  open_file_t *open_file = NULL;
+  FILE *out = NULL;
+
+  log_debug(LD_HIST, "Considering writing exit port statistics to disk..");
+  while (when > end_of_current_exit_stats_period) {
+    format_iso_time(t, end_of_current_exit_stats_period);
+    log_info(LD_HIST, "Writing exit port statistics to disk for period "
+             "ending at %s.", t);
+
+    if (!open_file) {
+      out = start_writing_to_stdio_file(filename, OPEN_FLAGS_APPEND,
+                                        0600, &open_file);
+      if (!out) {
+        log_warn(LD_HIST, "Couldn't open '%s'.", filename);
+        goto done;
+      }
+    }
+
+    /* written yyyy-mm-dd HH:MM:SS (n s) */
+    if (fprintf(out, "written %s (%d s)\n", t, EXIT_STATS_INTERVAL_SEC) < 0)
+      goto done;
+
+    /* Count the total number of bytes, so that we can attribute all
+     * observations below a threshold of 1 / EXIT_STATS_THRESHOLD_RECIPROCAL
+     * of all bytes to a special port 'other'. */
+    total_bytes = 0;
+    for (i = 1; i < EXIT_STATS_NUM_PORTS; i++) {
+      total_bytes += exit_bytes_read[i];
+      total_bytes += exit_bytes_written[i];
+    }
+    threshold_bytes = total_bytes / EXIT_STATS_THRESHOLD_RECIPROCAL;
+
+    /* kibibytes-(read|written) port=kibibytes,.. */
+    for (r = 0; r < 2; r++) {
+      b = r ? exit_bytes_read : exit_bytes_written;
+      tor_assert(b);
+      if (fprintf(out, "%s ",
+                  r ? "kibibytes-read" : "kibibytes-written")<0)
+        goto done;
+
+      comma = 0;
+      other_bytes = 0;
+      for (i = 1; i < EXIT_STATS_NUM_PORTS; i++) {
+        if (b[i] > 0) {
+          if (exit_bytes_read[i] + exit_bytes_written[i] > threshold_bytes) {
+            uint64_t num = round_uint64_to_next_multiple_of(b[i],
+                                                EXIT_STATS_ROUND_UP_BYTES);
+            num /= 1024;
+            if (fprintf(out, "%s%d="U64_FORMAT,
+                        comma++ ? "," : "", i,
+                        U64_PRINTF_ARG(num)) < 0)
+              goto done;
+          } else
+            other_bytes += b[i];
+        }
+      }
+      other_bytes = round_uint64_to_next_multiple_of(other_bytes,
+                                         EXIT_STATS_ROUND_UP_BYTES);
+      other_bytes /= 1024;
+      if (fprintf(out, "%sother="U64_FORMAT"\n",
+                  comma ? "," : "", U64_PRINTF_ARG(other_bytes))<0)
+        goto done;
+    }
+    /* streams-opened port=num,.. */
+    if (fprintf(out, "streams-opened ")<0)
+      goto done;
+    comma = 0;
+    other_streams = 0;
+    for (i = 1; i < EXIT_STATS_NUM_PORTS; i++) {
+      if (exit_streams[i] > 0) {
+        if (exit_bytes_read[i] + exit_bytes_written[i] > threshold_bytes) {
+          uint32_t num = round_uint32_to_next_multiple_of(exit_streams[i],
+                                              EXIT_STATS_ROUND_UP_STREAMS);
+          if (fprintf(out, "%s%d=%u",
+                      comma++ ? "," : "", i, num)<0)
+            goto done;
+        } else
+          other_streams += exit_streams[i];
+      }
+    }
+    other_streams = round_uint32_to_next_multiple_of(other_streams,
+                                         EXIT_STATS_ROUND_UP_STREAMS);
+    if (fprintf(out, "%sother=%u\n",
+                comma ? "," : "", other_streams)<0)
+      goto done;
+    /* Reset counters */
+    memset(exit_bytes_read, 0, sizeof(exit_bytes_read));
+    memset(exit_bytes_written, 0, sizeof(exit_bytes_written));
+    memset(exit_streams, 0, sizeof(exit_streams));
+    end_of_current_exit_stats_period += EXIT_STATS_INTERVAL_SEC;
+  }
+
+  if (open_file)
+    finish_writing_to_file(open_file);
+  open_file = NULL;
+ done:
+  if (open_file)
+    abort_writing_to_file(open_file);
+  tor_free(filename);
+}
+
+/** Prepare to add an exit stats observation at second <b>when</b> by
+ * checking whether this observation lies in the current observation
+ * period; if not, shift the current period forward by one until the
+ * reported event fits it and write all results in between to disk. */
+static void
+add_exit_obs(time_t when)
+{
+  if (when > end_of_current_exit_stats_period) {
+    if (end_of_current_exit_stats_period)
+      write_exit_stats(when);
+    else
+      end_of_current_exit_stats_period = when + EXIT_STATS_INTERVAL_SEC;
+  }
+}
+
+/** Note that we wrote <b>num_bytes</b> to an exit connection to
+ * <b>port</b> in second <b>when</b>. */
+void
+rep_hist_note_exit_bytes_written(uint16_t port, size_t num_bytes,
+                                 time_t when)
+{
+  if (!get_options()->ExitPortStatistics)
+    return;
+  add_exit_obs(when);
+  exit_bytes_written[port] += num_bytes;
+  log_debug(LD_HIST, "Written %lu bytes to exit connection to port %d.",
+            (unsigned long)num_bytes, port);
+}
+
+/** Note that we read <b>num_bytes</b> from an exit connection to
+ * <b>port</b> in second <b>when</b>. */
+void
+rep_hist_note_exit_bytes_read(uint16_t port, size_t num_bytes,
+                              time_t when)
+{
+  if (!get_options()->ExitPortStatistics)
+    return;
+  add_exit_obs(when);
+  exit_bytes_read[port] += num_bytes;
+  log_debug(LD_HIST, "Read %lu bytes from exit connection to port %d.",
+            (unsigned long)num_bytes, port);
+}
+
+/** Note that we opened an exit stream to <b>port</b> in second
+ * <b>when</b>. */
+void
+rep_hist_note_exit_stream_opened(uint16_t port, time_t when)
+{
+  if (!get_options()->ExitPortStatistics)
+    return;
+  add_exit_obs(when);
+  exit_streams[port]++;
+  log_debug(LD_HIST, "Opened exit stream to port %d", port);
+}
+#endif
+
+/** Helper: Return the largest value in b->maxima.  (This is equal to the
+ * most bandwidth used in any NUM_SECS_ROLLING_MEASURE period for the last
+ * NUM_SECS_BW_SUM_IS_VALID seconds.)
+ */
+static uint64_t
+find_largest_max(bw_array_t *b)
+{
+  int i;
+  uint64_t max;
+  max=0;
+  for (i=0; i<NUM_TOTALS; ++i) {
+    if (b->maxima[i]>max)
+      max = b->maxima[i];
+  }
+  return max;
+}
+
+/** Find the largest sums in the past NUM_SECS_BW_SUM_IS_VALID (roughly)
+ * seconds. Find one sum for reading and one for writing. They don't have
+ * to be at the same time.
+ *
+ * Return the smaller of these sums, divided by NUM_SECS_ROLLING_MEASURE.
+ */
+int
+rep_hist_bandwidth_assess(void)
+{
+  uint64_t w,r;
+  r = find_largest_max(read_array);
+  w = find_largest_max(write_array);
+  if (r>w)
+    return (int)(U64_TO_DBL(w)/NUM_SECS_ROLLING_MEASURE);
+  else
+    return (int)(U64_TO_DBL(r)/NUM_SECS_ROLLING_MEASURE);
+}
+
+/** Print the bandwidth history of b (either read_array or write_array)
+ * into the buffer pointed to by buf.  The format is simply comma
+ * separated numbers, from oldest to newest.
+ *
+ * It returns the number of bytes written.
+ */
+static size_t
+rep_hist_fill_bandwidth_history(char *buf, size_t len, bw_array_t *b)
+{
+  char *cp = buf;
+  int i, n;
+  or_options_t *options = get_options();
+  uint64_t cutoff;
+
+  if (b->num_maxes_set <= b->next_max_idx) {
+    /* We haven't been through the circular array yet; time starts at i=0.*/
+    i = 0;
+  } else {
+    /* We've been around the array at least once.  The next i to be
+       overwritten is the oldest. */
+    i = b->next_max_idx;
+  }
+
+  if (options->RelayBandwidthRate) {
+    /* We don't want to report that we used more bandwidth than the max we're
+     * willing to relay; otherwise everybody will know how much traffic
+     * we used ourself. */
+    cutoff = options->RelayBandwidthRate * NUM_SECS_BW_SUM_INTERVAL;
+  } else {
+    cutoff = UINT64_MAX;
+  }
+
+  for (n=0; n<b->num_maxes_set; ++n,++i) {
+    uint64_t total;
+    if (i >= NUM_TOTALS)
+      i -= NUM_TOTALS;
+    tor_assert(i < NUM_TOTALS);
+    /* Round the bandwidth used down to the nearest 1k. */
+    total = b->totals[i] & ~0x3ff;
+    if (total > cutoff)
+      total = cutoff;
+
+    if (n==(b->num_maxes_set-1))
+      tor_snprintf(cp, len-(cp-buf), U64_FORMAT, U64_PRINTF_ARG(total));
+    else
+      tor_snprintf(cp, len-(cp-buf), U64_FORMAT",", U64_PRINTF_ARG(total));
+    cp += strlen(cp);
+  }
+  return cp-buf;
+}
+
+/** Allocate and return lines for representing this server's bandwidth
+ * history in its descriptor.
+ */
+char *
+rep_hist_get_bandwidth_lines(int for_extrainfo)
+{
+  char *buf, *cp;
+  char t[ISO_TIME_LEN+1];
+  int r;
+  bw_array_t *b;
+  size_t len;
+
+  /* opt (read|write)-history yyyy-mm-dd HH:MM:SS (n s) n,n,n,n,n... */
+  len = (60+20*NUM_TOTALS)*2;
+  buf = tor_malloc_zero(len);
+  cp = buf;
+  for (r=0;r<2;++r) {
+    b = r?read_array:write_array;
+    tor_assert(b);
+    format_iso_time(t, b->next_period-NUM_SECS_BW_SUM_INTERVAL);
+    tor_snprintf(cp, len-(cp-buf), "%s%s %s (%d s) ",
+                 for_extrainfo ? "" : "opt ",
+                 r ? "read-history" : "write-history", t,
+                 NUM_SECS_BW_SUM_INTERVAL);
+    cp += strlen(cp);
+    cp += rep_hist_fill_bandwidth_history(cp, len-(cp-buf), b);
+    strlcat(cp, "\n", len-(cp-buf));
+    ++cp;
+  }
+  return buf;
+}
+
+/** Update <b>state</b> with the newest bandwidth history. */
+void
+rep_hist_update_state(or_state_t *state)
+{
+  int len, r;
+  char *buf, *cp;
+  smartlist_t **s_values;
+  time_t *s_begins;
+  int *s_interval;
+  bw_array_t *b;
+
+  len = 20*NUM_TOTALS+1;
+  buf = tor_malloc_zero(len);
+
+  for (r=0;r<2;++r) {
+    b = r?read_array:write_array;
+    s_begins  = r?&state->BWHistoryReadEnds    :&state->BWHistoryWriteEnds;
+    s_interval= r?&state->BWHistoryReadInterval:&state->BWHistoryWriteInterval;
+    s_values  = r?&state->BWHistoryReadValues  :&state->BWHistoryWriteValues;
+
+    if (*s_values) {
+      SMARTLIST_FOREACH(*s_values, char *, val, tor_free(val));
+      smartlist_free(*s_values);
+    }
+    if (! server_mode(get_options())) {
+      /* Clients don't need to store bandwidth history persistently;
+       * force these values to the defaults. */
+      /* FFFF we should pull the default out of config.c's state table,
+       * so we don't have two defaults. */
+      if (*s_begins != 0 || *s_interval != 900) {
+        time_t now = time(NULL);
+        time_t save_at = get_options()->AvoidDiskWrites ? now+3600 : now+600;
+        or_state_mark_dirty(state, save_at);
+      }
+      *s_begins = 0;
+      *s_interval = 900;
+      *s_values = smartlist_create();
+      continue;
+    }
+    *s_begins = b->next_period;
+    *s_interval = NUM_SECS_BW_SUM_INTERVAL;
+    cp = buf;
+    cp += rep_hist_fill_bandwidth_history(cp, len, b);
+    tor_snprintf(cp, len-(cp-buf), cp == buf ? U64_FORMAT : ","U64_FORMAT,
+                 U64_PRINTF_ARG(b->total_in_period));
+    *s_values = smartlist_create();
+    if (server_mode(get_options()))
+      smartlist_split_string(*s_values, buf, ",", SPLIT_SKIP_SPACE, 0);
+  }
+  tor_free(buf);
+  if (server_mode(get_options())) {
+    or_state_mark_dirty(get_or_state(), time(NULL)+(2*3600));
+  }
+}
+
+/** Set bandwidth history from our saved state. */
+int
+rep_hist_load_state(or_state_t *state, char **err)
+{
+  time_t s_begins, start;
+  time_t now = time(NULL);
+  uint64_t v;
+  int r,i,ok;
+  int all_ok = 1;
+  int s_interval;
+  smartlist_t *s_values;
+  bw_array_t *b;
+
+  /* Assert they already have been malloced */
+  tor_assert(read_array && write_array);
+
+  for (r=0;r<2;++r) {
+    b = r?read_array:write_array;
+    s_begins = r?state->BWHistoryReadEnds:state->BWHistoryWriteEnds;
+    s_interval =  r?state->BWHistoryReadInterval:state->BWHistoryWriteInterval;
+    s_values =  r?state->BWHistoryReadValues:state->BWHistoryWriteValues;
+    if (s_values && s_begins >= now - NUM_SECS_BW_SUM_INTERVAL*NUM_TOTALS) {
+      start = s_begins - s_interval*(smartlist_len(s_values));
+      if (start > now)
+        continue;
+      b->cur_obs_time = start;
+      b->next_period = start + NUM_SECS_BW_SUM_INTERVAL;
+      SMARTLIST_FOREACH(s_values, char *, cp, {
+        v = tor_parse_uint64(cp, 10, 0, UINT64_MAX, &ok, NULL);
+        if (!ok) {
+          all_ok=0;
+          log_notice(LD_HIST, "Could not parse '%s' into a number.'", cp);
+        }
+        if (start < now) {
+          add_obs(b, start, v);
+          start += NUM_SECS_BW_SUM_INTERVAL;
+        }
+      });
+    }
+
+    /* Clean up maxima and observed */
+    /* Do we really want to zero this for the purpose of max capacity? */
+    for (i=0; i<NUM_SECS_ROLLING_MEASURE; ++i) {
+      b->obs[i] = 0;
+    }
+    b->total_obs = 0;
+    for (i=0; i<NUM_TOTALS; ++i) {
+      b->maxima[i] = 0;
+    }
+    b->max_total = 0;
+  }
+
+  if (!all_ok) {
+    *err = tor_strdup("Parsing of bandwidth history values failed");
+    /* and create fresh arrays */
+    tor_free(read_array);
+    tor_free(write_array);
+    read_array = bw_array_new();
+    write_array = bw_array_new();
+    return -1;
+  }
+  return 0;
+}
+
+/*********************************************************************/
+
+/** A list of port numbers that have been used recently. */
+static smartlist_t *predicted_ports_list=NULL;
+/** The corresponding most recently used time for each port. */
+static smartlist_t *predicted_ports_times=NULL;
+
+/** We just got an application request for a connection with
+ * port <b>port</b>. Remember it for the future, so we can keep
+ * some circuits open that will exit to this port.
+ */
+static void
+add_predicted_port(time_t now, uint16_t port)
+{
+  /* XXXX we could just use uintptr_t here, I think. */
+  uint16_t *tmp_port = tor_malloc(sizeof(uint16_t));
+  time_t *tmp_time = tor_malloc(sizeof(time_t));
+  *tmp_port = port;
+  *tmp_time = now;
+  rephist_total_alloc += sizeof(uint16_t) + sizeof(time_t);
+  smartlist_add(predicted_ports_list, tmp_port);
+  smartlist_add(predicted_ports_times, tmp_time);
+}
+
+/** Initialize whatever memory and structs are needed for predicting
+ * which ports will be used. Also seed it with port 80, so we'll build
+ * circuits on start-up.
+ */
+static void
+predicted_ports_init(void)
+{
+  predicted_ports_list = smartlist_create();
+  predicted_ports_times = smartlist_create();
+  add_predicted_port(time(NULL), 80); /* add one to kickstart us */
+}
+
+/** Free whatever memory is needed for predicting which ports will
+ * be used.
+ */
+static void
+predicted_ports_free(void)
+{
+  rephist_total_alloc -= smartlist_len(predicted_ports_list)*sizeof(uint16_t);
+  SMARTLIST_FOREACH(predicted_ports_list, char *, cp, tor_free(cp));
+  smartlist_free(predicted_ports_list);
+  rephist_total_alloc -= smartlist_len(predicted_ports_times)*sizeof(time_t);
+  SMARTLIST_FOREACH(predicted_ports_times, char *, cp, tor_free(cp));
+  smartlist_free(predicted_ports_times);
+}
+
+/** Remember that <b>port</b> has been asked for as of time <b>now</b>.
+ * This is used for predicting what sorts of streams we'll make in the
+ * future and making exit circuits to anticipate that.
+ */
+void
+rep_hist_note_used_port(time_t now, uint16_t port)
+{
+  int i;
+  uint16_t *tmp_port;
+  time_t *tmp_time;
+
+  tor_assert(predicted_ports_list);
+  tor_assert(predicted_ports_times);
+
+  if (!port) /* record nothing */
+    return;
+
+  for (i = 0; i < smartlist_len(predicted_ports_list); ++i) {
+    tmp_port = smartlist_get(predicted_ports_list, i);
+    tmp_time = smartlist_get(predicted_ports_times, i);
+    if (*tmp_port == port) {
+      *tmp_time = now;
+      return;
+    }
+  }
+  /* it's not there yet; we need to add it */
+  add_predicted_port(now, port);
+}
+
+/** For this long after we've seen a request for a given port, assume that
+ * we'll want to make connections to the same port in the future.  */
+#define PREDICTED_CIRCS_RELEVANCE_TIME (60*60)
+
+/** Return a pointer to the list of port numbers that
+ * are likely to be asked for in the near future.
+ *
+ * The caller promises not to mess with it.
+ */
+smartlist_t *
+rep_hist_get_predicted_ports(time_t now)
+{
+  int i;
+  uint16_t *tmp_port;
+  time_t *tmp_time;
+
+  tor_assert(predicted_ports_list);
+  tor_assert(predicted_ports_times);
+
+  /* clean out obsolete entries */
+  for (i = 0; i < smartlist_len(predicted_ports_list); ++i) {
+    tmp_time = smartlist_get(predicted_ports_times, i);
+    if (*tmp_time + PREDICTED_CIRCS_RELEVANCE_TIME < now) {
+      tmp_port = smartlist_get(predicted_ports_list, i);
+      log_debug(LD_CIRC, "Expiring predicted port %d", *tmp_port);
+      smartlist_del(predicted_ports_list, i);
+      smartlist_del(predicted_ports_times, i);
+      rephist_total_alloc -= sizeof(uint16_t)+sizeof(time_t);
+      tor_free(tmp_port);
+      tor_free(tmp_time);
+      i--;
+    }
+  }
+  return predicted_ports_list;
+}
+
+/** The user asked us to do a resolve. Rather than keeping track of
+ * timings and such of resolves, we fake it for now by treating
+ * it the same way as a connection to port 80. This way we will continue
+ * to have circuits lying around if the user only uses Tor for resolves.
+ */
+void
+rep_hist_note_used_resolve(time_t now)
+{
+  rep_hist_note_used_port(now, 80);
+}
+
+/** The last time at which we needed an internal circ. */
+static time_t predicted_internal_time = 0;
+/** The last time we needed an internal circ with good uptime. */
+static time_t predicted_internal_uptime_time = 0;
+/** The last time we needed an internal circ with good capacity. */
+static time_t predicted_internal_capacity_time = 0;
+
+/** Remember that we used an internal circ at time <b>now</b>. */
+void
+rep_hist_note_used_internal(time_t now, int need_uptime, int need_capacity)
+{
+  predicted_internal_time = now;
+  if (need_uptime)
+    predicted_internal_uptime_time = now;
+  if (need_capacity)
+    predicted_internal_capacity_time = now;
+}
+
+/** Return 1 if we've used an internal circ recently; else return 0. */
+int
+rep_hist_get_predicted_internal(time_t now, int *need_uptime,
+                                int *need_capacity)
+{
+  if (!predicted_internal_time) { /* initialize it */
+    predicted_internal_time = now;
+    predicted_internal_uptime_time = now;
+    predicted_internal_capacity_time = now;
+  }
+  if (predicted_internal_time + PREDICTED_CIRCS_RELEVANCE_TIME < now)
+    return 0; /* too long ago */
+  if (predicted_internal_uptime_time + PREDICTED_CIRCS_RELEVANCE_TIME >= now)
+    *need_uptime = 1;
+  if (predicted_internal_capacity_time + PREDICTED_CIRCS_RELEVANCE_TIME >= now)
+    *need_capacity = 1;
+  return 1;
+}
+
+/** Any ports used lately? These are pre-seeded if we just started
+ * up or if we're running a hidden service. */
+int
+any_predicted_circuits(time_t now)
+{
+  return smartlist_len(predicted_ports_list) ||
+         predicted_internal_time + PREDICTED_CIRCS_RELEVANCE_TIME >= now;
+}
+
+/** Return 1 if we have no need for circuits currently, else return 0. */
+int
+rep_hist_circbuilding_dormant(time_t now)
+{
+  if (any_predicted_circuits(now))
+    return 0;
+
+  /* see if we'll still need to build testing circuits */
+  if (server_mode(get_options()) &&
+      (!check_whether_orport_reachable() || !circuit_enough_testing_circs()))
+    return 0;
+  if (!check_whether_dirport_reachable())
+    return 0;
+
+  return 1;
+}
+
+/** Structure to track how many times we've done each public key operation. */
+static struct {
+  /** How many directory objects have we signed? */
+  unsigned long n_signed_dir_objs;
+  /** How many routerdescs have we signed? */
+  unsigned long n_signed_routerdescs;
+  /** How many directory objects have we verified? */
+  unsigned long n_verified_dir_objs;
+  /** How many routerdescs have we verified */
+  unsigned long n_verified_routerdescs;
+  /** How many onionskins have we encrypted to build circuits? */
+  unsigned long n_onionskins_encrypted;
+  /** How many onionskins have we decrypted to do circuit build requests? */
+  unsigned long n_onionskins_decrypted;
+  /** How many times have we done the TLS handshake as a client? */
+  unsigned long n_tls_client_handshakes;
+  /** How many times have we done the TLS handshake as a server? */
+  unsigned long n_tls_server_handshakes;
+  /** How many PK operations have we done as a hidden service client? */
+  unsigned long n_rend_client_ops;
+  /** How many PK operations have we done as a hidden service midpoint? */
+  unsigned long n_rend_mid_ops;
+  /** How many PK operations have we done as a hidden service provider? */
+  unsigned long n_rend_server_ops;
+} pk_op_counts = {0,0,0,0,0,0,0,0,0,0,0};
+
+/** Increment the count of the number of times we've done <b>operation</b>. */
+void
+note_crypto_pk_op(pk_op_t operation)
+{
+  switch (operation)
+    {
+    case SIGN_DIR:
+      pk_op_counts.n_signed_dir_objs++;
+      break;
+    case SIGN_RTR:
+      pk_op_counts.n_signed_routerdescs++;
+      break;
+    case VERIFY_DIR:
+      pk_op_counts.n_verified_dir_objs++;
+      break;
+    case VERIFY_RTR:
+      pk_op_counts.n_verified_routerdescs++;
+      break;
+    case ENC_ONIONSKIN:
+      pk_op_counts.n_onionskins_encrypted++;
+      break;
+    case DEC_ONIONSKIN:
+      pk_op_counts.n_onionskins_decrypted++;
+      break;
+    case TLS_HANDSHAKE_C:
+      pk_op_counts.n_tls_client_handshakes++;
+      break;
+    case TLS_HANDSHAKE_S:
+      pk_op_counts.n_tls_server_handshakes++;
+      break;
+    case REND_CLIENT:
+      pk_op_counts.n_rend_client_ops++;
+      break;
+    case REND_MID:
+      pk_op_counts.n_rend_mid_ops++;
+      break;
+    case REND_SERVER:
+      pk_op_counts.n_rend_server_ops++;
+      break;
+    default:
+      log_warn(LD_BUG, "Unknown pk operation %d", operation);
+  }
+}
+
+/** Log the number of times we've done each public/private-key operation. */
+void
+dump_pk_ops(int severity)
+{
+  log(severity, LD_HIST,
+      "PK operations: %lu directory objects signed, "
+      "%lu directory objects verified, "
+      "%lu routerdescs signed, "
+      "%lu routerdescs verified, "
+      "%lu onionskins encrypted, "
+      "%lu onionskins decrypted, "
+      "%lu client-side TLS handshakes, "
+      "%lu server-side TLS handshakes, "
+      "%lu rendezvous client operations, "
+      "%lu rendezvous middle operations, "
+      "%lu rendezvous server operations.",
+      pk_op_counts.n_signed_dir_objs,
+      pk_op_counts.n_verified_dir_objs,
+      pk_op_counts.n_signed_routerdescs,
+      pk_op_counts.n_verified_routerdescs,
+      pk_op_counts.n_onionskins_encrypted,
+      pk_op_counts.n_onionskins_decrypted,
+      pk_op_counts.n_tls_client_handshakes,
+      pk_op_counts.n_tls_server_handshakes,
+      pk_op_counts.n_rend_client_ops,
+      pk_op_counts.n_rend_mid_ops,
+      pk_op_counts.n_rend_server_ops);
+}
+
+/** Free all storage held by the OR/link history caches, by the
+ * bandwidth history arrays, or by the port history. */
+void
+rep_hist_free_all(void)
+{
+  digestmap_free(history_map, free_or_history);
+  tor_free(read_array);
+  tor_free(write_array);
+  tor_free(last_stability_doc);
+  built_last_stability_doc_at = 0;
+  predicted_ports_free();
+}
+
+/****************** hidden service usage statistics ******************/
+
+/** How large are the intervals for which we track and report hidden service
+ * use? */
+#define NUM_SECS_HS_USAGE_SUM_INTERVAL (15*60)
+/** How far in the past do we remember and publish hidden service use? */
+#define NUM_SECS_HS_USAGE_SUM_IS_VALID (24*60*60)
+/** How many hidden service usage intervals do we remember? (derived) */
+#define NUM_TOTALS_HS_USAGE (NUM_SECS_HS_USAGE_SUM_IS_VALID/ \
+                             NUM_SECS_HS_USAGE_SUM_INTERVAL)
+
+/** List element containing a service id and the count. */
+typedef struct hs_usage_list_elem_t {
+   /** Service id of this elem. */
+  char service_id[REND_SERVICE_ID_LEN_BASE32+1];
+  /** Number of occurrences for the given service id. */
+  uint32_t count;
+  /* Pointer to next list elem */
+  struct hs_usage_list_elem_t *next;
+} hs_usage_list_elem_t;
+
+/** Ordered list that stores service ids and the number of observations. It is
+ * ordered by the number of occurrences in descending order. Its purpose is to
+ * calculate the frequency distribution when the period is over. */
+typedef struct hs_usage_list_t {
+  /* Pointer to the first element in the list. */
+  hs_usage_list_elem_t *start;
+  /* Number of total occurrences for all list elements. */
+  uint32_t total_count;
+  /* Number of service ids, i.e. number of list elements. */
+  uint32_t total_service_ids;
+} hs_usage_list_t;
+
+/** Tracks service-related observations in the current period and their
+ * history. */
+typedef struct hs_usage_service_related_observation_t {
+  /** Ordered list that stores service ids and the number of observations in
+   * the current period. It is ordered by the number of occurrences in
+   * descending order. Its purpose is to calculate the frequency distribution
+   * when the period is over. */
+  hs_usage_list_t *list;
+  /** Circular arrays that store the history of observations. totals stores all
+   * observations, twenty (ten, five) the number of observations related to a
+   * service id being accounted for the top 20 (10, 5) percent of all
+   * observations. */
+  uint32_t totals[NUM_TOTALS_HS_USAGE];
+  uint32_t five[NUM_TOTALS_HS_USAGE];
+  uint32_t ten[NUM_TOTALS_HS_USAGE];
+  uint32_t twenty[NUM_TOTALS_HS_USAGE];
+} hs_usage_service_related_observation_t;
+
+/** Tracks the history of general period-related observations, i.e. those that
+ * cannot be related to a specific service id. */
+typedef struct hs_usage_general_period_related_observations_t {
+  /** Circular array that stores the history of observations. */
+  uint32_t totals[NUM_TOTALS_HS_USAGE];
+} hs_usage_general_period_related_observations_t;
+
+/** Keeps information about the current observation period and its relation to
+ * the histories of observations. */
+typedef struct hs_usage_current_observation_period_t {
+  /** Where do we write the next history entry? */
+  int next_idx;
+  /** How many values in history have been set ever? (upper bound!) */
+  int num_set;
+  /** When did this period begin? */
+  time_t start_of_current_period;
+  /** When does the next period begin? */
+  time_t start_of_next_period;
+} hs_usage_current_observation_period_t;
+
+/** Usage statistics for the current observation period. */
+static hs_usage_current_observation_period_t *current_period = NULL;
+
+/** Total number of descriptor publish requests in the current observation
+ * period. */
+static hs_usage_service_related_observation_t *publish_total = NULL;
+
+/** Number of descriptor publish requests for services that have not been
+ * seen before in the current observation period. */
+static hs_usage_service_related_observation_t *publish_novel = NULL;
+
+/** Total number of descriptor fetch requests in the current observation
+ * period. */
+static hs_usage_service_related_observation_t *fetch_total = NULL;
+
+/** Number of successful descriptor fetch requests in the current
+ * observation period. */
+static hs_usage_service_related_observation_t *fetch_successful = NULL;
+
+/** Number of descriptors stored in the current observation period. */
+static hs_usage_general_period_related_observations_t *descs = NULL;
+
+/** Creates an empty ordered list element. */
+static hs_usage_list_elem_t *
+hs_usage_list_elem_new(void)
+{
+  hs_usage_list_elem_t *e;
+  e = tor_malloc_zero(sizeof(hs_usage_list_elem_t));
+  rephist_total_alloc += sizeof(hs_usage_list_elem_t);
+  e->count = 1;
+  e->next = NULL;
+  return e;
+}
+
+/** Creates an empty ordered list. */
+static hs_usage_list_t *
+hs_usage_list_new(void)
+{
+  hs_usage_list_t *l;
+  l = tor_malloc_zero(sizeof(hs_usage_list_t));
+  rephist_total_alloc += sizeof(hs_usage_list_t);
+  l->start = NULL;
+  l->total_count = 0;
+  l->total_service_ids = 0;
+  return l;
+}
+
+/** Creates an empty structure for storing service-related observations. */
+static hs_usage_service_related_observation_t *
+hs_usage_service_related_observation_new(void)
+{
+  hs_usage_service_related_observation_t *h;
+  h = tor_malloc_zero(sizeof(hs_usage_service_related_observation_t));
+  rephist_total_alloc += sizeof(hs_usage_service_related_observation_t);
+  h->list = hs_usage_list_new();
+  return h;
+}
+
+/** Creates an empty structure for storing general period-related
+ * observations. */
+static hs_usage_general_period_related_observations_t *
+hs_usage_general_period_related_observations_new(void)
+{
+  hs_usage_general_period_related_observations_t *p;
+  p = tor_malloc_zero(sizeof(hs_usage_general_period_related_observations_t));
+  rephist_total_alloc+= sizeof(hs_usage_general_period_related_observations_t);
+  return p;
+}
+
+/** Creates an empty structure for storing period-specific information. */
+static hs_usage_current_observation_period_t *
+hs_usage_current_observation_period_new(void)
+{
+  hs_usage_current_observation_period_t *c;
+  time_t now;
+  c = tor_malloc_zero(sizeof(hs_usage_current_observation_period_t));
+  rephist_total_alloc += sizeof(hs_usage_current_observation_period_t);
+  now = time(NULL);
+  c->start_of_current_period = now;
+  c->start_of_next_period = now + NUM_SECS_HS_USAGE_SUM_INTERVAL;
+  return c;
+}
+
+/** Initializes the structures for collecting hidden service usage data. */
+static void
+hs_usage_init(void)
+{
+  current_period = hs_usage_current_observation_period_new();
+  publish_total = hs_usage_service_related_observation_new();
+  publish_novel = hs_usage_service_related_observation_new();
+  fetch_total = hs_usage_service_related_observation_new();
+  fetch_successful = hs_usage_service_related_observation_new();
+  descs = hs_usage_general_period_related_observations_new();
+}
+
+/** Clears the given ordered list by resetting its attributes and releasing
+ * the memory allocated by its elements. */
+static void
+hs_usage_list_clear(hs_usage_list_t *lst)
+{
+  /* walk through elements and free memory */
+  hs_usage_list_elem_t *current = lst->start;
+  hs_usage_list_elem_t *tmp;
+  while (current != NULL) {
+    tmp = current->next;
+    rephist_total_alloc -= sizeof(hs_usage_list_elem_t);
+    tor_free(current);
+    current = tmp;
+  }
+  /* reset attributes */
+  lst->start = NULL;
+  lst->total_count = 0;
+  lst->total_service_ids = 0;
+  return;
+}
+
+/** Frees the memory used by the given list. */
+static void
+hs_usage_list_free(hs_usage_list_t *lst)
+{
+  if (!lst)
+    return;
+  hs_usage_list_clear(lst);
+  rephist_total_alloc -= sizeof(hs_usage_list_t);
+  tor_free(lst);
+}
+
+/** Frees the memory used by the given service-related observations. */
+static void
+hs_usage_service_related_observation_free(
+                                    hs_usage_service_related_observation_t *s)
+{
+  if (!s)
+    return;
+  hs_usage_list_free(s->list);
+  rephist_total_alloc -= sizeof(hs_usage_service_related_observation_t);
+  tor_free(s);
+}
+
+/** Frees the memory used by the given period-specific observations. */
+static void
+hs_usage_general_period_related_observations_free(
+                             hs_usage_general_period_related_observations_t *s)
+{
+  rephist_total_alloc-=sizeof(hs_usage_general_period_related_observations_t);
+  tor_free(s);
+}
+
+/** Frees the memory used by period-specific information. */
+static void
+hs_usage_current_observation_period_free(
+                                    hs_usage_current_observation_period_t *s)
+{
+  rephist_total_alloc -= sizeof(hs_usage_current_observation_period_t);
+  tor_free(s);
+}
+
+/** Frees all memory that was used for collecting hidden service usage data. */
+void
+hs_usage_free_all(void)
+{
+  hs_usage_general_period_related_observations_free(descs);
+  descs = NULL;
+  hs_usage_service_related_observation_free(fetch_successful);
+  hs_usage_service_related_observation_free(fetch_total);
+  hs_usage_service_related_observation_free(publish_novel);
+  hs_usage_service_related_observation_free(publish_total);
+  fetch_successful = fetch_total = publish_novel = publish_total = NULL;
+  hs_usage_current_observation_period_free(current_period);
+  current_period = NULL;
+}
+
+/** Inserts a new occurrence for the given service id to the given ordered
+ * list. */
+static void
+hs_usage_insert_value(hs_usage_list_t *lst, const char *service_id)
+{
+  /* search if there is already an elem with same service_id in list */
+  hs_usage_list_elem_t *current = lst->start;
+  hs_usage_list_elem_t *previous = NULL;
+  while (current != NULL && strcasecmp(current->service_id,service_id)) {
+    previous = current;
+    current = current->next;
+  }
+  /* found an element with same service_id? */
+  if (current == NULL) {
+    /* not found! append to end (which could also be the end of a zero-length
+     * list), don't need to sort (1 is smallest value). */
+    /* create elem */
+    hs_usage_list_elem_t *e = hs_usage_list_elem_new();
+    /* update list attributes (one new elem, one new occurrence) */
+    lst->total_count++;
+    lst->total_service_ids++;
+    /* copy service id to elem */
+    strlcpy(e->service_id,service_id,sizeof(e->service_id));
+    /* let either l->start or previously last elem point to new elem */
+    if (lst->start == NULL) {
+      /* this is the first elem */
+      lst->start = e;
+    } else {
+      /* there were elems in the list before */
+      previous->next = e;
+    }
+  } else {
+    /* found! add occurrence to elem and consider resorting */
+    /* update list attributes (no new elem, but one new occurrence) */
+    lst->total_count++;
+    /* add occurrence to elem */
+    current->count++;
+    /* is it another than the first list elem? and has previous elem fewer
+     * count than current? then we need to resort */
+    if (previous != NULL && previous->count < current->count) {
+      /* yes! we need to resort */
+      /* remove current elem first */
+      previous->next = current->next;
+      /* can we prepend elem to all other elements? */
+      if (lst->start->count <= current->count) {
+        /* yes! prepend elem */
+        current->next = lst->start;
+        lst->start = current;
+      } else {
+        /* no! walk through list a second time and insert at correct place */
+        hs_usage_list_elem_t *insert_current = lst->start->next;
+        hs_usage_list_elem_t *insert_previous = lst->start;
+        while (insert_current != NULL &&
+               insert_current->count > current->count) {
+          insert_previous = insert_current;
+          insert_current = insert_current->next;
+        }
+        /* insert here */
+        current->next = insert_current;
+        insert_previous->next = current;
+      }
+    }
+  }
+}
+
+/** Writes the current service-related observations to the history array and
+ * clears the observations of the current period. */
+static void
+hs_usage_write_service_related_observations_to_history(
+                                    hs_usage_current_observation_period_t *p,
+                                    hs_usage_service_related_observation_t *h)
+{
+  /* walk through the first 20 % of list elements and calculate frequency
+   * distributions */
+  /* maximum indices for the three frequencies */
+  int five_percent_idx = h->list->total_service_ids/20;
+  int ten_percent_idx = h->list->total_service_ids/10;
+  int twenty_percent_idx = h->list->total_service_ids/5;
+  /* temp values */
+  uint32_t five_percent = 0;
+  uint32_t ten_percent = 0;
+  uint32_t twenty_percent = 0;
+  /* walk through list */
+  hs_usage_list_elem_t *current = h->list->start;
+  int i=0;
+  while (current != NULL && i <= twenty_percent_idx) {
+    twenty_percent += current->count;
+    if (i <= ten_percent_idx)
+      ten_percent += current->count;
+    if (i <= five_percent_idx)
+      five_percent += current->count;
+    current = current->next;
+    i++;
+  }
+  /* copy frequencies */
+  h->twenty[p->next_idx] = twenty_percent;
+  h->ten[p->next_idx] = ten_percent;
+  h->five[p->next_idx] = five_percent;
+  /* copy total number of observations */
+  h->totals[p->next_idx] = h->list->total_count;
+  /* free memory of old list */
+  hs_usage_list_clear(h->list);
+}
+
+/** Advances to next observation period. */
+static void
+hs_usage_advance_current_observation_period(void)
+{
+  /* aggregate observations to history, including frequency distribution
+   * arrays */
+  hs_usage_write_service_related_observations_to_history(
+                                    current_period, publish_total);
+  hs_usage_write_service_related_observations_to_history(
+                                    current_period, publish_novel);
+  hs_usage_write_service_related_observations_to_history(
+                                    current_period, fetch_total);
+  hs_usage_write_service_related_observations_to_history(
+                                    current_period, fetch_successful);
+  /* write current number of descriptors to descs history */
+  descs->totals[current_period->next_idx] = rend_cache_size();
+  /* advance to next period */
+  current_period->next_idx++;
+  if (current_period->next_idx == NUM_TOTALS_HS_USAGE)
+    current_period->next_idx = 0;
+  if (current_period->num_set < NUM_TOTALS_HS_USAGE)
+    ++current_period->num_set;
+  current_period->start_of_current_period=current_period->start_of_next_period;
+  current_period->start_of_next_period += NUM_SECS_HS_USAGE_SUM_INTERVAL;
+}
+
+/** Checks if the current period is up to date, and if not, advances it. */
+static void
+hs_usage_check_if_current_period_is_up_to_date(time_t now)
+{
+  while (now > current_period->start_of_next_period) {
+    hs_usage_advance_current_observation_period();
+  }
+}
+
+/** Adds a service-related observation, maybe after advancing to next
+ * observation period. */
+static void
+hs_usage_add_service_related_observation(
+                                    hs_usage_service_related_observation_t *h,
+                                    time_t now,
+                                    const char *service_id)
+{
+  if (now < current_period->start_of_current_period) {
+    /* don't record old data */
+    return;
+  }
+  /* check if we are up-to-date */
+  hs_usage_check_if_current_period_is_up_to_date(now);
+  /* add observation */
+  hs_usage_insert_value(h->list, service_id);
+}
+
+/** Adds the observation of storing a rendezvous service descriptor to our
+ * cache in our role as HS authoritative directory. */
+void
+hs_usage_note_publish_total(const char *service_id, time_t now)
+{
+  hs_usage_add_service_related_observation(publish_total, now, service_id);
+}
+
+/** Adds the observation of storing a novel rendezvous service descriptor to
+ * our cache in our role as HS authoritative directory. */
+void
+hs_usage_note_publish_novel(const char *service_id, time_t now)
+{
+  hs_usage_add_service_related_observation(publish_novel, now, service_id);
+}
+
+/** Adds the observation of being requested for a rendezvous service descriptor
+ * in our role as HS authoritative directory. */
+void
+hs_usage_note_fetch_total(const char *service_id, time_t now)
+{
+  hs_usage_add_service_related_observation(fetch_total, now, service_id);
+}
+
+/** Adds the observation of being requested for a rendezvous service descriptor
+ * in our role as HS authoritative directory and being able to answer that
+ * request successfully. */
+void
+hs_usage_note_fetch_successful(const char *service_id, time_t now)
+{
+  hs_usage_add_service_related_observation(fetch_successful, now, service_id);
+}
+
+/** Writes the given circular array to a string. */
+static size_t
+hs_usage_format_history(char *buf, size_t len, uint32_t *data)
+{
+  char *cp = buf; /* pointer where we are in the buffer */
+  int i, n;
+  if (current_period->num_set <= current_period->next_idx) {
+    i = 0; /* not been through circular array */
+  } else {
+    i = current_period->next_idx;
+  }
+  for (n = 0; n < current_period->num_set; ++n,++i) {
+    if (i >= NUM_TOTALS_HS_USAGE)
+      i -= NUM_TOTALS_HS_USAGE;
+    tor_assert(i < NUM_TOTALS_HS_USAGE);
+    if (n == (current_period->num_set-1))
+      tor_snprintf(cp, len-(cp-buf), "%d", data[i]);
+    else
+      tor_snprintf(cp, len-(cp-buf), "%d,", data[i]);
+    cp += strlen(cp);
+  }
+  return cp-buf;
+}
+
+/** Writes the complete usage history as hidden service authoritative directory
+ * to a string. */
+static char *
+hs_usage_format_statistics(void)
+{
+  char *buf, *cp, *s = NULL;
+  char t[ISO_TIME_LEN+1];
+  int r;
+  uint32_t *data = NULL;
+  size_t len;
+  len = (70+20*NUM_TOTALS_HS_USAGE)*11;
+  buf = tor_malloc_zero(len);
+  cp = buf;
+  for (r = 0; r < 11; ++r) {
+    switch (r) {
+    case 0:
+      s = (char*) "publish-total-history";
+      data = publish_total->totals;
+      break;
+    case 1:
+      s = (char*) "publish-novel-history";
+      data = publish_novel->totals;
+      break;
+    case 2:
+      s = (char*) "publish-top-5-percent-history";
+      data = publish_total->five;
+      break;
+    case 3:
+      s = (char*) "publish-top-10-percent-history";
+      data = publish_total->ten;
+      break;
+    case 4:
+      s = (char*) "publish-top-20-percent-history";
+      data = publish_total->twenty;
+      break;
+    case 5:
+      s = (char*) "fetch-total-history";
+      data = fetch_total->totals;
+      break;
+    case 6:
+      s = (char*) "fetch-successful-history";
+      data = fetch_successful->totals;
+      break;
+    case 7:
+      s = (char*) "fetch-top-5-percent-history";
+      data = fetch_total->five;
+      break;
+    case 8:
+      s = (char*) "fetch-top-10-percent-history";
+      data = fetch_total->ten;
+      break;
+    case 9:
+      s = (char*) "fetch-top-20-percent-history";
+      data = fetch_total->twenty;
+      break;
+    case 10:
+      s = (char*) "desc-total-history";
+      data = descs->totals;
+      break;
+    }
+    format_iso_time(t, current_period->start_of_current_period);
+    tor_snprintf(cp, len-(cp-buf), "%s %s (%d s) ", s, t,
+                 NUM_SECS_HS_USAGE_SUM_INTERVAL);
+    cp += strlen(cp);
+    cp += hs_usage_format_history(cp, len-(cp-buf), data);
+    strlcat(cp, "\n", len-(cp-buf));
+    ++cp;
+  }
+  return buf;
+}
+
+/** Write current statistics about hidden service usage to file. */
+void
+hs_usage_write_statistics_to_file(time_t now)
+{
+  char *buf;
+  size_t len;
+  char *fname;
+  or_options_t *options = get_options();
+  /* check if we are up-to-date */
+  hs_usage_check_if_current_period_is_up_to_date(now);
+  buf = hs_usage_format_statistics();
+  len = strlen(options->DataDirectory) + 16;
+  fname = tor_malloc(len);
+  tor_snprintf(fname, len, "%s"PATH_SEPARATOR"hsusage",
+               options->DataDirectory);
+  write_str_to_file(fname,buf,0);
+  tor_free(buf);
+  tor_free(fname);
+}
+
+/*** cell statistics ***/
+
+#ifdef ENABLE_BUFFER_STATS
+/** Start of the current buffer stats interval. */
+time_t start_of_buffer_stats_interval;
+
+typedef struct circ_buffer_stats_t {
+  uint32_t processed_cells;
+  double mean_num_cells_in_queue;
+  double mean_time_cells_in_queue;
+  uint32_t local_circ_id;
+} circ_buffer_stats_t;
+
+/** Holds stats. */
+smartlist_t *circuits_for_buffer_stats = NULL;
+
+/** Remember cell statistics for circuit <b>circ</b> at time
+ * <b>end_of_interval</b> and reset cell counters in case the circuit
+ * remains open in the next measurement interval. */
+void
+add_circ_to_buffer_stats(circuit_t *circ, time_t end_of_interval)
+{
+  circ_buffer_stats_t *stat;
+  time_t start_of_interval;
+  int interval_length;
+  or_circuit_t *orcirc;
+  if (CIRCUIT_IS_ORIGIN(circ))
+    return;
+  orcirc = TO_OR_CIRCUIT(circ);
+  if (!orcirc->processed_cells)
+    return;
+  if (!circuits_for_buffer_stats)
+    circuits_for_buffer_stats = smartlist_create();
+  start_of_interval = circ->timestamp_created >
+      start_of_buffer_stats_interval ?
+        circ->timestamp_created :
+        start_of_buffer_stats_interval;
+  interval_length = (int) (end_of_interval - start_of_interval);
+  stat = tor_malloc_zero(sizeof(circ_buffer_stats_t));
+  stat->processed_cells = orcirc->processed_cells;
+  /* 1000.0 for s -> ms; 2.0 because of app-ward and exit-ward queues */
+  stat->mean_num_cells_in_queue = interval_length == 0 ? 0.0 :
+      (double) orcirc->total_cell_waiting_time /
+      (double) interval_length / 1000.0 / 2.0;
+  stat->mean_time_cells_in_queue =
+      (double) orcirc->total_cell_waiting_time /
+      (double) orcirc->processed_cells;
+  smartlist_add(circuits_for_buffer_stats, stat);
+  orcirc->total_cell_waiting_time = 0;
+  orcirc->processed_cells = 0;
+}
+
+/** Sorting helper: return -1, 1, or 0 based on comparison of two
+ * circ_buffer_stats_t */
+static int
+_buffer_stats_compare_entries(const void **_a, const void **_b)
+{
+  const circ_buffer_stats_t *a = *_a, *b = *_b;
+  if (a->processed_cells < b->processed_cells)
+    return 1;
+  else if (a->processed_cells > b->processed_cells)
+    return -1;
+  else
+    return 0;
+}
+
+/** Append buffer statistics to local file. */
+void
+dump_buffer_stats(void)
+{
+  time_t now = time(NULL);
+  char *filename;
+  char written[ISO_TIME_LEN+1];
+  open_file_t *open_file = NULL;
+  FILE *out;
+#define SHARES 10
+  int processed_cells[SHARES], circs_in_share[SHARES],
+      number_of_circuits, i;
+  double queued_cells[SHARES], time_in_queue[SHARES];
+  smartlist_t *str_build = smartlist_create();
+  char *str = NULL;
+  char buf[32];
+  circuit_t *circ;
+  /* add current circuits to stats */
+  for (circ = _circuit_get_global_list(); circ; circ = circ->next)
+    add_circ_to_buffer_stats(circ, now);
+  /* calculate deciles */
+  memset(processed_cells, 0, SHARES * sizeof(int));
+  memset(circs_in_share, 0, SHARES * sizeof(int));
+  memset(queued_cells, 0, SHARES * sizeof(double));
+  memset(time_in_queue, 0, SHARES * sizeof(double));
+  smartlist_sort(circuits_for_buffer_stats,
+                 _buffer_stats_compare_entries);
+  number_of_circuits = smartlist_len(circuits_for_buffer_stats);
+  i = 0;
+  SMARTLIST_FOREACH_BEGIN(circuits_for_buffer_stats,
+                          circ_buffer_stats_t *, stat)
+  {
+    int share = i++ * SHARES / number_of_circuits;
+    processed_cells[share] += stat->processed_cells;
+    queued_cells[share] += stat->mean_num_cells_in_queue;
+    time_in_queue[share] += stat->mean_time_cells_in_queue;
+    circs_in_share[share]++;
+  }
+  SMARTLIST_FOREACH_END(stat);
+  /* clear buffer stats history */
+  SMARTLIST_FOREACH(circuits_for_buffer_stats, circ_buffer_stats_t *,
+      stat, tor_free(stat));
+  smartlist_clear(circuits_for_buffer_stats);
+  /* write to file */
+  filename = get_datadir_fname("buffer-stats");
+  out = start_writing_to_stdio_file(filename, OPEN_FLAGS_APPEND,
+                                    0600, &open_file);
+  if (!out)
+    goto done;
+  format_iso_time(written, now);
+  if (fprintf(out, "written %s (%d s)\n", written,
+              DUMP_BUFFER_STATS_INTERVAL) < 0)
+    goto done;
+  for (i = 0; i < SHARES; i++) {
+    tor_snprintf(buf, sizeof(buf), "%d", !circs_in_share[i] ? 0 :
+                 processed_cells[i] / circs_in_share[i]);
+    smartlist_add(str_build, tor_strdup(buf));
+  }
+  str = smartlist_join_strings(str_build, ",", 0, NULL);
+  if (fprintf(out, "processed-cells %s\n", str) < 0)
+    goto done;
+  tor_free(str);
+  SMARTLIST_FOREACH(str_build, char *, c, tor_free(c));
+  smartlist_clear(str_build);
+  for (i = 0; i < SHARES; i++) {
+    tor_snprintf(buf, sizeof(buf), "%.2f", circs_in_share[i] == 0 ? 0.0 :
+                 queued_cells[i] / (double) circs_in_share[i]);
+    smartlist_add(str_build, tor_strdup(buf));
+  }
+  str = smartlist_join_strings(str_build, ",", 0, NULL);
+  if (fprintf(out, "queued-cells %s\n", str) < 0)
+    goto done;
+  tor_free(str);
+  SMARTLIST_FOREACH(str_build, char *, c, tor_free(c));
+  smartlist_clear(str_build);
+  for (i = 0; i < SHARES; i++) {
+    tor_snprintf(buf, sizeof(buf), "%.0f", circs_in_share[i] == 0 ? 0.0 :
+                 time_in_queue[i] / (double) circs_in_share[i]);
+    smartlist_add(str_build, tor_strdup(buf));
+  }
+  str = smartlist_join_strings(str_build, ",", 0, NULL);
+  if (fprintf(out, "time-in-queue %s\n", str) < 0)
+    goto done;
+  tor_free(str);
+  SMARTLIST_FOREACH(str_build, char *, c, tor_free(c));
+  smartlist_free(str_build);
+  str_build = NULL;
+  if (fprintf(out, "number-of-circuits-per-share %d\n",
+              (number_of_circuits + SHARES - 1) / SHARES) < 0)
+    goto done;
+  finish_writing_to_file(open_file);
+  open_file = NULL;
+ done:
+  if (open_file)
+    abort_writing_to_file(open_file);
+  tor_free(filename);
+  if (str_build) {
+    SMARTLIST_FOREACH(str_build, char *, c, tor_free(c));
+    smartlist_free(str_build);
+  }
+  tor_free(str);
+#undef SHARES
+}
+#endif
+

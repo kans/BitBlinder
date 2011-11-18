@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version="0.5.5"
+Encoding=UTF-8
+Name=BitBlinder
+Type=Application
+GenericName="Anonymizing Platform and BitTorrent Client"
+MimeType=.torrent;
+Exec=bitblinder --launch-bt
+Icon=bitblinder
+Terminal=false
+Categories=Network;GTK
+GenericName[en_US]="Anonymizing Platform"

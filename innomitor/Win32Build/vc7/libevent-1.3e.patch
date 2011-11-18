@@ -1,0 +1,858 @@
+diff -Nubr libevent-1.3e/WIN32-Code/win32.c libevent-1.3e_new/WIN32-Code/win32.c
+--- libevent-1.3e/WIN32-Code/win32.c	2007-08-17 23:06:10.000000000 -0400
++++ libevent-1.3e_new/WIN32-Code/win32.c	2008-08-18 12:54:33.328125000 -0400
+@@ -32,7 +32,9 @@
+ #include "../config.h"
+ #endif
+ 
++#define WIN32_LEAN_AND_MEAN
+ #include <windows.h>
++#undef WIN32_LEAN_AND_MEAN
+ #include <winsock2.h>
+ #include <sys/types.h>
+ #include <sys/queue.h>
+diff -Nubr libevent-1.3e/WIN32-Prj/event_test/event_test.vcproj libevent-1.3e_new/WIN32-Prj/event_test/event_test.vcproj
+--- libevent-1.3e/WIN32-Prj/event_test/event_test.vcproj	1969-12-31 19:00:00.000000000 -0500
++++ libevent-1.3e_new/WIN32-Prj/event_test/event_test.vcproj	2008-08-18 12:54:33.343750000 -0400
+@@ -0,0 +1,172 @@
++<?xml version="1.0" encoding="Windows-1252"?>
++<VisualStudioProject
++	ProjectType="Visual C++"
++	Version="7.10"
++	Name="event_test"
++	SccProjectName=""
++	SccLocalPath="">
++	<Platforms>
++		<Platform
++			Name="Win32"/>
++	</Platforms>
++	<Configurations>
++		<Configuration
++			Name="Debug|Win32"
++			OutputDirectory=".\Debug"
++			IntermediateDirectory=".\Debug"
++			ConfigurationType="1"
++			UseOfMFC="0"
++			ATLMinimizesCRunTimeLibraryUsage="FALSE"
++			CharacterSet="2">
++			<Tool
++				Name="VCCLCompilerTool"
++				Optimization="0"
++				AdditionalIncludeDirectories="..\..\,..\..\WIN32-Code,..\..\compat"
++				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
++				BasicRuntimeChecks="3"
++				RuntimeLibrary="5"
++				UsePrecompiledHeader="2"
++				PrecompiledHeaderFile=".\Debug/event_test.pch"
++				AssemblerListingLocation=".\Debug/"
++				ObjectFile=".\Debug/"
++				ProgramDataBaseFileName=".\Debug/"
++				WarningLevel="3"
++				SuppressStartupBanner="TRUE"
++				DebugInformationFormat="4"
++				CompileAs="0"/>
++			<Tool
++				Name="VCCustomBuildTool"/>
++			<Tool
++				Name="VCLinkerTool"
++				OutputFile=".\Debug/event_test.exe"
++				LinkIncremental="1"
++				SuppressStartupBanner="TRUE"
++				GenerateDebugInformation="TRUE"
++				ProgramDatabaseFile=".\Debug/event_test.pdb"
++				SubSystem="1"
++				TargetMachine="1"/>
++			<Tool
++				Name="VCMIDLTool"
++				TypeLibraryName=".\Debug/event_test.tlb"
++				HeaderFileName=""/>
++			<Tool
++				Name="VCPostBuildEventTool"/>
++			<Tool
++				Name="VCPreBuildEventTool"/>
++			<Tool
++				Name="VCPreLinkEventTool"/>
++			<Tool
++				Name="VCResourceCompilerTool"
++				PreprocessorDefinitions="_DEBUG"
++				Culture="1033"/>
++			<Tool
++				Name="VCWebServiceProxyGeneratorTool"/>
++			<Tool
++				Name="VCXMLDataGeneratorTool"/>
++			<Tool
++				Name="VCWebDeploymentTool"/>
++			<Tool
++				Name="VCManagedWrapperGeneratorTool"/>
++			<Tool
++				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
++		</Configuration>
++		<Configuration
++			Name="Release|Win32"
++			OutputDirectory=".\Release"
++			IntermediateDirectory=".\Release"
++			ConfigurationType="1"
++			UseOfMFC="0"
++			ATLMinimizesCRunTimeLibraryUsage="FALSE"
++			CharacterSet="2">
++			<Tool
++				Name="VCCLCompilerTool"
++				Optimization="2"
++				InlineFunctionExpansion="1"
++				AdditionalIncludeDirectories="..\..\,..\..\WIN32-Code,..\..\compat"
++				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
++				StringPooling="TRUE"
++				RuntimeLibrary="4"
++				EnableFunctionLevelLinking="TRUE"
++				UsePrecompiledHeader="2"
++				PrecompiledHeaderFile=".\Release/event_test.pch"
++				AssemblerListingLocation=".\Release/"
++				ObjectFile=".\Release/"
++				ProgramDataBaseFileName=".\Release/"
++				WarningLevel="3"
++				SuppressStartupBanner="TRUE"
++				CompileAs="0"/>
++			<Tool
++				Name="VCCustomBuildTool"/>
++			<Tool
++				Name="VCLinkerTool"
++				OutputFile=".\Release/event_test.exe"
++				LinkIncremental="1"
++				SuppressStartupBanner="TRUE"
++				ProgramDatabaseFile=".\Release/event_test.pdb"
++				SubSystem="1"
++				TargetMachine="1"/>
++			<Tool
++				Name="VCMIDLTool"
++				TypeLibraryName=".\Release/event_test.tlb"
++				HeaderFileName=""/>
++			<Tool
++				Name="VCPostBuildEventTool"/>
++			<Tool
++				Name="VCPreBuildEventTool"/>
++			<Tool
++				Name="VCPreLinkEventTool"/>
++			<Tool
++				Name="VCResourceCompilerTool"
++				PreprocessorDefinitions="NDEBUG"
++				Culture="1033"/>
++			<Tool
++				Name="VCWebServiceProxyGeneratorTool"/>
++			<Tool
++				Name="VCXMLDataGeneratorTool"/>
++			<Tool
++				Name="VCWebDeploymentTool"/>
++			<Tool
++				Name="VCManagedWrapperGeneratorTool"/>
++			<Tool
++				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
++		</Configuration>
++	</Configurations>
++	<References>
++	</References>
++	<Files>
++		<Filter
++			Name="Source Files"
++			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat">
++			<File
++				RelativePath="..\..\sample\event-test.c">
++				<FileConfiguration
++					Name="Debug|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="0"
++						AdditionalIncludeDirectories=""
++						PreprocessorDefinitions=""
++						BasicRuntimeChecks="3"/>
++				</FileConfiguration>
++				<FileConfiguration
++					Name="Release|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="2"
++						AdditionalIncludeDirectories=""
++						PreprocessorDefinitions=""/>
++				</FileConfiguration>
++			</File>
++		</Filter>
++		<Filter
++			Name="Header Files"
++			Filter="h;hpp;hxx;hm;inl">
++		</Filter>
++		<Filter
++			Name="Resource Files"
++			Filter="ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe">
++		</Filter>
++	</Files>
++	<Globals>
++	</Globals>
++</VisualStudioProject>
+diff -Nubr libevent-1.3e/WIN32-Prj/libevent.sln libevent-1.3e_new/WIN32-Prj/libevent.sln
+--- libevent-1.3e/WIN32-Prj/libevent.sln	1969-12-31 19:00:00.000000000 -0500
++++ libevent-1.3e_new/WIN32-Prj/libevent.sln	2008-08-18 12:54:33.343750000 -0400
+@@ -0,0 +1,50 @@
++Microsoft Visual Studio Solution File, Format Version 8.00
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "event_test", "event_test\event_test.vcproj", "{2B0E2DC1-1FF3-4BED-A599-695097FFCA8C}"
++	ProjectSection(ProjectDependencies) = postProject
++		{60352911-E547-493B-8406-18E66DECB0AE} = {60352911-E547-493B-8406-18E66DECB0AE}
++	EndProjectSection
++EndProject
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libevent", "libevent.vcproj", "{60352911-E547-493B-8406-18E66DECB0AE}"
++	ProjectSection(ProjectDependencies) = postProject
++	EndProjectSection
++EndProject
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "signal_test", "signal_test\signal_test.vcproj", "{504CCF57-8C0D-4352-A64D-DA070E5A8766}"
++	ProjectSection(ProjectDependencies) = postProject
++		{60352911-E547-493B-8406-18E66DECB0AE} = {60352911-E547-493B-8406-18E66DECB0AE}
++	EndProjectSection
++EndProject
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "time_test", "time_test\time_test.vcproj", "{4227D6C6-6601-4160-9C58-773F5D0F9702}"
++	ProjectSection(ProjectDependencies) = postProject
++		{60352911-E547-493B-8406-18E66DECB0AE} = {60352911-E547-493B-8406-18E66DECB0AE}
++	EndProjectSection
++EndProject
++Global
++	GlobalSection(SolutionConfiguration) = preSolution
++		Debug = Debug
++		Release = Release
++	EndGlobalSection
++	GlobalSection(ProjectDependencies) = postSolution
++	EndGlobalSection
++	GlobalSection(ProjectConfiguration) = postSolution
++		{2B0E2DC1-1FF3-4BED-A599-695097FFCA8C}.Debug.ActiveCfg = Debug|Win32
++		{2B0E2DC1-1FF3-4BED-A599-695097FFCA8C}.Debug.Build.0 = Debug|Win32
++		{2B0E2DC1-1FF3-4BED-A599-695097FFCA8C}.Release.ActiveCfg = Release|Win32
++		{2B0E2DC1-1FF3-4BED-A599-695097FFCA8C}.Release.Build.0 = Release|Win32
++		{60352911-E547-493B-8406-18E66DECB0AE}.Debug.ActiveCfg = Debug|Win32
++		{60352911-E547-493B-8406-18E66DECB0AE}.Debug.Build.0 = Debug|Win32
++		{60352911-E547-493B-8406-18E66DECB0AE}.Release.ActiveCfg = Release|Win32
++		{60352911-E547-493B-8406-18E66DECB0AE}.Release.Build.0 = Release|Win32
++		{504CCF57-8C0D-4352-A64D-DA070E5A8766}.Debug.ActiveCfg = Debug|Win32
++		{504CCF57-8C0D-4352-A64D-DA070E5A8766}.Debug.Build.0 = Debug|Win32
++		{504CCF57-8C0D-4352-A64D-DA070E5A8766}.Release.ActiveCfg = Release|Win32
++		{504CCF57-8C0D-4352-A64D-DA070E5A8766}.Release.Build.0 = Release|Win32
++		{4227D6C6-6601-4160-9C58-773F5D0F9702}.Debug.ActiveCfg = Debug|Win32
++		{4227D6C6-6601-4160-9C58-773F5D0F9702}.Debug.Build.0 = Debug|Win32
++		{4227D6C6-6601-4160-9C58-773F5D0F9702}.Release.ActiveCfg = Release|Win32
++		{4227D6C6-6601-4160-9C58-773F5D0F9702}.Release.Build.0 = Release|Win32
++	EndGlobalSection
++	GlobalSection(ExtensibilityGlobals) = postSolution
++	EndGlobalSection
++	GlobalSection(ExtensibilityAddIns) = postSolution
++	EndGlobalSection
++EndGlobal
+diff -Nubr libevent-1.3e/WIN32-Prj/libevent.vcproj libevent-1.3e_new/WIN32-Prj/libevent.vcproj
+--- libevent-1.3e/WIN32-Prj/libevent.vcproj	1969-12-31 19:00:00.000000000 -0500
++++ libevent-1.3e_new/WIN32-Prj/libevent.vcproj	2008-08-18 14:18:52.390625000 -0400
+@@ -0,0 +1,227 @@
++<?xml version="1.0" encoding="Windows-1252"?>
++<VisualStudioProject
++	ProjectType="Visual C++"
++	Version="7.10"
++	Name="libevent"
++	ProjectGUID="{76E40712-9978-4A30-986F-CE061DEDAF66}"
++	SccProjectName=""
++	SccLocalPath="">
++	<Platforms>
++		<Platform
++			Name="Win32"/>
++	</Platforms>
++	<Configurations>
++		<Configuration
++			Name="Debug|Win32"
++			OutputDirectory=".\Debug"
++			IntermediateDirectory=".\Debug"
++			ConfigurationType="4"
++			UseOfMFC="0"
++			ATLMinimizesCRunTimeLibraryUsage="FALSE"
++			CharacterSet="2">
++			<Tool
++				Name="VCCLCompilerTool"
++				Optimization="0"
++				AdditionalIncludeDirectories="..\,..\WIN32-Code,..\compat"
++				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
++				BasicRuntimeChecks="3"
++				RuntimeLibrary="1"
++				UsePrecompiledHeader="2"
++				PrecompiledHeaderFile=".\Debug/libevent.pch"
++				AssemblerListingLocation=".\Debug/"
++				ObjectFile=".\Debug/"
++				ProgramDataBaseFileName=".\Debug/"
++				WarningLevel="3"
++				SuppressStartupBanner="TRUE"
++				DebugInformationFormat="4"
++				CompileAs="0"/>
++			<Tool
++				Name="VCCustomBuildTool"/>
++			<Tool
++				Name="VCLibrarianTool"
++				OutputFile=".\Debug\libevent.lib"
++				SuppressStartupBanner="TRUE"/>
++			<Tool
++				Name="VCMIDLTool"/>
++			<Tool
++				Name="VCPostBuildEventTool"/>
++			<Tool
++				Name="VCPreBuildEventTool"/>
++			<Tool
++				Name="VCPreLinkEventTool"/>
++			<Tool
++				Name="VCResourceCompilerTool"
++				PreprocessorDefinitions="_DEBUG"
++				Culture="1033"/>
++			<Tool
++				Name="VCWebServiceProxyGeneratorTool"/>
++			<Tool
++				Name="VCXMLDataGeneratorTool"/>
++			<Tool
++				Name="VCManagedWrapperGeneratorTool"/>
++			<Tool
++				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
++		</Configuration>
++		<Configuration
++			Name="Release|Win32"
++			OutputDirectory=".\Release"
++			IntermediateDirectory=".\Release"
++			ConfigurationType="4"
++			UseOfMFC="0"
++			ATLMinimizesCRunTimeLibraryUsage="FALSE"
++			CharacterSet="2">
++			<Tool
++				Name="VCCLCompilerTool"
++				Optimization="2"
++				InlineFunctionExpansion="1"
++				AdditionalIncludeDirectories="..\,..\WIN32-Code,..\compat"
++				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
++				StringPooling="TRUE"
++				RuntimeLibrary="0"
++				EnableFunctionLevelLinking="TRUE"
++				UsePrecompiledHeader="2"
++				PrecompiledHeaderFile=".\Release/libevent.pch"
++				AssemblerListingLocation=".\Release/"
++				ObjectFile=".\Release/"
++				ProgramDataBaseFileName=".\Release/"
++				WarningLevel="3"
++				SuppressStartupBanner="TRUE"
++				CompileAs="0"/>
++			<Tool
++				Name="VCCustomBuildTool"/>
++			<Tool
++				Name="VCLibrarianTool"
++				OutputFile=".\Release\libevent.lib"
++				SuppressStartupBanner="TRUE"/>
++			<Tool
++				Name="VCMIDLTool"/>
++			<Tool
++				Name="VCPostBuildEventTool"/>
++			<Tool
++				Name="VCPreBuildEventTool"/>
++			<Tool
++				Name="VCPreLinkEventTool"/>
++			<Tool
++				Name="VCResourceCompilerTool"
++				PreprocessorDefinitions="NDEBUG"
++				Culture="1033"/>
++			<Tool
++				Name="VCWebServiceProxyGeneratorTool"/>
++			<Tool
++				Name="VCXMLDataGeneratorTool"/>
++			<Tool
++				Name="VCManagedWrapperGeneratorTool"/>
++			<Tool
++				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
++		</Configuration>
++	</Configurations>
++	<References>
++	</References>
++	<Files>
++		<Filter
++			Name="Source Files"
++			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat">
++			<File
++				RelativePath="..\event.c">
++				<FileConfiguration
++					Name="Debug|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="0"
++						AdditionalIncludeDirectories=""
++						PreprocessorDefinitions=""
++						BasicRuntimeChecks="3"/>
++				</FileConfiguration>
++				<FileConfiguration
++					Name="Release|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="2"
++						AdditionalIncludeDirectories=""
++						PreprocessorDefinitions=""/>
++				</FileConfiguration>
++			</File>
++			<File
++				RelativePath="..\log.c">
++				<FileConfiguration
++					Name="Debug|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="0"
++						AdditionalIncludeDirectories=""
++						PreprocessorDefinitions=""
++						BasicRuntimeChecks="3"/>
++				</FileConfiguration>
++				<FileConfiguration
++					Name="Release|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="2"
++						AdditionalIncludeDirectories=""
++						PreprocessorDefinitions=""/>
++				</FileConfiguration>
++			</File>
++			<File
++				RelativePath="..\WIN32-Code\misc.c">
++				<FileConfiguration
++					Name="Debug|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="0"
++						AdditionalIncludeDirectories=""
++						PreprocessorDefinitions=""
++						BasicRuntimeChecks="3"/>
++				</FileConfiguration>
++				<FileConfiguration
++					Name="Release|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="2"
++						AdditionalIncludeDirectories=""
++						PreprocessorDefinitions=""/>
++				</FileConfiguration>
++			</File>
++			<File
++				RelativePath="..\WIN32-Code\win32.c">
++				<FileConfiguration
++					Name="Debug|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="0"
++						AdditionalIncludeDirectories=""
++						PreprocessorDefinitions=""
++						BasicRuntimeChecks="3"/>
++				</FileConfiguration>
++				<FileConfiguration
++					Name="Release|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="2"
++						AdditionalIncludeDirectories=""
++						PreprocessorDefinitions=""/>
++				</FileConfiguration>
++			</File>
++		</Filter>
++		<Filter
++			Name="Header Files"
++			Filter="h;hpp;hxx;hm;inl">
++			<File
++				RelativePath="..\acconfig.h">
++			</File>
++			<File
++				RelativePath="..\WIN32-Code\config.h">
++			</File>
++			<File
++				RelativePath="..\compat\err.h">
++			</File>
++			<File
++				RelativePath="..\event.h">
++			</File>
++			<File
++				RelativePath="..\WIN32-Code\misc.h">
++			</File>
++		</Filter>
++	</Files>
++	<Globals>
++	</Globals>
++</VisualStudioProject>
+diff -Nubr libevent-1.3e/WIN32-Prj/signal_test/signal_test.vcproj libevent-1.3e_new/WIN32-Prj/signal_test/signal_test.vcproj
+--- libevent-1.3e/WIN32-Prj/signal_test/signal_test.vcproj	1969-12-31 19:00:00.000000000 -0500
++++ libevent-1.3e_new/WIN32-Prj/signal_test/signal_test.vcproj	2008-08-18 12:54:33.359375000 -0400
+@@ -0,0 +1,169 @@
++<?xml version="1.0" encoding="Windows-1252"?>
++<VisualStudioProject
++	ProjectType="Visual C++"
++	Version="7.10"
++	Name="signal_test"
++	SccProjectName=""
++	SccLocalPath="">
++	<Platforms>
++		<Platform
++			Name="Win32"/>
++	</Platforms>
++	<Configurations>
++		<Configuration
++			Name="Release|Win32"
++			OutputDirectory=".\Release"
++			IntermediateDirectory=".\Release"
++			ConfigurationType="1"
++			UseOfMFC="0"
++			ATLMinimizesCRunTimeLibraryUsage="FALSE"
++			CharacterSet="2">
++			<Tool
++				Name="VCCLCompilerTool"
++				Optimization="2"
++				InlineFunctionExpansion="1"
++				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
++				StringPooling="TRUE"
++				RuntimeLibrary="4"
++				EnableFunctionLevelLinking="TRUE"
++				UsePrecompiledHeader="2"
++				PrecompiledHeaderFile=".\Release/signal_test.pch"
++				AssemblerListingLocation=".\Release/"
++				ObjectFile=".\Release/"
++				ProgramDataBaseFileName=".\Release/"
++				WarningLevel="3"
++				SuppressStartupBanner="TRUE"/>
++			<Tool
++				Name="VCCustomBuildTool"/>
++			<Tool
++				Name="VCLinkerTool"
++				OutputFile=".\Release/signal_test.exe"
++				LinkIncremental="1"
++				SuppressStartupBanner="TRUE"
++				ProgramDatabaseFile=".\Release/signal_test.pdb"
++				SubSystem="1"
++				TargetMachine="1"/>
++			<Tool
++				Name="VCMIDLTool"
++				TypeLibraryName=".\Release/signal_test.tlb"
++				HeaderFileName=""/>
++			<Tool
++				Name="VCPostBuildEventTool"/>
++			<Tool
++				Name="VCPreBuildEventTool"/>
++			<Tool
++				Name="VCPreLinkEventTool"/>
++			<Tool
++				Name="VCResourceCompilerTool"
++				PreprocessorDefinitions="NDEBUG"
++				Culture="1033"/>
++			<Tool
++				Name="VCWebServiceProxyGeneratorTool"/>
++			<Tool
++				Name="VCXMLDataGeneratorTool"/>
++			<Tool
++				Name="VCWebDeploymentTool"/>
++			<Tool
++				Name="VCManagedWrapperGeneratorTool"/>
++			<Tool
++				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
++		</Configuration>
++		<Configuration
++			Name="Debug|Win32"
++			OutputDirectory=".\Debug"
++			IntermediateDirectory=".\Debug"
++			ConfigurationType="1"
++			UseOfMFC="0"
++			ATLMinimizesCRunTimeLibraryUsage="FALSE"
++			CharacterSet="2">
++			<Tool
++				Name="VCCLCompilerTool"
++				Optimization="0"
++				AdditionalIncludeDirectories="..\..\,..\..\WIN32-Code,..\..\compat"
++				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
++				BasicRuntimeChecks="3"
++				RuntimeLibrary="5"
++				UsePrecompiledHeader="2"
++				PrecompiledHeaderFile=".\Debug/signal_test.pch"
++				AssemblerListingLocation=".\Debug/"
++				ObjectFile=".\Debug/"
++				ProgramDataBaseFileName=".\Debug/"
++				WarningLevel="3"
++				SuppressStartupBanner="TRUE"
++				DebugInformationFormat="4"
++				CompileAs="0"/>
++			<Tool
++				Name="VCCustomBuildTool"/>
++			<Tool
++				Name="VCLinkerTool"
++				OutputFile=".\Debug/signal_test.exe"
++				LinkIncremental="1"
++				SuppressStartupBanner="TRUE"
++				GenerateDebugInformation="TRUE"
++				ProgramDatabaseFile=".\Debug/signal_test.pdb"
++				SubSystem="1"
++				TargetMachine="1"/>
++			<Tool
++				Name="VCMIDLTool"
++				TypeLibraryName=".\Debug/signal_test.tlb"
++				HeaderFileName=""/>
++			<Tool
++				Name="VCPostBuildEventTool"/>
++			<Tool
++				Name="VCPreBuildEventTool"/>
++			<Tool
++				Name="VCPreLinkEventTool"/>
++			<Tool
++				Name="VCResourceCompilerTool"
++				PreprocessorDefinitions="_DEBUG"
++				Culture="1033"/>
++			<Tool
++				Name="VCWebServiceProxyGeneratorTool"/>
++			<Tool
++				Name="VCXMLDataGeneratorTool"/>
++			<Tool
++				Name="VCWebDeploymentTool"/>
++			<Tool
++				Name="VCManagedWrapperGeneratorTool"/>
++			<Tool
++				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
++		</Configuration>
++	</Configurations>
++	<References>
++	</References>
++	<Files>
++		<Filter
++			Name="Source Files"
++			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat">
++			<File
++				RelativePath="..\..\sample\signal-test.c">
++				<FileConfiguration
++					Name="Release|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="2"
++						PreprocessorDefinitions=""/>
++				</FileConfiguration>
++				<FileConfiguration
++					Name="Debug|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="0"
++						AdditionalIncludeDirectories=""
++						PreprocessorDefinitions=""
++						BasicRuntimeChecks="3"/>
++				</FileConfiguration>
++			</File>
++		</Filter>
++		<Filter
++			Name="Header Files"
++			Filter="h;hpp;hxx;hm;inl">
++		</Filter>
++		<Filter
++			Name="Resource Files"
++			Filter="ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe">
++		</Filter>
++	</Files>
++	<Globals>
++	</Globals>
++</VisualStudioProject>
+diff -Nubr libevent-1.3e/WIN32-Prj/time_test/time_test.vcproj libevent-1.3e_new/WIN32-Prj/time_test/time_test.vcproj
+--- libevent-1.3e/WIN32-Prj/time_test/time_test.vcproj	1969-12-31 19:00:00.000000000 -0500
++++ libevent-1.3e_new/WIN32-Prj/time_test/time_test.vcproj	2008-08-18 12:54:33.375000000 -0400
+@@ -0,0 +1,169 @@
++<?xml version="1.0" encoding="Windows-1252"?>
++<VisualStudioProject
++	ProjectType="Visual C++"
++	Version="7.10"
++	Name="time_test"
++	SccProjectName=""
++	SccLocalPath="">
++	<Platforms>
++		<Platform
++			Name="Win32"/>
++	</Platforms>
++	<Configurations>
++		<Configuration
++			Name="Release|Win32"
++			OutputDirectory=".\Release"
++			IntermediateDirectory=".\Release"
++			ConfigurationType="1"
++			UseOfMFC="0"
++			ATLMinimizesCRunTimeLibraryUsage="FALSE"
++			CharacterSet="2">
++			<Tool
++				Name="VCCLCompilerTool"
++				Optimization="2"
++				InlineFunctionExpansion="1"
++				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
++				StringPooling="TRUE"
++				RuntimeLibrary="4"
++				EnableFunctionLevelLinking="TRUE"
++				UsePrecompiledHeader="2"
++				PrecompiledHeaderFile=".\Release/time_test.pch"
++				AssemblerListingLocation=".\Release/"
++				ObjectFile=".\Release/"
++				ProgramDataBaseFileName=".\Release/"
++				WarningLevel="3"
++				SuppressStartupBanner="TRUE"/>
++			<Tool
++				Name="VCCustomBuildTool"/>
++			<Tool
++				Name="VCLinkerTool"
++				OutputFile=".\Release/time_test.exe"
++				LinkIncremental="1"
++				SuppressStartupBanner="TRUE"
++				ProgramDatabaseFile=".\Release/time_test.pdb"
++				SubSystem="1"
++				TargetMachine="1"/>
++			<Tool
++				Name="VCMIDLTool"
++				TypeLibraryName=".\Release/time_test.tlb"
++				HeaderFileName=""/>
++			<Tool
++				Name="VCPostBuildEventTool"/>
++			<Tool
++				Name="VCPreBuildEventTool"/>
++			<Tool
++				Name="VCPreLinkEventTool"/>
++			<Tool
++				Name="VCResourceCompilerTool"
++				PreprocessorDefinitions="NDEBUG"
++				Culture="1033"/>
++			<Tool
++				Name="VCWebServiceProxyGeneratorTool"/>
++			<Tool
++				Name="VCXMLDataGeneratorTool"/>
++			<Tool
++				Name="VCWebDeploymentTool"/>
++			<Tool
++				Name="VCManagedWrapperGeneratorTool"/>
++			<Tool
++				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
++		</Configuration>
++		<Configuration
++			Name="Debug|Win32"
++			OutputDirectory=".\Debug"
++			IntermediateDirectory=".\Debug"
++			ConfigurationType="1"
++			UseOfMFC="0"
++			ATLMinimizesCRunTimeLibraryUsage="FALSE"
++			CharacterSet="2">
++			<Tool
++				Name="VCCLCompilerTool"
++				Optimization="0"
++				AdditionalIncludeDirectories="..\..\,..\..\WIN32-Code,..\..\compat"
++				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
++				BasicRuntimeChecks="3"
++				RuntimeLibrary="5"
++				UsePrecompiledHeader="2"
++				PrecompiledHeaderFile=".\Debug/time_test.pch"
++				AssemblerListingLocation=".\Debug/"
++				ObjectFile=".\Debug/"
++				ProgramDataBaseFileName=".\Debug/"
++				WarningLevel="3"
++				SuppressStartupBanner="TRUE"
++				DebugInformationFormat="4"
++				CompileAs="0"/>
++			<Tool
++				Name="VCCustomBuildTool"/>
++			<Tool
++				Name="VCLinkerTool"
++				OutputFile=".\Debug/time_test.exe"
++				LinkIncremental="1"
++				SuppressStartupBanner="TRUE"
++				GenerateDebugInformation="TRUE"
++				ProgramDatabaseFile=".\Debug/time_test.pdb"
++				SubSystem="1"
++				TargetMachine="1"/>
++			<Tool
++				Name="VCMIDLTool"
++				TypeLibraryName=".\Debug/time_test.tlb"
++				HeaderFileName=""/>
++			<Tool
++				Name="VCPostBuildEventTool"/>
++			<Tool
++				Name="VCPreBuildEventTool"/>
++			<Tool
++				Name="VCPreLinkEventTool"/>
++			<Tool
++				Name="VCResourceCompilerTool"
++				PreprocessorDefinitions="_DEBUG"
++				Culture="1033"/>
++			<Tool
++				Name="VCWebServiceProxyGeneratorTool"/>
++			<Tool
++				Name="VCXMLDataGeneratorTool"/>
++			<Tool
++				Name="VCWebDeploymentTool"/>
++			<Tool
++				Name="VCManagedWrapperGeneratorTool"/>
++			<Tool
++				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
++		</Configuration>
++	</Configurations>
++	<References>
++	</References>
++	<Files>
++		<Filter
++			Name="Source Files"
++			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat">
++			<File
++				RelativePath="..\..\sample\time-test.c">
++				<FileConfiguration
++					Name="Release|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="2"
++						PreprocessorDefinitions=""/>
++				</FileConfiguration>
++				<FileConfiguration
++					Name="Debug|Win32">
++					<Tool
++						Name="VCCLCompilerTool"
++						Optimization="0"
++						AdditionalIncludeDirectories=""
++						PreprocessorDefinitions=""
++						BasicRuntimeChecks="3"/>
++				</FileConfiguration>
++			</File>
++		</Filter>
++		<Filter
++			Name="Header Files"
++			Filter="h;hpp;hxx;hm;inl">
++		</Filter>
++		<Filter
++			Name="Resource Files"
++			Filter="ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe">
++		</Filter>
++	</Files>
++	<Globals>
++	</Globals>
++</VisualStudioProject>
+diff -Nubr libevent-1.3e/event.c libevent-1.3e_new/event.c
+--- libevent-1.3e/event.c	2007-08-17 23:06:10.000000000 -0400
++++ libevent-1.3e_new/event.c	2008-08-18 12:54:33.375000000 -0400
+@@ -24,8 +24,13 @@
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  */
+-#ifdef HAVE_CONFIG_H
+-#include "config.h"
++
++#ifdef _MSC_VER
++#include "WIN32-Code/config.h"
++#else
++	#ifdef HAVE_CONFIG_H
++	#include "config.h"
++	#endif
+ #endif
+ 
+ #ifdef WIN32
+diff -Nubr libevent-1.3e/event.h libevent-1.3e_new/event.h
+--- libevent-1.3e/event.h	2007-07-30 23:41:10.000000000 -0400
++++ libevent-1.3e_new/event.h	2008-08-18 12:54:33.390625000 -0400
+@@ -31,8 +31,13 @@
+ extern "C" {
+ #endif
+ 
+-#include <sys/time.h>
+-#include <stdint.h>
++#ifdef _MSC_VER
++	typedef unsigned char           uint8_t;
++	typedef unsigned int            uint32_t;
++#else 
++	#include <sys/time.h>
++	#include <stdint.h>           
++#endif 
+ #include <stdarg.h>
+ 
+ #ifdef WIN32

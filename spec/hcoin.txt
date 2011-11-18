@@ -1,0 +1,159 @@
+X ---[30]---> A ---[20]--> B --[10]--> C -> Y
+
+1.  size(set(?B)) = 10
+2.  size = 10...  but overlap of set 1, 2 is only 5
+3.
+4.
+
+
+
+HCOIN PROCESS:
+
+0. Login:
+ 
+ Learn about bank server->coin mapping
+ version protocol for login
+
+1.  WITHDRAWL
+
+CLIENT SENDS
+    Necessary Information:
+        version of protocol
+        hexid
+        secret key
+        blinded(H) for signature
+        TODO:  batch creation process, just like ACoins
+        
+    Algorithm:
+        #a list of all hashes.  [i] is hash([i+1])
+        coinHashes = []
+        #this will be the last coin (just a random number)
+        coinHashes.insert(0, random number)
+        #create the hundred hashes
+        for i in range(0,100):
+            #putting each into the front of the array.  These will be in order of use.
+            coinHashes.insert(0, hash(coinHashes[0]))
+        #blind the root, to be signed by the bank
+        blindedFirstCoin = blind(coinHashes[0])
+        message = pack(protocol, blindedFirstCoin )
+        encryptedMessage = bank.encrypt(message)
+        
+BANK PROCESS:
+    unpack shit
+    does the client have monies?
+    sign shit
+    deduct monies and send out coin
+    
+CLIENT RECEIVES:
+    coinSignature, interval = bank.decrypt(message)
+    newCoin = HCoin.HCoin(coinSignature, coinHashes)
+
+2.  PAYMENT SETUP
+
+    Each relay pays the next relay, like existing system
+    Maybe want to send a coin for that relay, then simply send hashes for later payments
+        meh, not really saving a lot of bw...  maybe just always send sig, hash, num
+    no real setup needed then...  extend later to backing off for SCoins
+    RESUME:  figure out how to tunnel communications through tor to a specific relay along the circuit
+
+3.  PAYMENT
+
+    PROBLEM:  paths are immediately clear because of the amounts of payments--3/2/1 shows the length of the path
+
+    would like payment to depend on who you are paying--always use the same coin for the same person
+    have to consider when you dont actually have enough value left over
+
+4.  CLIENT VERIFICATION
+
+5.  DEPOSIT
+    xor sig[0] or something
+    deposit to correct bank according to mapping
+    
+6.  BANK VERIFICATION
+
+    (lookup cipher key, hmac key)
+    decrypt + verify hmac
+    verify correct bank to handle coin
+    
+    #hard part :(
+    if not coin_in_cache():
+        if verify_sig(coin):
+            if verify_hash_chain(coin, hash, number)
+                if not in_database(coin)
+                push_into_cache(coin, maxminHash, bitString, time.time())
+            else:
+                1/0
+        else:
+            1/0
+    else:
+        get_cache(coin) #includes bit string, maxmin verified hash, time
+        if verify_hash_chain(coin, hash, number):
+            if number == 100:
+                shove back into cache?
+            else:
+                bitString = update_cache_bitstring(number)
+                if is room_in_cache():
+                    shove_into_cache(coin, maxminHash, bitString, time.time())
+                else:
+                    cull_cache(force=True)
+                    write to database directly
+
+
+7.  BALANCE UPDATE
+if at_scheduled_time():
+    cull_cache()
+    deterimine_next_time()
+    schedule_next_cron()
+
+cull_cache(force=False):
+    """looks for old, disused coins and completed coins
+    @param force, then get rid of x % of bottom
+    @type force: Bool """
+    stack = []
+    for coin in cache: #do we really want to iterate over the entire cache?
+        if coin.time < criticalTime:
+            stack.push(coin)
+        elif coin.is_done():
+            stack.push(coin)
+    for coin in stack:
+        createSQL()
+    db.commit(SQL)
+    cache.purge(stack)
+    
+BANK COMMUNICATION:
+
+def encrypt(message):
+    message += hmac.HMAC(message)
+    encryptedMessage = sharedKey.encrypt(message)
+    return hexId + encryptedMessage
+    
+def decrypt(message, hexId):
+    #look up sharedKey for hexId
+    message = sharedKey.decrypt(message)
+    md5Size = sizeof(MD5)
+    mac = message[-md5Size:]
+    message = [:-md5Size]
+    checkMAC = hmac.HMAC(message)
+    if checkMAC != mac:
+        #message was tampered with
+        return
+    return message
+        
+TODOs:
+add login protocol number
+add hmacs to scoins
+disable acoins
+we need hcoin intervals too (of expiration) or else our database reqs are unbounded
+so, hcoins are valid for the next two intervals, though clients only make hcoins from this interval
+client needs to think about depositing HCoins before they go bad
+bank needs a new key for each interval- > gives this and last one 
+
+need clients to learn about the next interval keys BEFORE those keys start getting used.
+    so, on login, bank should present:  currentInterval, lastKey, curKey, nextKey
+logins should be staggered for learning about this (interval rollover)
+
+intervals are a day long
+overlap of about an hour
+client calcs its own offset
+
+

@@ -1,0 +1,687 @@
+10:50:38 [info] /home/co/client/core/tor/TorCtl::78:  AUTHENTICATE "slothking"
+
+10:50:38 [info] /home/co/client/core/tor/TorCtl::78:  USEFEATURE VERBOSE_NAMES
+
+10:50:38 [info] /home/co/client/core/tor/TorCtl::78:  SETEVENTS EXTENDED WARN
+
+10:50:38 [info] /home/co/client/core/tor/TorCtl::78:  KEEPALIVE 300
+
+10:50:38 [info] /home/co/client/core/tor/TorCtl::78:  GETINFO version
+
+10:50:38 [info] /home/co/client/core/tor/TorCtl::78:  GETINFO status/bootstrap-phase
+
+10:50:38 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:50:38 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:50:38 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:50:38 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:50:38 [info] /home/co/client/core/tor/TorCtl::78:  250-version=0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 (r4159)
+10:50:38 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:50:38 [info] /home/co/client/core/tor/TorCtl::78:  250-status/bootstrap-phase=NOTICE BOOTSTRAP PROGRESS=45 TAG=requesting_descriptors SUMMARY="Asking for relay descriptors"
+10:50:38 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:50:38 [info] /home/co/client/core/tor/TorCtl::78:  GETINFO status/bootstrap-phase
+
+10:50:38 [info] /home/co/client/core/tor/TorCtl::78:  250-status/bootstrap-phase=NOTICE BOOTSTRAP PROGRESS=45 TAG=requesting_descriptors SUMMARY="Asking for relay descriptors"
+10:50:38 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:50:38 [info] /home/co/client/core/tor/TorCtl::78:  GETINFO status/bootstrap-phase
+
+10:50:38 [info] /home/co/client/core/tor/TorCtl::78:  250-status/bootstrap-phase=NOTICE BOOTSTRAP PROGRESS=45 TAG=requesting_descriptors SUMMARY="Asking for relay descriptors"
+10:50:38 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:50:38 [info] /home/co/client/core/tor/TorCtl::78:  GETINFO status/bootstrap-phase
+
+10:50:38 [info] /home/co/client/core/tor/TorCtl::78:  250-status/bootstrap-phase=NOTICE BOOTSTRAP PROGRESS=45 TAG=requesting_descriptors SUMMARY="Asking for relay descriptors"
+10:50:38 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:50:38 [info] /home/co/client/core/tor/TorCtl::78:  GETINFO status/bootstrap-phase
+
+10:50:38 [info] /home/co/client/core/tor/TorCtl::78:  250-status/bootstrap-phase=NOTICE BOOTSTRAP PROGRESS=50 TAG=loading_descriptors SUMMARY="Loading relay descriptors"
+10:50:38 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  GETINFO status/bootstrap-phase
+
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  250-status/bootstrap-phase=NOTICE BOOTSTRAP PROGRESS=80 TAG=conn_or SUMMARY="Connecting to the Tor network"
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  GETINFO ns/all
+
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  GETINFO desc_short/all-recent
+
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  250+ns/all=
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  r 1DA9F03ECA0916AF JoqfOE/FmNdVt8+G8EGpOY5WMy4 qFXw2d711cnzja4cy63bhHlAmhc 2010-01-07 15:41:30 89.12.185.34 10001 10010
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  s Fast Running V2Dir Valid
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  r InnomiNetAuth3 RG27muxa/mp5n2WxYj00+YDyhf0 6ZxO5PEcFFqgkt2fYn1f32MCvEo 2010-01-07 10:13:18 174.129.199.15 33354 33355
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  s Authority Fast Guard HSDir Running Stable V2Dir Valid
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  r 0A1ED726D25B7572 UY6WdZNksByYAMNu3TzA6rnwtOU NqDvShWJqFKdsxd6k820xydTF/U 2010-01-07 02:54:06 96.22.210.194 10001 10030
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  s Fast Running V2Dir Valid
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  r BC96D2BF10B218B3 VurdjmYpv03smcV9sso8wjHeZjs 5IX61sMMRtwj73oUJX8Gjxhp/fM 2010-01-07 12:31:24 220.233.13.190 10001 0
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  s Exit Fast Running Valid
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  r InnomiNetAuth1 X6FR2IA6dvhYEqL/FYbf5xmZVAU B5y7kMcNuIrxEQ50tGXfCpoMcHs 2010-01-06 22:14:15 174.129.199.15 33350 33351
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  s Authority Fast HSDir Running Stable V2Dir Valid
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  r DE3D2A7E37AD9666 a5d/AXDoO8cc3KsbIjZDoGgloLc RFeB8UVSHsX4yJafjz5E3DJYLnw 2010-01-07 07:24:38 75.72.116.66 10001 10030
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  s Fast Guard HSDir Running V2Dir Valid
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  r EAAA9A8E6A8F209F hUpok23oiXjnXWa0xp67Lj0p5Cc G1PmynKKrfFxl6lEUlKsM3CX19w 2010-01-07 08:11:41 82.228.55.143 10001 10030
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  s Exit Fast Guard HSDir Running Stable V2Dir Valid
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  r 941C712DA0F7DFD6 hgG2iIoy1YAG9z0w9GHw4adgvOg YkgcICt7uHMQfr5MOnXi3DuOOg4 2010-01-07 15:12:12 220.233.25.181 10002 10031
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  s Fast Running Stable V2Dir Valid
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  r 70565C3E7F293AA9 monWP9We66Lq5/n5z2JaW3jOGTI bsK5yNK1Br6gt/ez0YzUVDkTpp4 2010-01-07 06:50:17 64.122.230.233 10001 10030
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  s Fast Guard HSDir Running Stable V2Dir Valid
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  r 394687A5EAA75437 oYTpqyvLJ41p+c9ReDyVvGPAkHA LONeuuyquhSt8oskrbnSCMjdPgw 2010-01-07 01:19:05 92.135.193.35 10001 10030
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  s Exit Fast Running Stable V2Dir Valid
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  r 9C72215273C50E3F p14a7Jti0+Mi+pUz/cHWBXW0rDs a2PlBCsMCXbqWlLo1SnBgoywcQQ 2010-01-07 08:38:00 87.227.83.186 9998 10007
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  s Fast Running Stable V2Dir Valid
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  r 6B0F4BA87B5E4CE8 q9oTqg4SCJSbsQYUQ5PqCY6V2fc PT5zTFzUjo61yXCVcR9mWYAUtg4 2010-01-07 15:38:55 213.161.252.207 9001 0
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  s Exit Running Valid
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  r 873E99C1034DE334 sviJwhU/Dj/9eS9qBYUPEmdHEPQ JDS5MW9c/Rc16xA2QKUksfeJJjU 2010-01-07 02:52:59 98.236.71.7 8001 8030
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  s Exit Fast Guard HSDir Running Stable V2Dir Valid
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  r 92BD6BFE91C7A79E uvdOQMB04d+J7DPx4f+l/hB6S/Y cIwE+MqLqmPWtffDVTf4d07UgCA 2010-01-07 14:21:45 121.243.187.71 10001 10030
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  s Exit Fast Running V2Dir Valid
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  r 9B452E3761D5AAF4 yKE87mNM1BzbO2EAokYaBZuGaEY or9KCFrL9qKPX1SW5Y7E3Zk50Es 2010-01-07 02:28:07 75.110.43.65 10001 10030
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  s Exit Fast Guard HSDir Running Stable V2Dir Valid
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  r InnomiNetAuth2 2+Wg4+EixnrPIroCRK7M6X4+e5k vVQ4H0saYQibMTyzhAjTgi0wxLc 2010-01-07 06:08:08 174.143.240.110 33352 33353
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  s Authority Fast HSDir Running Stable V2Dir Valid
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  r 0BECCEB8E600A27B 5pIxoxk6S7Ky+HzcYmZg9ktBikM IIu6Fd0H+52gZFOBHTcpptnZL/I 2010-01-07 13:37:44 93.11.181.56 10001 10030
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  s Exit Fast Running V2Dir Valid
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  r 791B008EEE3BD27C 8/2rJg0HDwWo0QIa7dSF32nHFGI kdQEa+/3wnnYXGJNz/t6Epu+fFA 2010-01-07 03:57:37 98.194.177.74 46835 10030
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  s Exit Fast Running Stable V2Dir Valid
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  .
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  250+desc_short/all-recent=
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  DESC:
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  -----BEGIN RSA PUBLIC KEY-----
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  MIGJAoGBAMP9dR83H/eHv52DFbL8TXQTeUjvs7rn2yBp90UEVsiGji7238O6OBcM
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  PhdSvAzAFxx7Bx1QYEjT6eOP22e0HGeRhQBUApD/6jaK9guJc7vwreZ+tMleVLgS
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  32ZiqJL9ks1MDiaJ8gZxWUZMAiE6IpK1h/4CnxrZDpuLy3wQ1ga9AgMBAAE=
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  -----END RSA PUBLIC KEY-----
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  DE3D2A7E37AD9666|75.72.116.66|us|10001|10030|Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Very recent version of Windows [major=6,minor=1]  [workstation] {terminal services, single user}|6B97 7F01 70E8 3BC7 1CDC AB1B 2236 43A0 6825 A0B7|1|99130|1|0|1|accept 127.0.0.1:60301|reject *:*
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  DESC:
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  -----BEGIN RSA PUBLIC KEY-----
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  MIGJAoGBAKq7HEgDVottFLvgoC2j43owvN7rVkJOSyw4TgY67D/L1F38xMuP0w5Y
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  uuGcx5wvnlodOjMTNdfkbGg++upl1mze9ptmLjGqJ9Utf3zfRw1oYLUZBdwk/Nd4
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  QxlPuih0NxMxNPR7W/jLUKdlyBE6x/m1J+Y38RXRBpUzF+Fr50ObAgMBAAE=
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  -----END RSA PUBLIC KEY-----
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  941C712DA0F7DFD6|220.233.25.181|au|10002|10031|Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Very recent version of Windows [major=6,minor=1]  [workstation] {terminal services, single user}|8601 B688 8A32 D580 06F7 3D30 F461 F0E1 A760 BCE8|1|44528|1|0|1|accept 127.0.0.1:60301|reject *:*
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  DESC:
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  -----BEGIN RSA PUBLIC KEY-----
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  MIGJAoGBAKnwEgYtoyxAuUTxcVLyRzquMIOg1BHRPU8BliujCMDu58NNy1qLPPQk
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  UphkD3yv02u6ybXA2xWwE0pGwBe9qRCAuUXIA+dPezRlUsaSyFE5RtsbshSat0Dy
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  vYzA4zj+/7BzVUCdx/jnHONstZi1PDDzGEUlpvKlBXxTgFhESCJ5AgMBAAE=
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  -----END RSA PUBLIC KEY-----
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  70565C3E7F293AA9|64.122.230.233|us|10001|10030|Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Windows XP Service Pack 3 [workstation] {terminal services, single user}|9A89 D63F D59E EBA2 EAE7 F9F9 CF62 5A5B 78CE 1932|1|63620|1|0|1|accept 127.0.0.1:60301|reject *:*
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  DESC:
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  -----BEGIN RSA PUBLIC KEY-----
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  MIGJAoGBALXZtCpLM10GtU86mTx/1R3YJe9asmbOBtdLd4///4xpkBCZ1EG0XdKr
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  tzL76PZPy1t1zyegPA0sQSUfwNodJmXBzwoBx8hdxAAsRxY+f2qkwJZhBBz6UB9R
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  deUKrV7NJX4+mzwrDcVBmZb1E1uxLWS8rcCe7FzqdJXnATMCdRaLAgMBAAE=
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  -----END RSA PUBLIC KEY-----
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  9C72215273C50E3F|87.227.83.186|se|9998|10007|Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Windows XP Service Pack 2 [workstation] {personal} {terminal services, single user}|A75E 1AEC 9B62 D3E3 22FA 9533 FDC1 D605 75B4 AC3B|1|22526|1|0|0|accept 127.0.0.1:60301|reject *:*
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  DESC:
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  -----BEGIN RSA PUBLIC KEY-----
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  MIGJAoGBAK/9W8ZE265cXxR555R1p+uGjCzRqSNMG+v8P6Z0Jr3tO5W1Rm81e2I9
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  dSs9bkfgrsTboe9fjnDoYkytN0ffbGLG/1+wnciP5G5Ntr4a7u3l5Eci7R/vUr1t
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  j60wKh9gf/n3KfBfabITryyBc7001oXe9uxhfr/1CyaTZ2ExFOcTAgMBAAE=
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  -----END RSA PUBLIC KEY-----
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  6B0F4BA87B5E4CE8|213.161.252.207|no|9001|0|Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Windows XP Service Pack 3 [workstation] {terminal services, single user}|ABDA 13AA 0E12 0894 9BB1 0614 4393 EA09 8E95 D9F7|1|599|1|0|0|accept 127.0.0.1:60301|reject 0.0.0.0/8:*|reject 169.254.0.0/16:*|reject 127.0.0.0/8:*|reject 192.168.0.0/16:*|reject 10.0.0.0/8:*|reject 172.16.0.0/12:*|reject *:25|reject *:119|reject *:135-139|reject *:445|reject *:80|reject *:443|accept *:*
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  DESC:
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  -----BEGIN RSA PUBLIC KEY-----
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  MIGJAoGBAL9bBZMg+RIZxgIXexJEzCe8OOweQEpN/VC+oZIm3M/MSWYJia8YEvQI
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  PzUyJqrIsNkdCeWhgmfNSUKdNAMb4wqTHQDT9GX4b64eKwcrtRM6JmJEPQsoWvKg
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  UtkDr2tg4qWtVx0NxpOXlb/EbTi3h7sz1o/EYSNAq6ytom9Q6TR3AgMBAAE=
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  -----END RSA PUBLIC KEY-----
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  92BD6BFE91C7A79E|121.243.187.71|in|10001|10030|Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Windows XP Service Pack 2 [workstation] {terminal services, single user}|BAF7 4E40 C074 E1DF 89EC 33F1 E1FF A5FE 107A 4BF6|1|62264|1|0|1|accept 127.0.0.1:60301|reject 0.0.0.0/8:*|reject 169.254.0.0/16:*|reject 127.0.0.0/8:*|reject 192.168.0.0/16:*|reject 10.0.0.0/8:*|reject 172.16.0.0/12:*|reject *:25|reject *:119|reject *:135-139|reject *:445|accept *:*
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  DESC:
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  -----BEGIN RSA PUBLIC KEY-----
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  MIGJAoGBAMWSdisvkjrvkHBj7D5SeFGWJ/molyU4T3qilOYbGPF1xvZRGzVprEp1
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  lcbr3YgqxcIfLuXRG0Ab8mnk5/WglPAU1cXKtsyr12BeuMgNgnLPHVvcgSBPmxf8
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  51fIMMzuPlZkdgF8QPf2x4mQ/Zvnk36Nry8/lGZNOv/1cCLRfsVJAgMBAAE=
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  -----END RSA PUBLIC KEY-----
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  0A1ED726D25B7572|96.22.210.194|ca|10001|10030|Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Windows XP Service Pack 3 [workstation] {terminal services, single user}|518E 9675 9364 B01C 9800 C36E DD3C C0EA B9F0 B4E5|1|99405|1|0|1|accept 127.0.0.1:60301|reject *:*
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  DESC:
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  -----BEGIN RSA PUBLIC KEY-----
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  MIGJAoGBAMQPPXlbmnBLB6KUi8y/64YITDGg/t2HD0jsfADGcoJnl9d6uhpX/jJ0
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  m3M/A315HIJ2ls0ULLdUiap24bh+cBiQsumBwXbxYmVLGI9AKAWjirtX0RLeuu86
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  r7JFlJQ4zxstJT1tO+rdYCB3jAbYBeBTpJ5AwIAwAEcKKw/6yPbPAgMBAAE=
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  -----END RSA PUBLIC KEY-----
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  InnomiNetAuth1|174.129.199.15|us|33350|33351|Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 (r4026) on Linux i686|5FA1 51D8 803A 76F8 5812 A2FF 1586 DFE7 1999 5405|1|53398|1|0|0|reject *:*
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  DESC:
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  -----BEGIN RSA PUBLIC KEY-----
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  MIGJAoGBALWiGaZ5NrUiT8tKuEPWNUIdLiwAupstc0j5eTB1yzU5TVlq81gxskeA
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  7hsxoY+UeWncZEQJNY4A/eNNTqWN0S4F5etaobrolF1c11OxnZ8qcUqZx+ExUSWT
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  1avJuFVjL31zxiW7I5CiPbk+GJhE9eE3cDyD1IpxXqV1W+h86p5TAgMBAAE=
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  -----END RSA PUBLIC KEY-----
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  EAAA9A8E6A8F209F|82.228.55.143|fr|10001|10030|Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Windows "Longhorn" Service Pack 2 [workstation] {personal} {terminal services, single user}|854A 6893 6DE8 8978 E75D 66B4 C69E BB2E 3D29 E427|1|92411|1|0|1|accept 127.0.0.1:60301|reject 0.0.0.0/8:*|reject 169.254.0.0/16:*|reject 127.0.0.0/8:*|reject 192.168.0.0/16:*|reject 10.0.0.0/8:*|reject 172.16.0.0/12:*|reject *:25|reject *:119|reject *:135-139|reject *:445|reject *:80|reject *:443|accept *:*
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  DESC:
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  -----BEGIN RSA PUBLIC KEY-----
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  MIGJAoGBANN2n0DTl0xzMF7omMx0kRAI+0O7C18DJ47Uyq3HWGh+LKk4s8neRT8C
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  PvdzdcRw8nawaDihSHhDkXcPW3wRykKBmT7tbiYlgaSHybzWzm4Fjs2IR1hICP3l
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  YqIvA1euRPBKa7f7YS3IwfRsBggFiL7h9M1QiT0THy74X7QKi1CHAgMBAAE=
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  -----END RSA PUBLIC KEY-----
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  394687A5EAA75437|92.135.193.35|fr|10001|10030|Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Windows "Longhorn" Service Pack 2 [workstation] {terminal services, single user}|A184 E9AB 2BCB 278D 69F9 CF51 783C 95BC 63C0 9070|1|48550|1|0|1|accept 127.0.0.1:60301|reject 0.0.0.0/8:*|reject 169.254.0.0/16:*|reject 127.0.0.0/8:*|reject 192.168.0.0/16:*|reject 10.0.0.0/8:*|reject 172.16.0.0/12:*|reject *:25|reject *:119|reject *:135-139|reject *:445|accept *:*
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  DESC:
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  -----BEGIN RSA PUBLIC KEY-----
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  MIGJAoGBAO9nMslU/48DRngw3vMnfbM1OA1CUPnpDij8HVU7KXWoZJ3tJVP2wmgy
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  xgZYB79iRWgmUJ3Ds6EloK0VPdX8hM/RFPRSLnJcoXj2jgGrdAxywtdsWbvQobj7
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  0T2B+EjH4i8NYCvPUkebZXdW77I6jcTafGZwSwlcPHBqABSods9FAgMBAAE=
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  -----END RSA PUBLIC KEY-----
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  873E99C1034DE334|98.236.71.7|us|8001|8030|Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Windows XP Service Pack 2 [workstation] {terminal services, single user}|B2F8 89C2 153F 0E3F FD79 2F6A 0585 0F12 6747 10F4|1|174119|1|0|1|accept 127.0.0.1:60301|reject 0.0.0.0/8:*|reject 169.254.0.0/16:*|reject 127.0.0.0/8:*|reject 192.168.0.0/16:*|reject 10.0.0.0/8:*|reject 172.16.0.0/12:*|reject *:25|reject *:119|reject *:135-139|reject *:445|accept *:*
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  DESC:
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  -----BEGIN RSA PUBLIC KEY-----
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  MIGJAoGBANXhyuyA7zKdFptYp1Ppn5VJGvU82jlucoIXzXSNDqM5NAyTPxaFrC0v
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  wpwT1oJyeInUmlvTzz8Fo/x0PlnR/MKPGrIrhvIglks0zgPrDvua/ofIyepeg+17
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  4SWibFmIuB/Tma2ybR1PKMu6A1xMvNdeICENk5i4r3NHPcBYulIRAgMBAAE=
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  -----END RSA PUBLIC KEY-----
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  0BECCEB8E600A27B|93.11.181.56|fr|10001|10030|Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Windows XP Service Pack 3 [workstation] {terminal services, single user}|E692 31A3 193A 4BB2 B2F8 7CDC 6266 60F6 4B41 8A43|1|63389|1|0|1|accept 127.0.0.1:60301|reject 0.0.0.0/8:*|reject 169.254.0.0/16:*|reject 127.0.0.0/8:*|reject 192.168.0.0/16:*|reject 10.0.0.0/8:*|reject 172.16.0.0/12:*|reject *:25|reject *:119|reject *:135-139|reject *:445|accept *:*
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  DESC:
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  -----BEGIN RSA PUBLIC KEY-----
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  MIGJAoGBANbOyQIl5QBojriVuIe3tXCWBJIaiD4wr22BDy7S1tSPEA/yAm52kizo
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  U7VcS03PKYxqLi/fQQ7iSJ50kw+rK2iQlPrti4ZxQNtrOFQMEJPliZKfQQhyQMiz
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  71ce/GX5/kvZ5MaaT+WpsdQsHuefvWjtKNtHlc+Ne0K6KspDGqsZAgMBAAE=
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  -----END RSA PUBLIC KEY-----
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  InnomiNetAuth3|174.129.199.15|us|33354|33355|Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 (r4026) on Linux i686|446D BB9A EC5A FE6A 799F 65B1 623D 34F9 80F2 85FD|1|53639|1|0|0|reject *:*
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  DESC:
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  -----BEGIN RSA PUBLIC KEY-----
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  MIGJAoGBALtS2WBYf9dErXLEXqiNuCQ5QMMTLaF+Mb8UuZxo5rx2n2iYIIO+7m9X
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  7CodlYzKGQTKRWLrGAPCPqgxhcCzaQDk+2MuX5Pc5hQCXx81GNdaHqNl1XfoxbtM
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  VBn8M5V04d+porzN8yJiXHjiz4Y/pMdU25uBNotWxP5zBStW2btxAgMBAAE=
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  -----END RSA PUBLIC KEY-----
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  BC96D2BF10B218B3|220.233.13.190|au|10001|0|Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Windows XP Service Pack 3 [workstation] {personal} {terminal services, single user}|56EA DD8E 6629 BF4D EC99 C57D B2CA 3CC2 31DE 663B|1|64428|1|0|1|accept 127.0.0.1:60301|reject 0.0.0.0/8:*|reject 169.254.0.0/16:*|reject 127.0.0.0/8:*|reject 192.168.0.0/16:*|reject 10.0.0.0/8:*|reject 172.16.0.0/12:*|reject *:25|reject *:119|reject *:135-139|reject *:445|reject *:80|reject *:443|accept *:*
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  DESC:
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  -----BEGIN RSA PUBLIC KEY-----
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  MIGJAoGBALXrpTQK4HoZIKOaY2JmGdFQrpqpGEiEh2OT6ZC8sFjFQGzVKWB7em3f
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  Dpqsc8GWBFpsmDuE7nIYfFJFn2al+4ztzKI9Aa0UqN3ak9hZbeUb3zoR3nnzarOg
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  7zCLFpm+8IxWAISNBZZYrpCLGghFnFmjJpMpe0+VOHNHD4c28i9FAgMBAAE=
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  -----END RSA PUBLIC KEY-----
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  9B452E3761D5AAF4|75.110.43.65|us|10001|10030|Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Windows XP Service Pack 3 [workstation] {personal} {terminal services, single user}|C8A1 3CEE 634C D41C DB3B 6100 A246 1A05 9B86 6846|1|84039|1|0|0|accept 127.0.0.1:60301|reject 0.0.0.0/8:*|reject 169.254.0.0/16:*|reject 127.0.0.0/8:*|reject 192.168.0.0/16:*|reject 10.0.0.0/8:*|reject 172.16.0.0/12:*|reject *:25|reject *:119|reject *:135-139|reject *:445|accept *:*
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  DESC:
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  -----BEGIN RSA PUBLIC KEY-----
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  MIGJAoGBAK0gojAOvhgnw9mRk/91qo7jigQ9aNUPDsTPy4HPI/MxGEwmoCcD0SGu
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  vnPrKW/gVXma6fBZOvST7AX47UMh3iGvA41uZCYzdpai5K5s6u7fYeMdMeNE5e8v
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  8uD8V0w80Yuc/Rn/rwqvBAYlmia3s4vNxlaVwirscaaXqMoGSW7fAgMBAAE=
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  -----END RSA PUBLIC KEY-----
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  InnomiNetAuth2|174.143.240.110|??|33352|33353|Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 (r4026) on Linux x86_64|DBE5 A0E3 E122 C67A CF22 BA02 44AE CCE9 7E3E 7B99|1|46196|1|0|0|reject *:*
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  DESC:
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  -----BEGIN RSA PUBLIC KEY-----
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  MIGJAoGBAK2gISryXRw10EQPqI0pzPjX0l3AfL/Ff7GDBOonF0p3KF77JXDUmf0X
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  6QYeZ+1IEocdrxvVu7k8irVPvU4/zSnZAuWnnd7Je86NCUUJNPBI1E/fbDIyH7TB
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  OlFazUKbz9cUMxd8MSb8MTRZGQm1Z0fDo6kEYqEZgVTVJ601qlBBAgMBAAE=
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  -----END RSA PUBLIC KEY-----
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  791B008EEE3BD27C|98.194.177.74|us|46835|10030|Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Windows "Longhorn"  [workstation] {personal} {terminal services, single user}|F3FD AB26 0D07 0F05 A8D1 021A EDD4 85DF 69C7 1462|1|62764|1|0|0|accept 127.0.0.1:60301|reject 0.0.0.0/8:*|reject 169.254.0.0/16:*|reject 127.0.0.0/8:*|reject 192.168.0.0/16:*|reject 10.0.0.0/8:*|reject 172.16.0.0/12:*|reject *:25|reject *:119|reject *:135-139|reject *:445|accept *:*
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  .
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  SETEVENTS EXTENDED STREAM TOKEN_LEVELS CIRC NS NEWDESC NEWCONSENSUS ORCONN BW STATUS_GENERAL STATUS_CLIENT STATUS_SERVER WARN
+
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  GETINFO status/bootstrap-phase
+
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  250-status/bootstrap-phase=NOTICE BOOTSTRAP PROGRESS=80 TAG=conn_or SUMMARY="Connecting to the Tor network"
+10:50:39 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:50:40 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:50:40 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 1000 1000
+10:50:40 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 1000 1000
+10:50:40 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 1000 1000
+10:50:41 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:50:41 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:50:41 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:50:41 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:50:41 [info] /home/co/client/core/tor/TorCtl::78:  EXTENDCIRCUIT 0 56EADD8E6629BF4DEC99C57DB2CA3CC231DE663B
+
+10:50:41 [info] /home/co/client/core/tor/TorCtl::78:  650 ORCONN $56EADD8E6629BF4DEC99C57DB2CA3CC231DE663B~BC96D2BF10B218B3 LAUNCHED 
+10:50:41 [info] /home/co/client/core/tor/TorCtl::78:  250 EXTENDED 4
+10:50:41 [info] /home/co/client/core/tor/TorCtl::78:  650 CIRC 4 LAUNCHED PURPOSE=GENERAL
+10:50:41 [info] /home/co/client/core/tor/TorCtl::78:  650 STATUS_CLIENT NOTICE BOOTSTRAP PROGRESS=85 TAG=handshake_or SUMMARY="Finishing handshake with first hop"
+10:50:41 [info] /home/co/client/core/tor/TorCtl::78:  SETCONF Log="notice file /home/co/client/logs/tor.out"
+
+10:50:41 [info] /home/co/client/core/tor/TorCtl::78:  SETEVENTS EXTENDED STREAM TOKEN_LEVELS CIRC NS NEWDESC NEWCONSENSUS ORCONN BW STATUS_GENERAL STATUS_CLIENT STATUS_SERVER WARN ORCIRCUIT
+
+10:50:41 [info] /home/co/client/core/tor/TorCtl::78:  SETCONF RelayBandwidthBurst="4000 KB" RelayBandwidthRate="2000 KB"
+
+10:50:41 [info] /home/co/client/core/tor/TorCtl::78:  SETCONF FastFirstHopPK=0
+
+10:50:41 [info] /home/co/client/core/tor/TorCtl::78:  SETCONF AllowDHTExits=0
+
+10:50:41 [info] /home/co/client/core/tor/TorCtl::78:  650 WARN TestingTorNetwork is set. This will make your node almost unusable in the public Tor network, and is therefore only advised if you are building a testing Tor network! 
+10:50:41 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:50:41 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:50:41 [info] /home/co/client/core/tor/TorCtl::78:  650 WARN TestingTorNetwork is set. This will make your node almost unusable in the public Tor network, and is therefore only advised if you are building a testing Tor network! 
+10:50:41 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:50:41 [info] /home/co/client/core/tor/TorCtl::78:  650 WARN TestingTorNetwork is set. This will make your node almost unusable in the public Tor network, and is therefore only advised if you are building a testing Tor network! 
+10:50:41 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:50:41 [info] /home/co/client/core/tor/TorCtl::78:  650 WARN TestingTorNetwork is set. This will make your node almost unusable in the public Tor network, and is therefore only advised if you are building a testing Tor network! 
+10:50:41 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:50:42 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:50:42 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 4 1000 1000 1000 1000
+10:50:42 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:50:42 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:50:42 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:50:43 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 3472 2072
+10:50:43 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 4 1000 1000 0 0
+10:50:43 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:50:43 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:50:43 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:50:43 [info] /home/co/client/core/tor/TorCtl::78:  CLOSECIRCUIT 4 0 
+
+10:50:43 [info] /home/co/client/core/tor/TorCtl::78:  650 CIRC 4 FAILED PURPOSE=GENERAL REASON=REQUESTED
+10:50:43 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:50:43 [info] /home/co/client/core/tor/TorCtl::78:  650 ORCONN $56EADD8E6629BF4DEC99C57DB2CA3CC231DE663B~BC96D2BF10B218B3 CONNECTED 
+10:50:44 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 586 586
+10:50:44 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:50:44 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:50:44 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:50:45 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:50:45 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:50:45 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:50:45 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:50:45 [info] /home/co/client/core/tor/TorCtl::78:  SETCONF Nickname=75207EE8EF003BE1 ORPort=10001 DirPort=10030 RelayBandwidthRate="2000 KB" RelayBandwidthBurst="4000 KB"
+
+10:50:45 [info] /home/co/client/core/tor/TorCtl::78:  SETCONF Nickname=75207EE8EF003BE1 ORPort=10001 DirPort=10030 RelayBandwidthRate="2000 KB" RelayBandwidthBurst="4000 KB"
+
+10:50:45 [info] /home/co/client/core/tor/TorCtl::78:  650 WARN TestingTorNetwork is set. This will make your node almost unusable in the public Tor network, and is therefore only advised if you are building a testing Tor network! 
+10:50:45 [info] /home/co/client/core/tor/TorCtl::78:  650 WARN Fixing permissions on directory /home/co/client/users/tor_data/keys 
+10:50:45 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:50:45 [info] /home/co/client/core/tor/TorCtl::78:  650 WARN TestingTorNetwork is set. This will make your node almost unusable in the public Tor network, and is therefore only advised if you are building a testing Tor network! 
+10:50:45 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:50:46 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:50:46 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:50:46 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:50:46 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:50:47 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:50:47 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:50:47 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:50:47 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:50:48 [info] /home/co/client/core/tor/TorCtl::78:  SETCONF AllowDHTExits=1
+
+10:50:48 [info] /home/co/client/core/tor/TorCtl::78:  650 WARN TestingTorNetwork is set. This will make your node almost unusable in the public Tor network, and is therefore only advised if you are building a testing Tor network! 
+10:50:48 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:50:48 [info] /home/co/client/core/tor/TorCtl::78:  650 ORCONN 174.143.240.110:33551 NEW 
+10:50:48 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:50:48 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:50:48 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:50:48 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:50:49 [info] /home/co/client/core/tor/TorCtl::78:  650 ORCONN 174.143.240.110:33542 NEW 
+10:50:49 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:50:49 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:50:49 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:50:49 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:50:49 [info] /home/co/client/core/tor/TorCtl::78:  650 NEWDESC $268A9F384FC598D755B7CF86F041A9398E56332E~1DA9F03ECA0916AF
+10:50:49 [info] /home/co/client/core/tor/TorCtl::78:  GETINFO ns/id/268A9F384FC598D755B7CF86F041A9398E56332E
+
+10:50:49 [info] /home/co/client/core/tor/TorCtl::78:  GETINFO desc_short/id/268A9F384FC598D755B7CF86F041A9398E56332E
+
+10:50:49 [info] /home/co/client/core/tor/TorCtl::78:  250+ns/id/268A9F384FC598D755B7CF86F041A9398E56332E=
+10:50:49 [info] /home/co/client/core/tor/TorCtl::78:  r 1DA9F03ECA0916AF JoqfOE/FmNdVt8+G8EGpOY5WMy4 qFXw2d711cnzja4cy63bhHlAmhc 2010-01-07 15:41:30 89.12.185.34 10001 10010
+10:50:49 [info] /home/co/client/core/tor/TorCtl::78:  s Fast Running V2Dir Valid
+10:50:49 [info] /home/co/client/core/tor/TorCtl::78:  .
+10:50:49 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:50:49 [info] /home/co/client/core/tor/TorCtl::78:  250+desc_short/id/268A9F384FC598D755B7CF86F041A9398E56332E=
+10:50:49 [info] /home/co/client/core/tor/TorCtl::78:  DESC:
+10:50:49 [info] /home/co/client/core/tor/TorCtl::78:  -----BEGIN RSA PUBLIC KEY-----
+10:50:49 [info] /home/co/client/core/tor/TorCtl::78:  MIGJAoGBAOwsD64/vsDI7M2GIkhr9UCwZg9VwXxLMRy2IfaqrKh61D1PX971emxy
+10:50:49 [info] /home/co/client/core/tor/TorCtl::78:  JGGNViTYL58ygKF5SN0FwUJ4DnmKSEgXG5DZYpo/3Gol3qYDUgMb6sp6lRrBnPLr
+10:50:49 [info] /home/co/client/core/tor/TorCtl::78:  8h0o94OqmDDt4XETj+VZweVTCTgEPpk5kz7SezHRKtCFlNwDLHgVAgMBAAE=
+10:50:49 [info] /home/co/client/core/tor/TorCtl::78:  -----END RSA PUBLIC KEY-----
+10:50:49 [info] /home/co/client/core/tor/TorCtl::78:  
+10:50:49 [info] /home/co/client/core/tor/TorCtl::78:  1DA9F03ECA0916AF|89.12.185.34|de|10001|10010|Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Very recent version of Windows [major=6,minor=1]  [workstation] {terminal services, single user}|268A 9F38 4FC5 98D7 55B7 CF86 F041 A939 8E56 332E|4|38490|1|0|1|accept 127.0.0.1:60301|reject *:*
+10:50:49 [info] /home/co/client/core/tor/TorCtl::78:  .
+10:50:49 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:50:50 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 1959 3408
+10:50:50 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:50:50 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:50:50 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:50:51 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:50:51 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:50:51 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:50:51 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:50:52 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:50:52 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:50:52 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:50:52 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:50:53 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:50:53 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:50:53 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:50:53 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:50:54 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:50:54 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:50:54 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:50:54 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:50:55 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:50:55 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:50:55 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:50:55 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:50:56 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:50:56 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:50:56 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:50:56 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:50:56 [info] /home/co/client/core/tor/TorCtl::78:  SETCONF AllowDHTExits=1
+
+10:50:56 [info] /home/co/client/core/tor/TorCtl::78:  SETCONF Nickname=75207EE8EF003BE1 ORPort=10006 DirPort=10030 RelayBandwidthRate="2000 KB" RelayBandwidthBurst="4000 KB"
+
+10:50:56 [info] /home/co/client/core/tor/TorCtl::78:  650 WARN TestingTorNetwork is set. This will make your node almost unusable in the public Tor network, and is therefore only advised if you are building a testing Tor network! 
+10:50:56 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:50:56 [info] /home/co/client/core/tor/TorCtl::78:  650 WARN TestingTorNetwork is set. This will make your node almost unusable in the public Tor network, and is therefore only advised if you are building a testing Tor network! 
+10:50:56 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:50:57 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:50:57 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:50:57 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:50:57 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:50:58 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:50:58 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:50:58 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:50:58 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:50:59 [info] /home/co/client/core/tor/TorCtl::78:  SETCONF AllowDHTExits=1
+
+10:50:59 [info] /home/co/client/core/tor/TorCtl::78:  650 WARN TestingTorNetwork is set. This will make your node almost unusable in the public Tor network, and is therefore only advised if you are building a testing Tor network! 
+10:50:59 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:50:59 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:50:59 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:50:59 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:50:59 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:50:59 [info] /home/co/client/core/tor/TorCtl::78:  650 ORCONN 174.143.240.110:36405 NEW 
+10:51:00 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:00 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:00 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:00 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:01 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:01 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:01 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:01 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:02 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:02 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:02 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:02 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:03 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:03 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:03 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:03 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:04 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:04 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:04 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:04 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:05 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:05 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:05 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:05 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:06 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:06 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:06 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:06 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:07 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:07 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:07 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:07 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:08 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:08 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:08 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:08 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:08 [info] /home/co/client/core/tor/TorCtl::78:  KEEPALIVE 300
+
+10:51:08 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:51:09 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:09 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:09 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:09 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:10 [info] /home/co/client/core/tor/TorCtl::78:  SETCONF AllowDHTExits=1
+
+10:51:10 [info] /home/co/client/core/tor/TorCtl::78:  SETCONF Nickname=75207EE8EF003BE1 ORPort=10006 DirPort=10038 RelayBandwidthRate="2000 KB" RelayBandwidthBurst="4000 KB"
+
+10:51:10 [info] /home/co/client/core/tor/TorCtl::78:  650 WARN TestingTorNetwork is set. This will make your node almost unusable in the public Tor network, and is therefore only advised if you are building a testing Tor network! 
+10:51:10 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:51:10 [info] /home/co/client/core/tor/TorCtl::78:  650 WARN TestingTorNetwork is set. This will make your node almost unusable in the public Tor network, and is therefore only advised if you are building a testing Tor network! 
+10:51:10 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:51:10 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:10 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:10 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:10 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:11 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:11 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:11 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:11 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:12 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:12 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:12 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:12 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:12 [info] /home/co/client/core/tor/TorCtl::78:  SETCONF AllowDHTExits=1
+
+10:51:12 [info] /home/co/client/core/tor/TorCtl::78:  650 WARN TestingTorNetwork is set. This will make your node almost unusable in the public Tor network, and is therefore only advised if you are building a testing Tor network! 
+10:51:12 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:51:12 [info] /home/co/client/core/tor/TorCtl::78:  650 ORCONN 174.143.240.110:36410 NEW 
+10:51:13 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:13 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:13 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:13 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:14 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:14 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:14 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:14 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:15 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:15 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:15 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:15 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:15 [info] /home/co/client/core/tor/TorCtl::78:  SETCONF Nickname=75207EE8EF003BE1 ORPort=10006 DirPort=10038 RelayBandwidthRate="2000 KB" RelayBandwidthBurst="4000 KB"
+
+10:51:15 [info] /home/co/client/core/tor/TorCtl::78:  650 WARN TestingTorNetwork is set. This will make your node almost unusable in the public Tor network, and is therefore only advised if you are building a testing Tor network! 
+10:51:15 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:51:16 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:16 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:16 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:16 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:17 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:17 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:17 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:17 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:18 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:18 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:18 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:18 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:19 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:19 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:19 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:19 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:20 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:20 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:20 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:20 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:21 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:21 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:21 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:21 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:22 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:22 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:22 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:22 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:23 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:23 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:23 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:23 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:24 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:24 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:24 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:24 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:25 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:25 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:25 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:25 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:26 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:26 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:26 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:26 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:27 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:27 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:27 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:27 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:27 [info] /home/co/client/core/tor/TorCtl::78:  EXTENDCIRCUIT 0 518E96759364B01C9800C36EDD3CC0EAB9F0B4E5,B2F889C2153F0E3FFD792F6A05850F12674710F4
+
+10:51:27 [info] /home/co/client/core/tor/TorCtl::78:  650 STATUS_CLIENT NOTICE BOOTSTRAP PROGRESS=90 TAG=circuit_create SUMMARY="Establishing a Tor circuit"
+10:51:27 [info] /home/co/client/core/tor/TorCtl::78:  250 EXTENDED 5
+10:51:27 [info] /home/co/client/core/tor/TorCtl::78:  650 CIRC 5 LAUNCHED PURPOSE=GENERAL
+10:51:27 [info] /home/co/client/core/tor/TorCtl::78:  650 CIRC 5 EXTENDED $518E96759364B01C9800C36EDD3CC0EAB9F0B4E5~0A1ED726D25B7572 PURPOSE=GENERAL
+10:51:28 [info] /home/co/client/core/tor/TorCtl::78:  650 CIRC 5 EXTENDED $518E96759364B01C9800C36EDD3CC0EAB9F0B4E5~0A1ED726D25B7572,$B2F889C2153F0E3FFD792F6A05850F12674710F4~873E99C1034DE334 PURPOSE=GENERAL
+10:51:28 [info] /home/co/client/core/tor/TorCtl::78:  650 STATUS_CLIENT NOTICE BOOTSTRAP PROGRESS=100 TAG=done SUMMARY="Done"
+10:51:28 [info] /home/co/client/core/tor/TorCtl::78:  650 STATUS_CLIENT NOTICE CIRCUIT_ESTABLISHED
+10:51:28 [info] /home/co/client/core/tor/TorCtl::78:  650 CIRC 5 BUILT $518E96759364B01C9800C36EDD3CC0EAB9F0B4E5~0A1ED726D25B7572,$B2F889C2153F0E3FFD792F6A05850F12674710F4~873E99C1034DE334 PURPOSE=GENERAL
+10:51:28 [info] /home/co/client/core/tor/TorCtl::78:  CONVERTCIRCID 5
+
+10:51:28 [info] /home/co/client/core/tor/TorCtl::78:  250 59934
+10:51:28 [info] /home/co/client/core/tor/TorCtl::78:  SENDPAYMENT 518E96759364B01C9800C36EDD3CC0EAB9F0B4E5 59934 AAIBASAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg 1 0
+
+10:51:28 [info] /home/co/client/core/tor/TorCtl::78:  SENDPAYMENT 518E96759364B01C9800C36EDD3CC0EAB9F0B4E5 59934 AAIBASAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg 2 0
+
+10:51:28 [info] /home/co/client/core/tor/TorCtl::78:  250 999 999
+10:51:28 [info] /home/co/client/core/tor/TorCtl::78:  250 999 999
+10:51:28 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:28 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 5 999 999 1000 1000
+10:51:28 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:28 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:28 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:28 [info] /home/co/client/core/tor/TorCtl::78:  650 ORCIRCUIT PAYMENT 59934 518E96759364B01C9800C36EDD3CC0EAB9F0B4E5 0 0 A6cCAbL4icIVPw4//XkvagWFDxJnRxD0BAAAAAC8cXSn+cpog32bx7anwQa9D7L4BcJOAm58GhTgy+ddAEQSAUUOhbWGcUSXKAx0wwWVxw5qlq9BJ6fKKMbgJKF0N0hzI1LQP1sEemZycPpr3mtUZkVFG32D+C3b6Q7b9Jm26BaQ6f3G3nroAmCE9OOPudnGUefwKAWq8IGfyZ9WlYDX6lXZnTgBoK8DLP8+x35I2X++e6jgeyI+j0gD0rzyTH4j3XZ9fA5yhyIyLDtT5swA42JYe4/fFxB6cWaf4l0pWuuP8GfDptH0g7+jaJXb93tr3TxdCDcr/rqf8o8cggAAAAGrRfedZTs/i84g0QkXbon2VjQNxRSMtNDEYs9+eafd4n146OtRbLIjda6BOIjN8V+CSf17l2NhK0Ga8zC4TDYeFWbU3hIPqax0BX6sKyn0i8YnUfV36tPIh5Tw53Cu3fufi6ZkE9B4VCWsFj9CFpshr+XQzQ7ahkiRlysDU08TaPGQBBgmqA0QjnBh9oeRMwH0wICO9hExbDN1r+6+4aFp4Tsc7gWMa+FUfPeM3CjuVk5exYzM4o8oJv0jVKU5RNtjHWB6xNFg0pUknep/SHS+Uha8UrMptMcXj+C21vBOagAAAAK30ZBwW/vKUogk/p4BR24obnNzKpYN
+10:51:28 [info] /home/co/client/core/tor/TorCtl::78:  650 ORCIRCUIT PAYMENT 59934 518E96759364B01C9800C36EDD3CC0EAB9F0B4E5 0 0 VnLgJenHa3Mh3DupsGHVIhc+YZTg9DVPwSpR//w30JHg5hhjpsXPFLDWXz0MUKd+OtR3oZv+yTjdL1BuV/h67mXJAB4rVbWvhGa9WeXUZ55am+7Z+dgSrw/Sp9jLGiLjbVYT3ThOfvzgFnnv0A5Hb7zvVKA6gCPbIiREox8SmDOJCGla9vIqq+LXFf/FIPLBDrsHfbC7EIXd1BEBs1dvOG8zZVkTz/4J++F444Hp7CWDiqpba+lodZG2fNGbube8okP4R2dzEZ/vDwAAAAMoQgIisrNlt4cvF9X10ab6jzZUMGhcPexHfsCsifHlEBJeKilMgWEhkmts87SIZJfEITcDuRZRfRlQsM9Czic2pZu5eY4q8mXF98qh2yS1DDzk6GLgjC6a1EdKtrb6O4QhrXpFvpu92CIiaO7Agr23nGyWNXMNfu+ZU+WmLrSAa22caAXaC7H5hKetcEA/c3zS+A7v3Llhfe0yjEBbWEXhEsiCfPoXKkyI3ySbm9KPPaRhwjihZ3adwltTGlVgMw2fU3qwpbPhAR/GqFN2QM8JAqrwqACU9wAWryrAtmz2YiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+10:51:28 [info] /home/co/client/core/tor/TorCtl::78:  650 ORCIRCUIT PAYMENT 59934 518E96759364B01C9800C36EDD3CC0EAB9F0B4E5 0 0 A6cCAVGOlnWTZLAcmADDbt08wOq58LTlBAAAAAAY9amlqK765JRtffQG9epeVtLjVwyAIbB3Fb4/ndz5zFWTkapJnBCjUw0wsPU+KQDUMpL7BQ5PT8Fe47cBqpqiqAttVBOzXTAohKJuuZER4lqNJUmXaoA2m9TJaHlp8a1ZWZU5HtlsU8l76trj2zze0CQZmRuozSCEeRAXVUyV6w47PrAFqFeQzM9FelPZ+itOexdG5hKimiKSRTnebn1uU1tLhfPrPjAb1GSosVMeYt9/c/+pD98rtYDeOnaqFCWxD23kPZIvmXzqFMmQhaEjKEiWts1JyT8cRF3O1pmn+QAAAAExG2r4F4AUE6ebXhhJWTWHjqdbyMW2GClSuHMOC3xwq7+VtlD9APv2IXdBbyMOMlEUIYKiypRWjNXZ2cSHydBBvJk/0KJ7Gv8fxjheAA7fo/HK3aICPCKD68Mim1TRPgyxTe2MyKRNTfzH7DMz3mxxWNz/3+YpTjsG2fxQQQ5Qv3Ribi7Z3irvE9E9QwfDnLlYr4dtgMgDWZLJ+K3TTYJFXls0qXv+hN+FkIJv7pwGvTZ3l4aDr/sBmNkbuOl7R5xflJkHKSIINJvq1qJVt3O1c9vBHaevQFMgdE212GQ3twAAAAKqhnor/J0TzipNm33iaXpmdoPxqILq
+10:51:28 [info] /home/co/client/core/tor/TorCtl::78:  650 ORCIRCUIT PAYMENT 59934 518E96759364B01C9800C36EDD3CC0EAB9F0B4E5 0 0 yhSke5ROoyxY12cjE6Tnv7VD+5WVZAKQn2dN/BbK3LPpI1jQ9Z/yXhEYJJPxylSL3D19vsxK4UDDM3LkPSJReMU2Xt3HDBzRjEGq1dFzv6w/4IEVsl6P1m3R+62cf+okhP6F0d/ME+thDqmb0fJ+lISV7XxaUMEKHWgrPZgdk0ZEdxJ81EYC73ZWRfALagv44X5/P/CQlbGyYGFMcoTOg/o6x5tlUigsWEqjj8ShWXl5GXf3Zfv/b2ASvohuTjrIbo6kTdllzli4bQAAAAOEBpvZBo9dFNYzjR2zUMro1zH7GZuTPb3j7YZjaZZsANejYYitejk6rllCsUox4w1no3br0J8rsxpieWs7T8C8j446DzwWCdkT1Bwv6rhwULoqdA1sg7suH/1wsTu8iCtCWP5eXiOYvoPX58b7+3MQAuvIhYfHzVvUK7PFB09NEk5hEMSXYp5xu/PoJNp2YnzT59DOPXffQvEVo8W3cVlTyjUihTSm68fy3NHdxIo2fL/xOOclL09bQASzutcknvrUAxhpYTnP5o/bn0PwLZpZhUkZsPS9/BdVu5wdnx8nCSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+10:51:28 [info] /home/co/client/core/tor/TorCtl::78:  ADDTOKENS 518E96759364B01C9800C36EDD3CC0EAB9F0B4E5 59934 5120 5120
+
+10:51:28 [info] /home/co/client/core/tor/TorCtl::78:  250 6119 6119
+10:51:29 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:29 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 5 6119 6119 5120 5120
+10:51:29 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:29 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:29 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:30 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:30 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 5 6119 6119 0 0
+10:51:30 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:30 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:30 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:31 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:31 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 5 6119 6119 0 0
+10:51:31 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:31 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:31 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:31 [info] /home/co/client/core/tor/TorCtl::78:  CLOSECIRCUIT 5 9 
+
+10:51:31 [info] /home/co/client/core/tor/TorCtl::78:  650 CIRC 5 CLOSED $518E96759364B01C9800C36EDD3CC0EAB9F0B4E5~0A1ED726D25B7572,$B2F889C2153F0E3FFD792F6A05850F12674710F4~873E99C1034DE334 PURPOSE=GENERAL REASON=REQUESTED
+10:51:31 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:51:32 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:32 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:32 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:32 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:33 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:33 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:33 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:33 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:34 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:34 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:34 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:34 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:35 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:35 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:35 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:35 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:36 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:36 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:36 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:36 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:37 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:37 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:37 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:37 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:38 [info] /home/co/client/core/tor/TorCtl::78:  KEEPALIVE 300
+
+10:51:38 [info] /home/co/client/core/tor/TorCtl::78:  250 OK
+10:51:38 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:38 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:38 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:38 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:39 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:39 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:39 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:39 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:39 [info] /home/co/client/core/tor/TorCtl::78:  650 CIRC 6 LAUNCHED PURPOSE=TESTING
+10:51:39 [info] /home/co/client/core/tor/TorCtl::78:  650 STATUS_SERVER NOTICE CHECKING_REACHABILITY ORADDRESS=98.236.71.7:10006
+10:51:39 [info] /home/co/client/core/tor/TorCtl::78:  650 STATUS_SERVER NOTICE ACCEPTED_SERVER_DESCRIPTOR DIRAUTH=174.129.199.15:33351
+10:51:39 [info] /home/co/client/core/tor/TorCtl::78:  650 STATUS_SERVER NOTICE GOOD_SERVER_DESCRIPTOR
+10:51:39 [info] /home/co/client/core/tor/TorCtl::78:  650 STATUS_SERVER NOTICE ACCEPTED_SERVER_DESCRIPTOR DIRAUTH=174.129.199.15:33355
+10:51:39 [info] /home/co/client/core/tor/TorCtl::78:  650 STATUS_SERVER NOTICE GOOD_SERVER_DESCRIPTOR
+10:51:39 [info] /home/co/client/core/tor/TorCtl::78:  650 CIRC 6 EXTENDED $6B977F0170E83BC71CDCAB1B223643A06825A0B7~DE3D2A7E37AD9666 PURPOSE=TESTING
+10:51:39 [info] /home/co/client/core/tor/TorCtl::78:  650 CIRC 7 LAUNCHED PURPOSE=TESTING
+10:51:39 [info] /home/co/client/core/tor/TorCtl::78:  650 STATUS_SERVER NOTICE CHECKING_REACHABILITY ORADDRESS=98.236.71.7:10006
+10:51:39 [info] /home/co/client/core/tor/TorCtl::78:  650 STATUS_SERVER NOTICE ACCEPTED_SERVER_DESCRIPTOR DIRAUTH=174.143.240.110:33353
+10:51:39 [info] /home/co/client/core/tor/TorCtl::78:  650 STATUS_SERVER NOTICE GOOD_SERVER_DESCRIPTOR
+10:51:40 [info] /home/co/client/core/tor/TorCtl::78:  650 CIRC 7 EXTENDED $6B977F0170E83BC71CDCAB1B223643A06825A0B7~DE3D2A7E37AD9666 PURPOSE=TESTING
+10:51:40 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:40 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 7 1000 999 1000 1000
+10:51:40 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 6 1000 999 1000 1000
+10:51:40 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:40 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:40 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:40 [info] /home/co/client/core/tor/TorCtl::78:  650 CIRC 6 EXTENDED $6B977F0170E83BC71CDCAB1B223643A06825A0B7~DE3D2A7E37AD9666,$BAF74E40C074E1DF89EC33F1E1FFA5FE107A4BF6~92BD6BFE91C7A79E PURPOSE=TESTING
+10:51:41 [info] /home/co/client/core/tor/TorCtl::78:  650 ORCONN 121.243.187.71:55078 NEW 
+10:51:41 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 0 0
+10:51:41 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 7 1000 999 0 0
+10:51:41 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 6 999 998 0 0
+10:51:41 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:41 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:41 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:42 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 569 2657
+10:51:42 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 7 1000 999 0 0
+10:51:42 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 6 999 998 0 0
+10:51:42 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:42 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:42 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:43 [info] /home/co/client/core/tor/TorCtl::78:  650 CIRC 7 EXTENDED $6B977F0170E83BC71CDCAB1B223643A06825A0B7~DE3D2A7E37AD9666,$8601B6888A32D58006F73D30F461F0E1A760BCE8~941C712DA0F7DFD6 PURPOSE=TESTING
+10:51:43 [info] /home/co/client/core/tor/TorCtl::78:  650 ORCONN $BAF74E40C074E1DF89EC33F1E1FFA5FE107A4BF6~92BD6BFE91C7A79E CONNECTED 
+10:51:43 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 1997 1337
+10:51:43 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 7 999 998 0 0
+10:51:43 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 6 999 998 0 0
+10:51:43 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:43 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:43 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:43 [info] /home/co/client/core/tor/TorCtl::78:  650 STATUS_SERVER NOTICE REACHABILITY_SUCCEEDED ORADDRESS=98.236.71.7:10006
+10:51:44 [info] /home/co/client/core/tor/TorCtl::78:  650 CIRC 6 EXTENDED $6B977F0170E83BC71CDCAB1B223643A06825A0B7~DE3D2A7E37AD9666,$BAF74E40C074E1DF89EC33F1E1FFA5FE107A4BF6~92BD6BFE91C7A79E,$5F20794278407A6B3A56F45E252A864CB005E6AB~75207EE8EF003BE1 PURPOSE=TESTING
+10:51:44 [info] /home/co/client/core/tor/TorCtl::78:  650 CIRC 6 BUILT $6B977F0170E83BC71CDCAB1B223643A06825A0B7~DE3D2A7E37AD9666,$BAF74E40C074E1DF89EC33F1E1FFA5FE107A4BF6~92BD6BFE91C7A79E,$5F20794278407A6B3A56F45E252A864CB005E6AB~75207EE8EF003BE1 PURPOSE=TESTING
+10:51:44 [info] /home/co/client/core/tor/TorCtl::78:  650 CIRC 8 LAUNCHED PURPOSE=TESTING
+10:51:44 [info] /home/co/client/core/tor/TorCtl::78:  650 STATUS_SERVER NOTICE CHECKING_REACHABILITY ORADDRESS=98.236.71.7:10006
+10:51:44 [info] /home/co/client/core/tor/TorCtl::78:  650 CIRC 8 EXTENDED $6B977F0170E83BC71CDCAB1B223643A06825A0B7~DE3D2A7E37AD9666 PURPOSE=TESTING
+10:51:44 [info] /home/co/client/core/tor/TorCtl::78:  650 CIRC 8 EXTENDED $6B977F0170E83BC71CDCAB1B223643A06825A0B7~DE3D2A7E37AD9666,$5FA151D8803A76F85812A2FF1586DFE719995405~InnomiNetAuth1 PURPOSE=TESTING
+10:51:44 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 586 586
+10:51:44 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 8 999 998 1000 1000
+10:51:44 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 7 999 998 0 0
+10:51:44 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 6 998 998 0 0
+10:51:44 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:44 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:44 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:44 [info] /home/co/client/core/tor/TorCtl::78:  650 ORCONN 174.129.199.15:36411 NEW 
+10:51:44 [info] /home/co/client/core/tor/TorCtl::78:  650 ORCONN 220.233.25.181:55198 NEW 
+10:51:44 [info] /home/co/client/core/tor/TorCtl::78:  650 ORCONN $5FA151D8803A76F85812A2FF1586DFE719995405~InnomiNetAuth1 CONNECTED 
+10:51:45 [info] /home/co/client/core/tor/TorCtl::78:  650 CIRC 8 EXTENDED $6B977F0170E83BC71CDCAB1B223643A06825A0B7~DE3D2A7E37AD9666,$5FA151D8803A76F85812A2FF1586DFE719995405~InnomiNetAuth1,$5F20794278407A6B3A56F45E252A864CB005E6AB~75207EE8EF003BE1 PURPOSE=TESTING
+10:51:45 [info] /home/co/client/core/tor/TorCtl::78:  650 CIRC 8 BUILT $6B977F0170E83BC71CDCAB1B223643A06825A0B7~DE3D2A7E37AD9666,$5FA151D8803A76F85812A2FF1586DFE719995405~InnomiNetAuth1,$5F20794278407A6B3A56F45E252A864CB005E6AB~75207EE8EF003BE1 PURPOSE=TESTING
+10:51:45 [info] /home/co/client/core/tor/TorCtl::78:  650 CIRC 9 LAUNCHED PURPOSE=TESTING
+10:51:45 [info] /home/co/client/core/tor/TorCtl::78:  650 ORCONN $B2F889C2153F0E3FFD792F6A05850F12674710F4~873E99C1034DE334 LAUNCHED 
+10:51:45 [info] /home/co/client/core/tor/TorCtl::78:  650 STATUS_SERVER NOTICE CHECKING_REACHABILITY ORADDRESS=98.236.71.7:10006
+10:51:45 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 3002 3706
+10:51:45 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 9 1000 1000 1000 1000
+10:51:45 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 8 998 998 0 0
+10:51:45 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 7 999 998 0 0
+10:51:45 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 6 998 998 0 0
+10:51:45 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:45 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:45 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:46 [info] /home/co/client/core/tor/TorCtl::78:  650 BW 1938 3408
+10:51:46 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 9 1000 1000 0 0
+10:51:46 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 8 998 998 0 0
+10:51:46 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 7 999 998 0 0
+10:51:46 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 6 998 998 0 0
+10:51:46 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 3 990 998 0 0
+10:51:46 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 2 989 998 0 0
+10:51:46 [info] /home/co/client/core/tor/TorCtl::78:  650 TOKEN_LEVELS 1 989 998 0 0
+10:51:47 [info] /home/co/client/core/tor/TorCtl::78:  SIGNAL HALT
+

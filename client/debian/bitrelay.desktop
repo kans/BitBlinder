@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version="0.5.5"
+Encoding=UTF-8
+Name=BitBlinder Relay
+Type=Application
+GenericName="BitBlinder Relay"
+MimeType=.torrent;
+Exec=bitblinder --launch-bb
+Icon=bitblinder
+Terminal=false
+Categories=Network;GTK
+GenericName[en_US]="BitTorrent Client" 

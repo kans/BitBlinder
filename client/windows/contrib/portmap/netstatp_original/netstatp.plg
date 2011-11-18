@@ -1,0 +1,35 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: netstatp - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x409 /fo"Release/netstatp.res" /d "NDEBUG" "E:\Src\Tcpview\netstatp\netstatp.rc""
+Creating temporary file "C:\DOCUME~1\ADMINI~1.DEV\LOCALS~1\Temp\RSP406.tmp" with contents
+[
+/nologo /ML /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /Fo"Release/" /Fd"Release/" /FD /c
+"E:\Src\Tcpview\netstatp\netstatp.c"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1.DEV\LOCALS~1\Temp\RSP406.tmp"
+Creating temporary file "C:\DOCUME~1\ADMINI~1.DEV\LOCALS~1\Temp\RSP407.tmp" with contents
+[
+ws2_32.lib iphlpapi.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /incremental:no /pdb:"Release/netstatp.pdb" /machine:I386 /out:"Release/netstatp.exe"
+.\Release\netstatp.obj
+.\Release\netstatp.res
+]
+Creating command line "link.exe @C:\DOCUME~1\ADMINI~1.DEV\LOCALS~1\Temp\RSP407.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+netstatp.c
+Linking...
+
+
+
+<h3>Results</h3>
+netstatp.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

@@ -1,0 +1,306 @@
+0.  Definitions.
+
+  X -- the relay that is sending traffic (the client).  Also referred to as 
+       "the customer", since X is responsible for paying for the circuit
+  A -- first relay in the circuit
+  B -- second relay in the circuit
+  C -- third relay in the circuit
+  Y -- the destination of X's traffic (ex:  a website)
+  merchant -- A, B, and C are each merchants, since they are recieving payments
+  BANK -- the bank server
+  
+  (p).pub          -- the public key of (p)
+  (p).priv         -- the private key of (p)
+  BANK.acoinKey    -- the key used for signing blinded ACoin requests
+  (k).encrypt(msg) -- msg encrypted by key k.  Uses PKCS1 padding for RSA.  
+                      Uses CFB mode for AES.
+  (k).verify(msg)  -- same as above
+  (k).decrypt(msg) -- the decrypted text of msg, using key k.
+  (k).sign(msg)    -- same as above
+  H(msg)           -- An SHA256 hash of some message
+  a | b            -- concatenation of a and b
+  
+  All numbers are sent in big-endian format.
+  All symmetric keys are AES256
+  All public keys are 1024 bit RSA.  If they are used to encrypt some 
+  impossibly large message, assume they encrypt a symmetric key that encrypts 
+  the rest of the message.
+  
+0.1.  ACoins.
+
+  ACoins have 3 components:
+    r        -- the random number to prove ownership of the coin
+    interval -- the interval for this coin
+    sig      -- the bank's signature on H( r | interval )
+    
+0.1.1.  ACoin Messages.
+  
+  ACOIN_REQUEST(M):
+    This is a request by M for a new ACoin.  To generate this message, M 
+    generates r (as defined above) and b (a blinding factor)  M then uses b 
+    to blind the following message:
+      H( r | interval)
+    ACOIN_REQUEST(M) refers to this blinded message.
+
+  ACOIN_RESPONSE(req)
+    This message has the form:
+      BANK.acoinKey.sign( req )
+    where:
+      req = the blinded ACOIN_REQUEST(M) message
+    NOTE:  ACOIN_RESPONSE(req) becomes sig from section 0.1
+           Also, ACOIN_RESPONSE can be sent in plaintext because the eventual 
+           receiver can verify it, and is the only person who can actually 
+           use the ACoin it represents
+    
+  ACOIN(M):
+    This is the form taken by an ACoin when it is being presented for payment 
+    or deposit.  This message has the form:
+      r | interval | sig
+    Where r and interval are definded as above, and sig is a valid signature 
+    by BANK.acoinKey on H( r | interval )
+  
+1.  Overview.
+
+  The goal of this system is to enable users ("customers") to pay relays 
+  ("merchants") for traffic that the user sends over their Tor circuits.  
+  
+  In this setup, X (the user/customer) pays each merchant 1 money (so X 
+  will spend 3 total on the entire circuit).  All payments are done using 
+  ACoins.
+  
+  There are 2 basic client operations:
+  1.  Setup.  
+        Sent by X to each merchant when the circuit is created.  Each 
+        merchant replies with a list of encrypted requests for new ACoins to 
+        the client.
+        
+  2.  Payment.  
+        X sends an encrypted payment request for each of A/B/C to A.  A 
+        forwards the requests to the bank.  The responses are encrypted valid 
+        ACoins that represent the payments for A/B/C.  A forwards these 
+        responses to A/B/C.  Upon receiving their encrypted ACoins and 
+        validating them, the merchants send a new payment request back to X, 
+        to be used for later payment.
+  
+  There are 3 basic bank operations:
+  
+  1.  Withdrawal.  
+        X asks the bank for n ACoins.  The bank deducts n from X's account, 
+        and returns n ACoins
+        
+  2.  Payment.  
+        X sends an ACoin, and an encrypted request for a new ACoin.  The bank 
+        validates the old ACoin, and returns a newly signed ACoin.
+        
+  3.  Deposit.  
+        Some merchant sends n ACoins to the bank, which credits his account 
+        by n.
+  
+2.  Goals.
+
+  The payment system should be:
+  
+  1.  Anonymous
+    Should not enable any new attacks against Tor
+  
+  2.  Efficient
+    The bank should be able to handle at least 10,000 simultaneous clients on 
+    a single server while each are sending at a rate of 100KBps
+    
+    Customers should not have an excessive overhead in terms of bandwidth or 
+    CPU to make payments (similarly for merchants recieving payments)
+  
+  3.  Fair
+    Customers should not be able to get any service unless they have made a 
+    valid payment.
+    
+    Merchants should only be able to earn money by providing service, over 
+    the long run.
+    
+    Neither customers nor merchants should be able to gain money, or cause 
+    another to lose money, in any way except the above.
+    
+3.  Setup.
+
+  X/A/B/C all have:
+    username -- known by the bank
+    password -- known by the bank
+    id_key   -- a unique private RSA key, from Tor
+    balance  -- an amount of money the relay is allowed to spend
+    bankCert -- the certificate of the bank (for use making SSL connections)
+    
+  Before any payments can be made, the circuit (X->A->B->C->Y) must be 
+  established.
+  
+  Payment communications are done with a special cell-type in Tor.  This 
+  special cell type is not counted against relayed traffic for the purposes 
+  of determining whether a circuit has paid enough to continue sending traffic.
+    
+4.  Client Messages.
+
+4.1.  Setup.
+
+  For each merchant M:
+    After the circuit is established, X sends M a SETUP message of the form:
+      1 | version
+    where:
+      1       -- simply a byte to indicate that this is a SETUP message
+      version -- highest known protocol version (always 1 right now)
+    
+    Upon receiving a SETUP message, M sends X a SETUP_REPLY message form:
+      2 | version | ACOIN_REQUEST(M)
+    where:
+      2                -- byte to indicate that this is a SETUP_REPLY message
+      version          -- highest known protocol version (always 1 right now)
+      ACOIN_REQUEST(M) -- see definition in 0.2
+    X stores the ACOIN_REQUEST(M) for use when sending a payment later.  
+
+4.2.  Payment.
+
+  To send payments to each merchant, X uses A as a payment proxy (ie, A 
+  communicates with the bank on behalf of X, to conceal X's identity)
+  
+  For each merchant, M:
+  
+    X sends A the PAYMENT message of the form:
+      BANK.pub.encrypt( ACOIN(X) | ACOIN_REQUEST(M) )
+      
+    A forwards the PAYMENT message to the bank, which replies with 
+    PAYMENT_REPLY message of the form:
+      ACOIN_RESPONSE( ACOIN_REQUEST(M) )
+      (see section 5.2 for a description of this bank transaction)
+      
+    A sends PAYMENT_REPLY to M
+    
+    M unblinds PAYMENT_REPLY and checks that the ACoin is valid:
+      BANK.acoinKey.verify( H( r | interval ) ) == unblinded PAYMENT_REPLY
+    If so, M has been successfully paid.
+    
+    At this point, M sends X a RECEIPT message of the form:
+      ACOIN_REQUEST(M)
+      (basically, a new ACoin request to be used for the next payment)
+      
+  NOTES:
+    - We could use another relay besides A to proxy payments with the bank, 
+    but I dont see a need, and this requires fewer send operations over the 
+    internet.  Also, in the case of a malicious A and malicious Bank, no extra
+    information is gained by the attacker
+    - The PAYMENT_REPLY is a plain-text bank signature of the blinded ACoin.  
+    This is ok because the blinding factor, r and interval values are 
+    necessary to use it, and known only to M.
+      
+5.  Bank Messages.
+
+5.1.  Withdrawal.
+
+  Upon starting the program, X sends a WITHDRAWAL message to the bank.
+  All communcations for this protocol are sent over an SSL connection between 
+  X and BANK.
+  
+  X sends the bank a message of the following form:
+    1 | username | password | n | ACOIN_REQUEST(X_1) | ... | ACOIN_REQUEST(X_n)
+  where:
+    1             -- a byte to indicate that this is a WITHDRAWAL message
+    username      -- the name of this account
+    password      -- the user's password for this account
+    number        -- the number of ACoin requests being sent
+    ACOIN_REQUEST(X_1) | ... | ACOIN_REQUEST(X_n) -- n blinded ACoin requests 
+    from X (see sec. 0.1.1 for definition)
+  
+  The bank checks that the account corresponding to username/password has a 
+  sufficient balance.
+  If so, the bank sends X a reply of the following form:
+    ACOIN_RESPONSE( ACOIN_REQUEST(X_1) ) 
+    | ...
+    | ACOIN_RESPONSE( ACOIN_REQUEST(X_n) )
+    (again, see sec 0.1.1 for the definition)
+    
+  X unblinds each response and stores that signature (along with r and the 
+  interval) so that X can later deposit or make a payment with the coin.
+    
+  NOTES:
+   - The parameter n is very important.  If n is low, the bank will 
+   essentially be able to see the rate at which X is sending payments.  If n 
+   is high, the protocol will be inefficient because X will later have to 
+   deposit the unused coins.  A high n value also means that both X and the 
+   bank will have to do more computation when X starts up.  However, it seems 
+   that there is a good range of reasonable values--n=60 will aggregate 100MB 
+   of client traffic for 3 hop circuits.
+
+5.2. Payment.
+
+  This message sequence happens exactly once for each payment that happens in 
+  the network, at the time that the payment occurs.
+  
+  A, acting as a payment proxy to for X to pay M, sends the bank the PAYMENT 
+  message as described in 4.2:
+    BANK.pub.encrypt( ACOIN(X) | ACOIN_REQUEST(M) )
+    
+  Then bank checks that:
+    interval == previous_interval or interval == current_interval
+    BANK.acoinKey.verify( H(r|interval) ) == sig
+    H(r|interval) has not been deposited yet during this interval
+    
+  If those conditions hold, the bank sends the following response:
+    ACOIN_RESPONSE( ACOIN_REQUEST(M) )
+  Which A forwards on as payment.
+  
+5.3.  Deposit.
+
+  When shutting down the client, the customer or merchant must deposit all 
+  ACoins that he currently has withdrawn.  If he does not, they could expire 
+  before the program is started again.
+  
+  Merchants and customers must also ensure that all ACoins from the previous 
+  interval are deposited before the next interval begins.
+  
+  All communications for this protocol are between X and the Bank, over SSL.
+  To deposit ACoins, X sends a message of the form:
+    2 | username | password | n | ACOIN(X_1) | ... | ACOIN(X_n)
+  where:
+    2             -- a byte to indicate that this is a DEPOSIT message
+    username      -- the name of this account
+    password      -- the user's password for this account
+    number        -- the number of ACoins to be deposited
+    ACOIN(X_1) | ... | ACOIN(X_n) -- n ACoins for deposit (see sec. 0.1.1 for 
+                                     definition)
+  For each coin, the bank checks the same conditions as for payment in 5.2:
+    interval == previous_interval or interval == current_interval
+    BANK.acoinKey.verify( H(r|interval) ) == sig
+    H(r|interval) has not been deposited yet during this interval
+    
+  If all coins check out, n is added to X's balance, and the bank replies 
+  with '0'
+  
+A.  Miscellaneous Notes.
+
+  - Because of Tor, X has an encrypted and authenticated channel to A, B, and 
+  C.  However, this is NOT the case for A, who we use as a payment proxy in 
+  4.2.  This means that A must send messages in cleartext that are relayed by 
+  B to C.  Since the connections between A/B and B/C are over TLS, no 
+  outsiders can spy on the traffic, but A and B can.  The ONLY messages that 
+  MUST be sent in this fashion are the forwarded bank payment responses in 
+  4.2.  Since these requests are blinded, verifiable, and require knowledge 
+  of the secret r to be of any use, this seems acceptable.
+    
+  - X currently sends no traffic until it receives the receipt message.  X 
+  can pre-emptively send payments so that it will no thave to wait for the 
+  receipt, at the risk of losing that value if some malicious merchant takes 
+  the payment and closes the circuit.  If a merchant cheats in this way, X 
+  cannot know exactly which merchant it was, but he can prefer not to use all 
+  involved relays in the future.
+  
+  - Currently, A, B, and C refuse to allow relayed traffic until the entire 
+  payment process is complete.  This condition can be relaxed at the risk of 
+  providing some service before realizing that the payments are invalid, for 
+  the purposes of reducing latency in the normal (non-cheating) case.
+    
+  - The actual protocols we have implemented differ slightly from those 
+  described for the purposes of efficiency--I have kept those parts out to 
+  keep this first draft simple.  For example, during the setup step we send 
+  multiple ACOIN_REQUESTS at once, so that X will not need to wait to make 
+  more payments  We also include IDs for the payment requests, to help the 
+  merchants keep track of which one is being returned.  If everything here 
+  makes sense, I will revise these specs to reflect the actual messages 
+  exactly.
+  

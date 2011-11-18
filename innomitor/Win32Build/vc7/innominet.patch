@@ -1,0 +1,867 @@
+Index: src/common/compat.h
+===================================================================
+--- src/common/compat.h	(revision 17142)
++++ src/common/compat.h	(working copy)
+@@ -11,16 +11,16 @@
+ #include "orconfig.h"
+ #include "torint.h"
+ #ifdef MS_WINDOWS
+-#define WIN32_WINNT 0x400
+-#define _WIN32_WINNT 0x400
+-#define WIN32_LEAN_AND_MEAN
+-#if defined(_MSC_VER) && (_MSC_VER < 1300)
+-#include <winsock.h>
+-#else
+-#include <winsock2.h>
+-#include <ws2tcpip.h>
++  #define WIN32_WINNT 0x400
++  #define _WIN32_WINNT 0x400
++  #define WIN32_LEAN_AND_MEAN
++  #if defined(_MSC_VER) && (_MSC_VER < 1300)
++    #include <winsock.h>
++  #else
++    #include <winsock2.h>
++    #include <ws2tcpip.h>
++  #endif
+ #endif
+-#endif
+ #ifdef HAVE_SYS_TYPES_H
+ #include <sys/types.h>
+ #endif
+Index: src/common/torgzip.c
+===================================================================
+--- src/common/torgzip.c	(revision 17142)
++++ src/common/torgzip.c	(working copy)
+@@ -17,7 +17,7 @@
+ #include <stdio.h>
+ #include <assert.h>
+ #ifdef _MSC_VER
+-#include "..\..\contrib\zlib\zlib.h"
++#include "..\..\contrib\zlib-1.2.3\zlib.h"
+ #else
+ #include <zlib.h>
+ #endif
+@@ -427,3 +427,4 @@
+   tor_free(state);
+ }
+ 
++
+Index: src/common/util.h
+===================================================================
+--- src/common/util.h	(revision 17142)
++++ src/common/util.h	(working copy)
+@@ -19,12 +19,14 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ 
+-#ifndef O_BINARY
+-#define O_BINARY 0
++#ifndef MS_WINDOWS
++  #ifndef O_BINARY
++  #define O_BINARY 0
++  #endif
++  #ifndef O_TEXT
++  #define O_TEXT 0
++  #endif
+ #endif
+-#ifndef O_TEXT
+-#define O_TEXT 0
+-#endif
+ 
+ /* Replace assert() with a variant that sends failures to the log before
+  * calling assert() normally.
+Index: src/or/control.c
+===================================================================
+--- src/or/control.c	(revision 17142)
++++ src/or/control.c	(working copy)
+@@ -1377,7 +1377,7 @@
+                          "NS STATUS_GENERAL STATUS_CLIENT STATUS_SERVER "
+                          "GUARD STREAM_BW");
+   } else if (!strcmp(question, "features/names")) {
+-    *answer = tor_strdup("VERBOSE_NAMES EXTENDED_EVENTS");
++    *answer = tor_strdup("VERBOSE_NAMES EXTENDED_EVENTS SHORT_DESCRIPTORS");
+   } else if (!strcmp(question, "address")) {
+     uint32_t addr;
+     if (router_pick_published_address(get_options(), &addr) < 0)
+@@ -1451,7 +1451,44 @@
+ getinfo_helper_dir(control_connection_t *control_conn,
+                    const char *question, char **answer)
+ {
+-  if (!strcmpstart(question, "desc/id/")) {
++  char* s;
++  int len;
++  
++  if (!strcmpstart(question, "desc_short/id/")) {
++    routerinfo_t *ri = router_get_by_hexdigest(question+strlen("desc_short/id/"));
++    if (ri) {
++      s = tor_malloc(8192);
++      len = router_dump_router_to_short_string(s, 8192, ri);
++      if (len<0) {
++        log_warn(LD_BUG, "Couldn't generate router descriptor.");
++        tor_free(s);
++        return -1;
++      } else {
++        *answer = tor_strndup(s, len);
++        tor_free(s);
++      }
++    }
++  } else if (!strcmp(question, "desc_short/all-recent")) {
++    routerlist_t *routerlist = router_get_routerlist();
++    smartlist_t *sl = smartlist_create();
++    if (routerlist && routerlist->routers) {
++      SMARTLIST_FOREACH(routerlist->routers, routerinfo_t *, ri,
++      {
++        s = tor_malloc(8192);
++        len = router_dump_router_to_short_string(s, 8192, ri);
++        if (len<0) {
++          log_warn(LD_BUG, "Couldn't generate router descriptor.");
++          tor_free(s);
++        } else {
++          smartlist_add(sl, tor_strndup(s, len));
++          tor_free(s);
++        }
++      });
++    }
++    *answer = smartlist_join_strings(sl, "", 0, NULL);
++    SMARTLIST_FOREACH(sl, char *, c, tor_free(c));
++    smartlist_free(sl);
++  } else if (!strcmpstart(question, "desc/id/")) {
+     routerinfo_t *ri = router_get_by_hexdigest(question+strlen("desc/id/"));
+     if (ri) {
+       const char *body = signed_descriptor_get_body(&ri->cache_info);
+@@ -1878,10 +1915,13 @@
+   ITEM("events/names", misc,
+        "Events that the controller can ask for with SETEVENTS."),
+   ITEM("features/names", misc, "What arguments can USEFEATURE take?"),
++  PREFIX("desc_short/id/", dir, "Router descriptors by ID."),
+   PREFIX("desc/id/", dir, "Router descriptors by ID."),
+   PREFIX("desc/name/", dir, "Router descriptors by nickname."),
+   ITEM("desc/all-recent", dir,
+        "All non-expired, non-superseded router descriptors."),
++  ITEM("desc_short/all-recent", dir,
++       "All non-expired, non-superseded router descriptors (short versions)."),
+   ITEM("desc/all-recent-extrainfo-hack", dir, NULL), /* Hack. */
+   PREFIX("extra-info/digest/", dir, "Extra-info documents by digest."),
+   ITEM("ns/all", networkstatus,
+@@ -2335,12 +2375,12 @@
+       r = router_get_by_digest(exit_digest);
+     }
+     /* Do both the client and relay allow one-hop exit circuits? */
+-    if (!r || !r->allow_single_hop_exits ||
+-        !get_options()->AllowSingleHopCircuits) {
+-      connection_write_str_to_buf(
+-      "551 Can't attach stream to this one-hop circuit.\r\n", conn);
+-      return 0;
+-    }
++    //if (!r || !r->allow_single_hop_exits ||
++    //    !get_options()->AllowSingleHopCircuits) {
++    //  connection_write_str_to_buf(
++    //  "551 Can't attach stream to this one-hop circuit.\r\n", conn);
++    //  return 0;
++    //}
+     ap_conn->chosen_exit_name = tor_strdup(hex_str(exit_digest, DIGEST_LEN));
+   }
+ 
+Index: src/or/eventdns.c
+===================================================================
+--- src/or/eventdns.c	(revision 17142)
++++ src/or/eventdns.c	(working copy)
+@@ -95,6 +95,7 @@
+ #include <windows.h>
+ #include <winsock2.h>
+ #include <iphlpapi.h>
++#include "or.h"
+ #else
+ #include <sys/socket.h>
+ #include <netinet/in.h>
+Index: src/or/eventdns.h
+===================================================================
+--- src/or/eventdns.h	(revision 17142)
++++ src/or/eventdns.h	(working copy)
+@@ -271,7 +271,7 @@
+ int evdns_resolve_reverse(struct in_addr *in, int flags, evdns_callback_type callback, void *ptr);
+ int evdns_resolve_reverse_ipv6(struct in6_addr *in, int flags, evdns_callback_type callback, void *ptr);
+ int evdns_set_option(const char *option, const char *val, int flags);
+-int evdns_resolv_conf_parse(int flags, const char *);
++int evdns_resolv_conf_parse(int flags, const char *const filename);
+ #ifdef MS_WINDOWS
+ int evdns_config_windows_nameservers(void);
+ #endif
+Index: src/or/or.h
+===================================================================
+--- src/or/or.h	(revision 17142)
++++ src/or/or.h	(working copy)
+@@ -4111,6 +4111,7 @@
+ int router_rebuild_descriptor(int force);
+ int router_dump_router_to_string(char *s, size_t maxlen, routerinfo_t *router,
+                                  crypto_pk_env_t *ident_key);
++int router_dump_router_to_short_string(char *s, size_t maxlen, routerinfo_t *router);
+ int extrainfo_dump_to_string(char *s, size_t maxlen, extrainfo_t *extrainfo,
+                              crypto_pk_env_t *ident_key);
+ int is_legal_nickname(const char *s);
+Index: src/or/router.c
+===================================================================
+--- src/or/router.c	(revision 17142)
++++ src/or/router.c	(working copy)
+@@ -2024,3 +2024,88 @@
+   }
+ }
+ 
++/** Josh:  create a smaller version of a router descriptor for the controller
++ *  to load more quickly.
++ */
++int
++router_dump_router_to_short_string(char *s, size_t maxlen, routerinfo_t *router)
++{
++  char fingerprint[FINGERPRINT_LEN+1];
++  size_t written;
++  int result=0;
++  addr_policy_t *tmpe;
++  const char* country;
++  
++  country = "None\0";
++  if (geoip_is_loaded()) {
++    int c;
++    uint32_t ip;
++    struct in_addr in;
++    if (tor_inet_aton(router->address, &in) != 0) {
++      ip = ntohl(in.s_addr);
++      c = geoip_get_country_by_ip(ip);
++      country = geoip_get_country_name(c);
++    }
++  }
++
++  /* record our fingerprint, so we can include it in the descriptor */
++  if (crypto_pk_get_fingerprint(router->identity_pkey, fingerprint, 1)<0) {
++    log_err(LD_BUG,"Error computing fingerprint");
++    return -1;
++  }
++
++  /* Generate the easy portion of the router descriptor. */
++  result = tor_snprintf(s, maxlen,
++                    "%s|%s|%s|%d|%d|%s|%s|%ld|%d|%s|",
++    router->nickname,
++    router->address,
++    country,
++    router->or_port,
++    router->dir_port,
++    router->platform,
++    fingerprint,
++    stats_n_seconds_working,
++    (int) router->bandwidthcapacity,
++    router->allow_single_hop_exits ? "1" : "0");
++
++  if (result < 0) {
++    log_warn(LD_BUG,"descriptor snprintf #1 ran out of room!");
++    return -1;
++  }
++  /* From now on, we use 'written' to remember the current length of 's'. */
++  written = result;
++
++  /* Write the exit policy to the end of 's'. */
++  if (!router->exit_policy || !smartlist_len(router->exit_policy)) {
++    strlcat(s+written, "reject *:*\n", maxlen-written);
++    written += strlen("reject *:*\n");
++    tmpe = NULL;
++  } else if (router->exit_policy) {
++    int i;
++    for (i = 0; i < smartlist_len(router->exit_policy); ++i) {
++      tmpe = smartlist_get(router->exit_policy, i);
++      result = policy_write_item(s+written, maxlen-written, tmpe, 1);
++      if (result < 0) {
++        log_warn(LD_BUG,"descriptor policy_write_item ran out of room!");
++        return -1;
++      }
++      tor_assert(result == (int)strlen(s+written));
++      written += result;
++      if (written+2 > maxlen) {
++        log_warn(LD_BUG,"descriptor policy_write_item ran out of room (2)!");
++        return -1;
++      }
++      s[written++] = '|';
++    }
++  }
++
++  if (written+1 > maxlen) {
++    log_warn(LD_BUG,"Not enough room to finish descriptor.");
++    return -1;
++  }
++  /* overwrite the last '|' and end the string */
++  s[written-1] = '\n';
++  s[written] = 0;
++
++  return (int)written;
++}
+\ No newline at end of file
+Index: src/win32/orconfig.h
+===================================================================
+--- src/win32/orconfig.h	(revision 17142)
++++ src/win32/orconfig.h	(working copy)
+@@ -229,4 +229,10 @@
+ /* Version number of package */
+ #define VERSION "0.2.1.6-alpha-dev"
+ 
++/* Necessary to because <winsock2.h> also defines struct in6_addr */
++#define HAVE_STRUCT_IN6_ADDR
++#define HAVE_STRUCT_SOCKADDR_IN6
+ 
++/* This line is supposed to be set by the makefile, but MSVC doesnt use the makefile */
++#define SHARE_DATADIR "."
++
+Index: Win32Build/vc7/Tor/Tor.sln
+===================================================================
+--- Win32Build/vc7/Tor/Tor.sln	(revision 17142)
++++ Win32Build/vc7/Tor/Tor.sln	(working copy)
+@@ -1,6 +1,10 @@
+ Microsoft Visual Studio Solution File, Format Version 8.00
+ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tor", "Tor.vcproj", "{63A6B170-E742-400C-B3A0-9CCED3699043}"
+ 	ProjectSection(ProjectDependencies) = postProject
++		{76E40712-9978-4A30-986F-CE061DEDAF66} = {76E40712-9978-4A30-986F-CE061DEDAF66}
++		{E2D2762A-26BD-4A28-BD72-DDAB181324B4} = {E2D2762A-26BD-4A28-BD72-DDAB181324B4}
++		{82900092-DA40-433A-8F46-A3F3959D6081} = {82900092-DA40-433A-8F46-A3F3959D6081}
++		{F1F64693-11A9-4992-8B4B-2A67C07BD8C8} = {F1F64693-11A9-4992-8B4B-2A67C07BD8C8}
+ 	EndProjectSection
+ EndProject
+ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tor_resolve", "..\tor_resolve\tor_resolve.vcproj", "{E2D2762A-26BD-4A28-BD72-DDAB181324B4}"
+@@ -9,17 +13,25 @@
+ EndProject
+ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "unittests", "..\unittests\unittests.vcproj", "{F1F64693-11A9-4992-8B4B-2A67C07BD8C8}"
+ 	ProjectSection(ProjectDependencies) = postProject
++		{76E40712-9978-4A30-986F-CE061DEDAF66} = {76E40712-9978-4A30-986F-CE061DEDAF66}
++		{82900092-DA40-433A-8F46-A3F3959D6081} = {82900092-DA40-433A-8F46-A3F3959D6081}
+ 	EndProjectSection
+ EndProject
+-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libevent", "..\..\..\contrib\libevent\WIN32-Prj\libevent.vcproj", "{52BBFCA6-6F82-4596-BBAD-0BCFBC637B80}"
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libevent", "..\..\..\contrib\libevent-1.3e\WIN32-Prj\libevent.vcproj", "{76E40712-9978-4A30-986F-CE061DEDAF66}"
+ 	ProjectSection(ProjectDependencies) = postProject
+ 	EndProjectSection
+ EndProject
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zlib", "..\..\..\contrib\zlib-1.2.3\projects\visualc6\zlib.vcproj", "{82900092-DA40-433A-8F46-A3F3959D6081}"
++	ProjectSection(ProjectDependencies) = postProject
++	EndProjectSection
++EndProject
+ Global
+ 	GlobalSection(SolutionConfiguration) = preSolution
+ 		Debug = Debug
+ 		Release = Release
+ 	EndGlobalSection
++	GlobalSection(ProjectDependencies) = postSolution
++	EndGlobalSection
+ 	GlobalSection(ProjectConfiguration) = postSolution
+ 		{63A6B170-E742-400C-B3A0-9CCED3699043}.Debug.ActiveCfg = Debug|Win32
+ 		{63A6B170-E742-400C-B3A0-9CCED3699043}.Debug.Build.0 = Debug|Win32
+@@ -33,10 +45,14 @@
+ 		{F1F64693-11A9-4992-8B4B-2A67C07BD8C8}.Debug.Build.0 = Debug|Win32
+ 		{F1F64693-11A9-4992-8B4B-2A67C07BD8C8}.Release.ActiveCfg = Release|Win32
+ 		{F1F64693-11A9-4992-8B4B-2A67C07BD8C8}.Release.Build.0 = Release|Win32
+-		{52BBFCA6-6F82-4596-BBAD-0BCFBC637B80}.Debug.ActiveCfg = Debug|Win32
+-		{52BBFCA6-6F82-4596-BBAD-0BCFBC637B80}.Debug.Build.0 = Debug|Win32
+-		{52BBFCA6-6F82-4596-BBAD-0BCFBC637B80}.Release.ActiveCfg = Release|Win32
+-		{52BBFCA6-6F82-4596-BBAD-0BCFBC637B80}.Release.Build.0 = Release|Win32
++		{76E40712-9978-4A30-986F-CE061DEDAF66}.Debug.ActiveCfg = Debug|Win32
++		{76E40712-9978-4A30-986F-CE061DEDAF66}.Debug.Build.0 = Debug|Win32
++		{76E40712-9978-4A30-986F-CE061DEDAF66}.Release.ActiveCfg = Release|Win32
++		{76E40712-9978-4A30-986F-CE061DEDAF66}.Release.Build.0 = Release|Win32
++		{82900092-DA40-433A-8F46-A3F3959D6081}.Debug.ActiveCfg = LIB Debug|Win32
++		{82900092-DA40-433A-8F46-A3F3959D6081}.Debug.Build.0 = LIB Debug|Win32
++		{82900092-DA40-433A-8F46-A3F3959D6081}.Release.ActiveCfg = LIB ASM Release|Win32
++		{82900092-DA40-433A-8F46-A3F3959D6081}.Release.Build.0 = LIB ASM Release|Win32
+ 	EndGlobalSection
+ 	GlobalSection(ExtensibilityGlobals) = postSolution
+ 	EndGlobalSection
+Index: Win32Build/vc7/Tor/Tor.vcproj
+===================================================================
+--- Win32Build/vc7/Tor/Tor.vcproj	(revision 17142)
++++ Win32Build/vc7/Tor/Tor.vcproj	(working copy)
+@@ -19,7 +19,7 @@
+ 			<Tool
+ 				Name="VCCLCompilerTool"
+ 				Optimization="0"
+-				AdditionalIncludeDirectories="c:\openssl\include;..\..\..\src\win32;..\..\..\contrib\libevent"
++				AdditionalIncludeDirectories="..\..\..\src\common;c:\openssl\include;..\..\..\src\win32;&quot;..\..\..\contrib\libevent-1.3e&quot;"
+ 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
+ 				IgnoreStandardIncludePath="FALSE"
+ 				MinimalRebuild="TRUE"
+@@ -29,15 +29,17 @@
+ 				WarningLevel="3"
+ 				Detect64BitPortabilityProblems="FALSE"
+ 				DebugInformationFormat="4"
+-				CompileAs="1"/>
++				CompileAs="1"
++				ShowIncludes="FALSE"/>
+ 			<Tool
+ 				Name="VCCustomBuildTool"/>
+ 			<Tool
+ 				Name="VCLinkerTool"
+-				AdditionalDependencies="wsock32.lib t:\openssl\install\lib\vc\ssleay32.lib t:\openssl\install\lib\vc\libeay32.lib ..\..\..\contrib\libevent\win32-prj\Debug\libevent.lib ws2_32.lib"
++				AdditionalDependencies="wsock32.lib C:\OpenSSL\lib\VC\ssleay32MTd.lib C:\OpenSSL\lib\VC\libeay32MTd.lib ..\..\..\contrib\libevent-1.3e\WIN32-Prj\Debug\libevent.lib ..\..\..\contrib\zlib-1.2.3\projects\visualc6\Win32_LIB_Debug\zlibd.lib ws2_32.lib"
+ 				OutputFile="$(OutDir)/Tor.exe"
+ 				LinkIncremental="2"
+-				IgnoreDefaultLibraryNames="LIBCD"
++				IgnoreAllDefaultLibraries="FALSE"
++				IgnoreDefaultLibraryNames=""
+ 				DelayLoadDLLs="advapi32.dll"
+ 				GenerateDebugInformation="TRUE"
+ 				ProgramDatabaseFile="$(OutDir)/Tor.pdb"
+@@ -72,20 +74,21 @@
+ 			CharacterSet="2">
+ 			<Tool
+ 				Name="VCCLCompilerTool"
+-				AdditionalIncludeDirectories="c:\openssl\include;..\..\..\src\win32;..\..\..\contrib\libevent"
+-				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
++				AdditionalIncludeDirectories="..\..\..\src\win32;..\..\..\src\common;c:\openssl\include;&quot;..\..\..\contrib\libevent-1.3e&quot;"
++				PreprocessorDefinitions="WIN32;_CONSOLE"
+ 				IgnoreStandardIncludePath="FALSE"
+ 				RuntimeLibrary="0"
+ 				UsePrecompiledHeader="0"
+ 				WarningLevel="3"
+ 				Detect64BitPortabilityProblems="TRUE"
+ 				DebugInformationFormat="3"
+-				CompileAs="1"/>
++				CompileAs="1"
++				ShowIncludes="FALSE"/>
+ 			<Tool
+ 				Name="VCCustomBuildTool"/>
+ 			<Tool
+ 				Name="VCLinkerTool"
+-				AdditionalDependencies="wsock32.lib c:\openssl\lib\vc\ssleay32.lib c:\openssl\lib\vc\libeay32.lib"
++				AdditionalDependencies="wsock32.lib C:\OpenSSL\lib\VC\ssleay32MT.lib C:\OpenSSL\lib\VC\libeay32MT.lib ..\..\..\contrib\libevent-1.3e\WIN32-Prj\Release\libevent.lib ..\..\..\contrib\zlib-1.2.3\projects\visualc6\Win32_LIB_ASM_Release\zlib.lib"
+ 				OutputFile="$(OutDir)/Tor.exe"
+ 				LinkIncremental="1"
+ 				DelayLoadDLLs="advapi32.dll"
+@@ -124,6 +127,9 @@
+ 			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx"
+ 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
+ 			<File
++				RelativePath="..\..\..\src\common\address.c">
++			</File>
++			<File
+ 				RelativePath="..\..\..\src\common\aes.c">
+ 			</File>
+ 			<File
+@@ -175,9 +181,21 @@
+ 				RelativePath="..\..\..\src\or\dirserv.c">
+ 			</File>
+ 			<File
++				RelativePath="..\..\..\src\or\dirvote.c">
++			</File>
++			<File
+ 				RelativePath="..\..\..\src\or\dns.c">
+ 			</File>
+ 			<File
++				RelativePath="..\..\..\src\or\dnsserv.c">
++			</File>
++			<File
++				RelativePath="..\..\..\src\or\eventdns.c">
++			</File>
++			<File
++				RelativePath="..\..\..\src\or\geoip.c">
++			</File>
++			<File
+ 				RelativePath="..\..\..\src\or\hibernate.c">
+ 			</File>
+ 			<File
+@@ -187,6 +205,18 @@
+ 				RelativePath="..\..\..\src\or\main.c">
+ 			</File>
+ 			<File
++				RelativePath="..\..\..\src\common\memarea.c">
++			</File>
++			<File
++				RelativePath="..\..\..\src\common\mempool.c">
++			</File>
++			<File
++				RelativePath="..\..\..\src\or\networkstatus.c">
++			</File>
++			<File
++				RelativePath="..\..\..\src\or\ntmain.c">
++			</File>
++			<File
+ 				RelativePath="..\..\..\src\or\onion.c">
+ 			</File>
+ 			<File
+@@ -199,6 +229,9 @@
+ 				RelativePath="..\..\..\src\or\policies.c">
+ 			</File>
+ 			<File
++				RelativePath="..\..\..\src\or\reasons.c">
++			</File>
++			<File
+ 				RelativePath="..\..\..\src\or\relay.c">
+ 			</File>
+ 			<File
+@@ -240,82 +273,15 @@
+ 			<File
+ 				RelativePath="..\..\..\src\common\util.c">
+ 			</File>
+-			<Filter
+-				Name="zlib"
+-				Filter="">
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\adler32.c">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\compress.c">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\crc32.c">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\crc32.h">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\deflate.c">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\deflate.h">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\gzio.c">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\infback.c">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\inffast.c">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\inffast.h">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\inffixed.h">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\inflate.c">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\inflate.h">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\inftrees.c">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\inftrees.h">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\trees.c">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\trees.h">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\uncompr.c">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\zconf.h">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\zlib.h">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\zutil.c">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\zutil.h">
+-				</File>
+-			</Filter>
+ 		</Filter>
+ 		<Filter
+ 			Name="Header Files"
+ 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
+ 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
+ 			<File
++				RelativePath="..\..\..\src\common\address.h">
++			</File>
++			<File
+ 				RelativePath="..\..\..\src\common\aes.h">
+ 			</File>
+ 			<File
+@@ -328,9 +294,18 @@
+ 				RelativePath="..\..\..\src\common\crypto.h">
+ 			</File>
+ 			<File
++				RelativePath="..\..\..\src\or\eventdns.h">
++			</File>
++			<File
+ 				RelativePath="..\..\..\src\common\log.h">
+ 			</File>
+ 			<File
++				RelativePath="..\..\..\src\common\memarea.h">
++			</File>
++			<File
++				RelativePath="..\..\..\src\common\mempool.h">
++			</File>
++			<File
+ 				RelativePath="..\..\..\src\common\torgzip.h">
+ 			</File>
+ 			<File
+Index: Win32Build/vc7/tor_resolve/tor_resolve.vcproj
+===================================================================
+--- Win32Build/vc7/tor_resolve/tor_resolve.vcproj	(revision 17142)
++++ Win32Build/vc7/tor_resolve/tor_resolve.vcproj	(working copy)
+@@ -19,7 +19,7 @@
+ 			<Tool
+ 				Name="VCCLCompilerTool"
+ 				Optimization="0"
+-				AdditionalIncludeDirectories="..\..\..\contrib\libevent;..\..\..\src\win32"
++				AdditionalIncludeDirectories="..\..\..\src\common;..\..\..\src\win32;&quot;..\..\..\contrib\libevent-1.3e&quot;"
+ 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
+ 				MinimalRebuild="TRUE"
+ 				BasicRuntimeChecks="3"
+@@ -27,14 +27,17 @@
+ 				UsePrecompiledHeader="0"
+ 				WarningLevel="3"
+ 				Detect64BitPortabilityProblems="FALSE"
+-				DebugInformationFormat="4"/>
++				DebugInformationFormat="4"
++				ShowIncludes="FALSE"/>
+ 			<Tool
+ 				Name="VCCustomBuildTool"/>
+ 			<Tool
+ 				Name="VCLinkerTool"
+-				AdditionalDependencies="wsock32.lib ..\..\..\contrib\libevent\win32-prj\Debug\libevent.lib"
++				AdditionalDependencies="wsock32.lib ..\..\..\contrib\libevent-1.3e\WIN32-Prj\Debug\libevent.lib"
+ 				OutputFile="$(OutDir)/tor_resolve.exe"
+ 				LinkIncremental="2"
++				IgnoreAllDefaultLibraries="FALSE"
++				IgnoreDefaultLibraryNames=""
+ 				GenerateDebugInformation="TRUE"
+ 				ProgramDatabaseFile="$(OutDir)/tor_resolve.pdb"
+ 				SubSystem="1"
+@@ -68,8 +71,8 @@
+ 			CharacterSet="2">
+ 			<Tool
+ 				Name="VCCLCompilerTool"
+-				AdditionalIncludeDirectories="..\..\..\contrib\libevent;..\..\..\src\win32"
+-				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
++				AdditionalIncludeDirectories="..\..\..\src\win32;..\..\..\src\common;&quot;..\..\..\contrib\libevent-1.3e&quot;"
++				PreprocessorDefinitions="WIN32;_CONSOLE"
+ 				RuntimeLibrary="0"
+ 				UsePrecompiledHeader="0"
+ 				WarningLevel="3"
+@@ -79,7 +82,7 @@
+ 				Name="VCCustomBuildTool"/>
+ 			<Tool
+ 				Name="VCLinkerTool"
+-				AdditionalDependencies="wsock32.lib ..\..\..\contrib\libevent\win32-prj\Debug\libevent.lib"
++				AdditionalDependencies="wsock32.lib ..\..\..\contrib\libevent-1.3e\WIN32-Prj\Release\libevent.lib"
+ 				OutputFile="$(OutDir)/tor_resolve.exe"
+ 				LinkIncremental="1"
+ 				GenerateDebugInformation="TRUE"
+@@ -117,6 +120,9 @@
+ 			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx"
+ 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
+ 			<File
++				RelativePath="..\..\..\src\common\address.c">
++			</File>
++			<File
+ 				RelativePath="..\..\..\src\common\compat.c">
+ 			</File>
+ 			<File
+Index: Win32Build/vc7/unittests/unittests.vcproj
+===================================================================
+--- Win32Build/vc7/unittests/unittests.vcproj	(revision 17142)
++++ Win32Build/vc7/unittests/unittests.vcproj	(working copy)
+@@ -19,7 +19,7 @@
+ 			<Tool
+ 				Name="VCCLCompilerTool"
+ 				Optimization="0"
+-				AdditionalIncludeDirectories="..\..\..\src\win32;c:\openssl\include;..\..\..\contrib\libevent"
++				AdditionalIncludeDirectories="..\..\..\src\win32;..\..\..\src\common;C:\OpenSSL\include;&quot;..\..\..\contrib\libevent-1.3e&quot;"
+ 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
+ 				MinimalRebuild="TRUE"
+ 				BasicRuntimeChecks="3"
+@@ -27,15 +27,17 @@
+ 				UsePrecompiledHeader="0"
+ 				WarningLevel="3"
+ 				Detect64BitPortabilityProblems="FALSE"
+-				DebugInformationFormat="4"/>
++				DebugInformationFormat="4"
++				ShowIncludes="FALSE"/>
+ 			<Tool
+ 				Name="VCCustomBuildTool"/>
+ 			<Tool
+ 				Name="VCLinkerTool"
+-				AdditionalDependencies="wsock32.lib t:\openssl\install\lib\vc\libeay32.lib t:\openssl\install\lib\vc\ssleay32.lib ws2_32.lib ..\..\..\contrib\libevent\win32-prj\Debug\libevent.lib"
++				AdditionalDependencies="wsock32.lib C:\OpenSSL\lib\VC\libeay32MTd.lib C:\OpenSSL\lib\VC\ssleay32MTd.lib ws2_32.lib ..\..\..\contrib\zlib-1.2.3\projects\visualc6\Win32_LIB_Debug\zlibd.lib ..\..\..\contrib\libevent-1.3e\WIN32-Prj\Debug\libevent.lib"
+ 				OutputFile="$(OutDir)/unittests.exe"
+ 				LinkIncremental="2"
+-				IgnoreDefaultLibraryNames="LIBCD"
++				IgnoreAllDefaultLibraries="FALSE"
++				IgnoreDefaultLibraryNames=""
+ 				GenerateDebugInformation="TRUE"
+ 				ProgramDatabaseFile="$(OutDir)/unittests.pdb"
+ 				SubSystem="1"
+@@ -69,8 +71,8 @@
+ 			CharacterSet="2">
+ 			<Tool
+ 				Name="VCCLCompilerTool"
+-				AdditionalIncludeDirectories="..\..\..\src\win32;c:\openssl\include;..\..\..\contrib\libevent"
+-				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
++				AdditionalIncludeDirectories="..\..\..\src\common;..\..\..\src\win32;c:\OpenSSL\include;&quot;..\..\..\contrib\libevent-1.3e&quot;"
++				PreprocessorDefinitions="WIN32;_CONSOLE"
+ 				RuntimeLibrary="0"
+ 				UsePrecompiledHeader="0"
+ 				WarningLevel="3"
+@@ -80,7 +82,7 @@
+ 				Name="VCCustomBuildTool"/>
+ 			<Tool
+ 				Name="VCLinkerTool"
+-				AdditionalDependencies="wsock32.lib c:\openssl\lib\vc\libeay32.lib c:\openssl\lib\vc\ssleay32.lib"
++				AdditionalDependencies="wsock32.lib C:\OpenSSL\lib\VC\ssleay32MT.lib C:\OpenSSL\lib\VC\libeay32MT.lib ..\..\..\contrib\libevent-1.3e\WIN32-Prj\Release\libevent.lib ..\..\..\contrib\zlib-1.2.3\projects\visualc6\Win32_LIB_ASM_Release\zlib.lib"
+ 				OutputFile="$(OutDir)/unittests.exe"
+ 				LinkIncremental="1"
+ 				GenerateDebugInformation="TRUE"
+@@ -118,6 +120,9 @@
+ 			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx"
+ 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
+ 			<File
++				RelativePath="..\..\..\src\common\address.c">
++			</File>
++			<File
+ 				RelativePath="..\..\..\src\common\aes.c">
+ 			</File>
+ 			<File
+@@ -169,9 +174,24 @@
+ 				RelativePath="..\..\..\src\or\dirserv.c">
+ 			</File>
+ 			<File
++				RelativePath="..\..\..\src\or\dirvote.c">
++			</File>
++			<File
+ 				RelativePath="..\..\..\src\or\dns.c">
+ 			</File>
+ 			<File
++				RelativePath="..\..\..\src\or\dnsserv.c">
++			</File>
++			<File
++				RelativePath="..\..\..\src\or\eventdns.c">
++			</File>
++			<File
++				RelativePath="..\..\..\src\or\eventdns.h">
++			</File>
++			<File
++				RelativePath="..\..\..\src\or\geoip.c">
++			</File>
++			<File
+ 				RelativePath="..\..\..\src\or\hibernate.c">
+ 			</File>
+ 			<File
+@@ -181,6 +201,24 @@
+ 				RelativePath="..\..\..\src\or\main.c">
+ 			</File>
+ 			<File
++				RelativePath="..\..\..\src\common\memarea.c">
++			</File>
++			<File
++				RelativePath="..\..\..\src\common\memarea.h">
++			</File>
++			<File
++				RelativePath="..\..\..\src\common\mempool.c">
++			</File>
++			<File
++				RelativePath="..\..\..\src\common\mempool.h">
++			</File>
++			<File
++				RelativePath="..\..\..\src\or\networkstatus.c">
++			</File>
++			<File
++				RelativePath="..\..\..\src\or\ntmain.c">
++			</File>
++			<File
+ 				RelativePath="..\..\..\src\or\onion.c">
+ 			</File>
+ 			<File
+@@ -193,6 +231,9 @@
+ 				RelativePath="..\..\..\src\or\policies.c">
+ 			</File>
+ 			<File
++				RelativePath="..\..\..\src\or\reasons.c">
++			</File>
++			<File
+ 				RelativePath="..\..\..\src\or\relay.c">
+ 			</File>
+ 			<File
+@@ -223,6 +264,9 @@
+ 				RelativePath="..\..\..\src\or\test.c">
+ 			</File>
+ 			<File
++				RelativePath="..\..\..\src\or\test_data.c">
++			</File>
++			<File
+ 				RelativePath="..\..\..\src\common\torgzip.c">
+ 			</File>
+ 			<File
+@@ -237,72 +281,6 @@
+ 			<File
+ 				RelativePath="..\..\..\contrib\zlib\zutil.h">
+ 			</File>
+-			<Filter
+-				Name="zlib">
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\adler32.c">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\compress.c">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\crc32.c">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\crc32.h">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\deflate.c">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\deflate.h">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\gzio.c">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\infback.c">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\inffast.c">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\inffast.h">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\inffixed.h">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\inflate.c">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\inflate.h">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\inftrees.c">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\inftrees.h">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\trees.c">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\trees.h">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\uncompr.c">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\zconf.h">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\zlib.h">
+-				</File>
+-				<File
+-					RelativePath="..\..\..\contrib\zlib\zutil.c">
+-				</File>
+-			</Filter>
+ 		</Filter>
+ 		<Filter
+ 			Name="Header Files"

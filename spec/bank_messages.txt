@@ -1,0 +1,123 @@
+Message Format Language:
+
+SPC = a space character
+lower_case_names = some variable
+LEN(x) = len(str(x)) SPC str(x)
+LONG(x) = bytes_to_long(x)
+STR(x) = long_to_bytes(x)
+| = or, meaning "one of these messages")
+*x = repeated x times
+
+acoinInterval: the bank blind signs all acoin requests with its private key.  the keys must be changed periodically; intervals are mapping between an int, starting with 1, and keys
+BPK = Bank Public(or Private, for decrypt/sign) Key
+CPK = Client Public(or Private, for decrypt/sign) Key
+SK = shared secret symmetric Key
+*K.ENC(...) = encrypt ... with the public key
+*K.DEC(...) = decrypt ... with the private key
+*K.SIGN(...) = ... SPC str(*K.sign(LONG(HASH(...))))
+msgnum: a monoatomically increasing global int which starts at 1 on the fist msg sent to the bank (not login) and increases by one thereafter. 
+
+LOGIN:
+	V0:
+		CLIENT REQUEST:
+			CPK.SIGN( LOGIN CPK.e CPK.n relay_idhex str(BPK.encrypt( LONG(LEN(username) LEN(password)) )) )
+		BANK RESPONSE:
+			CPK.ENC( LONG(SK.random_key_data) ) SK.random_key.ENC( LONG(balance) )
+	V1:
+		see here:  http://trevp.net/tlslite/docs/index.html
+		CLIENT HTTPS REQUEST to innomi.net/secure_client_bank_login.html?username=%s&password=%s&hexid=%s&n=CPK.n
+			(all parameters will be urlencoded)
+		BANK RESPONSE:
+			200 response code
+			CPK.ENC( LONG(SK.random_key_data) ) SK.random_key.ENC( LONG(balance) )
+		
+ACOIN REQUEST:
+	V0:
+		CLIENT REQUEST:
+			hexid SK.ENC( ACOIN_REQUEST desired_coin_value LONG(random_receipt) )
+		BANK RESPONSE:
+			SK.ENC( BPK.DEC(LONG(random_receipt)) )
+	V1:
+		CLIENT REQUEST:
+			hexid SK.ENC( version msgnum ACOIN_REQUEST (desiredValue  LONG(random_receipt)*numDesired)
+			WHERE:
+				version = int, >= 0
+				timestap = time.time()
+				numDesired = int, <=1000
+				numValuesRequested = int, <=20
+		BANK RESPONSE:
+			SK.ENC( balance acoinInterval (BPK.DEC(LONG(random_receipt))*numMinted) )
+      only one acoinInterval is used to mint all the acoins, even if they happen at a roll over period
+		
+ACOIN DEPOSIT:
+	V0:
+		CLIENT REQUEST:
+			hexid SK.ENC( ACOIN DEPOSIT acoin.pack() )
+		BANK:
+			PROCEDURE:  
+				here, the Bank should:
+				check the validity of the coin.  coin.is_valid does this.  Basically:
+					retrieve the proper public key (for the acoin interval and value)
+					hash the acoin receipt
+					verify that this was signed by this key at some earlier date (that the bank signature in the acoin is valid)
+				if the coin is valid, check that it has not already been deposited
+				if not, everything worked out, adjust the balance appropriately
+			RESPONSE:
+				SK.ENC( OK | DEPOSITED_BY_YOU | DEPOSITED_BY_OTHER | INVALID )
+	V1:
+		CLIENT REQUEST:
+			hexid SK.ENC( version msgnum ACOIN_DEPOSIT numCoins acoin.pack()*numCoins )
+		BANK:
+			PROCEDURE:  
+				just call unpack a bunch
+				here, the Bank should:
+				check the validity of the coin.  coin.is_valid does this.  Basically:
+					retrieve the proper public key (for the acoin interval and value)
+					hash the acoin receipt
+					verify that this was signed by this key at some earlier date (that the bank signature in the acoin is valid)
+				if the coin is valid, check that it has not already been deposited
+				if not, everything worked out, adjust the balance appropriately
+			RESPONSE:
+				SK.ENC( balance (OK | DEPOSITED_BY_YOU | DEPOSITED_BY_OTHER)*numCoins )
+
+SCOIN DEPOSIT:
+	V0:
+	CLIENT REQUEST:
+		hexid SK.ENC( SCOIN DEPOSIT scoin.pack() )
+	BANK:
+		PROCEDURE:
+			just call unpack a bunch
+			check the validity of the coin.  coin.is_valid does this.  Basically:
+				is the signature of the payer correct for the details of this coin?
+			check whether the coin is depositable.  coin.is_depositable does this.  Basically:
+				still not implemented, have to read through micropayment paper again  :)
+			if both of these things are true, adjust the balance, respond appropriately
+		RESPONSE:
+			SK.ENC( (DEPOSITED | NOT_DEPOSITABLE) )
+	V1:
+	CLIENT REQUEST:
+		hexid SK.ENC( version msgnum SCOIN_DEPOSIT numCoins scoin.pack()*numCoins )
+	BANK:
+		PROCEDURE:
+			just call unpack a bunch
+			check the validity of the coin.  coin.is_valid does this.  Basically:
+				is the signature of the payer correct for the details of this coin?
+			check whether the coin is depositable.  coin.is_depositable does this.  Basically:
+				still not implemented, have to read through micropayment paper again  :)
+			if both of these things are true, adjust the balance, respond appropriately
+		RESPONSE:
+			SK.ENC( balance (DEPOSITED | NOT_DEPOSITABLE)*numCoins )
+    
+KEY REQUEST
+  V1
+  CLIENT
+  REQUEST
+  hexid SK.ENC( version msgnum KEY_REQUEST max(acoinInterval ) )
+    interval is the highest interval the client currently has on file
+  BANK:
+  RESPONSE
+    SK.ENC( (acoinInterval long(BPK.n) )*numNewIntervals | UP2DATE)
+    the bank either returns the intervals and keys, or it returns UP2DATE
+    
+    
+    

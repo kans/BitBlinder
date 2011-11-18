@@ -1,0 +1,1468 @@
+@downloaded-at 2010-01-07 15:50:38
+@source "96.22.210.194"
+router DE3D2A7E37AD9666 75.72.116.66 10001 0 10030
+platform Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Very recent version of Windows [major=6,minor=1]  [workstation] {terminal services, single user}
+opt protocols Link 1 2 Circuit 1
+published 2010-01-07 07:24:38
+opt fingerprint 6B97 7F01 70E8 3BC7 1CDC AB1B 2236 43A0 6825 A0B7
+uptime 65702
+bandwidth 2048000 4096000 99130
+opt extra-info-digest DD44DE8784A591F1A610497ED943D374BDF2DB94
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAMZcPCU5eIJ+444XDq+IGiHj/DwPT6HWrCQvzAknUDThCi4gn4chkRhP
+7SUHwsVD/eiPuZ38DZuw2HNXjy/Z4q4wc7MTpSskZnDlpaXlVsgGAXvXJ6JTyryK
+5G9U4DIPdA9IiApAteChlhqEHX6wQrImJyk8gb8qx4k0bbH684UvAgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAMP9dR83H/eHv52DFbL8TXQTeUjvs7rn2yBp90UEVsiGji7238O6OBcM
+PhdSvAzAFxx7Bx1QYEjT6eOP22e0HGeRhQBUApD/6jaK9guJc7vwreZ+tMleVLgS
+32ZiqJL9ks1MDiaJ8gZxWUZMAiE6IpK1h/4CnxrZDpuLy3wQ1ga9AgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+opt allow-dht-exits
+contact abuse@mail.bitblinder.com
+accept 127.0.0.1:60301
+reject *:*
+router-signature
+-----BEGIN SIGNATURE-----
+VduQ+j3K0DZZHUR2M5LqSsdZFeS9TIMIx/iQDhfe7hyWq8SuAhhFu3nrE7fdcURE
+3lWY6PLRRQwyQgsI81tOMCEkCBcGgRJISqEgOjKx0YG89c4C44XhzOdF/PtF8Egy
+UY63bVN+PQmM2NQ65fizGgr2sFMyKWF7QY/rieId1vs=
+-----END SIGNATURE-----
+@downloaded-at 2010-01-07 15:50:38
+@source "96.22.210.194"
+router 941C712DA0F7DFD6 220.233.25.181 10002 0 10031
+platform Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Very recent version of Windows [major=6,minor=1]  [workstation] {terminal services, single user}
+opt protocols Link 1 2 Circuit 1
+published 2010-01-07 15:12:12
+opt fingerprint 8601 B688 8A32 D580 06F7 3D30 F461 F0E1 A760 BCE8
+uptime 65453
+bandwidth 2048000 4096000 44528
+opt extra-info-digest 70CD96C198D0F6B61CF6E06B9E80858786C13B84
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBALgjYN65vRe66fSvsposZjrZmEuw1E745RoxvvNSkyDSJQlXGjgeDP7R
+ngVgemGCQy1F8CUzPFcBQ4lnp0qrpA0/pW/pIO5kCiurNeRPRoKxx16AIGLcW11h
+NAeNEcPCVQEl4zEnwJFHpNES24Lc9NCSX6G1Qn0F6gSBwIa0vbGVAgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAKq7HEgDVottFLvgoC2j43owvN7rVkJOSyw4TgY67D/L1F38xMuP0w5Y
+uuGcx5wvnlodOjMTNdfkbGg++upl1mze9ptmLjGqJ9Utf3zfRw1oYLUZBdwk/Nd4
+QxlPuih0NxMxNPR7W/jLUKdlyBE6x/m1J+Y38RXRBpUzF+Fr50ObAgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+opt allow-dht-exits
+contact abuse@mail.bitblinder.com
+accept 127.0.0.1:60301
+reject *:*
+router-signature
+-----BEGIN SIGNATURE-----
+YMtwCrLLv87H6BINLqV7Rxrkj1yUtJIcNTsfcaEUJhhKGqyd0WvGYTyEtD6YyI4A
+grZ1t6uOU5DDaZ3BsZ6fgBLEkM3ghQBwR3aEX+3E30TBCSVxXEF0BxJGOp+5sDEB
+zyCdsvNn9AMCzj20azrCb64tNtPg7MsZHNkAV3+lo2Q=
+-----END SIGNATURE-----
+@downloaded-at 2010-01-07 15:50:38
+@source "96.22.210.194"
+router 70565C3E7F293AA9 64.122.230.233 10001 0 10030
+platform Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Windows XP Service Pack 3 [workstation] {terminal services, single user}
+opt protocols Link 1 2 Circuit 1
+published 2010-01-07 06:50:17
+opt fingerprint 9A89 D63F D59E EBA2 EAE7 F9F9 CF62 5A5B 78CE 1932
+uptime 236209
+bandwidth 512000 1024000 63620
+opt extra-info-digest ADEDE12D4FACA83EE528FB43E850D3B6670DD938
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAN0Mh5uc1LZch9Rll22SQfF1ozEv6kgNfiXQid0/nM1gyN6WVhaoMlUJ
+10u2cAHIeyZjzaB8vaZlXtA5A4ldRYzRjYUNrzk19f7oJxF4pEEPAzeWVUsspKxj
+upmo4ByiO60LKYSvrIJiuFNUEsbmtZHz2M0J2vBEgb4vGSnfDBt/AgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAKnwEgYtoyxAuUTxcVLyRzquMIOg1BHRPU8BliujCMDu58NNy1qLPPQk
+UphkD3yv02u6ybXA2xWwE0pGwBe9qRCAuUXIA+dPezRlUsaSyFE5RtsbshSat0Dy
+vYzA4zj+/7BzVUCdx/jnHONstZi1PDDzGEUlpvKlBXxTgFhESCJ5AgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+opt allow-dht-exits
+contact abuse@mail.bitblinder.com
+accept 127.0.0.1:60301
+reject *:*
+router-signature
+-----BEGIN SIGNATURE-----
+VJIRD5ZzKk2Sw3W4BpZ+M9H4iOVh5bJwIkp7vmok56fuUfYXoaUrzlW4wM8/kY0r
+JcymhpGBhintolGWDKtiI8K2KfRc3hEqOcQAXw7Ff3dt8mk5xV9pN+K5Z1qTkZDg
+D8Gi2CnEqV7Nu2x6pj1XnBRcEjX+5uTHlgbUdRKHQZA=
+-----END SIGNATURE-----
+@downloaded-at 2010-01-07 15:50:38
+@source "96.22.210.194"
+router 9C72215273C50E3F 87.227.83.186 9998 0 10007
+platform Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Windows XP Service Pack 2 [workstation] {personal} {terminal services, single user}
+opt protocols Link 1 2 Circuit 1
+published 2010-01-07 08:38:00
+opt fingerprint A75E 1AEC 9B62 D3E3 22FA 9533 FDC1 D605 75B4 AC3B
+uptime 915
+bandwidth 512000 1024000 22526
+opt extra-info-digest C65E59BEC9666DC706D72055DDC914415082AC33
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBALANKQuW1m23ZqiaNmLO6jlCDpMhk/AkNqK1DyrzMIP+dt9anMOaPZWK
+QzF+RXaA+o++GlZdx4GpiVPDthGD0qEBQR47iRIVmD9wgFB+/YwesmetyE24DxX0
+T/N6hP+nAymS1ufTpx4vv6LrV8usLRelM+VMUMzK7EorT2zQFV5VAgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBALXZtCpLM10GtU86mTx/1R3YJe9asmbOBtdLd4///4xpkBCZ1EG0XdKr
+tzL76PZPy1t1zyegPA0sQSUfwNodJmXBzwoBx8hdxAAsRxY+f2qkwJZhBBz6UB9R
+deUKrV7NJX4+mzwrDcVBmZb1E1uxLWS8rcCe7FzqdJXnATMCdRaLAgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+contact abuse@mail.bitblinder.com
+accept 127.0.0.1:60301
+reject *:*
+router-signature
+-----BEGIN SIGNATURE-----
+KLutra0iIPv8h5JVVTlGRn88TtOWWuXF9eN4LKPnCZjx7Fi4yJc0RI/D9aeQN1YE
+Pj8ep+PYRSkdEk6WTnGeQ2WYbKp3OAqSn8tjps70LcKuYLLn9YGN6bOdn5p0I4TP
+hf6cFXH6/01fIQedNwAD1XxLx4eQ5RFnB2cf15x5aCQ=
+-----END SIGNATURE-----
+@downloaded-at 2010-01-07 15:50:38
+@source "96.22.210.194"
+router 6B0F4BA87B5E4CE8 213.161.252.207 9001 0 0
+platform Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Windows XP Service Pack 3 [workstation] {terminal services, single user}
+opt protocols Link 1 2 Circuit 1
+published 2010-01-07 15:38:55
+opt fingerprint ABDA 13AA 0E12 0894 9BB1 0614 4393 EA09 8E95 D9F7
+uptime 915
+bandwidth 21504 43008 599
+opt extra-info-digest AA4A8EE5B6CC7D9C3B798C61B0C9C9241A3E4538
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBALIjh2UsmcQ323ztSaqmPxmfA+Dq3Mf+oGzH2K0+fC62UuSQHuh2Hg2u
+8bwE4FDBJLjI5q4OP2RSQVgYsH7DpigUN9kv4XNsaAa0E/dFvJLfy3KWT3KgIytu
+8MxnfYZdcZkCXNqr4Mu87EHUChfYypefwL5AkWTSEsYRaaVXIN7fAgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAK/9W8ZE265cXxR555R1p+uGjCzRqSNMG+v8P6Z0Jr3tO5W1Rm81e2I9
+dSs9bkfgrsTboe9fjnDoYkytN0ffbGLG/1+wnciP5G5Ntr4a7u3l5Eci7R/vUr1t
+j60wKh9gf/n3KfBfabITryyBc7001oXe9uxhfr/1CyaTZ2ExFOcTAgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+contact abuse@mail.bitblinder.com
+accept 127.0.0.1:60301
+reject 0.0.0.0/8:*
+reject 169.254.0.0/16:*
+reject 127.0.0.0/8:*
+reject 192.168.0.0/16:*
+reject 10.0.0.0/8:*
+reject 172.16.0.0/12:*
+reject *:25
+reject *:119
+reject *:135-139
+reject *:445
+reject *:80
+reject *:443
+accept *:*
+router-signature
+-----BEGIN SIGNATURE-----
+DhT9DDl8nNOvNAxLLDvNrMRNSAOz6tZz7Ophl2AxN+gwj+MwWKAGwhhEt/EYMQg8
+gcJuxNikX6sW0KsaDkKx6OTxIrGcKqXe1ZaP84jzPzLVeGDxamzCljd0UCenVvKV
+95mdmorX6x8kXcAkLG5jTq/Dza7kySZM/pMJs4v8ICU=
+-----END SIGNATURE-----
+@downloaded-at 2010-01-07 15:50:38
+@source "96.22.210.194"
+router 92BD6BFE91C7A79E 121.243.187.71 10001 0 10030
+platform Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Windows XP Service Pack 2 [workstation] {terminal services, single user}
+opt protocols Link 1 2 Circuit 1
+published 2010-01-07 14:21:45
+opt fingerprint BAF7 4E40 C074 E1DF 89EC 33F1 E1FF A5FE 107A 4BF6
+uptime 64832
+bandwidth 2048000 4096000 62264
+opt extra-info-digest B843B4B7D523A4890AB1B8E565E704CC1B4EE9E3
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAMElRcLEkCh2xJDo3v5xt1+MeNnq6gZAawPG12fzpTWt4Fi99Ec7JIbg
+5A/KnsWuK0pCSdW7IoEIUnshyQMwVQjlpNgySaeQ/26eutFUAeD7ZUFSqpDGSl2h
+BnKZH/o8cHZ9W3gPIz4D0wMofWsqUa3TVI+JFUmPzXjFEsi4pofDAgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAL9bBZMg+RIZxgIXexJEzCe8OOweQEpN/VC+oZIm3M/MSWYJia8YEvQI
+PzUyJqrIsNkdCeWhgmfNSUKdNAMb4wqTHQDT9GX4b64eKwcrtRM6JmJEPQsoWvKg
+UtkDr2tg4qWtVx0NxpOXlb/EbTi3h7sz1o/EYSNAq6ytom9Q6TR3AgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+opt allow-dht-exits
+contact abuse@mail.bitblinder.com
+accept 127.0.0.1:60301
+reject 0.0.0.0/8:*
+reject 169.254.0.0/16:*
+reject 127.0.0.0/8:*
+reject 192.168.0.0/16:*
+reject 10.0.0.0/8:*
+reject 172.16.0.0/12:*
+reject *:25
+reject *:119
+reject *:135-139
+reject *:445
+accept *:*
+router-signature
+-----BEGIN SIGNATURE-----
+SlxF0JyXtTqq9J6vtpvRbmy+Qbr8uatzf3S+fvAgjVWXysOmRJm2//+mFpVLCWCQ
+hQfa6xhCoaccPsVH1LGCqUvMQ2KwV1o+0HjUXJmSWABkxSBW4NWwjiSDFuGfhjam
+RyFNkiQNLGmIP8eljA9oDlBnBqiltJ/pQ/k51otk1hI=
+-----END SIGNATURE-----
+@downloaded-at 2010-01-07 15:50:39
+@source "75.72.116.66"
+router 0A1ED726D25B7572 96.22.210.194 10001 0 10030
+platform Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Windows XP Service Pack 3 [workstation] {terminal services, single user}
+opt protocols Link 1 2 Circuit 1
+published 2010-01-07 02:54:06
+opt fingerprint 518E 9675 9364 B01C 9800 C36E DD3C C0EA B9F0 B4E5
+uptime 3
+bandwidth 2048000 4096000 99405
+opt extra-info-digest 81E68A870AC6F859FF92899C77ADDCE89750730F
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBALcT44K7gohmDfimnYTHi7Y+xsW5E1ox8KKlYTFuwNvCbJ2IjiA5TxYA
+N4E3q5RhIYeqZ7+F4dsxSfpmeNpKuCweCqtKUblvXqggU4IAV3skV3p91EdqRxF0
+jhfN5cpXXdj5M1F51olFMs+UAq7HmVChEulcYTX/NrE3ome6kCf/AgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAMWSdisvkjrvkHBj7D5SeFGWJ/molyU4T3qilOYbGPF1xvZRGzVprEp1
+lcbr3YgqxcIfLuXRG0Ab8mnk5/WglPAU1cXKtsyr12BeuMgNgnLPHVvcgSBPmxf8
+51fIMMzuPlZkdgF8QPf2x4mQ/Zvnk36Nry8/lGZNOv/1cCLRfsVJAgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+opt allow-dht-exits
+contact abuse@mail.bitblinder.com
+accept 127.0.0.1:60301
+reject *:*
+router-signature
+-----BEGIN SIGNATURE-----
+kJdDipKdiUj4uEhYulT93OP/VqzI+OFcqb+hLdw/wEGEOMvv/Hs5GG7GNa0XA9at
+r3g9vGrOg1z8Fc7s78Pa7H6cClQkp5lcuItObchM+3NnKRZZNOuNFbQwYR0ekAZE
+BgZ2rpg2oig2IpBqrJ4+zd3gmVkoXIAi/QEpNQl2vjU=
+-----END SIGNATURE-----
+@downloaded-at 2010-01-07 15:50:39
+@source "75.72.116.66"
+router InnomiNetAuth1 174.129.199.15 33350 0 33351
+platform Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 (r4026) on Linux i686
+opt protocols Link 1 2 Circuit 1
+published 2010-01-06 22:14:15
+opt fingerprint 5FA1 51D8 803A 76F8 5812 A2FF 1586 DFE7 1999 5405
+uptime 2445451
+bandwidth 5242880 10485760 53398
+opt extra-info-digest 71982DB717DEBE044F201D0DB94C8D824FE055B9
+opt caches-extra-info
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAKATo0JmzohxFgE2eW2OZsSCY39TmTKn0gboLoheDECoAm1Q6SNxfWUB
+hctR43CHKU2Ir74t2h6Ib4ayo71W7u9za/RZACGH7BDiUqse/ileW4YtBtt1p1hA
+LYdc/e7DDFIL/Dg4iIJnki+yaJtN4ojAhFH8XmL8GZXlLovYpvKlAgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAMQPPXlbmnBLB6KUi8y/64YITDGg/t2HD0jsfADGcoJnl9d6uhpX/jJ0
+m3M/A315HIJ2ls0ULLdUiap24bh+cBiQsumBwXbxYmVLGI9AKAWjirtX0RLeuu86
+r7JFlJQ4zxstJT1tO+rdYCB3jAbYBeBTpJ5AwIAwAEcKKw/6yPbPAgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+contact admin@innomi.net
+reject *:*
+router-signature
+-----BEGIN SIGNATURE-----
+KRfTQF2qAYYPj6f0V008QbIxt3tOP1pka/XgIe3KgR31uW/u1NJuZyH6NsLLLl7f
+DyLzM62EbmEnup6ftOoH7UvoGe/L7fFrBUGPb2v1FtYQ3YngKGgcZyOwxD1mi9Lf
+e88UjFG2VgXPfkM0zlNcF5zgq2Exoqo4jETcUjiE+oM=
+-----END SIGNATURE-----
+@downloaded-at 2010-01-07 15:50:39
+@source "75.72.116.66"
+router EAAA9A8E6A8F209F 82.228.55.143 10001 0 10030
+platform Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Windows "Longhorn" Service Pack 2 [workstation] {personal} {terminal services, single user}
+opt protocols Link 1 2 Circuit 1
+published 2010-01-07 08:11:41
+opt fingerprint 854A 6893 6DE8 8978 E75D 66B4 C69E BB2E 3D29 E427
+uptime 1625920
+bandwidth 4096000 8192000 92411
+opt extra-info-digest 1BFFF962E0C7C1C1F86AF90AB9DB10294ED6E031
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBALovQHta6flNyazZtl4FxaLw2gp3je0oGNQSD6Q8N4o8g1gH73qYKq5f
+N7vrTTJRUzMcfVz3zqghm7O1WcR4Dl2XEYWL5j1RpomZDf388e27QJtcJEZB2zAW
+FFA3kEbsC9T6YGDaj/7CCMtDSYFPNk7Dk8YNew1m5PpbhXoef3CTAgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBALWiGaZ5NrUiT8tKuEPWNUIdLiwAupstc0j5eTB1yzU5TVlq81gxskeA
+7hsxoY+UeWncZEQJNY4A/eNNTqWN0S4F5etaobrolF1c11OxnZ8qcUqZx+ExUSWT
+1avJuFVjL31zxiW7I5CiPbk+GJhE9eE3cDyD1IpxXqV1W+h86p5TAgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+opt allow-dht-exits
+contact abuse@mail.bitblinder.com
+accept 127.0.0.1:60301
+reject 0.0.0.0/8:*
+reject 169.254.0.0/16:*
+reject 127.0.0.0/8:*
+reject 192.168.0.0/16:*
+reject 10.0.0.0/8:*
+reject 172.16.0.0/12:*
+reject *:25
+reject *:119
+reject *:135-139
+reject *:445
+reject *:80
+reject *:443
+accept *:*
+router-signature
+-----BEGIN SIGNATURE-----
+FqjlFktyy2bz+OHNSDihPKtA5+HFCZwQAH78HoCzS1VG3SBrFOwZ8GUrXH8R4nwD
+dDMWGnuExt1+znWAVIh9tmFlb9BXgpaIvxraT9nwBYTXjfRtbqAh9sKASje3HPnD
+S+EIPZoUKxo8RxsFBUlSEjx6XT3FQ4fOjsyrW9+AR8s=
+-----END SIGNATURE-----
+@downloaded-at 2010-01-07 15:50:39
+@source "75.72.116.66"
+router 394687A5EAA75437 92.135.193.35 10001 0 10030
+platform Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Windows "Longhorn" Service Pack 2 [workstation] {terminal services, single user}
+opt protocols Link 1 2 Circuit 1
+published 2010-01-07 01:19:05
+opt fingerprint A184 E9AB 2BCB 278D 69F9 CF51 783C 95BC 63C0 9070
+uptime 915
+bandwidth 2048000 4096000 48550
+opt extra-info-digest F733ADAF966B779200CBAFDBC9BB835402E5365C
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAKKOesOjlzS2Brk88tK7XpcyKnNmCu6pXgZFdP0Z7IWR7Tm//RXbTX+M
+rOBNnZdLsKiXQChYO8W1KsGDvq8AbKDvpEvXsjgBbsDFROjJB+JVgvqHWdOJxGJZ
+DoTIcKJg4770uOtMP6RrVN8ToGVuVnP9HLM2edeqfTnkvCmeyw19AgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBANN2n0DTl0xzMF7omMx0kRAI+0O7C18DJ47Uyq3HWGh+LKk4s8neRT8C
+PvdzdcRw8nawaDihSHhDkXcPW3wRykKBmT7tbiYlgaSHybzWzm4Fjs2IR1hICP3l
+YqIvA1euRPBKa7f7YS3IwfRsBggFiL7h9M1QiT0THy74X7QKi1CHAgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+opt allow-dht-exits
+contact abuse@mail.bitblinder.com
+accept 127.0.0.1:60301
+reject 0.0.0.0/8:*
+reject 169.254.0.0/16:*
+reject 127.0.0.0/8:*
+reject 192.168.0.0/16:*
+reject 10.0.0.0/8:*
+reject 172.16.0.0/12:*
+reject *:25
+reject *:119
+reject *:135-139
+reject *:445
+accept *:*
+router-signature
+-----BEGIN SIGNATURE-----
+u0hpsBAPnlXBg0DwvnrbFvO6u4y9eVjiQjOVBPbJm6HJRwNGdRbpIr/gxrZQhKn/
+NjIfR08y4IzIQg811wUGCDCuinI6zJuR7TRDdpd4jOAjbN2+4dg4wc3y1bk1xa/I
+K7E/wT2vOGFe0zmlLkkrUzhFoXMSmf63Qfz0MgkxymU=
+-----END SIGNATURE-----
+@downloaded-at 2010-01-07 15:50:39
+@source "75.72.116.66"
+router 873E99C1034DE334 98.236.71.7 8001 0 8030
+platform Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Windows XP Service Pack 2 [workstation] {terminal services, single user}
+opt protocols Link 1 2 Circuit 1
+published 2010-01-07 02:52:59
+opt fingerprint B2F8 89C2 153F 0E3F FD79 2F6A 0585 0F12 6747 10F4
+uptime 1592979
+bandwidth 512000 1024000 174119
+opt extra-info-digest 4B325EE0E4759284A1394DE5B920F1626A1727BC
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAJ+DmQycCJuvD4W3ZaZQp7bZp0cLNAQIc5qjcmVAk76vydubqmS9CmlN
+ZmzHGIULMxPxuOfyUPDhVCuggIEeXFVAYuHfNM62jIdBdoT6e4eGkG8IzSCoU2er
+dAjyM+/jNHOwTUlCKokftXy/ws9O5/4XsZAFjgkpyGGPkKS8CbPtAgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAO9nMslU/48DRngw3vMnfbM1OA1CUPnpDij8HVU7KXWoZJ3tJVP2wmgy
+xgZYB79iRWgmUJ3Ds6EloK0VPdX8hM/RFPRSLnJcoXj2jgGrdAxywtdsWbvQobj7
+0T2B+EjH4i8NYCvPUkebZXdW77I6jcTafGZwSwlcPHBqABSods9FAgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+opt allow-dht-exits
+contact abuse@mail.bitblinder.com
+accept 127.0.0.1:60301
+reject 0.0.0.0/8:*
+reject 169.254.0.0/16:*
+reject 127.0.0.0/8:*
+reject 192.168.0.0/16:*
+reject 10.0.0.0/8:*
+reject 172.16.0.0/12:*
+reject *:25
+reject *:119
+reject *:135-139
+reject *:445
+accept *:*
+router-signature
+-----BEGIN SIGNATURE-----
+nmXPOB3frsVQrxpmL268CSFDUOUFzXHHyGjhw2KzddVVAt4GD/RnVe3/Kw2OYiEk
+EveqyG95wnivRA0JXlIIrIqSk3jYPfe8a8/OX+bFBjz+kutig8G2zrohgD1VRg7T
+IpHsX7orF94zLmbTWhWmZ+bqpgEw88zmQ9/qK8ugD1k=
+-----END SIGNATURE-----
+@downloaded-at 2010-01-07 15:50:39
+@source "75.72.116.66"
+router 0BECCEB8E600A27B 93.11.181.56 10001 0 10030
+platform Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Windows XP Service Pack 3 [workstation] {terminal services, single user}
+opt protocols Link 1 2 Circuit 1
+published 2010-01-07 13:37:44
+opt fingerprint E692 31A3 193A 4BB2 B2F8 7CDC 6266 60F6 4B41 8A43
+uptime 427
+bandwidth 512000 1024000 63389
+opt extra-info-digest EE5DF59F922AD90E887735D6F5492ECB4071C920
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAMraO9uEj4zckLTASb3eZH2FKCSkUgSFmhh7jYxBpOeLsriyerxl7Evf
+vCMpxjRwkomvNmc4d6cQtIP9U0jPYTPYV6Onv8TVXNfH1zh7nZBUuxfgW5B+Z/HI
+IiwWG+k6QjuwJbTQKRLfDuezSNPTYYParU84e7bqEqzcLdFZMs4xAgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBANXhyuyA7zKdFptYp1Ppn5VJGvU82jlucoIXzXSNDqM5NAyTPxaFrC0v
+wpwT1oJyeInUmlvTzz8Fo/x0PlnR/MKPGrIrhvIglks0zgPrDvua/ofIyepeg+17
+4SWibFmIuB/Tma2ybR1PKMu6A1xMvNdeICENk5i4r3NHPcBYulIRAgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+opt allow-dht-exits
+contact abuse@mail.bitblinder.com
+accept 127.0.0.1:60301
+reject 0.0.0.0/8:*
+reject 169.254.0.0/16:*
+reject 127.0.0.0/8:*
+reject 192.168.0.0/16:*
+reject 10.0.0.0/8:*
+reject 172.16.0.0/12:*
+reject *:25
+reject *:119
+reject *:135-139
+reject *:445
+accept *:*
+router-signature
+-----BEGIN SIGNATURE-----
+M/det0jwyVx20wmm8D+g7WORVDhhVifdJ3scaxtMxdL89K+5trZiMod9PleIoudZ
+WSQl6Q8CgXW22W/JUO/wq+K1LELbep0Xq2JOLWviUtxVC7CflPhnJ3RUGnuvZQl+
+h2nzxUV53kPWeyLfp+ksGt57+hkhOPuPVerJpneVcls=
+-----END SIGNATURE-----
+@downloaded-at 2010-01-07 15:50:39
+@source "64.122.230.233"
+router InnomiNetAuth3 174.129.199.15 33354 0 33355
+platform Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 (r4026) on Linux i686
+opt protocols Link 1 2 Circuit 1
+published 2010-01-07 10:13:18
+opt fingerprint 446D BB9A EC5A FE6A 799F 65B1 623D 34F9 80F2 85FD
+uptime 2488594
+bandwidth 5242880 10485760 53639
+opt extra-info-digest C4D84F63C935FD2FE9C5A87A013D77C3AA79A03F
+opt caches-extra-info
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAMLMswzHhNIRxZu7bbuT70YBORlPctL4TATlRy42xKRpfEu59/LW96XM
+drkxEF0KPGNCkUt53375CeOnbnTSdBOHMy6qAIIg8Y4BzIl96HxDQDb0jjSue5Bq
+E6pwk3Cc6TeVJmerRipjf/R58Cckv3BVF4bQ0EZjV4dkxJQ6fZMNAgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBANbOyQIl5QBojriVuIe3tXCWBJIaiD4wr22BDy7S1tSPEA/yAm52kizo
+U7VcS03PKYxqLi/fQQ7iSJ50kw+rK2iQlPrti4ZxQNtrOFQMEJPliZKfQQhyQMiz
+71ce/GX5/kvZ5MaaT+WpsdQsHuefvWjtKNtHlc+Ne0K6KspDGqsZAgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+contact admin@innomi.net
+reject *:*
+router-signature
+-----BEGIN SIGNATURE-----
+YLUMRWZrlU2ALmdSmUtaA/b67Kj+K6bZt/n/A2LBQJ/M2beB0GTqw70H6K6RKffO
+OdJBk3Kws0JNkN5hpXDtL/JAWjP78zMmTFBRtKxvhLf979SpACeqTeBtUAuJTFps
+cqQJjj8uArFmVTdrZK9S24gV0KMA1aEPZFMMHCM/ccI=
+-----END SIGNATURE-----
+@downloaded-at 2010-01-07 15:50:39
+@source "64.122.230.233"
+router BC96D2BF10B218B3 220.233.13.190 10001 0 0
+platform Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Windows XP Service Pack 3 [workstation] {personal} {terminal services, single user}
+opt protocols Link 1 2 Circuit 1
+published 2010-01-07 12:31:24
+opt fingerprint 56EA DD8E 6629 BF4D EC99 C57D B2CA 3CC2 31DE 663B
+uptime 671
+bandwidth 21504 43008 64428
+opt extra-info-digest 072542B7F7A7F73CAC672B5629688FD9AA73A1F7
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAMBc3ziMVFu1esWsfptNQbazSrYfI1P0ZXWOpxpp896YnbJo7TFdTwpH
+CjPYAI4TV0jwn6DSY42feIXCPun3QKCpgxGXRGFhsFp99SdqLdInRYpRb4mXLSZO
+PAgLIRxqzdpHCuiec6QZ9pyeYRKh5n/Pi8Up+HYxA1shvHBWToVNAgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBALtS2WBYf9dErXLEXqiNuCQ5QMMTLaF+Mb8UuZxo5rx2n2iYIIO+7m9X
+7CodlYzKGQTKRWLrGAPCPqgxhcCzaQDk+2MuX5Pc5hQCXx81GNdaHqNl1XfoxbtM
+VBn8M5V04d+porzN8yJiXHjiz4Y/pMdU25uBNotWxP5zBStW2btxAgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+opt allow-dht-exits
+contact abuse@mail.bitblinder.com
+accept 127.0.0.1:60301
+reject 0.0.0.0/8:*
+reject 169.254.0.0/16:*
+reject 127.0.0.0/8:*
+reject 192.168.0.0/16:*
+reject 10.0.0.0/8:*
+reject 172.16.0.0/12:*
+reject *:25
+reject *:119
+reject *:135-139
+reject *:445
+reject *:80
+reject *:443
+accept *:*
+router-signature
+-----BEGIN SIGNATURE-----
+GOTUAx4bvWX2otXx3rj2Ql46vm38XmaMke1cgrSRF5LxfnlReXpzTmk/Rz8SX4Jt
+WpUvk94ZyTF+lJiBvgufMsDZ5zjHijDn5DZzkLHt7AHJxjCgg+7ULXsAGtSEPfi7
+lbD9S8MsOWdXcr5/nMvnmU+V46GAtA6/68QTdR18/Go=
+-----END SIGNATURE-----
+@downloaded-at 2010-01-07 15:50:39
+@source "64.122.230.233"
+router 9B452E3761D5AAF4 75.110.43.65 10001 0 10030
+platform Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Windows XP Service Pack 3 [workstation] {personal} {terminal services, single user}
+opt protocols Link 1 2 Circuit 1
+published 2010-01-07 02:28:07
+opt fingerprint C8A1 3CEE 634C D41C DB3B 6100 A246 1A05 9B86 6846
+uptime 83940
+bandwidth 409600 819200 84039
+opt extra-info-digest 6351DD66F528EF9DA928591D7320ABBFE94A780C
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAMtUlhQaTXk6dhK4W8kw7UNEesTpEPqpptJ41fDvFmGl3x6MqMZYu4vj
+qILjCGtZfa1mmmKeGa9nnFHawUEV4l094etnbLulNPxr8/Ad7ad6e0Hza6EEcUgB
+uYILNpZwGds2b/37aftxudRsEb2vLmmNtqN0Cw9klucl0Fsi83JvAgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBALXrpTQK4HoZIKOaY2JmGdFQrpqpGEiEh2OT6ZC8sFjFQGzVKWB7em3f
+Dpqsc8GWBFpsmDuE7nIYfFJFn2al+4ztzKI9Aa0UqN3ak9hZbeUb3zoR3nnzarOg
+7zCLFpm+8IxWAISNBZZYrpCLGghFnFmjJpMpe0+VOHNHD4c28i9FAgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+contact abuse@mail.bitblinder.com
+accept 127.0.0.1:60301
+reject 0.0.0.0/8:*
+reject 169.254.0.0/16:*
+reject 127.0.0.0/8:*
+reject 192.168.0.0/16:*
+reject 10.0.0.0/8:*
+reject 172.16.0.0/12:*
+reject *:25
+reject *:119
+reject *:135-139
+reject *:445
+accept *:*
+router-signature
+-----BEGIN SIGNATURE-----
+cEg66r5xwwUFURQ7pzWL0OxvACPVNAP7mDFVt6oztsML3Ob+dN3i8wGADdKYqJnD
+8FOZEY+vx14DJdSGT4DA8ZzAqD13aX/gs2LUMELP118PDBZB4FSV2P041Q9jrFKD
+BU8hJ3bJfbWrdIa1MlHnADW0SEhXUUIeiq/vsvPxdv8=
+-----END SIGNATURE-----
+@downloaded-at 2010-01-07 15:50:39
+@source "64.122.230.233"
+router InnomiNetAuth2 174.143.240.110 33352 0 33353
+platform Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 (r4026) on Linux x86_64
+opt protocols Link 1 2 Circuit 1
+published 2010-01-07 06:08:08
+opt fingerprint DBE5 A0E3 E122 C67A CF22 BA02 44AE CCE9 7E3E 7B99
+uptime 2940312
+bandwidth 5242880 10485760 46196
+opt extra-info-digest 7284F779A100EA13E4C6DAF76E2871A6A1AAF168
+opt caches-extra-info
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAN6ffrsGcrezZj0KEvteBq6PxhElfSSA0WuWbAh5EpRLJupYKWMpZqDy
+UVBl1CZyZp9DpajEI6N01FfwWOEBXVJ10LlaMqkDL2uEi7Awh2075aiA8sFXwtVN
+69xFqkAa02WeSsFB+8OTfnO90Y1bOyLh8/HHSziVodsKFSbR3zoXAgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAK0gojAOvhgnw9mRk/91qo7jigQ9aNUPDsTPy4HPI/MxGEwmoCcD0SGu
+vnPrKW/gVXma6fBZOvST7AX47UMh3iGvA41uZCYzdpai5K5s6u7fYeMdMeNE5e8v
+8uD8V0w80Yuc/Rn/rwqvBAYlmia3s4vNxlaVwirscaaXqMoGSW7fAgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+contact admin@innomi.net
+reject *:*
+router-signature
+-----BEGIN SIGNATURE-----
+RNb+HA7I+woNvofTKZhx2lofjrESHfzPjoAIlUo9oKL0yqLOtzjb3t6hCc3wtys0
+7Wk7ntJs1p46xDLbvnk2MaTTIbswKQyNiHlyD7KZTfQ3a6pstudCA4T23bEBYqlN
+qxVxuu/SRizqoIsEUXLmb+N5WqJ7+tP/8L/3SHJYew8=
+-----END SIGNATURE-----
+@downloaded-at 2010-01-07 15:50:39
+@source "64.122.230.233"
+router 791B008EEE3BD27C 98.194.177.74 46835 0 10030
+platform Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Windows "Longhorn"  [workstation] {personal} {terminal services, single user}
+opt protocols Link 1 2 Circuit 1
+published 2010-01-07 03:57:37
+opt fingerprint F3FD AB26 0D07 0F05 A8D1 021A EDD4 85DF 69C7 1462
+uptime 36297
+bandwidth 102400000 204800000 62764
+opt extra-info-digest D0609826B016D399202B03414674DD5FD0266234
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAJp+p7NEN/FmWDfj5adf85NOMxGbcsRTWD8aVMGx9GDJw3dbn10BTuRS
+i3VNIWHWDWvFO65Uu0JuewzpMtyps2wmh/qJSco7bGcuLG2ozQdDReqxFnUuoKza
+5LJwASFbURDnIzn8AWvK13e+SBBgZcHXfG4pNoQsdv8q94QfcQnzAgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAK2gISryXRw10EQPqI0pzPjX0l3AfL/Ff7GDBOonF0p3KF77JXDUmf0X
+6QYeZ+1IEocdrxvVu7k8irVPvU4/zSnZAuWnnd7Je86NCUUJNPBI1E/fbDIyH7TB
+OlFazUKbz9cUMxd8MSb8MTRZGQm1Z0fDo6kEYqEZgVTVJ601qlBBAgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+contact abuse@mail.bitblinder.com
+accept 127.0.0.1:60301
+reject 0.0.0.0/8:*
+reject 169.254.0.0/16:*
+reject 127.0.0.0/8:*
+reject 192.168.0.0/16:*
+reject 10.0.0.0/8:*
+reject 172.16.0.0/12:*
+reject *:25
+reject *:119
+reject *:135-139
+reject *:445
+accept *:*
+router-signature
+-----BEGIN SIGNATURE-----
+XnYUPUIyw/7HkTKC4RD4QLCuc3EX2RIEroP8MNtHwqY7UEDGWqNoqAQL9eQTRDNv
+fFPCrhOX3gXNdIlyYpLI5q/plPXfgkpRh65lxVGG/obyuRnNX5qasE9PWK+P46Qq
+nmOZ7EVIo7xLrrV5SUMrAD45zv3f56B5Jc+yYlJGmR8=
+-----END SIGNATURE-----
+@downloaded-at 2010-01-07 15:50:49
+@source "96.22.210.194"
+router 1DA9F03ECA0916AF 89.12.185.34 10001 0 10010
+platform Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Very recent version of Windows [major=6,minor=1]  [workstation] {terminal services, single user}
+opt protocols Link 1 2 Circuit 1
+published 2010-01-07 15:41:30
+opt fingerprint 268A 9F38 4FC5 98D7 55B7 CF86 F041 A939 8E56 332E
+uptime 854
+bandwidth 2048000 4096000 38490
+opt extra-info-digest E9C7F9B56EC8CFAEB2F50E792B1C3DF056E189D1
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAMxru4tkbMBodXlVGYSCHph5J023PSwmtjnfXRWphZCA6ctApX+wyHZ2
+s6ghHVrId6v4rkNiPXF3YZ9dsA+QLbaIKI5CHmZFoiZASwfN/8MXDzsk6vyUwg4R
+rkCZoUiyI8psx9KsOVZxAysT8L6lMThVlyBY3SwMpOQxeUXv/wLnAgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAOwsD64/vsDI7M2GIkhr9UCwZg9VwXxLMRy2IfaqrKh61D1PX971emxy
+JGGNViTYL58ygKF5SN0FwUJ4DnmKSEgXG5DZYpo/3Gol3qYDUgMb6sp6lRrBnPLr
+8h0o94OqmDDt4XETj+VZweVTCTgEPpk5kz7SezHRKtCFlNwDLHgVAgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+opt allow-dht-exits
+contact abuse@mail.bitblinder.com
+accept 127.0.0.1:60301
+reject *:*
+router-signature
+-----BEGIN SIGNATURE-----
+dyHjQayLFnfgUOPVWFE4CGeb5CEuw9uHiNqKWLnOEffgGgzdx4rdLKIsoB+tz5vc
+XXJ/Z+8W814L93KFnaVyozX0BRCPiRQNc4m24nGngeYX47r6v/35TamTgV21Ttv3
+PeP1f90GZkvfzhmhL0EuYHfI46rHV7qEvGyhGNl+Hrw=
+-----END SIGNATURE-----
+@downloaded-at 2010-01-07 15:51:39
+@source "174.129.199.15"
+router B0BB24845E3C731A 201.208.246.68 10001 0 0
+platform Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Linux x86_64
+opt protocols Link 1 2 Circuit 1
+published 2010-01-07 00:05:30
+opt fingerprint 2F48 DB66 F2AB 4C5C 1DD9 4B28 A005 DB71 DC77 58DC
+uptime 65213
+bandwidth 21504 43008 46582
+opt extra-info-digest 4A42A42D7EFB369C7DF2E7E94A3C670FC7321C66
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBANJZBIi8nK3XDR4BuYQB3/R5H84RS/81bHG5yPIQu3XcjuKDm7QBAwt3
+zHZo+310gpFHu+M9Y8LdpAA0s7G/noXqk0DA2uH5MVBllLxta8/qAKPpwYPKnSlT
+hJQ75ZLVQFjf8DVL6hoNu6VWpcmHhJJ9FnZB6nuVcE77PEon24e9AgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAMbDutiWmRIoUL7jHLNnyX/oFb3HL+zbLpcg5RWZYNF8IJySJQKdmzpF
+AkFEKkfM3smYo41p5xEataU69SlK+exLiSGEOQCS9HjfbEToQy4ikY+vX+H7D5BA
+6Yarn3iooLx/BSoT8EaovgJXxsGnky3De2S5ax//4kQqd4nsoZutAgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+opt allow-dht-exits
+contact abuse@mail.bitblinder.com
+accept 127.0.0.1:60301
+reject 0.0.0.0/8:*
+reject 169.254.0.0/16:*
+reject 127.0.0.0/8:*
+reject 192.168.0.0/16:*
+reject 10.0.0.0/8:*
+reject 172.16.0.0/12:*
+reject *:25
+reject *:119
+reject *:135-139
+reject *:445
+reject *:80
+reject *:443
+accept *:*
+router-signature
+-----BEGIN SIGNATURE-----
+NUeeHWquA3HNRWruS1+4Dq9PZkTl2C2YZdH3dt3khrRInS9o4HzLSRpItepOu3uO
+VOeW255hRMvf8hWdyUPFghIuM19uQa6Pj06oZmfHmg/UsYrBdiBBX7AmAjyP83Uy
+0uz7Dup8TY0u+AEBwBvevmoMtOgB/ubN3qu05tQf+GU=
+-----END SIGNATURE-----
+@downloaded-at 2010-01-07 15:51:39
+@source "174.129.199.15"
+router 7E0977FEA3874B6D 97.83.146.132 10001 0 10030
+platform Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Windows XP Service Pack 3 [workstation] {terminal services, single user}
+opt protocols Link 1 2 Circuit 1
+published 2010-01-07 12:44:12
+opt fingerprint 4B91 2935 F371 ACC7 5B4A A229 699B 4E4B 1463 6005
+uptime 305
+bandwidth 2048000 4096000 50113
+opt extra-info-digest B9299D254356754CBE89A687CB3B75368CD862C6
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBANM7bXGtPiMIA0Wd1rvHcws0UCf1l5982sjctcSNS969vIjsnvU7j/BC
+G7NJWhL6ZrfkIUS3s2O2w3/9RB7q43zZfRRSucDvEBB0/9smQ1fZtri73KGGzAwl
+0nNPf1z8GxEBdyDvj1qubJz2RyJcLS8sJv5SP8p3DkuFpGJT5cC3AgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBANgnAOy9EyfCeBH4ma8KmnJIoPb0hvTNZeRcQ3KKjNu4vKSS5qpQgI/x
++GIq71oUs2qqhbGpcAGdV+XJ8wNOJ1i8KMZKwNzbemF0g872B8dCGqwbsA531Qp7
+/9PpucljyHV212r63UPq+LWa2ulSc6Gn5IrmMAFILQQCs8/02qTTAgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+opt allow-dht-exits
+contact abuse@mail.bitblinder.com
+accept 127.0.0.1:60301
+reject *:*
+router-signature
+-----BEGIN SIGNATURE-----
+hiSXK79TTVA6D8Do3wVWEAXm1sM4LAp+pPnspS/AcvooKradW3Te2p52D5c3oyAx
+9T1nqIrigHGEo6q5E27uHf1E8wSw2bAShI274HZfTcDmislAN8KWQjyQRIU9mLCC
+NMeqMxKnGwsnoUH3Z+ob3nZ4HwuFv8Kuq5A+BY3X12Y=
+-----END SIGNATURE-----
+@downloaded-at 2010-01-07 15:51:39
+@source "174.129.199.15"
+router AEAD3EB478579E60 89.240.115.72 10001 0 0
+platform Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Windows XP Service Pack 3, v.5857 [workstation] {terminal services, single user}
+opt protocols Link 1 2 Circuit 1
+published 2010-01-07 01:47:27
+opt fingerprint E259 F669 DBFB 4038 7473 389B 1764 E260 25C6 54A5
+uptime 5246
+bandwidth 2048000 4096000 40636
+opt extra-info-digest CF0FF891E56F3299144885A1DA5F0C64D2B98C03
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAMjr5/+rSNLutifAbQkorZlLZMddDEM23ygXMxgkMAmEu3DfABYi2Mzj
+e6UYpcwJxaiux/B8/ib+w0wBA3orEtw6WnGz0kUQMRFpl1TH3zrbL4TWWCPRJLc8
+JQaQES2geajWUOaNZGtImESxIHTajVYeJe/RnUZiMjzWJbqOlV51AgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAKS6Wbo9IGdjTjPUCiMxT67mSA5u0ziYdqe0AxnSB2XHJxbLc+TGxx4R
+t65rvKM6P633/7RipzekWBs7KrXLvj28VhFMNBuNpncB2zy2M7y/CuhD70AcfCXz
+2luinei1RVb68cFkdlh5S1Q+jGrUdsY1zp2WB220uRkcgcuUUh/LAgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+opt allow-dht-exits
+contact abuse@mail.bitblinder.com
+accept 127.0.0.1:60301
+reject 0.0.0.0/8:*
+reject 169.254.0.0/16:*
+reject 127.0.0.0/8:*
+reject 192.168.0.0/16:*
+reject 10.0.0.0/8:*
+reject 172.16.0.0/12:*
+reject *:25
+reject *:119
+reject *:135-139
+reject *:445
+accept *:*
+router-signature
+-----BEGIN SIGNATURE-----
+YgyKOGha5kV1yYECes6IjuraCnq5MR+VIn0Mn1IdfcgkJa1pZdYxc38ulKWprMud
+c8AKcg0FtkkDHnWxm2wxq546rpS1MKf/6Xo+iK1USN44Z/R2e9d/kJPRWQpHcccl
+ZZXamdDTcDh0VH/DChbprEwJflaEP2az4N+JenRpcF4=
+-----END SIGNATURE-----
+@downloaded-at 2010-01-07 15:51:39
+@source "174.129.199.15"
+router 0F38615332E5A3F5 98.236.71.7 10005 0 13424
+platform Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Very recent version of Windows [major=6,minor=1]  [workstation] {personal} {terminal services, single user}
+opt protocols Link 1 2 Circuit 1
+published 2010-01-07 13:55:06
+opt fingerprint FDFD D2BF D5F1 F068 A74D 5E62 F18F FC9F 8858 562A
+uptime 0
+bandwidth 2048000 4096000 0
+opt extra-info-digest 913DEA40D0A92190A7C7EAE7E782DD3B55EBBFDC
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBANux2jNGcmDd2fV2jI2bbGI4oftTXmZQzoCz7yNFYXglS2ka8O63JLM8
+rqjZf8U3gdQQf1aOxG62sNFx5ysJzWgRf+J6IZg/1eK/sombT599B2XRYkUGtbxC
+041KOIeRD6yvb0zIo7w3gGnrGr/sjQuDKvTepVPwC5UL7Z4x3PBNAgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAOqN1PNZDb+CE5kCA4KeT23XBbiEiNs4oOU+tLdb0lwFT15/hfANHlXt
+1Pw0MGYIepQB6wmlyCUp0TiXloLK2wRZifFNt5suzXxcSn2pb14IG6yevHYpAp12
+Fg4grQ2F3miM9uabJ6m2/4mwSJ2RP8qYzWGZlgNfBQbWIh81aNVzAgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+contact abuse@mail.bitblinder.com
+accept 127.0.0.1:60301
+reject 0.0.0.0/8:*
+reject 169.254.0.0/16:*
+reject 127.0.0.0/8:*
+reject 192.168.0.0/16:*
+reject 10.0.0.0/8:*
+reject 172.16.0.0/12:*
+reject *:25
+reject *:119
+reject *:135-139
+reject *:445
+accept *:*
+router-signature
+-----BEGIN SIGNATURE-----
+3a7TKtx+Pifzwmco4ZTJmcAkA0ejaK+j399CbaqbbTwyDyh7l/Mk+I4SUwEo1NAg
+7eVrcrsyQDFsxEuO0ghwyhiBR9DlNIl+TlemHwt1ERGlHNRyh50dppYbXD3q8ngY
+2ZPrzV3jYsfVkvs8lk4MJJ9lXjaU0pxKJg4jLgaCPl8=
+-----END SIGNATURE-----
+@downloaded-at 2010-01-07 15:51:39
+@source "174.129.199.15"
+router 4C90E31C0D8DEFE4 79.13.23.41 10001 0 10030
+platform Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Windows XP Service Pack 3 [workstation] {terminal services, single user}
+opt protocols Link 1 2 Circuit 1
+published 2010-01-07 07:16:03
+opt fingerprint 0349 AE98 5B16 9024 8698 8317 DDE6 F207 6886 CBC4
+uptime 27
+bandwidth 2048000 4096000 0
+opt extra-info-digest 21CEAB1EC98BAF33E3F411DA4BC74D7A3AE69D51
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAMY4kXZj9N1DqfCNHko09TFsYi2hSubAeprsk4OEaZ4oTGejXozkPyEi
+JKmaUxuNOy3DBitt4b10jZMKuoFJ+EEykxZPMj0ONhrBi6iLj1K+CUqhY1LCC31K
+rSiNIrvDFyrzWKrp+E5Db91hy5GXeCTRGFm8ijYBXdn6mJxRgaKvAgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBANNcRS3QEMmMuFTALuVsDVyEGKAwtCPden2tPjD1JbdbCNbi3ubaBbLU
+leu1P6MwUv6p4e+x+SDeiL+nnaAjXAc/X6LklSVnot1WwgFr5JuCN4cHTyz25EYh
+ggt505Vk3IaoZEAg2ccyov1aNBH+NddYoHYQcUFGZFphhGb5FoZPAgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+opt allow-dht-exits
+contact abuse@mail.bitblinder.com
+accept 127.0.0.1:60301
+reject 0.0.0.0/8:*
+reject 169.254.0.0/16:*
+reject 127.0.0.0/8:*
+reject 192.168.0.0/16:*
+reject 10.0.0.0/8:*
+reject 172.16.0.0/12:*
+reject *:25
+reject *:119
+reject *:135-139
+reject *:445
+accept *:*
+router-signature
+-----BEGIN SIGNATURE-----
+wXFsv9iUqlOH/jKpGGhNojeVn0MB47enol4SeFQ/b42Ox4dRlEiV6r0LXbsx/jxN
+N9M1DfG+jiaxf/XEr/W4yFc5zIQP9MLSXlI8FW/6A8BDLkL/uf7YfCcUFVVvV/SM
+18zLsMa6u5T1SK5kEpjQvfc3tvFNGum7XEP8ic0oFKo=
+-----END SIGNATURE-----
+@downloaded-at 2010-01-07 15:51:39
+@source "174.129.199.15"
+router 835CB8085406B8CC 62.31.65.93 10001 0 10030
+platform Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Very recent version of Windows [major=6,minor=1]  [workstation] {terminal services, single user}
+opt protocols Link 1 2 Circuit 1
+published 2010-01-06 21:36:02
+opt fingerprint 2DA3 A6AB 940D C0B7 0683 7557 6FAA 0B9F 807D 7159
+uptime 976
+bandwidth 2048000 4096000 52684
+opt extra-info-digest 7587868E569EAF95B8E012884E67E1A83E149891
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAMhMLkWsM2vUu3WtptVgZAhsBPYT+RtbYQnx3nbhXGyTJ51Ghgg63Hdp
+3Ofv+QzQ2Yuf0I4yelInZ0uhH/qkiG9MWLv9iGujsPZFL579+s/7LiQ/WdV4hcWu
+QFZK0qNIvayfkNHAjYlk/80fmYYdvx1jdbdWCtH0XzQVYnDykfbLAgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAJQZ2K0D4dlycaF+NrJFAmHg/NBPyq59PLvb9fCqxJoh3sZWlwhPMmTN
+3B92GJ1FC3pOVS6dTAJMuE3cbE93nZZohWwzSvxSoiqe5ZcDV1BliVt2WiQ0Lxqj
+f/miKIEfO7esJxtfU+4GfuWGnESwoWP2y6rbDGJ6DHWJzhSalq3PAgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+opt allow-dht-exits
+contact abuse@mail.bitblinder.com
+accept 127.0.0.1:60301
+reject 0.0.0.0/8:*
+reject 169.254.0.0/16:*
+reject 127.0.0.0/8:*
+reject 192.168.0.0/16:*
+reject 10.0.0.0/8:*
+reject 172.16.0.0/12:*
+reject *:25
+reject *:119
+reject *:135-139
+reject *:445
+accept *:*
+router-signature
+-----BEGIN SIGNATURE-----
+aeT6HOMf3VZDug9QHh9oqtrsNwbIUa9tOb3RJnGz3zUb4dDWvUk75HZzsbK+k6eb
+5H9qaHSct3VG8Ubqvmh70h7PpcMbidDcuMuPYyYR85uJ8yyqMduaNGb1cJw2xBXz
+Tjr/zn3pS4vb2Lcsiz0O9A43KyIPdolHSkRpN01AyV0=
+-----END SIGNATURE-----
+@downloaded-at 2010-01-07 15:51:39
+@source "174.129.199.15"
+router D749C49FB5DC3B04 208.69.32.132 10000 0 10030
+platform Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Linux i686
+opt protocols Link 1 2 Circuit 1
+published 2010-01-07 14:41:16
+opt fingerprint 4CD5 11E6 7325 197B 21EB 3D06 3436 2E6B B392 F4E2
+uptime 732
+bandwidth 2048000 4096000 2645
+opt extra-info-digest 37D2AC1B523FF9FD18A9E4A0092256DB406946B2
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAOKL+R4b1jqZM3S8GhsKUyOkOKqdzw0vSVfs87qh2uPRupcJDIZxmLi5
+yTWNvoSeskLvQGdL8ZBgtZUn/uvuknfcERs4NwlK6RV5uPwcld8+lWObsbcHuPP3
+DadAfxAnGboR1gatfwEhu89pdh3x2hVM6qG+bUAJevENm/zvhmfjAgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAMBIwM8CAD9+sKwPuHV6YIwhjLR6RxEjiwxBtWNDdPSAGpxcQBSSpf3Z
+HCSaegOpvSeNW0sXwjcCkub8iFKZXggdcJeA69/MqpJNEg13Z+P48owV1+2+C6ET
+iILN9xclioBU0ca+zbrvzfjvwBmoLWTE5HHmP0GZ6dllA7zARUdtAgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+opt allow-dht-exits
+contact abuse@mail.bitblinder.com
+accept 127.0.0.1:60301
+reject 0.0.0.0/8:*
+reject 169.254.0.0/16:*
+reject 127.0.0.0/8:*
+reject 192.168.0.0/16:*
+reject 10.0.0.0/8:*
+reject 172.16.0.0/12:*
+reject *:25
+reject *:119
+reject *:135-139
+reject *:445
+accept *:*
+router-signature
+-----BEGIN SIGNATURE-----
+s2Rc9Z7+ikCFOTXOXDXrHKHhKNffrqbhpHilzEK9gofhHLfpKB5FaE2znYfD5uZ5
+Ln+D/Vo1BYWosvoBN9Q0ydi7tsiSr1VtRG0cy/6dkuBfbY7kBjmK0xWv2IahKyqE
+bxCYtmE12QIx41d9/YSq5Wi+gRIWeDZpHQMUjQK+TnY=
+-----END SIGNATURE-----
+@downloaded-at 2010-01-07 15:51:39
+@source "174.129.199.15"
+router 2D1098BAAC5DF80C 24.243.2.112 1614 0 1615
+platform Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Windows XP Service Pack 3 [workstation] {terminal services, single user}
+opt protocols Link 1 2 Circuit 1
+published 2010-01-07 13:32:05
+opt fingerprint 501F FACF 1611 234C 834C D9E7 882B 9942 F314 FD13
+uptime 2670
+bandwidth 2048000 4096000 47273
+opt extra-info-digest 873BB4FB97148BE16AFDC439333399416BFBC330
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAKBSSrjjm+GoSLfU1dIlxZbjRMB2ud59o62fdBl6u4rDKfFtolLqHtuM
+KflHuBgBrRrTCAw4VRb1RyHhWlqwmadO2kr+6FtplG07mNBURenB8r5a1oZUgluc
+mDxam0Uj4/tAnQUCGpyG821QLNfbeOB27AJHu9S7xNQbHs305WgrAgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAMPRU/uSogbpz2GYdBrSArNphM1+mMJCecSCXpeRUeNIgHyUnA2FJLNs
+1uyFX4TH/cZLSYHamFUUQiHcdwqC9TI357dxmpzi7RxwIixzFR2Jek3N8/gRiJfO
+AV+kuoyAcLJ1GIg7EWQAr/jS03M+VBrnRMo6s39KQJioYFVslHwPAgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+contact abuse@mail.bitblinder.com
+accept 127.0.0.1:60301
+reject 0.0.0.0/8:*
+reject 169.254.0.0/16:*
+reject 127.0.0.0/8:*
+reject 192.168.0.0/16:*
+reject 10.0.0.0/8:*
+reject 172.16.0.0/12:*
+reject *:25
+reject *:119
+reject *:135-139
+reject *:445
+accept *:*
+router-signature
+-----BEGIN SIGNATURE-----
+BC7SSTStpTSdWT4pLNSOJFdBMXR/hiWppM/fs5YFODOjIDkeuKamY+HZT5/9XM9u
+nEmvM8B0v6hIfJ4O2LDNHcStW17amYn82JaqB3KtgKQUbN6MLuUtF2xb9xGqSNl/
+f+Z00uADMaVf+lmefIOR9gVw5r2ofnr6oN/UEGtzfPM=
+-----END SIGNATURE-----
+@downloaded-at 2010-01-07 15:51:39
+@source "174.129.199.15"
+router 3D4CEF6C18994C85 63.134.128.228 10001 0 0
+platform Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Very recent version of Windows [major=6,minor=1]  [workstation] {terminal services, single user}
+opt protocols Link 1 2 Circuit 1
+published 2010-01-07 01:21:16
+opt fingerprint 5783 7F84 A37F 95EE 7C3C 0E5D 830F BAFE 2F9F 59FF
+uptime 0
+bandwidth 21504 43008 0
+opt extra-info-digest 59A0D8CBF81A538B09446F1AB5D9F40DB8BBA044
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAMfV2WBGg9c/qDlFEUAzUqucSptOZ+Qyc95qHW8eO9Spqnnqjhbhcs4Y
+54Y1Hrlx2k4BWNBgjlkzru4IQOU/z8kfxY5B862yX5lvwao/4HkCFQSL/qqO2hCt
+n9UvfHD9RXACnA2XF0RpTSkXKOc3c7bXk7T3t/UofHiya6a2giAtAgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAL6COE2mFUX5huiXmw/Txjt0W2qCT5Sx6tSg3KH8J8iwft+z8/BoV1UA
+/jPoCqOHCXWXxgqT59bbuWbG4jGXGLAUglLmie+bZ1VRydPmP8FNxF7yN8nUOqqQ
+cmXGLamBp4y07zx19sofQjEPjt4Pv3RQ2YiqFmMVCIMW95coOuzjAgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+contact abuse@mail.bitblinder.com
+accept 127.0.0.1:60301
+reject *:*
+router-signature
+-----BEGIN SIGNATURE-----
+FXq6v3AxjMvF4KhZ4le01vO6Y0Pwm40NWCizdDRwtdnyCSssHpYUZODDOCd/2MtN
+a5FbEcua1yt23ocLhBSFXsmSUwxhyo/4r8ftKC9CghI715z+3mNxGYuDhXWhOKcg
+l2zMglKMv+X7rggfAqbWQRH1Dd1Z68gcpfbC8z0FLBo=
+-----END SIGNATURE-----
+@downloaded-at 2010-01-07 15:51:39
+@source "174.129.199.15"
+router C9561DB0C012E185 67.186.6.165 10001 0 10030
+platform Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Very recent version of Windows [major=6,minor=1]  [workstation] {terminal services, single user}
+opt protocols Link 1 2 Circuit 1
+published 2010-01-06 21:30:38
+opt fingerprint 84AE 2451 2461 3854 D9C4 F777 8557 6A8C 5784 0FAC
+uptime 855
+bandwidth 512000 1024000 50882
+opt extra-info-digest BBF96469BB1FD83563C1006DBB5B9CB86E364D54
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAOOqTujjxZMEA+tDLoPBoEkDCbxe91y27RB29i7ibUqveN/frv9YlnhJ
+7pU7UqkfsSxIvlLW1G0AgJKkgI9ZrB4lY9Fsz9SGI/41MRLzETMOfQm62Ci/hvrI
+g5azONBXWevnIEyL77P45zsyGohr3rOyxrltR5XH5EybsmxiYki5AgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAK2AjFY2UF2ol8RGkJiN7X8qVFryrZl+qAHRE+4m6MauaU57vEBVb9G1
+QhgdUO/3OqfWsaZ+ORHUu1Y8IaUpg/7L2xAFhUR6DYwszsn2n5rhBH64N4rZbGS/
+tg8GF6Ro3d3rMTPgpZzhdjHu6dvCCwtyIMNnycdMj7Ko2u0PVjv3AgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+contact abuse@mail.bitblinder.com
+accept 127.0.0.1:60301
+reject 0.0.0.0/8:*
+reject 169.254.0.0/16:*
+reject 127.0.0.0/8:*
+reject 192.168.0.0/16:*
+reject 10.0.0.0/8:*
+reject 172.16.0.0/12:*
+reject *:25
+reject *:119
+reject *:135-139
+reject *:445
+accept *:*
+router-signature
+-----BEGIN SIGNATURE-----
+qbPzI4RHVSJVM+cSFfLZp3wLwLZUXMJdxU2YHyfOU1ye2lS8DFlg/k+O5b8WlsuG
+NW1lbjnKUaY7DIMUYMiYikQDuK+MVYtRG7wbaxmvzJKH8QAinHIwpYZXzo4vmJ+R
+wYDD1kQPGHz6KCQ+LyiLv0gouBS+PgFgTobz69uP+R0=
+-----END SIGNATURE-----
+@downloaded-at 2010-01-07 15:51:39
+@source "174.129.199.15"
+router 836F14858D64B897 71.59.234.13 10001 0 10030
+platform Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Windows "Longhorn" Service Pack 1 [workstation] {personal} {terminal services, single user}
+opt protocols Link 1 2 Circuit 1
+published 2010-01-07 01:12:33
+opt fingerprint A4CB 8F3D A9C4 1155 6124 8873 8D82 4D18 6BFF 9AEA
+uptime 0
+bandwidth 2048000 4096000 0
+opt extra-info-digest BA3FFE7118151D02A2CECBB5DA8D79F9AB05CBB7
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAKroCRNHfZBdMe5huSC+eF88ZSu0f29DVdjMbkqPz27aar6deACO56Uc
+q4KW0qfxkr4AuPWfzfqVVoOSrxrOrkAs7HRXjg2CqHVoPfHAFEWSz0Fcf3FgV3/V
+WJiCsSZcNiUsBk/swJktdSpYBB1I0ae387C6G8VC1N5uCHtNpinzAgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAKrj5YuoH8c47KgyWVblB4kUxTrJ0yQArte12kHHI34x1hOFlV7nqXty
+BWEBNy3MnvbGhe+qlDK1qRYtMdK+RuCXPVuWkxq+S+YQrqTMBVRV4hMzYLNLXjBp
+HfIHfpi2G0AwsWNmfAd+ux9rR6De83W85qAzCeHPTNiw373bomtFAgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+contact abuse@mail.bitblinder.com
+accept 127.0.0.1:60301
+reject 0.0.0.0/8:*
+reject 169.254.0.0/16:*
+reject 127.0.0.0/8:*
+reject 192.168.0.0/16:*
+reject 10.0.0.0/8:*
+reject 172.16.0.0/12:*
+accept *:10001
+accept *:10030
+accept *:80
+accept *:443
+reject *:*
+router-signature
+-----BEGIN SIGNATURE-----
+cO8KC0F73cuwuuvUylc5OY8CYLTCo2PTyI9jU/S5W42INlJx4SM3MhY6wvEouPpB
+yvI2LcdWSa57X9Dho3d3T1JXRhdBm5hLKOnEqYpOB7jUiCpsNCtZeYfyljLfAluS
+xdFvyauuPLQmmfBQabYWRMkvk0GM1aF9me4zwfdTKG8=
+-----END SIGNATURE-----
+@downloaded-at 2010-01-07 15:51:39
+@source "174.129.199.15"
+router 601CFFC429EAD941 98.236.71.7 10001 0 10030
+platform Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Very recent version of Windows [major=6,minor=1]  [workstation] {personal} {terminal services, single user}
+opt protocols Link 1 2 Circuit 1
+published 2010-01-06 20:40:27
+opt fingerprint E7A1 F0DC 8AAE 04DD B2A1 8585 40D4 052A 605E 3F0F
+uptime 0
+bandwidth 2048000 4096000 0
+opt extra-info-digest 13773FDB6EE859D7612760B54615CB7F95566298
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAJ1NMQ9jgHYZ0IrASumQA4S+Bioc8RDh6A7dA2bPG1QqMZ3D6KTW6fb9
+ludN7jGgko6P02QbszjCilTBya/Y47+VW9UDcpr9CpIbzU65W28E0B2pUd0dHAfF
+3qwnxsFCYAoqy4N7gX20CIr5F0ODaqXn5qt8HIV8IkmZ7vblCf0ZAgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBALTf3h72HmBslAc2kXlEcvf8AU2SIwD459YVu4qoKQGlS5V+bF4jiQ2E
+Ohyzc9E4mjbvMt0k539WHOa60uoBHyyQyj3XCcqe/DX7Zwqg0GeDyrhtUOkAIfRA
+2paSlzrFbaJFrxDvP9tez/ofHBz4e6kGJWe4D2xaCFJeNpD7fIbdAgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+contact abuse@mail.bitblinder.com
+accept 127.0.0.1:60301
+reject 0.0.0.0/8:*
+reject 169.254.0.0/16:*
+reject 127.0.0.0/8:*
+reject 192.168.0.0/16:*
+reject 10.0.0.0/8:*
+reject 172.16.0.0/12:*
+reject *:25
+reject *:119
+reject *:135-139
+reject *:445
+accept *:*
+router-signature
+-----BEGIN SIGNATURE-----
+jzgaIfrGRAFqR3gdeHIZ6D3/HiwZwfZPOoifddJzzu+l5dxNeLCza//iXqP/9ZNW
+Vwjm0QKbY2Vl9dULcxE7kM9nTErEdtQ+dlQZquaInMoSq+HvZiCpiSM1Gia3BvaV
+1Ptn8ZFpcXpkGwCFZ0w/yUafFMD3Kriw6OhBhWdWtd0=
+-----END SIGNATURE-----
+@downloaded-at 2010-01-07 15:51:39
+@source "174.143.240.110"
+router C215C051D550C7C5 75.84.14.78 10001 0 0
+platform Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Windows XP Service Pack 3 [workstation] {terminal services, single user}
+opt protocols Link 1 2 Circuit 1
+published 2010-01-07 09:17:03
+opt fingerprint 5263 79FB CC9D 7C03 475B 299C D082 B042 EC18 4136
+uptime 22
+bandwidth 21504 43008 0
+opt extra-info-digest 9D1B4554DAD82CF6219372771C2F256DFC338B22
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBALp0C/jrKCEyRLrjkIqeHiaGpUv4zEqpyQWnK3w1xZMZTeXtYQr+Jqsk
+Gknt5K8+mZ0S2/gqqTFhTU2SWGuNx+Wa/7VolN8/mPPNtrRDjNd8lZZkKRcsoF3l
+UjZB4RoM7J4Zjte1QmmKwgYmSUASpy7jCWoEuCSHWhbuAGFKhRixAgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAMZLGIW60ZnbBXO9DQxQbPWG2iwaArIlImt6uwvc0whS/xQlMPvyTUxS
+2nt6/MJcnnX5ZCgmlb1DuakduNbWsryuJuB3vEFQ8Ysog+dVGXUMNhJ8dp2lPUi4
+mwYXCCWyASDENJMqMZG8VNsna1FCbukKusZxxLMgQL/NbRA1IfuzAgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+opt allow-dht-exits
+contact abuse@mail.bitblinder.com
+accept 127.0.0.1:60301
+reject 0.0.0.0/8:*
+reject 169.254.0.0/16:*
+reject 127.0.0.0/8:*
+reject 192.168.0.0/16:*
+reject 10.0.0.0/8:*
+reject 172.16.0.0/12:*
+reject *:25
+reject *:119
+reject *:135-139
+reject *:445
+accept *:*
+router-signature
+-----BEGIN SIGNATURE-----
+BXbjhvSmRTemoEXkMLX/A3Vcl+W5o3tIElJ5i0R4f/3aS5pKcqTiBvoQ3OQAghvD
+6BPPLMtvNQkfGK/lmJ2xL6jc8pBFXcShevUBP864REpjyBE65fugAhL3o8vjRJnL
+WQp5XRaMhxOuEwAgny6oLbvtpAc64BeLfxLoDUL+hAI=
+-----END SIGNATURE-----
+@downloaded-at 2010-01-07 15:51:39
+@source "174.143.240.110"
+router 2BF8A138C775F177 220.104.73.55 10001 0 10030
+platform Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Windows XP Service Pack 3 [workstation] {personal} {terminal services, single user}
+opt protocols Link 1 2 Circuit 1
+published 2010-01-07 10:09:25
+opt fingerprint 6D29 D14C 3BF9 99B5 8684 55CB 4817 E1BC 9A1C 78E2
+uptime 6
+bandwidth 307200 614400 0
+opt extra-info-digest 01CFD0E5D347981153AE6B2AE190EE9BE0F551D8
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBANSXW5F4WqG0XmoSgezIGB4//HezpvZVGlURKX3djgWuvhrU/WvSJOFD
+V75sfCwBWGt2/dFXC71SjLntubbygNakBnmothApT4Mc039Ue8BkIl/y19bMzYmb
+WADEYDybfUWJYPDlA+OrW0B3+CGxjNKeNvA2jLdYl5wC2AiVn8/BAgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAMjvaQIL6Xw5dssBiGW4U3tS36fsZiqpRq8x4WeWmn+Xu0ctDQyXwgXd
+CSPaDQpKVGRoPDEejU5dp5mXrzrQn7mynNwB7WO80k3SmUzuWi7R2ygzafBFdpvk
+WkDBOdT7A/8h3Rm4TpY0EoIMHcT+dMBP7d29BqsHdCdAaV2ylpX3AgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+opt allow-dht-exits
+contact abuse@mail.bitblinder.com
+accept 127.0.0.1:60301
+reject 0.0.0.0/8:*
+reject 169.254.0.0/16:*
+reject 127.0.0.0/8:*
+reject 192.168.0.0/16:*
+reject 10.0.0.0/8:*
+reject 172.16.0.0/12:*
+reject *:25
+reject *:119
+reject *:135-139
+reject *:445
+accept *:*
+router-signature
+-----BEGIN SIGNATURE-----
+qOCxXg2MZMU6zL8NgSMXvx9EX++/Dw/h0fgZb31tlCDaId/Jl3bHFP1O4lmYLFju
+p1w6iEkfdFFI4uCboJcq0vzpoKZvT8xO+JYMtUPlxggOlg+zU4BoRsjvkXE5T7A5
+ptGy9Z4wajn3bWYYnuX7fyjn1TOXfA4K0qeHowsedIg=
+-----END SIGNATURE-----
+@downloaded-at 2010-01-07 15:51:39
+@source "174.143.240.110"
+router 43A2285AF1D02CC3 86.196.254.189 10001 0 10030
+platform Tor 0.2.2.0-alpha-dev on Windows "Longhorn" Service Pack 2 [workstation] {personal} {terminal services, single user}
+opt protocols Link 1 2 Circuit 1
+published 2010-01-06 22:55:04
+opt fingerprint 9BA5 138D C465 B83F FE35 DFAD 455E 8521 4761 4709
+uptime 793
+bandwidth 512000 1024000 617
+opt extra-info-digest B3AE5CB00AFB9C340D4E906A04E7F488329D6F8A
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBALutZ8UfDSAMtBNxZRTtS1JBqEwQ0DgJ9CewKmwn/dP1D6ImVQkzE5Ht
+AVKdMubC7dAV35Lb3EHn85xMc5XDYm6gE8mCwXxae+NAQ360M0CWxREmx/IJtLiZ
+k/ozy/2mMGDUNsvnL/X+PcgEbcmnaBecI4E7ZB8mUlxA+GYY4ytLAgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAMie1X/m0SHrK2nziaxtsvL4RGen/phNxP5T70KdXEzY7c0wl3wJL6e9
+55pAtPGOKWoe1n2AGXl1lpXyCzjavbFuVAMZWmZSBZ1mygqEUItZpeTinzPIDbby
+4Md+rBP31NRBN00sYSl3TXy1PvTRRHk/vnWu92+/vyPXTuC3XAQZAgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+contact abuse@mail.bitblinder.com
+accept 127.0.0.1:60301
+reject 0.0.0.0/8:*
+reject 169.254.0.0/16:*
+reject 127.0.0.0/8:*
+reject 192.168.0.0/16:*
+reject 10.0.0.0/8:*
+reject 172.16.0.0/12:*
+reject *:25
+reject *:119
+reject *:135-139
+reject *:445
+reject *:80
+reject *:443
+accept *:*
+router-signature
+-----BEGIN SIGNATURE-----
+G2JCLej8hDddZEfSzVY6M+spV04E6xRVjKuGMm8mxvaEE6X7AzK/ogfKTBlmUDQp
+mMRifOlLmpA1a/M94p5fk3fUR8oi2upwsfZzaZLCJmZeBElseL4A3/ASuwDh5r4z
+lydZN6HkY37nfyG5d8ccXHxaTSZDAKblcQemERsaTP0=
+-----END SIGNATURE-----
+@downloaded-at 2010-01-07 15:51:39
+@source "174.143.240.110"
+router EA46046384E88E71 151.47.77.41 10001 0 10030
+platform Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Very recent version of Windows [major=6,minor=1]  [workstation] {personal} {terminal services, single user}
+opt protocols Link 1 2 Circuit 1
+published 2010-01-07 15:38:55
+opt fingerprint C9B6 4B71 5F82 3F8E B42D 91A6 8B86 6BBC D6DF 21F8
+uptime 5
+bandwidth 2048000 4096000 0
+opt extra-info-digest DA2217AE7D034AE733BEA73502E91DAD0BA193EB
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAN7YdH1SslMcZU8tUd6hpSQuKVKiv7nhy1LuvaqIWCzg4In0YpXSL3nA
+2G9ujq9lUuUwwQCixaE5xRBWQdkgxXfzvJ9MkrwCTI/pPGHQ8Fpqp0Hj103o2jKR
+NW/61z8MT/Whl0Irah8ji0drYMJpneu56ArJSuf4q6LJZcbXBDWVAgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAOscXusaSOvbQMbuqaWCyRDnmleRG4VytCMgaUULlM+N+vnDo6WTNuUV
+xbba6YgA/DH+z0VfQsPh2VXqVUPKWdwhG+gOrf7VdCPQ0pOUSvC9rovOerFhzbwB
+znqF2vNAvETzDJQzwWA/993V722lLbTJ2t0heF/9ykcLpBHEtdEnAgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+opt allow-dht-exits
+contact abuse@mail.bitblinder.com
+accept 127.0.0.1:60301
+reject 0.0.0.0/8:*
+reject 169.254.0.0/16:*
+reject 127.0.0.0/8:*
+reject 192.168.0.0/16:*
+reject 10.0.0.0/8:*
+reject 172.16.0.0/12:*
+reject *:25
+reject *:119
+reject *:135-139
+reject *:445
+accept *:*
+router-signature
+-----BEGIN SIGNATURE-----
+qnuD8TafEw88hq0m/zsuW/wRd5kjxVox1iYsOgaWl0KOkuniu7RFh8Jq5yL+Pka7
+HbKoYmnOTdhI3GxHLnMQXc/c103wrfhMswnLOtfdS4Q5d8H/ld8Zunl7z2TNxEpd
+hosoLYGFkohZZaJO0fQqm256e3oC5VJK1LBzl8QtpnM=
+-----END SIGNATURE-----
+@downloaded-at 2010-01-07 15:51:39
+@source "174.143.240.110"
+router F679FBD693865D56 94.23.9.43 10002 0 10030
+platform Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Very recent version of Windows [major=6,minor=1]  [workstation] {terminal services, single user}
+opt protocols Link 1 2 Circuit 1
+published 2010-01-07 10:31:43
+opt fingerprint E9D8 2FFD F6A9 C3D8 2951 C040 035D 539C CE74 B580
+uptime 32400
+bandwidth 512000 1024000 53227
+opt extra-info-digest AD5AC8EBFA4FE532E255B4C2749FA6ADDF08642B
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAM0wBrukVOiMV4lugcFu1PbLpYRKSQCfTRV6CCf7auz5kpOqmebbvh2B
+JujUpnTO/bwAZlo4vVhhV8uTzVjoD+yN8GLraN+2x8JYddk7/WtPM7W6N7nvPsuD
+FGTDbcOgtiL1sTHJ550jS7k7m3fghZIXBULEdQAuKY0jL8u3xQ+9AgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAMfPS7xLDDiUVFU3VeZ1imeprRprm40fz+AVDVgP8q7OGyTuHtIOnqjb
+Q7XRBm0pOjROoWlEYTnKj6NGixmleb/RCGfZy1vxKNqrTDZGusmq/fTrxyNW3AWX
+f/+BQwCJqrkz6D/nHAQICtGiGPgVxFAIEk2wn5h8iAwPhq98nvazAgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+contact abuse@mail.bitblinder.com
+accept 127.0.0.1:60301
+reject 0.0.0.0/8:*
+reject 169.254.0.0/16:*
+reject 127.0.0.0/8:*
+reject 192.168.0.0/16:*
+reject 10.0.0.0/8:*
+reject 172.16.0.0/12:*
+accept *:10001
+accept *:10030
+accept *:80
+accept *:443
+reject *:*
+router-signature
+-----BEGIN SIGNATURE-----
+MpLHiHncjV7YhYD8gJv4kgjghtj+Kjb+LsfkxnZR9l2Rc9asbF/vaxeKDsuN1EoZ
+nl3Us0xW/r+Z6YK9gH7PA02TMrXxVk6yO5Oog1oQftIA+TmwahgL5EIlQQiha+XP
+s4IbKFBU/saSGYYDjBnwk4PD/8etcD8ejf6qYKbndhc=
+-----END SIGNATURE-----
+@downloaded-at 2010-01-07 15:51:39
+@source "174.143.240.110"
+router 222CC9544001EE98 77.201.156.117 10001 0 10030
+platform Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 on Windows "Longhorn" Service Pack 1 [workstation] {personal} {terminal services, single user}
+opt protocols Link 1 2 Circuit 1
+published 2010-01-07 14:11:29
+opt fingerprint FD10 82EA 799F A861 765D D71E 0E0A E759 D6F2 7EE5
+uptime 793
+bandwidth 512000 1024000 1261
+opt extra-info-digest 505997FC4C29B4D660884E3D4A7B842A0790815E
+onion-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAMkSKeaOVWOzrJuHj6sE1pPS+KSKQv1OfZESNMMJ6ccdlx0D9T8jQLYZ
+iwNh5bNySQy0qSmXW0SBI48Cfh9XppJg+Hj7SMkEZNN8ih95Gvk9lhUWPoRdFRtn
+DcLlBJ12zy7GldiPnp78a7rA72hwlRrZZ2tC/OVvRIpOfKLAwPXNAgMBAAE=
+-----END RSA PUBLIC KEY-----
+signing-key
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAKY+jIVNjT8GL3vazdEXgE7XHfYOBquzLB3r1EG/SqCzoORU89S2ey1c
+TKsgHLClwvbBjNOoYR3lYLsTMW4S6mFDm/B3/EqOEnl2KTzO6TWrMVfqPe9RV7oQ
+v67Yph2GwC5rIwfsrwPvZqhCM1mZ0yA666mKCbz6k9FDon9vdRaLAgMBAAE=
+-----END RSA PUBLIC KEY-----
+opt hidden-service-dir
+opt allow-single-hop-exits
+contact abuse@mail.bitblinder.com
+accept 127.0.0.1:60301
+reject 0.0.0.0/8:*
+reject 169.254.0.0/16:*
+reject 127.0.0.0/8:*
+reject 192.168.0.0/16:*
+reject 10.0.0.0/8:*
+reject 172.16.0.0/12:*
+reject *:25
+reject *:119
+reject *:135-139
+reject *:445
+accept *:*
+router-signature
+-----BEGIN SIGNATURE-----
+jRmjCuxZscnbkBtDXbRuW8a1ud9AJ9u7ASg+E2Gpd0oHU7VQnb+3HeNSc6u88YTr
+owd2Agf7JHglTwLTXf/gWO4lTKkQLP9YExCoSgdDbXqIpmpVNkcNl2ed3XRqU27l
+tN3sGKYG14cvi9duG/e3UG0k2OlMld2gVoXy5e/9TGM=
+-----END SIGNATURE-----

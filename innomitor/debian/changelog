@@ -1,0 +1,29 @@
+innomitor (0.4.5) unstable; urgency=low
+
+  *added new event to inform bitblinder about the bandwidth and tokens on a given circuit
+
+ -- Matt Kaniaris <kans@bitblinder.com>  Tue, 08 Sep 2009 17:32:54 -0400
+
+innomitor (0.4.2) unstable; urgency=low
+
+  * fixed rare crash error
+
+ -- Matt Kaniaris <kans@bitblinder.com>  Sun, 09 Aug 2009 18:01:33 +0000
+
+innomitor (0.4.1) unstable; urgency=low
+  
+  * Updated to newest tor client: 0.2.1.17-rc-1
+
+ -- Matt Kaniaris <kans@bitblinder.com>  Tue, 28 June 2009 23:37:12 -0400
+ 
+innomitor (0.4.0) unstable; urgency=low
+  
+  * Updated to support the new payment system.
+
+ -- Matt Kaniaris <kans@bitblinder.com>  Tue, 21 June 2009 15:20:82 -0400
+
+innomitor (0.3.7) unstable; urgency=low
+
+  * Initial release, cheers!
+
+ -- Matt Kaniaris <kans@bitblinder.com>  Fri, 19 June 2009 12:28:31 -0400

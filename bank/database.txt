@@ -1,0 +1,71 @@
+CREATE TABLE Keys(
+Value INT,
+Interval INT,
+n NUMERIC,
+d NUMERIC,
+e NUMERIC,
+p NUMERIC,
+q NUMERIC,
+PRIMARY KEY(Value, Interval)
+);
+
+CREATE TABLE Accounts(
+Username VARCHAR(50) PRIMARY KEY,
+Balance INT );
+
+CREATE TABLE Scoin_Interval(
+Interval_Id int PRIMARY KEY,
+Valid_After TIMESTAMP,
+Fresh_Until TIMESTAMP,
+Spoils_On TIMESTAMP );
+
+CREATE TABLE Relays(
+Tor_Id TEXT PRIMARY KEY,
+Owner TEXT references Accounts(Username),
+Public_Key NUMERIC,
+Last_Interval int references Scoin_Interval(Interval_Id),
+Symmetric_Id NUMERIC;
+
+CREATE TABLE Acoin_Interval(
+Interval_Id INT PRIMARY KEY,
+Valid_After TIMESTAMP,
+Fresh_Until TIMESTAMP,
+Spoils_On TIMESTAMP
+);
+
+CREATE TABLE Acoin_Repo(
+Coin numeric,
+Depositor TEXT references Relays(Tor_Id),
+Sendor TEXT references Relays(Tor_Id),
+Interval INT references Acoin_Interval(Interval_Id),
+Value INT );
+
+CREATE TABLE Scoin_Repo(
+Depositor TEXT references Relays(Tor_Id),
+Interval INT references Scoin_Interval(Interval_Id),
+Value INT,
+Merchant TEXT references Relays(Tor_Id) 
+alter table scoin_repo add column transactionId bigint);
+
+alter table relays drop constraint relays_last_interval_fkey;
+
+create table limited_signup_keys(
+value varchar(50) PRIMARY KEY,
+expires timestamp,
+sent boolean,
+redeemed boolean);
+
+CREATE TABLE download_id_cache(
+hexkey VARCHAR(50) PRIMARY KEY,
+eventtime TIMESTAMP,
+address VARCHAR(20));
+
+CREATE TABLE beta_tester_signup(
+email VARCHAR(350) PRIMARY KEY,
+created_on TIMESTAMP);
+
+CREATE TABLE newsletter(
+email VARCHAR(250) PRIMARY KEY,
+created_on TIMESTAMP);
+
+

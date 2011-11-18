@@ -1,0 +1,122 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+# From Tor's rules file (these notes saved me hours or days):
+# These are used for cross-compiling and for saving the configure script
+# from having to guess our platform (since we know it already)
+#
+# See /usr/share/doc/autotools-dev/README.Debian.gz which suggests
+# this way of passing --build and --host.  Also see the thread on
+# debian-devel './configure in debian/rules' from February/March 2006,
+# starting with <43FF212C.5020800@xs4all.nl> by Pjotr Kourzanov.
+include /usr/share/dpatch/dpatch.make
+export DEB_HOST_GNU_TYPE   ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+export DEB_BUILD_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
+ifeq ($(DEB_BUILD_GNU_TYPE), $(DEB_HOST_GNU_TYPE))
+  confflags += --build $(DEB_HOST_GNU_TYPE)
+else
+  confflags += --build $(DEB_BUILD_GNU_TYPE) --host $(DEB_HOST_GNU_TYPE)
+endif
+
+CFLAGS ?= -Wall -g
+
+LOCALHOST_IP  ?= $(shell getent hosts localhost | awk '{print $$1}')
+
+# Do not optimize the build with "noopt"
+ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
+	CFLAGS += -O0
+else
+	CFLAGS += -O2
+endif
+
+# Do not strip the binary with "nostrip"
+#ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
+#	INSTALL_PROGRAM += -s
+#endif
+
+# Prevent the unit tests from being run with "nocheck"
+ifneq (,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
+	RUN_TEST = no
+endif
+ifneq (,$(findstring notest,$(DEB_BUILD_OPTIONS)))
+	RUN_TEST = no
+endif
+
+# Support passing of parallel=<n> in build options
+ifneq (,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
+	NUMJOBS = $(patsubst parallel=%,%,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
+	MAKEFLAGS += -j$(NUMJOBS)
+endif
+
+CONF_OPTIONS =
+# build against libdmalloc4 - it better be installed
+ifneq (,$(findstring with-dmalloc,$(DEB_BUILD_OPTIONS)))
+	CONF_OPTIONS += --with-dmalloc
+endif
+# allow building with --enable-openbsd-malloc
+ifneq (,$(findstring enable-openbsd-malloc,$(DEB_BUILD_OPTIONS)))
+	CONF_OPTIONS += --enable-openbsd-malloc
+endif
+
+
+configure: configure-stamp
+configure-stamp:
+	dh_testdir
+	# do stuff!
+	./autogen.sh 
+	./configure --prefix=/tor
+	touch configure-stamp
+
+
+build: build-stamp
+
+build-stamp: configure-stamp 
+	dh_testdir
+	# make tor
+	$(MAKE)
+	touch $@
+
+clean:
+	#should add an unpatch or something here really
+	dh_testdir
+	dh_testroot
+	rm -rf build-stamp configure-stamp build
+	[ ! -f Makefile ] || $(MAKE) distclean
+	dh_clean
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_installdirs
+	$(MAKE) install DESTDIR=$(CURDIR)/debian/
+	install -d $(CURDIR)/debian/innomitor/usr/bin
+	install -m 755 $(CURDIR)/debian/tor/bin/tor $(CURDIR)/debian/innomitor/usr/bin/innomitor
+	install -d $(CURDIR)/debian/innomitor/usr/share/doc/innomitor
+	install -m 755 $(CURDIR)/debian/copyright $(CURDIR)/debian/innomitor/usr/share/doc/innomitor/copyright
+	dh_install
+
+# Build architecture-independent files here.
+binary-indep: install
+	$(MAKE) -f debian/rules DH_OPTIONS=-i binary-common
+
+# Build architecture-dependent files here.
+binary-arch: build install
+	$(MAKE) -f debian/rules DH_OPTIONS=-s binary-common
+
+binary-common:
+	dh_testdir
+	dh_testroot
+	dh_link
+	dh_strip
+	dh_compress
+	dh_fixperms
+	dh_installdeb
+	dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install configure

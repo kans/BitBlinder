@@ -1,0 +1,39 @@
+#!/usr/bin/make -f
+#export DH_VERBOSE=1
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -rf build debian/python-bitblinder/
+	python setup.py clean
+	find . -name *\.py[co] -exec rm {} \;
+	make clean -C $(CURDIR)/miniupnpc
+	dh_clean
+install: build
+	dh_testdir
+	dh_testroot
+	dh_installdirs
+	python setup.py install --no-compile --root=$(CURDIR)/debian/python-bitblinder/
+	make -C $(CURDIR)/miniupnpc
+	install -m 755 -d $(CURDIR)/debian/python-bitblinder/usr/share/doc/python-bitblinder
+	install -m 755 $(CURDIR)/debian/copyright $(CURDIR)/debian/python-bitblinder/usr/share/doc/python-bitblinder/copyright 
+	install -m 755 -d $(CURDIR)/debian/python-bitblinder/usr/bin
+	install -m 755 $(CURDIR)/debian/bitblinder.sh $(CURDIR)/debian/python-bitblinder/usr/bin/bitblinder
+	install -m 755 $(CURDIR)/miniupnpc/upnpc-static $(CURDIR)/debian/python-bitblinder/usr/bin/upnpc-static
+	dh_install
+binary-indep: build install
+	dh_testdir
+	dh_testroot
+	#dh_link /usr/bin/bitblinder $(CURDIR)/debian/python-bitblinder/usr/share/python-share/python-bitblinder/bitblinder/Main.py
+	dh_strip
+	dh_compress
+	dh_pysupport
+	dh_fixperms
+	dh_installdeb
+	dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+binary-arch: #pass
+binary: binary-indep
+.PHONY: build clean binary-indep binary install configure

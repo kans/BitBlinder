@@ -1,0 +1,880 @@
+Jan 07 10:50:37.948 [notice] Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 (r4159) opening new log file.
+Jan 07 10:50:37.948 [info] tor_lockfile_lock(): Locking "/home/co/client/users/tor_data/lock"
+Jan 07 10:50:37.948 [debug] parse_dir_server_line(): Trusted 6 dirserver at 174.129.199.15:33351 (5FA1)
+Jan 07 10:50:37.948 [debug] parse_dir_server_line(): Trusted 6 dirserver at 174.143.240.110:33353 (DBE5)
+Jan 07 10:50:37.948 [debug] parse_dir_server_line(): Trusted 6 dirserver at 174.129.199.15:33355 (446D)
+Jan 07 10:50:37.948 [info] or_state_load(): Loaded state from "/home/co/client/users/tor_data/state"
+Jan 07 10:50:37.948 [info] read_file_to_str(): Could not open "/home/co/client/users/tor_data/router-stability": No such file or directory 
+Jan 07 10:50:37.948 [notice] Parsing GEOIP file.
+Jan 07 10:50:38.047 [info] crypto_global_init(): NOT using OpenSSL engine support.
+Jan 07 10:50:38.047 [info] crypto_seed_rng(): Seeding RNG from "/dev/urandom"
+Jan 07 10:50:38.069 [debug] mp_pool_new(): Capacity is 248, item size is 528, alloc size is 130944
+Jan 07 10:50:38.069 [info] Bootstrapped 0%: Starting.
+Jan 07 10:50:38.070 [debug] trusted_dirs_load_certs_from_string(): Parsed certificate for InnomiNetAuth3
+Jan 07 10:50:38.070 [info] trusted_dirs_load_certs_from_string(): Adding cached certificate for directory authority InnomiNetAuth3 with signing key FAC133B39B018C77E968BE45880E97AF639C38F7
+Jan 07 10:50:38.070 [debug] trusted_dirs_load_certs_from_string(): Parsed certificate for InnomiNetAuth1
+Jan 07 10:50:38.070 [info] trusted_dirs_load_certs_from_string(): Adding cached certificate for directory authority InnomiNetAuth1 with signing key 40CE6EE251C25028B3B27ACC11DFB3E526DE37BB
+Jan 07 10:50:38.071 [debug] trusted_dirs_load_certs_from_string(): Parsed certificate for InnomiNetAuth2
+Jan 07 10:50:38.071 [info] trusted_dirs_load_certs_from_string(): Adding cached certificate for directory authority InnomiNetAuth2 with signing key 67FECCED532E9BBDAAD021185B019652DB057F1D
+Jan 07 10:50:38.071 [info] 0 unknown, 0 missing key, 3 good, 0 bad, 0 no signature, 2 required
+Jan 07 10:50:38.071 [info] update_consensus_networkstatus_fetch_time(): Live consensus will be the most recent until 2010-01-07 11:00:00 and will expire at 2010-01-07 11:30:00; fetching the next one at 2010-01-07 11:26:53.
+Jan 07 10:50:38.071 [info] read_file_to_str(): Could not open "/home/co/client/users/tor_data/unverified-consensus": No such file or directory 
+Jan 07 10:50:38.071 [debug] tor_version_is_obsolete(): Checking whether version '0.2.2.0-alpha-dev_for_BitBlinder_0.5.0' is in ''
+Jan 07 10:50:38.071 [info] routers_update_all_from_networkstatus(): The directory authorities don't recommend any versions.
+Jan 07 10:50:38.071 [info] tor_mmap_file(): Could not open "/home/co/client/users/tor_data/cached-descriptors" for mmap(): No such file or directory
+Jan 07 10:50:38.071 [info] routerlist_remove_old_routers(): We have 0 live routers and 0 old router descriptors.
+Jan 07 10:50:38.071 [info] tor_mmap_file(): Could not open "/home/co/client/users/tor_data/cached-extrainfo" for mmap(): No such file or directory
+Jan 07 10:50:38.071 [debug] count_usable_descriptors(): 18 usable, 0 present.
+Jan 07 10:50:38.071 [notice] Bootstrapped 45%: Asking for relay descriptors.
+Jan 07 10:50:38.071 [notice] I learned some more directory information, but not enough to build a circuit: We have only 0/18 usable descriptors.
+Jan 07 10:50:38.071 [info] update_consensus_router_descriptor_downloads(): 18 router descriptors downloadable. 0 delayed; 0 present (0 of those were in old_routers); 0 would_reject; 0 wouldnt_use; 0 in progress.
+Jan 07 10:50:38.071 [debug] launch_router_descriptor_downloads(): There are enough downloadable routerdescs to launch requests.
+Jan 07 10:50:38.071 [info] launch_router_descriptor_downloads(): Launching 3 requests for 18 routers, 6 at a time
+Jan 07 10:50:38.071 [debug] smartlist_choose_by_bandwidth(): Total weighted bw = 423373, exit bw = 571000, nonexit bw = 356000, exit weight = 0.458844 (for exit == 0), guard bw = 500000, nonguard bw = 427000, guard weight = 0.382000 (for guard == 0)
+Jan 07 10:50:38.071 [debug] directory_initiate_command_rend(): anonymized 0, use_begindir 1.
+Jan 07 10:50:38.071 [debug] directory_initiate_command_rend(): Initiating server descriptor fetch
+Jan 07 10:50:38.071 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:10001 ...
+Jan 07 10:50:38.071 [debug] connection_add(): new conn type Socks, socket -1, address (Tor_internal), n_conns 3.
+Jan 07 10:50:38.071 [debug] circuit_get_open_circ_or_launch(): considering 1, $6B977F0170E83BC71CDCAB1B223643A06825A0B7
+Jan 07 10:50:38.071 [debug] onion_pick_cpath_exit(): Launching a one-hop circuit for dir tunnel.
+Jan 07 10:50:38.071 [info] onion_pick_cpath_exit(): Using requested exit node '6B977F0170E83BC71CDCAB1B223643A06825A0B7'
+Jan 07 10:50:38.071 [debug] onion_extend_cpath(): Path is 0 long; we want 1
+Jan 07 10:50:38.071 [debug] onion_extend_cpath(): Chose router 6B977F0170E83BC71CDCAB1B223643A06825A0B7 for hop 1 (exit is 6B977F0170E83BC71CDCAB1B223643A06825A0B7)
+Jan 07 10:50:38.071 [debug] onion_extend_cpath(): Path is complete: 1 steps long
+Jan 07 10:50:38.071 [debug] circuit_handle_first_hop(): Looking for firsthop '75.72.116.66:10001'
+Jan 07 10:50:38.071 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Router not connected (nothing is).  Connecting. 
+Jan 07 10:50:38.071 [debug] connection_connect(): Connecting to [scrubbed]:10001.
+Jan 07 10:50:38.071 [debug] connection_connect(): Connection to [scrubbed]:10001 in progress (sock 10).
+Jan 07 10:50:38.071 [debug] connection_add(): new conn type OR, socket 10, address 75.72.116.66, n_conns 4.
+Jan 07 10:50:38.071 [debug] circuit_handle_first_hop(): connecting in progress (or finished). Good.
+Jan 07 10:50:38.071 [info] connection_ap_make_link(): ... application connection created and linked.
+Jan 07 10:50:38.071 [debug] connection_add(): new conn type Directory, socket -1, address 75.72.116.66, n_conns 5.
+Jan 07 10:50:38.071 [debug] smartlist_choose_by_bandwidth(): Total weighted bw = 423373, exit bw = 571000, nonexit bw = 356000, exit weight = 0.458844 (for exit == 0), guard bw = 500000, nonguard bw = 427000, guard weight = 0.382000 (for guard == 0)
+Jan 07 10:50:38.071 [debug] directory_initiate_command_rend(): anonymized 0, use_begindir 1.
+Jan 07 10:50:38.071 [debug] directory_initiate_command_rend(): Initiating server descriptor fetch
+Jan 07 10:50:38.071 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:10001 ...
+Jan 07 10:50:38.071 [debug] connection_add(): new conn type Socks, socket -1, address (Tor_internal), n_conns 6.
+Jan 07 10:50:38.071 [debug] circuit_get_open_circ_or_launch(): considering 1, $518E96759364B01C9800C36EDD3CC0EAB9F0B4E5
+Jan 07 10:50:38.071 [debug] onion_pick_cpath_exit(): Launching a one-hop circuit for dir tunnel.
+Jan 07 10:50:38.071 [info] onion_pick_cpath_exit(): Using requested exit node '518E96759364B01C9800C36EDD3CC0EAB9F0B4E5'
+Jan 07 10:50:38.071 [debug] onion_extend_cpath(): Path is 0 long; we want 1
+Jan 07 10:50:38.071 [debug] onion_extend_cpath(): Chose router 518E96759364B01C9800C36EDD3CC0EAB9F0B4E5 for hop 1 (exit is 518E96759364B01C9800C36EDD3CC0EAB9F0B4E5)
+Jan 07 10:50:38.071 [debug] onion_extend_cpath(): Path is complete: 1 steps long
+Jan 07 10:50:38.071 [debug] circuit_handle_first_hop(): Looking for firsthop '96.22.210.194:10001'
+Jan 07 10:50:38.071 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting. 
+Jan 07 10:50:38.071 [debug] connection_connect(): Connecting to [scrubbed]:10001.
+Jan 07 10:50:38.072 [debug] connection_connect(): Connection to [scrubbed]:10001 in progress (sock 11).
+Jan 07 10:50:38.072 [debug] connection_add(): new conn type OR, socket 11, address 96.22.210.194, n_conns 7.
+Jan 07 10:50:38.072 [debug] circuit_handle_first_hop(): connecting in progress (or finished). Good.
+Jan 07 10:50:38.072 [info] connection_ap_make_link(): ... application connection created and linked.
+Jan 07 10:50:38.072 [debug] connection_add(): new conn type Directory, socket -1, address 96.22.210.194, n_conns 8.
+Jan 07 10:50:38.072 [debug] smartlist_choose_by_bandwidth(): Total weighted bw = 423373, exit bw = 571000, nonexit bw = 356000, exit weight = 0.458844 (for exit == 0), guard bw = 500000, nonguard bw = 427000, guard weight = 0.382000 (for guard == 0)
+Jan 07 10:50:38.072 [debug] directory_initiate_command_rend(): anonymized 0, use_begindir 1.
+Jan 07 10:50:38.072 [debug] directory_initiate_command_rend(): Initiating server descriptor fetch
+Jan 07 10:50:38.072 [info] connection_ap_make_link(): Making internal direct tunnel to [scrubbed]:10001 ...
+Jan 07 10:50:38.072 [debug] connection_add(): new conn type Socks, socket -1, address (Tor_internal), n_conns 9.
+Jan 07 10:50:38.072 [debug] circuit_get_open_circ_or_launch(): considering 1, $9A89D63FD59EEBA2EAE7F9F9CF625A5B78CE1932
+Jan 07 10:50:38.072 [debug] onion_pick_cpath_exit(): Launching a one-hop circuit for dir tunnel.
+Jan 07 10:50:38.072 [info] onion_pick_cpath_exit(): Using requested exit node '9A89D63FD59EEBA2EAE7F9F9CF625A5B78CE1932'
+Jan 07 10:50:38.072 [debug] onion_extend_cpath(): Path is 0 long; we want 1
+Jan 07 10:50:38.072 [debug] onion_extend_cpath(): Chose router 9A89D63FD59EEBA2EAE7F9F9CF625A5B78CE1932 for hop 1 (exit is 9A89D63FD59EEBA2EAE7F9F9CF625A5B78CE1932)
+Jan 07 10:50:38.072 [debug] onion_extend_cpath(): Path is complete: 1 steps long
+Jan 07 10:50:38.072 [debug] circuit_handle_first_hop(): Looking for firsthop '64.122.230.233:10001'
+Jan 07 10:50:38.072 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting. 
+Jan 07 10:50:38.072 [debug] connection_connect(): Connecting to [scrubbed]:10001.
+Jan 07 10:50:38.072 [debug] connection_connect(): Connection to [scrubbed]:10001 in progress (sock 12).
+Jan 07 10:50:38.072 [debug] connection_add(): new conn type OR, socket 12, address 64.122.230.233, n_conns 10.
+Jan 07 10:50:38.072 [debug] circuit_handle_first_hop(): connecting in progress (or finished). Good.
+Jan 07 10:50:38.072 [info] connection_ap_make_link(): ... application connection created and linked.
+Jan 07 10:50:38.072 [debug] connection_add(): new conn type Directory, socket -1, address 64.122.230.233, n_conns 11.
+Jan 07 10:50:38.072 [info] update_consensus_router_descriptor_downloads(): 0 router descriptors downloadable. 0 delayed; 0 present (0 of those were in old_routers); 0 would_reject; 0 wouldnt_use; 18 in progress.
+Jan 07 10:50:38.072 [info] routerlist_remove_old_routers(): We have 0 live routers and 0 old router descriptors.
+Jan 07 10:50:38.072 [info] or_state_save(): Saved state to "/home/co/client/users/tor_data/state"
+Jan 07 10:50:38.072 [debug] conn_read_callback(): socket -1 wants to read.
+Jan 07 10:50:38.072 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Jan 07 10:50:38.072 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Jan 07 10:50:38.072 [debug] connection_dir_finished_flushing(): client finished sending command.
+Jan 07 10:50:38.072 [debug] conn_read_callback(): socket -1 wants to read.
+Jan 07 10:50:38.072 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Jan 07 10:50:38.072 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Jan 07 10:50:38.072 [debug] connection_dir_finished_flushing(): client finished sending command.
+Jan 07 10:50:38.072 [debug] conn_read_callback(): socket -1 wants to read.
+Jan 07 10:50:38.072 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Jan 07 10:50:38.072 [info] connection_edge_process_inbuf(): data from edge while in 'waiting for circuit' state. Leaving it on buffer.
+Jan 07 10:50:38.072 [debug] connection_dir_finished_flushing(): client finished sending command.
+Jan 07 10:50:38.123 [debug] conn_write_callback(): socket 12 wants to write.
+Jan 07 10:50:38.123 [debug] connection_or_finished_connecting(): OR connect() to router at 64.122.230.233:10001 finished.
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): List was: ECDHE-ECDSA-AES256-SHA:ECDHE-RSA-AES256-SHA:DHE-RSA-AES256-SHA:DHE-DSS-AES256-SHA:ECDH-RSA-AES256-SHA:ECDH-ECDSA-AES256-SHA:AES256-SHA:ECDHE-ECDSA-RC4-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-RC4-SHA:ECDHE-RSA-AES128-SHA:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA:ECDH-RSA-RC4-SHA:ECDH-RSA-AES128-SHA:ECDH-ECDSA-RC4-SHA:ECDH-ECDSA-AES128-SHA:RC4-MD5:RC4-SHA:AES128-SHA:ECDHE-ECDSA-DES-CBC3-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:EDH-DSS-DES-CBC3-SHA:ECDH-RSA-DES-CBC3-SHA:ECDH-ECDSA-DES-CBC3-SHA:DES-CBC3-SHA:
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Cipher 0: 300c00a ECDHE-ECDSA-AES256-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Cipher 1: 300c014 ECDHE-RSA-AES256-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Cipher 2: 3000039 DHE-RSA-AES256-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Cipher 3: 3000038 DHE-DSS-AES256-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Cipher 4: 300c00f ECDH-RSA-AES256-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Cipher 5: 300c005 ECDH-ECDSA-AES256-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Cipher 6: 3000035 AES256-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Cipher 7: 300c007 ECDHE-ECDSA-RC4-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Cipher 8: 300c009 ECDHE-ECDSA-AES128-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Cipher 9: 300c011 ECDHE-RSA-RC4-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Cipher 10: 300c013 ECDHE-RSA-AES128-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Cipher 11: 3000033 DHE-RSA-AES128-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Cipher 12: 3000032 DHE-DSS-AES128-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Cipher 13: 300c00c ECDH-RSA-RC4-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Cipher 14: 300c00e ECDH-RSA-AES128-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Cipher 15: 300c002 ECDH-ECDSA-RC4-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Cipher 16: 300c004 ECDH-ECDSA-AES128-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Cipher 17: 3000004 RC4-MD5
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Cipher 18: 2010080 RC4-MD5
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Cipher 19: 3000005 RC4-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Cipher 20: 300002f AES128-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Cipher 21: 300c008 ECDHE-ECDSA-DES-CBC3-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Cipher 22: 300c012 ECDHE-RSA-DES-CBC3-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Cipher 23: 3000016 EDH-RSA-DES-CBC3-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Cipher 24: 3000013 EDH-DSS-DES-CBC3-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Cipher 25: 300c00d ECDH-RSA-DES-CBC3-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Cipher 26: 300c003 ECDH-ECDSA-DES-CBC3-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Cipher 27: 300000a DES-CBC3-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Found cipher ECDHE-ECDSA-AES256-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Found cipher ECDHE-RSA-AES256-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Found cipher DHE-RSA-AES256-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Found cipher DHE-DSS-AES256-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Found cipher ECDH-RSA-AES256-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Found cipher ECDH-ECDSA-AES256-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Found cipher AES256-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Found cipher ECDHE-ECDSA-RC4-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Found cipher ECDHE-ECDSA-AES128-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Found cipher ECDHE-RSA-RC4-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Found cipher ECDHE-RSA-AES128-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Found cipher DHE-RSA-AES128-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Found cipher DHE-DSS-AES128-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Found cipher ECDH-RSA-RC4-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Found cipher ECDH-RSA-AES128-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Found cipher ECDH-ECDSA-RC4-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Found cipher ECDH-ECDSA-AES128-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Found cipher RC4-MD5
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Skipping v2 cipher RC4-MD5
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Found cipher RC4-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Found cipher AES128-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Found cipher ECDHE-ECDSA-DES-CBC3-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Found cipher ECDHE-RSA-DES-CBC3-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Found cipher EDH-RSA-DES-CBC3-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Found cipher EDH-DSS-DES-CBC3-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Found cipher ECDH-RSA-DES-CBC3-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Found cipher ECDH-ECDSA-DES-CBC3-SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Inserting fake SSL3_TXT_RSA_FIPS_WITH_3DES_EDE_CBC_SHA
+Jan 07 10:50:38.123 [debug] rectify_client_ciphers(): Found cipher DES-CBC3-SHA
+Jan 07 10:50:38.123 [debug] connection_tls_start_handshake(): starting TLS handshake on fd 12
+Jan 07 10:50:38.123 [debug] connection_tls_continue_handshake(): wanted read
+Jan 07 10:50:38.123 [debug] connection_tls_continue_handshake(): wanted read
+Jan 07 10:50:38.132 [debug] conn_write_callback(): socket 10 wants to write.
+Jan 07 10:50:38.132 [debug] connection_or_finished_connecting(): OR connect() to router at 75.72.116.66:10001 finished.
+Jan 07 10:50:38.132 [debug] connection_tls_start_handshake(): starting TLS handshake on fd 10
+Jan 07 10:50:38.132 [debug] connection_tls_continue_handshake(): wanted read
+Jan 07 10:50:38.132 [debug] connection_tls_continue_handshake(): wanted read
+Jan 07 10:50:38.144 [debug] conn_write_callback(): socket 11 wants to write.
+Jan 07 10:50:38.144 [debug] connection_or_finished_connecting(): OR connect() to router at 96.22.210.194:10001 finished.
+Jan 07 10:50:38.144 [debug] connection_tls_start_handshake(): starting TLS handshake on fd 11
+Jan 07 10:50:38.144 [debug] connection_tls_continue_handshake(): wanted read
+Jan 07 10:50:38.144 [debug] connection_tls_continue_handshake(): wanted read
+Jan 07 10:50:38.188 [debug] conn_read_callback(): socket 12 wants to read.
+Jan 07 10:50:38.192 [debug] connection_tls_continue_handshake(): wanted read
+Jan 07 10:50:38.201 [debug] conn_read_callback(): socket 10 wants to read.
+Jan 07 10:50:38.206 [debug] connection_tls_continue_handshake(): wanted read
+Jan 07 10:50:38.214 [debug] conn_read_callback(): socket 11 wants to read.
+Jan 07 10:50:38.218 [debug] connection_tls_continue_handshake(): wanted read
+Jan 07 10:50:38.263 [debug] conn_read_callback(): socket 12 wants to read.
+Jan 07 10:50:38.263 [debug] tor_tls_handshake(): Server sent back a single certificate; looks like a v2 handshake on 0x2671570.
+Jan 07 10:50:38.263 [debug] connection_tls_continue_handshake(): wanted read
+Jan 07 10:50:38.300 [debug] conn_read_callback(): socket 11 wants to read.
+Jan 07 10:50:38.300 [debug] tor_tls_handshake(): Server sent back a single certificate; looks like a v2 handshake on 0x2691dc0.
+Jan 07 10:50:38.300 [debug] connection_tls_continue_handshake(): wanted read
+Jan 07 10:50:38.308 [debug] conn_read_callback(): socket 10 wants to read.
+Jan 07 10:50:38.309 [debug] tor_tls_handshake(): Server sent back a single certificate; looks like a v2 handshake on 0x26829b0.
+Jan 07 10:50:38.309 [debug] connection_tls_continue_handshake(): wanted read
+Jan 07 10:50:38.342 [debug] conn_read_callback(): socket 12 wants to read.
+Jan 07 10:50:38.348 [debug] connection_tls_continue_handshake(): wanted read
+Jan 07 10:50:38.392 [debug] conn_read_callback(): socket 11 wants to read.
+Jan 07 10:50:38.392 [debug] connection_tls_continue_handshake(): wanted read
+Jan 07 10:50:38.394 [debug] conn_read_callback(): socket 11 wants to read.
+Jan 07 10:50:38.399 [debug] connection_tls_continue_handshake(): wanted read
+Jan 07 10:50:38.408 [debug] conn_read_callback(): socket 10 wants to read.
+Jan 07 10:50:38.414 [debug] connection_tls_continue_handshake(): wanted read
+Jan 07 10:50:38.418 [debug] conn_read_callback(): socket 12 wants to read.
+Jan 07 10:50:38.418 [debug] connection_tls_finish_handshake(): tls handshake with [scrubbed] done. verifying.
+Jan 07 10:50:38.418 [debug] connection_or_check_valid_tls_handshake(): The certificate seems to be valid on outgoing connection with 64.122.230.233:10001
+Jan 07 10:50:38.418 [debug] connection_or_process_cells_from_inbuf(): 12: starting, inbuf_datalen 0 (0 pending in tls object).
+Jan 07 10:50:38.418 [debug] conn_write_callback(): socket 12 wants to write.
+Jan 07 10:50:38.418 [debug] flush_chunk_tls(): flushed 9 bytes, 0 ready to flush, 0 remain.
+Jan 07 10:50:38.418 [debug] connection_handle_write(): After TLS write of 9: 3432 read, 2071 written
+Jan 07 10:50:38.464 [debug] conn_read_callback(): socket 11 wants to read.
+Jan 07 10:50:38.465 [debug] connection_tls_finish_handshake(): tls handshake with [scrubbed] done. verifying.
+Jan 07 10:50:38.465 [debug] connection_or_check_valid_tls_handshake(): The certificate seems to be valid on outgoing connection with 96.22.210.194:10001
+Jan 07 10:50:38.465 [debug] connection_or_process_cells_from_inbuf(): 11: starting, inbuf_datalen 0 (0 pending in tls object).
+Jan 07 10:50:38.465 [debug] conn_write_callback(): socket 11 wants to write.
+Jan 07 10:50:38.465 [debug] flush_chunk_tls(): flushed 9 bytes, 0 ready to flush, 0 remain.
+Jan 07 10:50:38.465 [debug] connection_handle_write(): After TLS write of 9: 3409 read, 2066 written
+Jan 07 10:50:38.477 [debug] conn_read_callback(): socket 12 wants to read.
+Jan 07 10:50:38.477 [debug] connection_read_to_buf(): 12: starting, inbuf_datalen 0 (0 pending in tls object). at_most 16384.
+Jan 07 10:50:38.477 [debug] connection_read_to_buf(): After TLS read of 521: 586 read, 0 written
+Jan 07 10:50:38.477 [debug] connection_or_process_cells_from_inbuf(): 12: starting, inbuf_datalen 521 (0 pending in tls object).
+Jan 07 10:50:38.477 [info] command_process_versions_cell(): Negotiated version 2 with [scrubbed]:10001; sending NETINFO.
+Jan 07 10:50:38.477 [debug] connection_or_process_cells_from_inbuf(): 12: starting, inbuf_datalen 512 (0 pending in tls object).
+Jan 07 10:50:38.477 [debug] circuit_n_conn_done(): or_conn to $9A89D63FD59EEBA2EAE7F9F9CF625A5B78CE1932/64.122.230.233, status=1
+Jan 07 10:50:38.477 [debug] circuit_n_conn_done(): Found circ, sending create cell.
+Jan 07 10:50:38.477 [debug] circuit_send_next_onion_skin(): First skin; sending create cell.
+Jan 07 10:50:38.477 [debug] circuit_deliver_create_cell(): Chosen circID 47602.
+Jan 07 10:50:38.477 [debug] append_cell_to_circuit_queue(): Made a circuit active.
+Jan 07 10:50:38.477 [info] circuit_send_next_onion_skin(): First hop: finished sending CREATE_FAST cell to '<unnamed>'
+Jan 07 10:50:38.477 [info] command_process_netinfo_cell(): Got good NETINFO cell from [scrubbed]:10001; OR connection is now open, using protocol version 2
+Jan 07 10:50:38.477 [debug] connection_or_process_cells_from_inbuf(): 12: starting, inbuf_datalen 0 (0 pending in tls object).
+Jan 07 10:50:38.477 [debug] conn_write_callback(): socket 12 wants to write.
+Jan 07 10:50:38.477 [debug] flush_chunk_tls(): flushed 512 bytes, 0 ready to flush, 0 remain.
+Jan 07 10:50:38.477 [debug] connection_handle_write(): After TLS write of 512: 0 read, 586 written
+Jan 07 10:50:38.477 [debug] connection_or_flush_from_first_active_circuit(): Made a circuit inactive.
+Jan 07 10:50:38.477 [debug] conn_write_callback(): socket 12 wants to write.
+Jan 07 10:50:38.477 [debug] flush_chunk_tls(): flushed 512 bytes, 0 ready to flush, 0 remain.
+Jan 07 10:50:38.477 [debug] connection_handle_write(): After TLS write of 512: 0 read, 586 written
+Jan 07 10:50:38.500 [debug] conn_read_callback(): socket 10 wants to read.
+Jan 07 10:50:38.500 [debug] connection_tls_finish_handshake(): tls handshake with [scrubbed] done. verifying.
+Jan 07 10:50:38.500 [debug] connection_or_check_valid_tls_handshake(): The certificate seems to be valid on outgoing connection with 75.72.116.66:10001
+Jan 07 10:50:38.500 [debug] connection_or_process_cells_from_inbuf(): 10: starting, inbuf_datalen 0 (0 pending in tls object).
+Jan 07 10:50:38.501 [debug] conn_write_callback(): socket 10 wants to write.
+Jan 07 10:50:38.501 [debug] flush_chunk_tls(): flushed 9 bytes, 0 ready to flush, 0 remain.
+Jan 07 10:50:38.501 [debug] connection_handle_write(): After TLS write of 9: 3468 read, 2072 written
+Jan 07 10:50:38.517 [debug] conn_read_callback(): socket 11 wants to read.
+Jan 07 10:50:38.517 [debug] connection_read_to_buf(): 11: starting, inbuf_datalen 0 (0 pending in tls object). at_most 16384.
+Jan 07 10:50:38.517 [debug] connection_read_to_buf(): After TLS read of 521: 586 read, 0 written
+Jan 07 10:50:38.517 [debug] connection_or_process_cells_from_inbuf(): 11: starting, inbuf_datalen 521 (0 pending in tls object).
+Jan 07 10:50:38.517 [info] command_process_versions_cell(): Negotiated version 2 with [scrubbed]:10001; sending NETINFO.
+Jan 07 10:50:38.517 [debug] connection_or_process_cells_from_inbuf(): 11: starting, inbuf_datalen 512 (0 pending in tls object).
+Jan 07 10:50:38.517 [debug] circuit_n_conn_done(): or_conn to $518E96759364B01C9800C36EDD3CC0EAB9F0B4E5/96.22.210.194, status=1
+Jan 07 10:50:38.517 [debug] circuit_n_conn_done(): Found circ, sending create cell.
+Jan 07 10:50:38.517 [debug] circuit_send_next_onion_skin(): First skin; sending create cell.
+Jan 07 10:50:38.517 [debug] circuit_deliver_create_cell(): Chosen circID 59933.
+Jan 07 10:50:38.517 [debug] append_cell_to_circuit_queue(): Made a circuit active.
+Jan 07 10:50:38.517 [info] circuit_send_next_onion_skin(): First hop: finished sending CREATE_FAST cell to '<unnamed>'
+Jan 07 10:50:38.517 [info] command_process_netinfo_cell(): Got good NETINFO cell from [scrubbed]:10001; OR connection is now open, using protocol version 2
+Jan 07 10:50:38.517 [debug] connection_or_process_cells_from_inbuf(): 11: starting, inbuf_datalen 0 (0 pending in tls object).
+Jan 07 10:50:38.517 [debug] conn_write_callback(): socket 11 wants to write.
+Jan 07 10:50:38.517 [debug] flush_chunk_tls(): flushed 512 bytes, 0 ready to flush, 0 remain.
+Jan 07 10:50:38.517 [debug] connection_handle_write(): After TLS write of 512: 0 read, 586 written
+Jan 07 10:50:38.517 [debug] connection_or_flush_from_first_active_circuit(): Made a circuit inactive.
+Jan 07 10:50:38.517 [debug] conn_write_callback(): socket 11 wants to write.
+Jan 07 10:50:38.517 [debug] flush_chunk_tls(): flushed 512 bytes, 0 ready to flush, 0 remain.
+Jan 07 10:50:38.517 [debug] connection_handle_write(): After TLS write of 512: 0 read, 586 written
+Jan 07 10:50:38.532 [debug] conn_read_callback(): socket 7 wants to read.
+Jan 07 10:50:38.532 [debug] connection_handle_listener_read(): Connection accepted on socket 13 (child of fd 7).
+Jan 07 10:50:38.532 [debug] connection_add(): new conn type Control, socket 13, address 127.0.0.1, n_conns 12.
+Jan 07 10:50:38.532 [debug] conn_read_callback(): socket 13 wants to read.
+Jan 07 10:50:38.532 [debug] read_to_chunk(): Read 141 bytes. 141 on inbuf.
+Jan 07 10:50:38.533 [info] handle_control_authenticate(): Authenticated control connection (13)
+Jan 07 10:50:38.533 [debug] handle_control_keepalive(): Josh:  keepalive
+Jan 07 10:50:38.533 [debug] conn_write_callback(): socket 13 wants to write.
+Jan 07 10:50:38.569 [debug] conn_read_callback(): socket 10 wants to read.
+Jan 07 10:50:38.569 [debug] connection_read_to_buf(): 10: starting, inbuf_datalen 0 (0 pending in tls object). at_most 16384.
+Jan 07 10:50:38.569 [debug] connection_read_to_buf(): After TLS read of 521: 586 read, 0 written
+Jan 07 10:50:38.569 [debug] connection_or_process_cells_from_inbuf(): 10: starting, inbuf_datalen 521 (0 pending in tls object).
+Jan 07 10:50:38.569 [info] command_process_versions_cell(): Negotiated version 2 with [scrubbed]:10001; sending NETINFO.
+Jan 07 10:50:38.569 [debug] connection_or_process_cells_from_inbuf(): 10: starting, inbuf_datalen 512 (0 pending in tls object).
+Jan 07 10:50:38.569 [debug] circuit_n_conn_done(): or_conn to $6B977F0170E83BC71CDCAB1B223643A06825A0B7/75.72.116.66, status=1
+Jan 07 10:50:38.569 [debug] circuit_n_conn_done(): Found circ, sending create cell.
+Jan 07 10:50:38.569 [debug] circuit_send_next_onion_skin(): First skin; sending create cell.
+Jan 07 10:50:38.569 [debug] circuit_deliver_create_cell(): Chosen circID 34644.
+Jan 07 10:50:38.569 [debug] append_cell_to_circuit_queue(): Made a circuit active.
+Jan 07 10:50:38.569 [info] circuit_send_next_onion_skin(): First hop: finished sending CREATE_FAST cell to '<unnamed>'
+Jan 07 10:50:38.569 [info] command_process_netinfo_cell(): Got good NETINFO cell from [scrubbed]:10001; OR connection is now open, using protocol version 2
+Jan 07 10:50:38.570 [debug] connection_or_process_cells_from_inbuf(): 10: starting, inbuf_datalen 0 (0 pending in tls object).
+Jan 07 10:50:38.570 [debug] conn_write_callback(): socket 10 wants to write.
+Jan 07 10:50:38.570 [debug] flush_chunk_tls(): flushed 512 bytes, 0 ready to flush, 0 remain.
+Jan 07 10:50:38.570 [debug] connection_handle_write(): After TLS write of 512: 0 read, 586 written
+Jan 07 10:50:38.570 [debug] connection_or_flush_from_first_active_circuit(): Made a circuit inactive.
+Jan 07 10:50:38.570 [debug] conn_write_callback(): socket 10 wants to write.
+Jan 07 10:50:38.570 [debug] flush_chunk_tls(): flushed 512 bytes, 0 ready to flush, 0 remain.
+Jan 07 10:50:38.570 [debug] connection_handle_write(): After TLS write of 512: 0 read, 586 written
+Jan 07 10:50:38.634 [debug] conn_read_callback(): socket 13 wants to read.
+Jan 07 10:50:38.634 [debug] read_to_chunk(): Read 32 bytes. 32 on inbuf.
+Jan 07 10:50:38.634 [debug] conn_write_callback(): socket 13 wants to write.
+Jan 07 10:50:38.735 [debug] conn_read_callback(): socket 13 wants to read.
+Jan 07 10:50:38.735 [debug] read_to_chunk(): Read 32 bytes. 32 on inbuf.
+Jan 07 10:50:38.735 [debug] conn_write_callback(): socket 13 wants to write.
+Jan 07 10:50:38.815 [debug] conn_read_callback(): socket 11 wants to read.
+Jan 07 10:50:38.815 [debug] connection_read_to_buf(): 11: starting, inbuf_datalen 0 (0 pending in tls object). at_most 16384.
+Jan 07 10:50:38.815 [debug] connection_read_to_buf(): After TLS read of 512: 586 read, 0 written
+Jan 07 10:50:38.815 [debug] connection_or_process_cells_from_inbuf(): 11: starting, inbuf_datalen 512 (0 pending in tls object).
+Jan 07 10:50:38.815 [debug] command_process_created_cell(): at OP. Finishing handshake.
+Jan 07 10:50:38.815 [info] circuit_finish_handshake(): Finished building fast circuit hop:
+Jan 07 10:50:38.815 [info] exit circ (length 1, exit 518E96759364B01C9800C36EDD3CC0EAB9F0B4E5): $518E96759364B01C9800C36EDD3CC0EAB9F0B4E5(open)
+Jan 07 10:50:38.815 [debug] command_process_created_cell(): Moving to next skin.
+Jan 07 10:50:38.815 [debug] circuit_send_next_onion_skin(): starting to send subsequent skin.
+Jan 07 10:50:38.815 [info] circuit_send_next_onion_skin(): circuit built!
+Jan 07 10:50:38.815 [debug] circuit_get_open_circ_or_launch(): one on the way!
+Jan 07 10:50:38.815 [debug] connection_ap_handshake_attach_circuit(): Attaching apconn to circ 59933 (stream 0 sec old).
+Jan 07 10:50:38.815 [info] exit circ (length 1): $518E96759364B01C9800C36EDD3CC0EAB9F0B4E5(open)
+Jan 07 10:50:38.815 [debug] link_apconn_to_circ(): attaching new conn to circ. n_circ_id 59933.
+Jan 07 10:50:38.815 [debug] connection_ap_handshake_send_begin(): Sending relay cell to begin stream 29728.
+Jan 07 10:50:38.815 [debug] relay_send_command_from_edge(): delivering 13 cell forward.
+Jan 07 10:50:38.815 [debug] circuit_package_relay_cell(): crypting a layer of the relay cell.
+Jan 07 10:50:38.815 [debug] append_cell_to_circuit_queue(): Made a circuit active.
+Jan 07 10:50:38.815 [debug] append_cell_to_circuit_queue(): Primed a buffer.
+Jan 07 10:50:38.815 [debug] connection_or_flush_from_first_active_circuit(): Made a circuit inactive.
+Jan 07 10:50:38.815 [info] connection_ap_handshake_send_begin(): Address/port sent, ap socket -1, n_circ_id 59933
+Jan 07 10:50:38.815 [debug] circuit_get_open_circ_or_launch(): one on the way!
+Jan 07 10:50:38.815 [debug] connection_or_process_cells_from_inbuf(): 11: starting, inbuf_datalen 0 (0 pending in tls object).
+Jan 07 10:50:38.815 [debug] conn_write_callback(): socket 11 wants to write.
+Jan 07 10:50:38.815 [debug] flush_chunk_tls(): flushed 512 bytes, 0 ready to flush, 0 remain.
+Jan 07 10:50:38.815 [debug] connection_handle_write(): After TLS write of 512: 0 read, 586 written
+Jan 07 10:50:38.836 [debug] conn_read_callback(): socket 13 wants to read.
+Jan 07 10:50:38.836 [debug] read_to_chunk(): Read 32 bytes. 32 on inbuf.
+Jan 07 10:50:38.836 [debug] conn_write_callback(): socket 13 wants to write.
+Jan 07 10:50:38.856 [debug] conn_read_callback(): socket 12 wants to read.
+Jan 07 10:50:38.856 [debug] connection_read_to_buf(): 12: starting, inbuf_datalen 0 (0 pending in tls object). at_most 16384.
+Jan 07 10:50:38.856 [debug] connection_read_to_buf(): After TLS read of 512: 586 read, 0 written
+Jan 07 10:50:38.856 [debug] connection_or_process_cells_from_inbuf(): 12: starting, inbuf_datalen 512 (0 pending in tls object).
+Jan 07 10:50:38.856 [debug] command_process_created_cell(): at OP. Finishing handshake.
+Jan 07 10:50:38.856 [info] circuit_finish_handshake(): Finished building fast circuit hop:
+Jan 07 10:50:38.856 [info] exit circ (length 1, exit 9A89D63FD59EEBA2EAE7F9F9CF625A5B78CE1932): $9A89D63FD59EEBA2EAE7F9F9CF625A5B78CE1932(open)
+Jan 07 10:50:38.856 [debug] command_process_created_cell(): Moving to next skin.
+Jan 07 10:50:38.856 [debug] circuit_send_next_onion_skin(): starting to send subsequent skin.
+Jan 07 10:50:38.856 [info] circuit_send_next_onion_skin(): circuit built!
+Jan 07 10:50:38.856 [debug] circuit_get_open_circ_or_launch(): one on the way!
+Jan 07 10:50:38.856 [debug] connection_ap_handshake_attach_circuit(): Attaching apconn to circ 47602 (stream 0 sec old).
+Jan 07 10:50:38.856 [info] exit circ (length 1): $9A89D63FD59EEBA2EAE7F9F9CF625A5B78CE1932(open)
+Jan 07 10:50:38.856 [debug] link_apconn_to_circ(): attaching new conn to circ. n_circ_id 47602.
+Jan 07 10:50:38.856 [debug] connection_ap_handshake_send_begin(): Sending relay cell to begin stream 25039.
+Jan 07 10:50:38.856 [debug] relay_send_command_from_edge(): delivering 13 cell forward.
+Jan 07 10:50:38.856 [debug] circuit_package_relay_cell(): crypting a layer of the relay cell.
+Jan 07 10:50:38.856 [debug] append_cell_to_circuit_queue(): Made a circuit active.
+Jan 07 10:50:38.856 [debug] append_cell_to_circuit_queue(): Primed a buffer.
+Jan 07 10:50:38.856 [debug] connection_or_flush_from_first_active_circuit(): Made a circuit inactive.
+Jan 07 10:50:38.856 [info] connection_ap_handshake_send_begin(): Address/port sent, ap socket -1, n_circ_id 47602
+Jan 07 10:50:38.856 [debug] connection_or_process_cells_from_inbuf(): 12: starting, inbuf_datalen 0 (0 pending in tls object).
+Jan 07 10:50:38.856 [debug] conn_write_callback(): socket 12 wants to write.
+Jan 07 10:50:38.856 [debug] flush_chunk_tls(): flushed 512 bytes, 0 ready to flush, 0 remain.
+Jan 07 10:50:38.856 [debug] connection_handle_write(): After TLS write of 512: 0 read, 586 written
+Jan 07 10:50:38.870 [debug] conn_read_callback(): socket 11 wants to read.
+Jan 07 10:50:38.870 [debug] connection_read_to_buf(): 11: starting, inbuf_datalen 0 (0 pending in tls object). at_most 16384.
+Jan 07 10:50:38.870 [debug] connection_read_to_buf(): After TLS read of 512: 586 read, 0 written
+Jan 07 10:50:38.870 [debug] connection_or_process_cells_from_inbuf(): 11: starting, inbuf_datalen 512 (0 pending in tls object).
+Jan 07 10:50:38.870 [debug] relay_lookup_conn(): found conn for stream 29728.
+Jan 07 10:50:38.870 [debug] circuit_receive_relay_cell(): Sending to origin.
+Jan 07 10:50:38.870 [debug] connection_edge_process_relay_cell(): Now seen 1 relay cells here (command 4, stream 29728).
+Jan 07 10:50:38.870 [info] connection_edge_process_relay_cell_not_open(): 'connected' received after 0 seconds.
+Jan 07 10:50:38.870 [info] exit circ (length 1): $518E96759364B01C9800C36EDD3CC0EAB9F0B4E5(open)
+Jan 07 10:50:38.870 [debug] connection_edge_process_relay_cell_not_open(): considering
+Jan 07 10:50:38.870 [debug] connection_edge_process_relay_cell_not_open(): it is! 6
+Jan 07 10:50:38.870 [debug] count_usable_descriptors(): 18 usable, 0 present.
+Jan 07 10:50:38.870 [notice] Bootstrapped 50%: Loading relay descriptors.
+Jan 07 10:50:38.870 [debug] circuit_consider_stop_edge_reading(): considering layer_hint->package_window 1000
+Jan 07 10:50:38.870 [debug] connection_edge_package_raw_inbuf(): (-1) Packaging 355 bytes (0 waiting).
+Jan 07 10:50:38.870 [debug] relay_send_command_from_edge(): delivering 2 cell forward.
+Jan 07 10:50:38.870 [debug] circuit_package_relay_cell(): crypting a layer of the relay cell.
+Jan 07 10:50:38.870 [debug] append_cell_to_circuit_queue(): Made a circuit active.
+Jan 07 10:50:38.870 [debug] append_cell_to_circuit_queue(): Primed a buffer.
+Jan 07 10:50:38.870 [debug] connection_or_flush_from_first_active_circuit(): Made a circuit inactive.
+Jan 07 10:50:38.870 [debug] connection_edge_package_raw_inbuf(): conn->package_window is now 499
+Jan 07 10:50:38.870 [debug] circuit_consider_stop_edge_reading(): considering layer_hint->package_window 999
+Jan 07 10:50:38.870 [debug] connection_or_process_cells_from_inbuf(): 11: starting, inbuf_datalen 0 (0 pending in tls object).
+Jan 07 10:50:38.870 [debug] conn_write_callback(): socket 11 wants to write.
+Jan 07 10:50:38.870 [debug] flush_chunk_tls(): flushed 512 bytes, 0 ready to flush, 0 remain.
+Jan 07 10:50:38.870 [debug] connection_handle_write(): After TLS write of 512: 0 read, 586 written
+Jan 07 10:50:38.903 [debug] conn_read_callback(): socket 10 wants to read.
+Jan 07 10:50:38.903 [debug] connection_read_to_buf(): 10: starting, inbuf_datalen 0 (0 pending in tls object). at_most 16384.
+Jan 07 10:50:38.903 [debug] connection_read_to_buf(): After TLS read of 512: 586 read, 0 written
+Jan 07 10:50:38.903 [debug] connection_or_process_cells_from_inbuf(): 10: starting, inbuf_datalen 512 (0 pending in tls object).
+Jan 07 10:50:38.903 [debug] command_process_created_cell(): at OP. Finishing handshake.
+Jan 07 10:50:38.903 [info] circuit_finish_handshake(): Finished building fast circuit hop:
+Jan 07 10:50:38.903 [info] exit circ (length 1, exit 6B977F0170E83BC71CDCAB1B223643A06825A0B7): $6B977F0170E83BC71CDCAB1B223643A06825A0B7(open)
+Jan 07 10:50:38.903 [debug] command_process_created_cell(): Moving to next skin.
+Jan 07 10:50:38.903 [debug] circuit_send_next_onion_skin(): starting to send subsequent skin.
+Jan 07 10:50:38.903 [info] circuit_send_next_onion_skin(): circuit built!
+Jan 07 10:50:38.903 [debug] connection_ap_handshake_attach_circuit(): Attaching apconn to circ 34644 (stream 0 sec old).
+Jan 07 10:50:38.903 [info] exit circ (length 1): $6B977F0170E83BC71CDCAB1B223643A06825A0B7(open)
+Jan 07 10:50:38.903 [debug] link_apconn_to_circ(): attaching new conn to circ. n_circ_id 34644.
+Jan 07 10:50:38.903 [debug] connection_ap_handshake_send_begin(): Sending relay cell to begin stream 42658.
+Jan 07 10:50:38.903 [debug] relay_send_command_from_edge(): delivering 13 cell forward.
+Jan 07 10:50:38.903 [debug] circuit_package_relay_cell(): crypting a layer of the relay cell.
+Jan 07 10:50:38.903 [debug] append_cell_to_circuit_queue(): Made a circuit active.
+Jan 07 10:50:38.903 [debug] append_cell_to_circuit_queue(): Primed a buffer.
+Jan 07 10:50:38.903 [debug] connection_or_flush_from_first_active_circuit(): Made a circuit inactive.
+Jan 07 10:50:38.903 [info] connection_ap_handshake_send_begin(): Address/port sent, ap socket -1, n_circ_id 34644
+Jan 07 10:50:38.903 [debug] connection_or_process_cells_from_inbuf(): 10: starting, inbuf_datalen 0 (0 pending in tls object).
+Jan 07 10:50:38.903 [debug] conn_write_callback(): socket 10 wants to write.
+Jan 07 10:50:38.903 [debug] flush_chunk_tls(): flushed 512 bytes, 0 ready to flush, 0 remain.
+Jan 07 10:50:38.903 [debug] connection_handle_write(): After TLS write of 512: 0 read, 586 written
+Jan 07 10:50:38.925 [debug] conn_read_callback(): socket 11 wants to read.
+Jan 07 10:50:38.925 [debug] connection_read_to_buf(): 11: starting, inbuf_datalen 0 (0 pending in tls object). at_most 16384.
+Jan 07 10:50:38.925 [debug] connection_read_to_buf(): After TLS read of 512: 586 read, 0 written
+Jan 07 10:50:38.925 [debug] connection_or_process_cells_from_inbuf(): 11: starting, inbuf_datalen 512 (0 pending in tls object).
+Jan 07 10:50:38.925 [debug] relay_lookup_conn(): found conn for stream 29728.
+Jan 07 10:50:38.925 [debug] circuit_receive_relay_cell(): Sending to origin.
+Jan 07 10:50:38.925 [debug] connection_edge_process_relay_cell(): Now seen 2 relay cells here (command 2, stream 29728).
+Jan 07 10:50:38.925 [debug] connection_edge_process_relay_cell(): circ deliver_window now 999.
+Jan 07 10:50:38.925 [debug] circuit_consider_sending_sendme(): Josh:  Not sending SENDME:  read (998) write (998) deliver_window (999)
+Jan 07 10:50:38.925 [debug] connection_or_process_cells_from_inbuf(): 11: starting, inbuf_datalen 0 (0 pending in tls object).
+Jan 07 10:50:38.925 [debug] conn_read_callback(): socket -1 wants to read.
+Jan 07 10:50:38.925 [debug] connection_dir_process_inbuf(): Got data, not eof. Leaving on inbuf.
+Jan 07 10:50:38.930 [debug] conn_read_callback(): socket 11 wants to read.
+Jan 07 10:50:38.930 [debug] connection_read_to_buf(): 11: starting, inbuf_datalen 0 (0 pending in tls object). at_most 16384.
+Jan 07 10:50:38.930 [debug] tor_tls_read(): read returned r=-1, err=-2
+Jan 07 10:50:38.930 [debug] connection_read_to_buf(): After TLS read of 0: 1448 read, 0 written
+Jan 07 10:50:38.930 [debug] connection_or_process_cells_from_inbuf(): 11: starting, inbuf_datalen 0 (0 pending in tls object).
+Jan 07 10:50:38.935 [debug] conn_read_callback(): socket 12 wants to read.
+Jan 07 10:50:38.935 [debug] connection_read_to_buf(): 12: starting, inbuf_datalen 0 (0 pending in tls object). at_most 16384.
+Jan 07 10:50:38.935 [debug] connection_read_to_buf(): After TLS read of 512: 586 read, 0 written
+Jan 07 10:50:38.935 [debug] connection_or_process_cells_from_inbuf(): 12: starting, inbuf_datalen 512 (0 pending in tls object).
+Jan 07 10:50:38.935 [debug] relay_lookup_conn(): found conn for stream 25039.
+Jan 07 10:50:38.935 [debug] circuit_receive_relay_cell(): Sending to origin.
+Jan 07 10:50:38.935 [debug] connection_edge_process_relay_cell(): Now seen 3 relay cells here (command 4, stream 25039).
+Jan 07 10:50:38.935 [info] connection_edge_process_relay_cell_not_open(): 'connected' received after 0 seconds.
+Jan 07 10:50:38.937 [info] exit circ (length 1): $9A89D63FD59EEBA2EAE7F9F9CF625A5B78CE1932(open)
+Jan 07 10:50:38.937 [debug] connection_edge_process_relay_cell_not_open(): considering
+Jan 07 10:50:38.937 [debug] connection_edge_process_relay_cell_not_open(): it is! 6
+Jan 07 10:50:38.937 [debug] count_usable_descriptors(): 18 usable, 0 present.
+Jan 07 10:50:38.937 [debug] circuit_consider_stop_edge_reading(): considering layer_hint->package_window 1000
+Jan 07 10:50:38.937 [debug] connection_edge_package_raw_inbuf(): (-1) Packaging 356 bytes (0 waiting).
+Jan 07 10:50:38.937 [debug] relay_send_command_from_edge(): delivering 2 cell forward.
+Jan 07 10:50:38.937 [debug] circuit_package_relay_cell(): crypting a layer of the relay cell.
+Jan 07 10:50:38.937 [debug] append_cell_to_circuit_queue(): Made a circuit active.
+Jan 07 10:50:38.937 [debug] append_cell_to_circuit_queue(): Primed a buffer.
+Jan 07 10:50:38.937 [debug] connection_or_flush_from_first_active_circuit(): Made a circuit inactive.
+Jan 07 10:50:38.937 [debug] connection_edge_package_raw_inbuf(): conn->package_window is now 499
+Jan 07 10:50:38.938 [debug] circuit_consider_stop_edge_reading(): considering layer_hint->package_window 999
+Jan 07 10:50:38.938 [debug] connection_or_process_cells_from_inbuf(): 12: starting, inbuf_datalen 0 (0 pending in tls object).
+Jan 07 10:50:38.938 [debug] conn_write_callback(): socket 12 wants to write.
+Jan 07 10:50:38.938 [debug] flush_chunk_tls(): flushed 512 bytes, 0 ready to flush, 0 remain.
+Jan 07 10:50:38.938 [debug] connection_handle_write(): After TLS write of 512: 0 read, 586 written
+Jan 07 10:50:38.938 [debug] conn_read_callback(): socket 13 wants to read.
+Jan 07 10:50:38.938 [debug] read_to_chunk(): Read 32 bytes. 32 on inbuf.
+Jan 07 10:50:38.938 [debug] conn_write_callback(): socket 13 wants to write.
+Jan 07 10:50:38.942 [debug] conn_read_callback(): socket 11 wants to read.
+Jan 07 10:50:38.942 [debug] connection_read_to_buf(): 11: starting, inbuf_datalen 0 (0 pending in tls object). at_most 16384.
+Jan 07 10:50:38.942 [debug] tor_tls_read(): read returned r=-1, err=-2
+Jan 07 10:50:38.942 [debug] connection_read_to_buf(): After TLS read of 0: 1448 read, 0 written
+Jan 07 10:50:38.942 [debug] connection_or_process_cells_from_inbuf(): 11: starting, inbuf_datalen 0 (0 pending in tls object).
+Jan 07 10:50:38.957 [debug] conn_read_callback(): socket 11 wants to read.
+Jan 07 10:50:38.957 [debug] connection_read_to_buf(): 11: starting, inbuf_datalen 0 (0 pending in tls object). at_most 16384.
+Jan 07 10:50:38.957 [debug] connection_read_to_buf(): After TLS read of 4080: 1258 read, 0 written
+Jan 07 10:50:38.957 [debug] connection_or_process_cells_from_inbuf(): 11: starting, inbuf_datalen 4080 (0 pending in tls object).
+Jan 07 10:50:38.957 [debug] relay_lookup_conn(): found conn for stream 29728.
+Jan 07 10:50:38.957 [debug] circuit_receive_relay_cell(): Sending to origin.
+Jan 07 10:50:38.957 [debug] connection_edge_process_relay_cell(): Now seen 4 relay cells here (command 2, stream 29728).
+Jan 07 10:50:38.957 [debug] connection_edge_process_relay_cell(): circ deliver_window now 998.
+Jan 07 10:50:38.957 [debug] circuit_consider_sending_sendme(): Josh:  Not sending SENDME:  read (997) write (998) deliver_window (998)
+Jan 07 10:50:38.957 [debug] connection_or_process_cells_from_inbuf(): 11: starting, inbuf_datalen 3568 (0 pending in tls object).
+Jan 07 10:50:38.957 [debug] relay_lookup_conn(): found conn for stream 29728.
+Jan 07 10:50:38.957 [debug] circuit_receive_relay_cell(): Sending to origin.
+Jan 07 10:50:38.957 [debug] connection_edge_process_relay_cell(): Now seen 5 relay cells here (command 2, stream 29728).
+Jan 07 10:50:38.957 [debug] connection_edge_process_relay_cell(): circ deliver_window now 997.
+Jan 07 10:50:38.957 [debug] circuit_consider_sending_sendme(): Josh:  Not sending SENDME:  read (996) write (998) deliver_window (997)
+Jan 07 10:50:38.957 [debug] connection_or_process_cells_from_inbuf(): 11: starting, inbuf_datalen 3056 (0 pending in tls object).
+Jan 07 10:50:38.957 [debug] relay_lookup_conn(): found conn for stream 29728.
+Jan 07 10:50:38.958 [debug] circuit_receive_relay_cell(): Sending to origin.
+Jan 07 10:50:38.958 [debug] connection_edge_process_relay_cell(): Now seen 6 relay cells here (command 2, stream 29728).
+Jan 07 10:50:38.958 [debug] connection_edge_process_relay_cell(): circ deliver_window now 996.
+Jan 07 10:50:38.958 [debug] circuit_consider_sending_sendme(): Josh:  Not sending SENDME:  read (995) write (998) deliver_window (996)
+Jan 07 10:50:38.958 [debug] connection_or_process_cells_from_inbuf(): 11: starting, inbuf_datalen 2544 (0 pending in tls object).
+Jan 07 10:50:38.958 [debug] relay_lookup_conn(): found conn for stream 29728.
+Jan 07 10:50:38.958 [debug] circuit_receive_relay_cell(): Sending to origin.
+Jan 07 10:50:38.958 [debug] connection_edge_process_relay_cell(): Now seen 7 relay cells here (command 2, stream 29728).
+Jan 07 10:50:38.958 [debug] connection_edge_process_relay_cell(): circ deliver_window now 995.
+Jan 07 10:50:38.958 [debug] circuit_consider_sending_sendme(): Josh:  Not sending SENDME:  read (994) write (998) deliver_window (995)
+Jan 07 10:50:38.958 [debug] connection_or_process_cells_from_inbuf(): 11: starting, inbuf_datalen 2032 (0 pending in tls object).
+Jan 07 10:50:38.958 [debug] relay_lookup_conn(): found conn for stream 29728.
+Jan 07 10:50:38.958 [debug] circuit_receive_relay_cell(): Sending to origin.
+Jan 07 10:50:38.958 [debug] connection_edge_process_relay_cell(): Now seen 8 relay cells here (command 2, stream 29728).
+Jan 07 10:50:38.958 [debug] connection_edge_process_relay_cell(): circ deliver_window now 994.
+Jan 07 10:50:38.958 [debug] circuit_consider_sending_sendme(): Josh:  Not sending SENDME:  read (993) write (998) deliver_window (994)
+Jan 07 10:50:38.958 [debug] connection_or_process_cells_from_inbuf(): 11: starting, inbuf_datalen 1520 (0 pending in tls object).
+Jan 07 10:50:38.958 [debug] relay_lookup_conn(): found conn for stream 29728.
+Jan 07 10:50:38.958 [debug] circuit_receive_relay_cell(): Sending to origin.
+Jan 07 10:50:38.958 [debug] connection_edge_process_relay_cell(): Now seen 9 relay cells here (command 2, stream 29728).
+Jan 07 10:50:38.958 [debug] connection_edge_process_relay_cell(): circ deliver_window now 993.
+Jan 07 10:50:38.958 [debug] circuit_consider_sending_sendme(): Josh:  Not sending SENDME:  read (992) write (998) deliver_window (993)
+Jan 07 10:50:38.958 [debug] connection_or_process_cells_from_inbuf(): 11: starting, inbuf_datalen 1008 (0 pending in tls object).
+Jan 07 10:50:38.958 [debug] relay_lookup_conn(): found conn for stream 29728.
+Jan 07 10:50:38.958 [debug] circuit_receive_relay_cell(): Sending to origin.
+Jan 07 10:50:38.958 [debug] connection_edge_process_relay_cell(): Now seen 10 relay cells here (command 2, stream 29728).
+Jan 07 10:50:38.958 [debug] connection_edge_process_relay_cell(): circ deliver_window now 992.
+Jan 07 10:50:38.958 [debug] circuit_consider_sending_sendme(): Josh:  Not sending SENDME:  read (991) write (998) deliver_window (992)
+Jan 07 10:50:38.958 [debug] connection_or_process_cells_from_inbuf(): 11: starting, inbuf_datalen 496 (0 pending in tls object).
+Jan 07 10:50:38.958 [debug] conn_read_callback(): socket -1 wants to read.
+Jan 07 10:50:38.958 [debug] connection_dir_process_inbuf(): Got data, not eof. Leaving on inbuf.
+Jan 07 10:50:38.962 [debug] conn_read_callback(): socket 10 wants to read.
+Jan 07 10:50:38.962 [debug] connection_read_to_buf(): 10: starting, inbuf_datalen 0 (0 pending in tls object). at_most 16384.
+Jan 07 10:50:38.962 [debug] connection_read_to_buf(): After TLS read of 512: 586 read, 0 written
+Jan 07 10:50:38.962 [debug] connection_or_process_cells_from_inbuf(): 10: starting, inbuf_datalen 512 (0 pending in tls object).
+Jan 07 10:50:38.962 [debug] relay_lookup_conn(): found conn for stream 42658.
+Jan 07 10:50:38.962 [debug] circuit_receive_relay_cell(): Sending to origin.
+Jan 07 10:50:38.962 [debug] connection_edge_process_relay_cell(): Now seen 11 relay cells here (command 4, stream 42658).
+Jan 07 10:50:38.962 [info] connection_edge_process_relay_cell_not_open(): 'connected' received after 0 seconds.
+Jan 07 10:50:38.962 [info] exit circ (length 1): $6B977F0170E83BC71CDCAB1B223643A06825A0B7(open)
+Jan 07 10:50:38.962 [debug] connection_edge_process_relay_cell_not_open(): considering
+Jan 07 10:50:38.962 [debug] connection_edge_process_relay_cell_not_open(): it is! 6
+Jan 07 10:50:38.962 [debug] count_usable_descriptors(): 18 usable, 0 present.
+Jan 07 10:50:38.962 [debug] circuit_consider_stop_edge_reading(): considering layer_hint->package_window 1000
+Jan 07 10:50:38.962 [debug] connection_edge_package_raw_inbuf(): (-1) Packaging 354 bytes (0 waiting).
+Jan 07 10:50:38.962 [debug] relay_send_command_from_edge(): delivering 2 cell forward.
+Jan 07 10:50:38.962 [debug] circuit_package_relay_cell(): crypting a layer of the relay cell.
+Jan 07 10:50:38.962 [debug] append_cell_to_circuit_queue(): Made a circuit active.
+Jan 07 10:50:38.962 [debug] append_cell_to_circuit_queue(): Primed a buffer.
+Jan 07 10:50:38.962 [debug] connection_or_flush_from_first_active_circuit(): Made a circuit inactive.
+Jan 07 10:50:38.962 [debug] connection_edge_package_raw_inbuf(): conn->package_window is now 499
+Jan 07 10:50:38.963 [debug] circuit_consider_stop_edge_reading(): considering layer_hint->package_window 999
+Jan 07 10:50:38.963 [debug] connection_or_process_cells_from_inbuf(): 10: starting, inbuf_datalen 0 (0 pending in tls object).
+Jan 07 10:50:38.963 [debug] conn_write_callback(): socket 10 wants to write.
+Jan 07 10:50:38.963 [debug] flush_chunk_tls(): flushed 512 bytes, 0 ready to flush, 0 remain.
+Jan 07 10:50:38.963 [debug] connection_handle_write(): After TLS write of 512: 0 read, 586 written
+Jan 07 10:50:38.981 [debug] conn_read_callback(): socket 11 wants to read.
+Jan 07 10:50:38.981 [debug] connection_read_to_buf(): 11: starting, inbuf_datalen 496 (0 pending in tls object). at_most 16384.
+Jan 07 10:50:38.981 [debug] connection_read_to_buf(): After TLS read of 528: 602 read, 0 written
+Jan 07 10:50:38.981 [debug] connection_or_process_cells_from_inbuf(): 11: starting, inbuf_datalen 1024 (0 pending in tls object).
+Jan 07 10:50:38.981 [debug] relay_lookup_conn(): found conn for stream 29728.
+Jan 07 10:50:38.981 [debug] circuit_receive_relay_cell(): Sending to origin.
+Jan 07 10:50:38.981 [debug] connection_edge_process_relay_cell(): Now seen 12 relay cells here (command 2, stream 29728).
+Jan 07 10:50:38.981 [debug] connection_edge_process_relay_cell(): circ deliver_window now 991.
+Jan 07 10:50:38.981 [debug] circuit_consider_sending_sendme(): Josh:  Not sending SENDME:  read (990) write (998) deliver_window (991)
+Jan 07 10:50:38.981 [debug] connection_or_process_cells_from_inbuf(): 11: starting, inbuf_datalen 512 (0 pending in tls object).
+Jan 07 10:50:38.981 [debug] relay_lookup_conn(): found conn for stream 29728.
+Jan 07 10:50:38.981 [debug] circuit_receive_relay_cell(): Sending to origin.
+Jan 07 10:50:38.981 [debug] connection_edge_process_relay_cell(): Now seen 13 relay cells here (command 3, stream 29728).
+Jan 07 10:50:38.981 [info] connection_edge_process_relay_cell(): -1: end cell (closed normally) for stream 29728. Removing stream.
+Jan 07 10:50:38.981 [debug] connection_or_process_cells_from_inbuf(): 11: starting, inbuf_datalen 0 (0 pending in tls object).
+Jan 07 10:50:38.981 [debug] conn_close_if_marked(): Cleaning up connection (fd -1).
+Jan 07 10:50:38.981 [debug] conn_close_if_marked(): Flushed last 164 bytes from a linked conn; 0 left; flushlen 0; wants-to-flush==0
+Jan 07 10:50:38.981 [debug] connection_remove(): removing socket -1 (type Socks), n_conns now 12
+Jan 07 10:50:38.981 [info] _connection_free(): Freeing linked Socks connection [open] with 0 bytes on inbuf, 0 on outbuf.
+Jan 07 10:50:38.981 [debug] conn_read_callback(): socket -1 wants to read.
+Jan 07 10:50:38.981 [debug] fetch_from_buf_http(): headerlen 173, bodylen 3975.
+Jan 07 10:50:38.981 [debug] connection_dir_client_reached_eof(): Received response from directory server '96.22.210.194:10001': 200 "OK"
+Jan 07 10:50:38.981 [debug] router_new_address_suggestion(): Got X-Your-Address-Is: 98.236.71.7.
+Jan 07 10:50:38.981 [debug] connection_dir_client_reached_eof(): Time on received directory is within tolerance; we are -47 seconds skewed.  (That's okay.)
+Jan 07 10:50:38.981 [info] connection_dir_client_reached_eof(): Received server info (size 8329) from server '96.22.210.194:10001'
+Jan 07 10:50:38.981 [debug] router_parse_list_from_string(): Read router '92BD6BFE91C7A79E', purpose 'general'
+Jan 07 10:50:38.981 [debug] router_parse_list_from_string(): Read router '70565C3E7F293AA9', purpose 'general'
+Jan 07 10:50:38.981 [debug] router_parse_list_from_string(): Read router '9C72215273C50E3F', purpose 'general'
+Jan 07 10:50:38.981 [debug] router_parse_list_from_string(): Read router '941C712DA0F7DFD6', purpose 'general'
+Jan 07 10:50:38.982 [debug] router_parse_list_from_string(): Read router 'DE3D2A7E37AD9666', purpose 'general'
+Jan 07 10:50:38.982 [debug] router_parse_list_from_string(): Read router '6B0F4BA87B5E4CE8', purpose 'general'
+Jan 07 10:50:38.982 [info] router_load_routers_from_string(): 6 elements to add
+Jan 07 10:50:38.982 [debug] count_usable_descriptors(): 18 usable, 6 present.
+Jan 07 10:50:38.982 [debug] count_usable_descriptors(): 18 usable, 6 present.
+Jan 07 10:50:38.982 [notice] We now have enough directory information to build circuits.
+Jan 07 10:50:38.982 [notice] Bootstrapped 80%: Connecting to the Tor network.
+Jan 07 10:50:38.982 [info] connection_dir_client_reached_eof(): Received 6/6 router descriptors requested from 96.22.210.194:10001
+Jan 07 10:50:38.982 [debug] conn_close_if_marked(): Cleaning up connection (fd -1).
+Jan 07 10:50:38.982 [debug] connection_remove(): removing socket -1 (type Directory), n_conns now 11
+Jan 07 10:50:38.982 [info] _connection_free(): Freeing linked Directory connection [client finished] with 0 bytes on inbuf, 0 on outbuf.
+Jan 07 10:50:39.033 [debug] conn_read_callback(): socket 10 wants to read.
+Jan 07 10:50:39.033 [debug] connection_read_to_buf(): 10: starting, inbuf_datalen 0 (0 pending in tls object). at_most 16384.
+Jan 07 10:50:39.033 [debug] connection_read_to_buf(): After TLS read of 512: 586 read, 0 written
+Jan 07 10:50:39.033 [debug] connection_or_process_cells_from_inbuf(): 10: starting, inbuf_datalen 512 (0 pending in tls object).
+Jan 07 10:50:39.033 [debug] relay_lookup_conn(): found conn for stream 42658.
+Jan 07 10:50:39.033 [debug] circuit_receive_relay_cell(): Sending to origin.
+Jan 07 10:50:39.033 [debug] connection_edge_process_relay_cell(): Now seen 14 relay cells here (command 2, stream 42658).
+Jan 07 10:50:39.033 [debug] connection_edge_process_relay_cell(): circ deliver_window now 999.
+Jan 07 10:50:39.033 [debug] circuit_consider_sending_sendme(): Josh:  Not sending SENDME:  read (998) write (998) deliver_window (999)
+Jan 07 10:50:39.033 [debug] connection_or_process_cells_from_inbuf(): 10: starting, inbuf_datalen 0 (0 pending in tls object).
+Jan 07 10:50:39.033 [debug] conn_read_callback(): socket -1 wants to read.
+Jan 07 10:50:39.033 [debug] connection_dir_process_inbuf(): Got data, not eof. Leaving on inbuf.
+Jan 07 10:50:39.037 [debug] conn_read_callback(): socket 10 wants to read.
+Jan 07 10:50:39.037 [debug] connection_read_to_buf(): 10: starting, inbuf_datalen 0 (0 pending in tls object). at_most 16384.
+Jan 07 10:50:39.037 [debug] tor_tls_read(): read returned r=-1, err=-2
+Jan 07 10:50:39.037 [debug] connection_read_to_buf(): After TLS read of 0: 1448 read, 0 written
+Jan 07 10:50:39.037 [debug] connection_or_process_cells_from_inbuf(): 10: starting, inbuf_datalen 0 (0 pending in tls object).
+Jan 07 10:50:39.039 [debug] conn_read_callback(): socket 13 wants to read.
+Jan 07 10:50:39.039 [debug] read_to_chunk(): Read 32 bytes. 32 on inbuf.
+Jan 07 10:50:39.039 [debug] conn_write_callback(): socket 13 wants to write.
+Jan 07 10:50:39.040 [debug] conn_read_callback(): socket 12 wants to read.
+Jan 07 10:50:39.040 [debug] connection_read_to_buf(): 12: starting, inbuf_datalen 0 (0 pending in tls object). at_most 16384.
+Jan 07 10:50:39.040 [debug] connection_read_to_buf(): After TLS read of 512: 586 read, 0 written
+Jan 07 10:50:39.040 [debug] connection_or_process_cells_from_inbuf(): 12: starting, inbuf_datalen 512 (0 pending in tls object).
+Jan 07 10:50:39.040 [debug] relay_lookup_conn(): found conn for stream 25039.
+Jan 07 10:50:39.040 [debug] circuit_receive_relay_cell(): Sending to origin.
+Jan 07 10:50:39.040 [debug] connection_edge_process_relay_cell(): Now seen 15 relay cells here (command 2, stream 25039).
+Jan 07 10:50:39.040 [debug] connection_edge_process_relay_cell(): circ deliver_window now 999.
+Jan 07 10:50:39.040 [debug] circuit_consider_sending_sendme(): Josh:  Not sending SENDME:  read (998) write (998) deliver_window (999)
+Jan 07 10:50:39.040 [debug] connection_or_process_cells_from_inbuf(): 12: starting, inbuf_datalen 0 (0 pending in tls object).
+Jan 07 10:50:39.040 [debug] conn_read_callback(): socket -1 wants to read.
+Jan 07 10:50:39.040 [debug] connection_dir_process_inbuf(): Got data, not eof. Leaving on inbuf.
+Jan 07 10:50:39.042 [debug] conn_read_callback(): socket 10 wants to read.
+Jan 07 10:50:39.042 [debug] connection_read_to_buf(): 10: starting, inbuf_datalen 0 (0 pending in tls object). at_most 16384.
+Jan 07 10:50:39.042 [debug] tor_tls_read(): read returned r=-1, err=-2
+Jan 07 10:50:39.042 [debug] connection_read_to_buf(): After TLS read of 0: 1448 read, 0 written
+Jan 07 10:50:39.042 [debug] connection_or_process_cells_from_inbuf(): 10: starting, inbuf_datalen 0 (0 pending in tls object).
+Jan 07 10:50:39.042 [debug] conn_read_callback(): socket 10 wants to read.
+Jan 07 10:50:39.042 [debug] connection_read_to_buf(): 10: starting, inbuf_datalen 0 (0 pending in tls object). at_most 16384.
+Jan 07 10:50:39.042 [debug] connection_read_to_buf(): After TLS read of 4080: 1258 read, 0 written
+Jan 07 10:50:39.042 [debug] connection_or_process_cells_from_inbuf(): 10: starting, inbuf_datalen 4080 (0 pending in tls object).
+Jan 07 10:50:39.042 [debug] relay_lookup_conn(): found conn for stream 42658.
+Jan 07 10:50:39.042 [debug] circuit_receive_relay_cell(): Sending to origin.
+Jan 07 10:50:39.042 [debug] connection_edge_process_relay_cell(): Now seen 16 relay cells here (command 2, stream 42658).
+Jan 07 10:50:39.042 [debug] connection_edge_process_relay_cell(): circ deliver_window now 998.
+Jan 07 10:50:39.042 [debug] circuit_consider_sending_sendme(): Josh:  Not sending SENDME:  read (997) write (998) deliver_window (998)
+Jan 07 10:50:39.042 [debug] connection_or_process_cells_from_inbuf(): 10: starting, inbuf_datalen 3568 (0 pending in tls object).
+Jan 07 10:50:39.042 [debug] relay_lookup_conn(): found conn for stream 42658.
+Jan 07 10:50:39.042 [debug] circuit_receive_relay_cell(): Sending to origin.
+Jan 07 10:50:39.042 [debug] connection_edge_process_relay_cell(): Now seen 17 relay cells here (command 2, stream 42658).
+Jan 07 10:50:39.042 [debug] connection_edge_process_relay_cell(): circ deliver_window now 997.
+Jan 07 10:50:39.042 [debug] circuit_consider_sending_sendme(): Josh:  Not sending SENDME:  read (996) write (998) deliver_window (997)
+Jan 07 10:50:39.042 [debug] connection_or_process_cells_from_inbuf(): 10: starting, inbuf_datalen 3056 (0 pending in tls object).
+Jan 07 10:50:39.042 [debug] relay_lookup_conn(): found conn for stream 42658.
+Jan 07 10:50:39.042 [debug] circuit_receive_relay_cell(): Sending to origin.
+Jan 07 10:50:39.042 [debug] connection_edge_process_relay_cell(): Now seen 18 relay cells here (command 2, stream 42658).
+Jan 07 10:50:39.042 [debug] connection_edge_process_relay_cell(): circ deliver_window now 996.
+Jan 07 10:50:39.042 [debug] circuit_consider_sending_sendme(): Josh:  Not sending SENDME:  read (995) write (998) deliver_window (996)
+Jan 07 10:50:39.042 [debug] connection_or_process_cells_from_inbuf(): 10: starting, inbuf_datalen 2544 (0 pending in tls object).
+Jan 07 10:50:39.042 [debug] relay_lookup_conn(): found conn for stream 42658.
+Jan 07 10:50:39.042 [debug] circuit_receive_relay_cell(): Sending to origin.
+Jan 07 10:50:39.042 [debug] connection_edge_process_relay_cell(): Now seen 19 relay cells here (command 2, stream 42658).
+Jan 07 10:50:39.042 [debug] connection_edge_process_relay_cell(): circ deliver_window now 995.
+Jan 07 10:50:39.042 [debug] circuit_consider_sending_sendme(): Josh:  Not sending SENDME:  read (994) write (998) deliver_window (995)
+Jan 07 10:50:39.042 [debug] connection_or_process_cells_from_inbuf(): 10: starting, inbuf_datalen 2032 (0 pending in tls object).
+Jan 07 10:50:39.042 [debug] relay_lookup_conn(): found conn for stream 42658.
+Jan 07 10:50:39.042 [debug] circuit_receive_relay_cell(): Sending to origin.
+Jan 07 10:50:39.042 [debug] connection_edge_process_relay_cell(): Now seen 20 relay cells here (command 2, stream 42658).
+Jan 07 10:50:39.042 [debug] connection_edge_process_relay_cell(): circ deliver_window now 994.
+Jan 07 10:50:39.042 [debug] circuit_consider_sending_sendme(): Josh:  Not sending SENDME:  read (993) write (998) deliver_window (994)
+Jan 07 10:50:39.042 [debug] connection_or_process_cells_from_inbuf(): 10: starting, inbuf_datalen 1520 (0 pending in tls object).
+Jan 07 10:50:39.042 [debug] relay_lookup_conn(): found conn for stream 42658.
+Jan 07 10:50:39.042 [debug] circuit_receive_relay_cell(): Sending to origin.
+Jan 07 10:50:39.042 [debug] connection_edge_process_relay_cell(): Now seen 21 relay cells here (command 2, stream 42658).
+Jan 07 10:50:39.042 [debug] connection_edge_process_relay_cell(): circ deliver_window now 993.
+Jan 07 10:50:39.042 [debug] circuit_consider_sending_sendme(): Josh:  Not sending SENDME:  read (992) write (998) deliver_window (993)
+Jan 07 10:50:39.042 [debug] connection_or_process_cells_from_inbuf(): 10: starting, inbuf_datalen 1008 (0 pending in tls object).
+Jan 07 10:50:39.042 [debug] relay_lookup_conn(): found conn for stream 42658.
+Jan 07 10:50:39.042 [debug] circuit_receive_relay_cell(): Sending to origin.
+Jan 07 10:50:39.042 [debug] connection_edge_process_relay_cell(): Now seen 22 relay cells here (command 2, stream 42658).
+Jan 07 10:50:39.042 [debug] connection_edge_process_relay_cell(): circ deliver_window now 992.
+Jan 07 10:50:39.042 [debug] circuit_consider_sending_sendme(): Josh:  Not sending SENDME:  read (991) write (998) deliver_window (992)
+Jan 07 10:50:39.042 [debug] connection_or_process_cells_from_inbuf(): 10: starting, inbuf_datalen 496 (0 pending in tls object).
+Jan 07 10:50:39.043 [debug] conn_read_callback(): socket -1 wants to read.
+Jan 07 10:50:39.043 [debug] connection_dir_process_inbuf(): Got data, not eof. Leaving on inbuf.
+Jan 07 10:50:39.051 [debug] conn_read_callback(): socket 12 wants to read.
+Jan 07 10:50:39.051 [debug] connection_read_to_buf(): 12: starting, inbuf_datalen 0 (0 pending in tls object). at_most 16384.
+Jan 07 10:50:39.051 [debug] tor_tls_read(): read returned r=-1, err=-2
+Jan 07 10:50:39.051 [debug] connection_read_to_buf(): After TLS read of 0: 1448 read, 0 written
+Jan 07 10:50:39.051 [debug] connection_or_process_cells_from_inbuf(): 12: starting, inbuf_datalen 0 (0 pending in tls object).
+Jan 07 10:50:39.065 [debug] conn_read_callback(): socket 12 wants to read.
+Jan 07 10:50:39.065 [debug] connection_read_to_buf(): 12: starting, inbuf_datalen 0 (0 pending in tls object). at_most 16384.
+Jan 07 10:50:39.065 [debug] tor_tls_read(): read returned r=-1, err=-2
+Jan 07 10:50:39.065 [debug] connection_read_to_buf(): After TLS read of 0: 1448 read, 0 written
+Jan 07 10:50:39.065 [debug] connection_or_process_cells_from_inbuf(): 12: starting, inbuf_datalen 0 (0 pending in tls object).
+Jan 07 10:50:39.073 [debug] conn_read_callback(): socket 12 wants to read.
+Jan 07 10:50:39.073 [debug] connection_read_to_buf(): 12: starting, inbuf_datalen 0 (0 pending in tls object). at_most 16384.
+Jan 07 10:50:39.073 [debug] connection_read_to_buf(): After TLS read of 4080: 1258 read, 0 written
+Jan 07 10:50:39.073 [debug] connection_or_process_cells_from_inbuf(): 12: starting, inbuf_datalen 4080 (0 pending in tls object).
+Jan 07 10:50:39.073 [debug] relay_lookup_conn(): found conn for stream 25039.
+Jan 07 10:50:39.073 [debug] circuit_receive_relay_cell(): Sending to origin.
+Jan 07 10:50:39.073 [debug] connection_edge_process_relay_cell(): Now seen 23 relay cells here (command 2, stream 25039).
+Jan 07 10:50:39.073 [debug] connection_edge_process_relay_cell(): circ deliver_window now 998.
+Jan 07 10:50:39.073 [debug] circuit_consider_sending_sendme(): Josh:  Not sending SENDME:  read (997) write (998) deliver_window (998)
+Jan 07 10:50:39.073 [debug] connection_or_process_cells_from_inbuf(): 12: starting, inbuf_datalen 3568 (0 pending in tls object).
+Jan 07 10:50:39.073 [debug] relay_lookup_conn(): found conn for stream 25039.
+Jan 07 10:50:39.073 [debug] circuit_receive_relay_cell(): Sending to origin.
+Jan 07 10:50:39.073 [debug] connection_edge_process_relay_cell(): Now seen 24 relay cells here (command 2, stream 25039).
+Jan 07 10:50:39.073 [debug] connection_edge_process_relay_cell(): circ deliver_window now 997.
+Jan 07 10:50:39.073 [debug] circuit_consider_sending_sendme(): Josh:  Not sending SENDME:  read (996) write (998) deliver_window (997)
+Jan 07 10:50:39.073 [debug] connection_or_process_cells_from_inbuf(): 12: starting, inbuf_datalen 3056 (0 pending in tls object).
+Jan 07 10:50:39.073 [debug] relay_lookup_conn(): found conn for stream 25039.
+Jan 07 10:50:39.073 [debug] circuit_receive_relay_cell(): Sending to origin.
+Jan 07 10:50:39.073 [debug] connection_edge_process_relay_cell(): Now seen 25 relay cells here (command 2, stream 25039).
+Jan 07 10:50:39.073 [debug] connection_edge_process_relay_cell(): circ deliver_window now 996.
+Jan 07 10:50:39.073 [debug] circuit_consider_sending_sendme(): Josh:  Not sending SENDME:  read (995) write (998) deliver_window (996)
+Jan 07 10:50:39.073 [debug] connection_or_process_cells_from_inbuf(): 12: starting, inbuf_datalen 2544 (0 pending in tls object).
+Jan 07 10:50:39.073 [debug] relay_lookup_conn(): found conn for stream 25039.
+Jan 07 10:50:39.073 [debug] circuit_receive_relay_cell(): Sending to origin.
+Jan 07 10:50:39.073 [debug] connection_edge_process_relay_cell(): Now seen 26 relay cells here (command 2, stream 25039).
+Jan 07 10:50:39.073 [debug] connection_edge_process_relay_cell(): circ deliver_window now 995.
+Jan 07 10:50:39.073 [debug] circuit_consider_sending_sendme(): Josh:  Not sending SENDME:  read (994) write (998) deliver_window (995)
+Jan 07 10:50:39.073 [debug] connection_or_process_cells_from_inbuf(): 12: starting, inbuf_datalen 2032 (0 pending in tls object).
+Jan 07 10:50:39.073 [debug] relay_lookup_conn(): found conn for stream 25039.
+Jan 07 10:50:39.073 [debug] circuit_receive_relay_cell(): Sending to origin.
+Jan 07 10:50:39.073 [debug] connection_edge_process_relay_cell(): Now seen 27 relay cells here (command 2, stream 25039).
+Jan 07 10:50:39.073 [debug] connection_edge_process_relay_cell(): circ deliver_window now 994.
+Jan 07 10:50:39.073 [debug] circuit_consider_sending_sendme(): Josh:  Not sending SENDME:  read (993) write (998) deliver_window (994)
+Jan 07 10:50:39.073 [debug] connection_or_process_cells_from_inbuf(): 12: starting, inbuf_datalen 1520 (0 pending in tls object).
+Jan 07 10:50:39.073 [debug] relay_lookup_conn(): found conn for stream 25039.
+Jan 07 10:50:39.073 [debug] circuit_receive_relay_cell(): Sending to origin.
+Jan 07 10:50:39.073 [debug] connection_edge_process_relay_cell(): Now seen 28 relay cells here (command 2, stream 25039).
+Jan 07 10:50:39.073 [debug] connection_edge_process_relay_cell(): circ deliver_window now 993.
+Jan 07 10:50:39.073 [debug] circuit_consider_sending_sendme(): Josh:  Not sending SENDME:  read (992) write (998) deliver_window (993)
+Jan 07 10:50:39.073 [debug] connection_or_process_cells_from_inbuf(): 12: starting, inbuf_datalen 1008 (0 pending in tls object).
+Jan 07 10:50:39.073 [debug] relay_lookup_conn(): found conn for stream 25039.
+Jan 07 10:50:39.073 [debug] circuit_receive_relay_cell(): Sending to origin.
+Jan 07 10:50:39.073 [debug] connection_edge_process_relay_cell(): Now seen 29 relay cells here (command 2, stream 25039).
+Jan 07 10:50:39.073 [debug] connection_edge_process_relay_cell(): circ deliver_window now 992.
+Jan 07 10:50:39.073 [debug] circuit_consider_sending_sendme(): Josh:  Not sending SENDME:  read (991) write (998) deliver_window (992)
+Jan 07 10:50:39.073 [debug] connection_or_process_cells_from_inbuf(): 12: starting, inbuf_datalen 496 (0 pending in tls object).
+Jan 07 10:50:39.073 [debug] global_read_bucket now 10485760.
+Jan 07 10:50:39.073 [debug] global_write_bucket now 10485760.
+Jan 07 10:50:39.073 [debug] global_relayed_read_bucket now 4096000.
+Jan 07 10:50:39.073 [debug] global_relayed_write_bucket now 4096000.
+Jan 07 10:50:39.073 [debug] or_conn->read_bucket now 10485760.
+Jan 07 10:50:39.073 [debug] or_conn->read_bucket now 10485760.
+Jan 07 10:50:39.073 [debug] or_conn->read_bucket now 10485760.
+Jan 07 10:50:39.073 [debug] conn_read_callback(): socket -1 wants to read.
+Jan 07 10:50:39.073 [debug] connection_dir_process_inbuf(): Got data, not eof. Leaving on inbuf.
+Jan 07 10:50:39.099 [debug] conn_read_callback(): socket 10 wants to read.
+Jan 07 10:50:39.099 [debug] connection_read_to_buf(): 10: starting, inbuf_datalen 496 (0 pending in tls object). at_most 16384.
+Jan 07 10:50:39.099 [debug] connection_read_to_buf(): After TLS read of 528: 602 read, 0 written
+Jan 07 10:50:39.099 [debug] connection_or_process_cells_from_inbuf(): 10: starting, inbuf_datalen 1024 (0 pending in tls object).
+Jan 07 10:50:39.099 [debug] relay_lookup_conn(): found conn for stream 42658.
+Jan 07 10:50:39.099 [debug] circuit_receive_relay_cell(): Sending to origin.
+Jan 07 10:50:39.099 [debug] connection_edge_process_relay_cell(): Now seen 30 relay cells here (command 2, stream 42658).
+Jan 07 10:50:39.099 [debug] connection_edge_process_relay_cell(): circ deliver_window now 991.
+Jan 07 10:50:39.099 [debug] circuit_consider_sending_sendme(): Josh:  Not sending SENDME:  read (990) write (998) deliver_window (991)
+Jan 07 10:50:39.099 [debug] connection_or_process_cells_from_inbuf(): 10: starting, inbuf_datalen 512 (0 pending in tls object).
+Jan 07 10:50:39.099 [debug] relay_lookup_conn(): found conn for stream 42658.
+Jan 07 10:50:39.099 [debug] circuit_receive_relay_cell(): Sending to origin.
+Jan 07 10:50:39.099 [debug] connection_edge_process_relay_cell(): Now seen 31 relay cells here (command 3, stream 42658).
+Jan 07 10:50:39.099 [info] connection_edge_process_relay_cell(): -1: end cell (closed normally) for stream 42658. Removing stream.
+Jan 07 10:50:39.099 [debug] connection_or_process_cells_from_inbuf(): 10: starting, inbuf_datalen 0 (0 pending in tls object).
+Jan 07 10:50:39.099 [debug] conn_close_if_marked(): Cleaning up connection (fd -1).
+Jan 07 10:50:39.099 [debug] conn_close_if_marked(): Flushed last 213 bytes from a linked conn; 0 left; flushlen 0; wants-to-flush==0
+Jan 07 10:50:39.099 [debug] connection_remove(): removing socket -1 (type Socks), n_conns now 10
+Jan 07 10:50:39.099 [info] _connection_free(): Freeing linked Socks connection [open] with 0 bytes on inbuf, 0 on outbuf.
+Jan 07 10:50:39.099 [debug] conn_read_callback(): socket -1 wants to read.
+Jan 07 10:50:39.099 [debug] fetch_from_buf_http(): headerlen 173, bodylen 4024.
+Jan 07 10:50:39.099 [debug] connection_dir_client_reached_eof(): Received response from directory server '75.72.116.66:10001': 200 "OK"
+Jan 07 10:50:39.099 [debug] router_new_address_suggestion(): Got X-Your-Address-Is: 98.236.71.7.
+Jan 07 10:50:39.099 [debug] connection_dir_client_reached_eof(): Time on received directory is within tolerance; we are -45 seconds skewed.  (That's okay.)
+Jan 07 10:50:39.099 [info] connection_dir_client_reached_eof(): Received server info (size 8630) from server '75.72.116.66:10001'
+Jan 07 10:50:39.099 [debug] router_parse_list_from_string(): Read router '0A1ED726D25B7572', purpose 'general'
+Jan 07 10:50:39.099 [debug] router_parse_list_from_string(): Read router '394687A5EAA75437', purpose 'general'
+Jan 07 10:50:39.099 [debug] router_parse_list_from_string(): Read router '873E99C1034DE334', purpose 'general'
+Jan 07 10:50:39.099 [debug] router_parse_list_from_string(): Read router '0BECCEB8E600A27B', purpose 'general'
+Jan 07 10:50:39.100 [debug] router_parse_list_from_string(): Read router 'EAAA9A8E6A8F209F', purpose 'general'
+Jan 07 10:50:39.100 [debug] router_parse_list_from_string(): Read router 'InnomiNetAuth1', purpose 'general'
+Jan 07 10:50:39.100 [info] router_load_routers_from_string(): 6 elements to add
+Jan 07 10:50:39.100 [debug] count_usable_descriptors(): 18 usable, 12 present.
+Jan 07 10:50:39.100 [debug] count_usable_descriptors(): 18 usable, 12 present.
+Jan 07 10:50:39.100 [info] connection_dir_client_reached_eof(): Received 6/6 router descriptors requested from 75.72.116.66:10001
+Jan 07 10:50:39.100 [debug] conn_close_if_marked(): Cleaning up connection (fd -1).
+Jan 07 10:50:39.100 [debug] connection_remove(): removing socket -1 (type Directory), n_conns now 9
+Jan 07 10:50:39.100 [info] _connection_free(): Freeing linked Directory connection [client finished] with 0 bytes on inbuf, 0 on outbuf.
+Jan 07 10:50:39.103 [debug] conn_read_callback(): socket 12 wants to read.
+Jan 07 10:50:39.103 [debug] connection_read_to_buf(): 12: starting, inbuf_datalen 496 (0 pending in tls object). at_most 16384.
+Jan 07 10:50:39.103 [debug] connection_read_to_buf(): After TLS read of 16: 90 read, 0 written
+Jan 07 10:50:39.103 [debug] connection_or_process_cells_from_inbuf(): 12: starting, inbuf_datalen 512 (0 pending in tls object).
+Jan 07 10:50:39.103 [debug] relay_lookup_conn(): found conn for stream 25039.
+Jan 07 10:50:39.103 [debug] circuit_receive_relay_cell(): Sending to origin.
+Jan 07 10:50:39.103 [debug] connection_edge_process_relay_cell(): Now seen 32 relay cells here (command 3, stream 25039).
+Jan 07 10:50:39.103 [info] connection_edge_process_relay_cell(): -1: end cell (closed normally) for stream 25039. Removing stream.
+Jan 07 10:50:39.103 [debug] connection_or_process_cells_from_inbuf(): 12: starting, inbuf_datalen 0 (0 pending in tls object).
+Jan 07 10:50:39.103 [debug] conn_close_if_marked(): Cleaning up connection (fd -1).
+Jan 07 10:50:39.103 [debug] connection_remove(): removing socket -1 (type Socks), n_conns now 8
+Jan 07 10:50:39.103 [info] _connection_free(): Freeing linked Socks connection [open] with 0 bytes on inbuf, 0 on outbuf.
+Jan 07 10:50:39.103 [debug] conn_read_callback(): socket -1 wants to read.
+Jan 07 10:50:39.103 [debug] fetch_from_buf_http(): headerlen 173, bodylen 3432.
+Jan 07 10:50:39.103 [debug] connection_dir_client_reached_eof(): Received response from directory server '64.122.230.233:10001': 200 "OK"
+Jan 07 10:50:39.103 [debug] router_new_address_suggestion(): Got X-Your-Address-Is: 98.236.71.7.
+Jan 07 10:50:39.103 [debug] connection_dir_client_reached_eof(): Time on received directory is within tolerance; we are -39 seconds skewed.  (That's okay.)
+Jan 07 10:50:39.103 [info] connection_dir_client_reached_eof(): Received server info (size 7006) from server '64.122.230.233:10001'
+Jan 07 10:50:39.103 [debug] router_parse_list_from_string(): Read router 'InnomiNetAuth3', purpose 'general'
+Jan 07 10:50:39.103 [debug] router_parse_list_from_string(): Read router 'BC96D2BF10B218B3', purpose 'general'
+Jan 07 10:50:39.103 [debug] router_parse_list_from_string(): Read router 'InnomiNetAuth2', purpose 'general'
+Jan 07 10:50:39.103 [debug] router_parse_list_from_string(): Read router '9B452E3761D5AAF4', purpose 'general'
+Jan 07 10:50:39.103 [debug] router_parse_list_from_string(): Read router '791B008EEE3BD27C', purpose 'general'
+Jan 07 10:50:39.103 [info] router_load_routers_from_string(): 5 elements to add
+Jan 07 10:50:39.104 [debug] count_usable_descriptors(): 18 usable, 17 present.
+Jan 07 10:50:39.104 [debug] count_usable_descriptors(): 18 usable, 17 present.
+Jan 07 10:50:39.104 [info] connection_dir_client_reached_eof(): Received 5/6 router descriptors requested from 64.122.230.233:10001
+Jan 07 10:50:39.104 [debug] download_status_increment_failure(): A855F0D9DEF5D5C9F38DAE1CCBADDB8479409A17 failed 1 time(s); I'll try again immediately.
+Jan 07 10:50:39.104 [debug] conn_close_if_marked(): Cleaning up connection (fd -1).
+Jan 07 10:50:39.104 [debug] connection_remove(): removing socket -1 (type Directory), n_conns now 7
+Jan 07 10:50:39.104 [info] _connection_free(): Freeing linked Directory connection [client finished] with 0 bytes on inbuf, 0 on outbuf.
+Jan 07 10:50:39.140 [debug] conn_read_callback(): socket 13 wants to read.
+Jan 07 10:50:39.140 [debug] read_to_chunk(): Read 47 bytes. 47 on inbuf.
+Jan 07 10:50:39.141 [debug] conn_write_callback(): socket 13 wants to write.
+Jan 07 10:50:39.187 [debug] conn_read_callback(): socket 13 wants to read.
+Jan 07 10:50:39.187 [debug] read_to_chunk(): Read 159 bytes. 159 on inbuf.
+Jan 07 10:50:39.187 [debug] conn_write_callback(): socket 13 wants to write.
+Jan 07 10:50:40.077 [debug] global_read_bucket now 10485760.
+Jan 07 10:50:40.077 [debug] or_conn->read_bucket now 10485760.
+Jan 07 10:50:40.077 [debug] or_conn->read_bucket now 10485760.
+Jan 07 10:50:40.077 [debug] conn_write_callback(): socket 13 wants to write.
+Jan 07 10:50:41.087 [debug] conn_write_callback(): socket 13 wants to write.
+Jan 07 10:50:41.189 [debug] conn_read_callback(): socket 13 wants to read.
+Jan 07 10:50:41.189 [debug] read_to_chunk(): Read 58 bytes. 58 on inbuf.
+Jan 07 10:50:41.189 [debug] circuit_handle_first_hop(): Looking for firsthop '220.233.13.190:10001'
+Jan 07 10:50:41.189 [info] circuit_handle_first_hop(): Next router is [scrubbed]: Not connected. Connecting. 
+Jan 07 10:50:41.189 [debug] circuit_count_pending_on_or_conn(): or_conn to BC96D2BF10B218B3, 1 pending circs
+Jan 07 10:50:41.189 [debug] connection_connect(): Connecting to [scrubbed]:10001.
+Jan 07 10:50:41.189 [debug] connection_connect(): Connection to [scrubbed]:10001 in progress (sock 14).
+Jan 07 10:50:41.189 [debug] connection_add(): new conn type OR, socket 14, address 220.233.13.190, n_conns 7.
+Jan 07 10:50:41.189 [debug] circuit_handle_first_hop(): connecting in progress (or finished). Good.
+Jan 07 10:50:41.189 [debug] conn_write_callback(): socket 13 wants to write.
+Jan 07 10:50:41.646 [debug] conn_write_callback(): socket 14 wants to write.
+Jan 07 10:50:41.646 [debug] connection_or_finished_connecting(): OR connect() to router at 220.233.13.190:10001 finished.
+Jan 07 10:50:41.646 [notice] Bootstrapped 85%: Finishing handshake with first hop.
+Jan 07 10:50:41.647 [debug] connection_tls_start_handshake(): starting TLS handshake on fd 14
+Jan 07 10:50:41.647 [debug] connection_tls_continue_handshake(): wanted read
+Jan 07 10:50:41.647 [debug] connection_tls_continue_handshake(): wanted read
+Jan 07 10:50:41.647 [debug] conn_write_callback(): socket 13 wants to write.
+Jan 07 10:50:41.650 [debug] conn_read_callback(): socket 13 wants to read.
+Jan 07 10:50:41.650 [debug] read_to_chunk(): Read 312 bytes. 312 on inbuf.
+Jan 07 10:50:41.650 [debug] parse_addr_policy(): Adding new entry 'accept 127.0.0.1:60301'
+Jan 07 10:50:41.650 [debug] parse_addr_policy(): Adding new entry 'reject 0.0.0.0/8:*'
+Jan 07 10:50:41.650 [debug] parse_addr_policy(): Adding new entry 'reject 169.254.0.0/16:*'
+Jan 07 10:50:41.650 [debug] parse_addr_policy(): Adding new entry 'reject 127.0.0.0/8:*'
+Jan 07 10:50:41.650 [debug] parse_addr_policy(): Adding new entry 'reject 192.168.0.0/16:*'
+Jan 07 10:50:41.650 [debug] parse_addr_policy(): Adding new entry 'reject 10.0.0.0/8:*'
+Jan 07 10:50:41.650 [debug] parse_addr_policy(): Adding new entry 'reject 172.16.0.0/12:*'
+Jan 07 10:50:41.650 [debug] parse_addr_policy(): Adding new entry 'reject *:25'
+Jan 07 10:50:41.650 [debug] parse_addr_policy(): Adding new entry 'reject *:119'
+Jan 07 10:50:41.650 [debug] parse_addr_policy(): Adding new entry 'reject *:135-139'
+Jan 07 10:50:41.650 [debug] parse_addr_policy(): Adding new entry 'reject *:445'
+Jan 07 10:50:41.650 [debug] parse_addr_policy(): Adding new entry 'accept *:*'
+Jan 07 10:50:41.650 [debug] parse_addr_policy(): Adding new entry 'reject *:25'
+Jan 07 10:50:41.650 [debug] parse_addr_policy(): Adding new entry 'reject *:119'
+Jan 07 10:50:41.650 [debug] parse_addr_policy(): Adding new entry 'reject *:135-139'
+Jan 07 10:50:41.650 [debug] parse_addr_policy(): Adding new entry 'reject *:445'
+Jan 07 10:50:41.650 [debug] parse_addr_policy(): Adding new entry 'reject *:563'
+Jan 07 10:50:41.650 [debug] parse_addr_policy(): Adding new entry 'reject *:1214'
+Jan 07 10:50:41.650 [debug] parse_addr_policy(): Adding new entry 'reject *:4661-4666'
+Jan 07 10:50:41.650 [debug] parse_addr_policy(): Adding new entry 'reject *:6346-6429'
+Jan 07 10:50:41.650 [debug] parse_addr_policy(): Adding new entry 'reject *:6699'
+Jan 07 10:50:41.650 [debug] parse_addr_policy(): Adding new entry 'reject *:6881-6999'
+Jan 07 10:50:41.650 [debug] parse_addr_policy(): Adding new entry 'accept *:*'
+Jan 07 10:50:41.650 [warn] TestingTorNetwork is set. This will make your node almost unusable in the public Tor network, and is therefore only advised if you are building a testing Tor network!
+Jan 07 10:50:41.650 [notice] Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 (r4159) opening log file.
+Jan 07 10:50:41.651 [warn] TestingTorNetwork is set. This will make your node almost unusable in the public Tor network, and is therefore only advised if you are building a testing Tor network!
+Jan 07 10:50:41.651 [notice] Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 (r4159) opening log file.
+Jan 07 10:50:41.651 [warn] TestingTorNetwork is set. This will make your node almost unusable in the public Tor network, and is therefore only advised if you are building a testing Tor network!
+Jan 07 10:50:41.651 [notice] Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 (r4159) opening log file.
+Jan 07 10:50:41.652 [warn] TestingTorNetwork is set. This will make your node almost unusable in the public Tor network, and is therefore only advised if you are building a testing Tor network!
+Jan 07 10:50:41.652 [notice] Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 (r4159) opening log file.
+Jan 07 10:50:45.823 [warn] TestingTorNetwork is set. This will make your node almost unusable in the public Tor network, and is therefore only advised if you are building a testing Tor network!
+Jan 07 10:50:45.823 [notice] Opening OR listener on 0.0.0.0:10001
+Jan 07 10:50:45.823 [notice] Opening Directory listener on 0.0.0.0:10030
+Jan 07 10:50:45.823 [notice] Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 (r4159) opening log file.
+Jan 07 10:50:45.823 [warn] Fixing permissions on directory /home/co/client/users/tor_data/keys
+Jan 07 10:50:45.949 [notice] Your Tor server's identity key fingerprint is '75207EE8EF003BE1 5F20 7942 7840 7A6B 3A56 F45E 252A 864C B005 E6AB'
+Jan 07 10:50:45.950 [warn] TestingTorNetwork is set. This will make your node almost unusable in the public Tor network, and is therefore only advised if you are building a testing Tor network!
+Jan 07 10:50:45.950 [notice] Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 (r4159) opening log file.
+Jan 07 10:50:48.085 [warn] TestingTorNetwork is set. This will make your node almost unusable in the public Tor network, and is therefore only advised if you are building a testing Tor network!
+Jan 07 10:50:48.085 [notice] Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 (r4159) opening log file.
+Jan 07 10:50:56.864 [warn] TestingTorNetwork is set. This will make your node almost unusable in the public Tor network, and is therefore only advised if you are building a testing Tor network!
+Jan 07 10:50:56.864 [notice] Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 (r4159) opening log file.
+Jan 07 10:50:56.865 [warn] TestingTorNetwork is set. This will make your node almost unusable in the public Tor network, and is therefore only advised if you are building a testing Tor network!
+Jan 07 10:50:56.865 [notice] Closing no-longer-configured OR listener on 0.0.0.0:10001
+Jan 07 10:50:56.865 [notice] Opening OR listener on 0.0.0.0:10006
+Jan 07 10:50:56.865 [notice] Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 (r4159) opening log file.
+Jan 07 10:50:56.865 [notice] Closing old OR listener on 0.0.0.0:10001
+Jan 07 10:50:59.211 [warn] TestingTorNetwork is set. This will make your node almost unusable in the public Tor network, and is therefore only advised if you are building a testing Tor network!
+Jan 07 10:50:59.211 [notice] Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 (r4159) opening log file.
+Jan 07 10:51:10.130 [warn] TestingTorNetwork is set. This will make your node almost unusable in the public Tor network, and is therefore only advised if you are building a testing Tor network!
+Jan 07 10:51:10.130 [notice] Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 (r4159) opening log file.
+Jan 07 10:51:10.131 [warn] TestingTorNetwork is set. This will make your node almost unusable in the public Tor network, and is therefore only advised if you are building a testing Tor network!
+Jan 07 10:51:10.131 [notice] Closing no-longer-configured Directory listener on 0.0.0.0:10030
+Jan 07 10:51:10.131 [notice] Opening Directory listener on 0.0.0.0:10038
+Jan 07 10:51:10.131 [notice] Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 (r4159) opening log file.
+Jan 07 10:51:10.131 [notice] Closing old Directory listener on 0.0.0.0:10030
+Jan 07 10:51:12.503 [warn] TestingTorNetwork is set. This will make your node almost unusable in the public Tor network, and is therefore only advised if you are building a testing Tor network!
+Jan 07 10:51:12.503 [notice] Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 (r4159) opening log file.
+Jan 07 10:51:15.565 [warn] TestingTorNetwork is set. This will make your node almost unusable in the public Tor network, and is therefore only advised if you are building a testing Tor network!
+Jan 07 10:51:15.565 [notice] Tor 0.2.2.0-alpha-dev_for_BitBlinder_0.5.0 (r4159) opening log file.
+Jan 07 10:51:27.884 [notice] Bootstrapped 90%: Establishing a Tor circuit.
+Jan 07 10:51:28.259 [notice] Tor has successfully opened a circuit. Looks like client functionality is working.
+Jan 07 10:51:28.259 [notice] Bootstrapped 100%: Done.
+Jan 07 10:51:43.848 [notice] Self-testing indicates your ORPort is reachable from the outside. Excellent. Publishing server descriptor.
+Jan 07 10:51:47.255 [notice] Catching signal TERM, exiting cleanly.

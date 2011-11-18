@@ -1,0 +1,356 @@
+--
+-- PostgreSQL database dump
+--
+
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = off;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET escape_string_warning = off;
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: accounts; Type: TABLE; Schema: public; Owner: innominet; Tablespace: 
+--
+
+CREATE TABLE accounts (
+    username character varying(50) NOT NULL,
+    balance integer,
+    email character varying(350),
+    "time" timestamp without time zone,
+    password bytea
+);
+
+
+ALTER TABLE public.accounts OWNER TO innominet;
+
+--
+-- Name: acoin_interval; Type: TABLE; Schema: public; Owner: innominet; Tablespace: 
+--
+
+CREATE TABLE acoin_interval (
+    interval_id integer NOT NULL,
+    valid_after timestamp without time zone,
+    fresh_until timestamp without time zone,
+    spoils_on timestamp without time zone
+);
+
+
+ALTER TABLE public.acoin_interval OWNER TO innominet;
+
+--
+-- Name: acoin_repo; Type: TABLE; Schema: public; Owner: innominet; Tablespace: 
+--
+
+CREATE TABLE acoin_repo (
+    depositor text,
+    sendor text,
+    "interval" integer,
+    value integer,
+    coin numeric
+);
+
+
+ALTER TABLE public.acoin_repo OWNER TO innominet;
+
+--
+-- Name: badlogin; Type: TABLE; Schema: public; Owner: innominet; Tablespace: 
+--
+
+CREATE TABLE badlogin (
+    escalation integer,
+    timeout integer,
+    username character varying(50),
+    ip inet,
+    active boolean
+);
+
+
+ALTER TABLE public.badlogin OWNER TO innominet;
+
+--
+-- Name: keys; Type: TABLE; Schema: public; Owner: innominet; Tablespace: 
+--
+
+CREATE TABLE keys (
+    value integer NOT NULL,
+    "interval" integer NOT NULL,
+    n numeric,
+    d numeric,
+    e numeric,
+    p numeric,
+    q numeric
+);
+
+
+ALTER TABLE public.keys OWNER TO innominet;
+
+--
+-- Name: limited_signup_keys; Type: TABLE; Schema: public; Owner: innominet; Tablespace: 
+--
+
+CREATE TABLE limited_signup_keys (
+    value character varying(50) NOT NULL,
+    redeemed boolean,
+    created timestamp without time zone
+);
+
+
+ALTER TABLE public.limited_signup_keys OWNER TO innominet;
+
+--
+-- Name: login_key; Type: TABLE; Schema: public; Owner: innominet; Tablespace: 
+--
+
+CREATE TABLE login_key (
+    "interval" integer NOT NULL,
+    n numeric,
+    d numeric,
+    e numeric,
+    p numeric,
+    q numeric
+);
+
+
+ALTER TABLE public.login_key OWNER TO innominet;
+
+--
+-- Name: relays; Type: TABLE; Schema: public; Owner: innominet; Tablespace: 
+--
+
+CREATE TABLE relays (
+    tor_id text NOT NULL,
+    owner text,
+    last_interval integer,
+    public_key numeric,
+    symmetric_id numeric,
+    msgnum bigint,
+    scoin_deposit_time timestamp without time zone
+);
+
+
+ALTER TABLE public.relays OWNER TO innominet;
+
+--
+-- Name: scoin_interval; Type: TABLE; Schema: public; Owner: innominet; Tablespace: 
+--
+
+CREATE TABLE scoin_interval (
+    interval_id integer NOT NULL,
+    valid_after timestamp without time zone,
+    fresh_until timestamp without time zone,
+    spoils_on timestamp without time zone
+);
+
+
+ALTER TABLE public.scoin_interval OWNER TO innominet;
+
+--
+-- Name: scoin_repo; Type: TABLE; Schema: public; Owner: innominet; Tablespace: 
+--
+
+CREATE TABLE scoin_repo (
+    depositor text,
+    "interval" integer,
+    value integer,
+    merchant text,
+    transactionid numeric(20,0)
+);
+
+
+ALTER TABLE public.scoin_repo OWNER TO innominet;
+
+--
+-- Name: test; Type: TABLE; Schema: public; Owner: innominet; Tablespace: 
+--
+
+CREATE TABLE test (
+    x integer,
+    y integer
+);
+
+
+ALTER TABLE public.test OWNER TO innominet;
+
+--
+-- Name: updater; Type: TABLE; Schema: public; Owner: innominet; Tablespace: 
+--
+
+CREATE TABLE updater (
+    email character varying(375) NOT NULL,
+    "time" timestamp without time zone
+);
+
+
+ALTER TABLE public.updater OWNER TO innominet;
+
+--
+-- Name: accounts_pkey; Type: CONSTRAINT; Schema: public; Owner: innominet; Tablespace: 
+--
+
+ALTER TABLE ONLY accounts
+    ADD CONSTRAINT accounts_pkey PRIMARY KEY (username);
+
+
+--
+-- Name: acoin_interval_pkey; Type: CONSTRAINT; Schema: public; Owner: innominet; Tablespace: 
+--
+
+ALTER TABLE ONLY acoin_interval
+    ADD CONSTRAINT acoin_interval_pkey PRIMARY KEY (interval_id);
+
+
+--
+-- Name: keys_pkey; Type: CONSTRAINT; Schema: public; Owner: innominet; Tablespace: 
+--
+
+ALTER TABLE ONLY keys
+    ADD CONSTRAINT keys_pkey PRIMARY KEY (value, "interval");
+
+
+--
+-- Name: limited_signup_keys_pkey; Type: CONSTRAINT; Schema: public; Owner: innominet; Tablespace: 
+--
+
+ALTER TABLE ONLY limited_signup_keys
+    ADD CONSTRAINT limited_signup_keys_pkey PRIMARY KEY (value);
+
+
+--
+-- Name: login_key_pkey; Type: CONSTRAINT; Schema: public; Owner: innominet; Tablespace: 
+--
+
+ALTER TABLE ONLY login_key
+    ADD CONSTRAINT login_key_pkey PRIMARY KEY ("interval");
+
+
+--
+-- Name: relays_pkey; Type: CONSTRAINT; Schema: public; Owner: innominet; Tablespace: 
+--
+
+ALTER TABLE ONLY relays
+    ADD CONSTRAINT relays_pkey PRIMARY KEY (tor_id);
+
+
+--
+-- Name: scoin_interval_pkey; Type: CONSTRAINT; Schema: public; Owner: innominet; Tablespace: 
+--
+
+ALTER TABLE ONLY scoin_interval
+    ADD CONSTRAINT scoin_interval_pkey PRIMARY KEY (interval_id);
+
+
+--
+-- Name: unique_scoin; Type: CONSTRAINT; Schema: public; Owner: innominet; Tablespace: 
+--
+
+ALTER TABLE ONLY scoin_repo
+    ADD CONSTRAINT unique_scoin UNIQUE ("interval", value, transactionid);
+
+
+--
+-- Name: uniqueness; Type: CONSTRAINT; Schema: public; Owner: innominet; Tablespace: 
+--
+
+ALTER TABLE ONLY acoin_repo
+    ADD CONSTRAINT uniqueness UNIQUE ("interval", value, coin);
+
+
+--
+-- Name: updater_pkey; Type: CONSTRAINT; Schema: public; Owner: innominet; Tablespace: 
+--
+
+ALTER TABLE ONLY updater
+    ADD CONSTRAINT updater_pkey PRIMARY KEY (email);
+
+
+--
+-- Name: active_attempts; Type: INDEX; Schema: public; Owner: innominet; Tablespace: 
+--
+
+CREATE INDEX active_attempts ON badlogin USING btree (active, username) WHERE (active = true);
+
+
+--
+-- Name: acoin_repo_depositor_fkey; Type: FK CONSTRAINT; Schema: public; Owner: innominet
+--
+
+ALTER TABLE ONLY acoin_repo
+    ADD CONSTRAINT acoin_repo_depositor_fkey FOREIGN KEY (depositor) REFERENCES relays(tor_id);
+
+
+--
+-- Name: acoin_repo_interval_fkey; Type: FK CONSTRAINT; Schema: public; Owner: innominet
+--
+
+ALTER TABLE ONLY acoin_repo
+    ADD CONSTRAINT acoin_repo_interval_fkey FOREIGN KEY ("interval") REFERENCES acoin_interval(interval_id);
+
+
+--
+-- Name: acoin_repo_sendor_fkey; Type: FK CONSTRAINT; Schema: public; Owner: innominet
+--
+
+ALTER TABLE ONLY acoin_repo
+    ADD CONSTRAINT acoin_repo_sendor_fkey FOREIGN KEY (sendor) REFERENCES relays(tor_id);
+
+
+--
+-- Name: relays_last_interval_fkey; Type: FK CONSTRAINT; Schema: public; Owner: innominet
+--
+
+ALTER TABLE ONLY relays
+    ADD CONSTRAINT relays_last_interval_fkey FOREIGN KEY (last_interval) REFERENCES scoin_interval(interval_id);
+
+
+--
+-- Name: relays_owner_fkey; Type: FK CONSTRAINT; Schema: public; Owner: innominet
+--
+
+ALTER TABLE ONLY relays
+    ADD CONSTRAINT relays_owner_fkey FOREIGN KEY (owner) REFERENCES accounts(username);
+
+
+--
+-- Name: scoin_repo_depositor_fkey; Type: FK CONSTRAINT; Schema: public; Owner: innominet
+--
+
+ALTER TABLE ONLY scoin_repo
+    ADD CONSTRAINT scoin_repo_depositor_fkey FOREIGN KEY (depositor) REFERENCES relays(tor_id);
+
+
+--
+-- Name: scoin_repo_interval_fkey; Type: FK CONSTRAINT; Schema: public; Owner: innominet
+--
+
+ALTER TABLE ONLY scoin_repo
+    ADD CONSTRAINT scoin_repo_interval_fkey FOREIGN KEY ("interval") REFERENCES scoin_interval(interval_id);
+
+
+--
+-- Name: scoin_repo_merchant_fkey; Type: FK CONSTRAINT; Schema: public; Owner: innominet
+--
+
+ALTER TABLE ONLY scoin_repo
+    ADD CONSTRAINT scoin_repo_merchant_fkey FOREIGN KEY (merchant) REFERENCES relays(tor_id);
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: innominet
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM innominet;
+GRANT ALL ON SCHEMA public TO innominet;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+

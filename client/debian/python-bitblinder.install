@@ -1,0 +1,3 @@
+debian/bitblinder.desktop usr/share/applications
+debian/bitrelay.desktop usr/share/applications
+debian/bitblinder.xpm usr/share/pixmaps

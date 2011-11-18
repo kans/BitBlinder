@@ -1,0 +1,25 @@
+; dlltool --base-file C:\DOCUME~1\PROPRI~1\LOCALS~1\Temp/cca03356.base --output-exp miniupnpc.exp --dllname miniupnpc.dll -k --output-def miniupnpc.dll.def --exclude-symbol=DllMainCRTStartup@12 --def miniupnpc.def --output-lib miniupnpc.lib
+EXPORTS
+	FreeUPNPUrls @ 1
+	GetUPNPUrls @ 2
+	UPNP_AddPortMapping @ 3
+	UPNP_DeletePortMapping @ 4
+	UPNP_GetConnectionTypeInfo @ 5
+	UPNP_GetExternalIPAddress @ 6
+	UPNP_GetGenericPortMappingEntry @ 7
+	UPNP_GetIGDFromUrl @ 8
+	UPNP_GetLinkLayerMaxBitRates @ 9
+	UPNP_GetPortMappingNumberOfEntries @ 10
+	UPNP_GetSpecificPortMappingEntry @ 11
+	UPNP_GetStatusInfo @ 12
+	UPNP_GetTotalBytesReceived @ 13
+	UPNP_GetTotalBytesSent @ 14
+	UPNP_GetTotalPacketsReceived @ 15
+	UPNP_GetTotalPacketsSent @ 16
+	UPNP_GetValidIGD @ 17
+	freeUPNPDevlist @ 18
+	miniwget @ 19
+	miniwget_getaddr @ 20
+	parserootdesc @ 21
+	strupnperror @ 22
+	upnpDiscover @ 23

@@ -1,0 +1,3 @@
+tor_main.o: tor_main.c micro-revision.i
+
+micro-revision.i:

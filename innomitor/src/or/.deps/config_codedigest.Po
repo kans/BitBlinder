@@ -1,0 +1,3 @@
+config_codedigest.o: config_codedigest.c or_sha1.i
+
+or_sha1.i:
